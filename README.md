@@ -1,7 +1,7 @@
-### Las entidades de negocio para ponerlo en el github:
+### Las entidades de negocio:
 Pedido
 Línea de pedido
-Carrito 
+Carrito
 Línea de carrito
 Producto -saúl
 Categoría -saúl
