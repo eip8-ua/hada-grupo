@@ -25,14 +25,14 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  
 #### Categoría -saúl  
 -  Método que devuelve un listado con todas las categorías
-#### Usuario  
+#### Usuario  -Lucas
 -  Método que comprueba si el usuario está registrado
 -  Método que comprueba si el usuario tiene derechos de administrador
 -  Método para registrar al usuario
 -  Método para cambiar los datos del usuario una vez registrado
 #### Dirección -elias  
 -  
-#### Testimonial  
+#### Testimonial  -Lucas
 -  
 #### Valoraciones  
 -  
