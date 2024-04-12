@@ -17,9 +17,9 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Devolver el número de líneas de pedido que lo forman
 #### Línea de pedido  -dani
 -  Devolver el número de pedido al que pertenece
-#### Carrito  
+#### Carrito -David
 -  Devolver el precio total del carrito
-#### Línea de carrito  
+#### Línea de carrito -David
 -  
 #### Producto -saúl  
 -  
