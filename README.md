@@ -34,12 +34,12 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  
 #### Testimonial  -Lucas
 -  
-#### Valoraciones  
+#### Valoraciones  -abdel
 -  
 #### Locker 
 -  Obtener todos los lockers dada una provincia??
 -  Obtener todos los lockers
-#### Contacta con nosotros (Datos emisor + mensaje)  
+#### Contacta con nosotros (Datos emisor + mensaje)  -abdel
 -  
 #### Promociones  -emiliano
 -  Mostrar todas las promociones disponibles actualmente
