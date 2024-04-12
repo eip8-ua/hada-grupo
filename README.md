@@ -15,11 +15,12 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 La parte pública permite a los usuarios no registrados crear una cuenta, iniciar sesión, consultar los productos ofrecidos y su stock.  
 ## Listado EN Pública  
 #### Producto -saúl  
--  
+-  Mostrar datos como la disponibilidad, el precio, características...
 #### Categoría -saúl  
 -  Método que devuelve un listado con todas las categorías
 #### Contacta con nosotros (Datos emisor + mensaje)  -abdel
--  
+-  Devolver el mapa/ubicación de nuestra supuesta central
+-  Permitir poder enviar correos electrónicos a nuestro email de empresa?
 #### Promociones  -emiliano
 -  Mostrar todas las promociones disponibles actualmente
 -  Mostrar el periodo de disponibilidad de una promoción concreta
@@ -38,18 +39,18 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 #### Carrito -David
 -  Devolver el precio total del carrito
 #### Línea de carrito -David
--  
+-  Crear una línea de carrito al introducir un producto en la base de datos
 #### Usuario  -Lucas
 -  Método que comprueba si el usuario está registrado
 -  Método que comprueba si el usuario tiene derechos de administrador
 -  Método para registrar al usuario
 -  Método para cambiar los datos del usuario una vez registrado
 #### Dirección -elias  
--  
+-  Devolver la dirección de un usuario
 #### Testimonial  -Lucas
 -  
 #### Valoraciones  -abdel
--  
+-  Sacar la media de las puntuaciones emitidas por los usuarios
 #### Locker -elias
 -  Obtener todos los lockers dada una provincia??
 -  Obtener todos los lockers
