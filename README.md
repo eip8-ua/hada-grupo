@@ -41,10 +41,10 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Obtener todos los lockers
 #### Contacta con nosotros (Datos emisor + mensaje)  
 -  
-#### Promociones  
+#### Promociones  -emiliano
 -  Mostrar todas las promociones disponibles actualmente
 -  Mostrar el periodo de disponibilidad de una promoción concreta
-#### Informes  
+#### Informes  -emiliano
 -  Conseguir el top 10 de los productos más vendidos
 -  Conseguir el top 10 de los clientes que más aportan a la empresa
 -  Obtener la provincia con la mayor cantidad de pedidos
