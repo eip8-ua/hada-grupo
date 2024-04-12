@@ -13,9 +13,9 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 ## Posibles mejoras
 
 ## Las entidades de negocio:
-#### Pedido  
+#### Pedido  -dani
 -  Devolver el número de líneas de pedido que lo forman
-#### Línea de pedido  
+#### Línea de pedido  -dani
 -  Devolver el número de pedido al que pertenece
 #### Carrito  
 -  Devolver el precio total del carrito
