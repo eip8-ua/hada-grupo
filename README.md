@@ -61,3 +61,9 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Apartado de valoración de usuarios.
 -  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
 
+# Entrega 01 Propuesta - Comentarios
+
+La web que se propone es correcta y cumple con los requisitos de la práctica. El detalle de EN y funcionalidades es correcto. La descripción es correcta y además se cumple con todo lo que se pide para esta primera entrega en git.
+
+Todo bien. Enhorabuena!!
+
