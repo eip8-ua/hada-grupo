@@ -19,7 +19,7 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 | Saúl Conejo         |    Producto <br></br>  Categoría                      |
 | Lucas Alberola      |    Usuario <br></br>  Testimonial                     |
 | Elías Iborra        |    Locker <br></br>  Dirección                        |
-| David Mas Almendros |    Carrito <br></br>  Línea de pedido                 |
+| David Mas Almendros |    Carrito <br></br>  Línea de Carrito                |
 | Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |
 | Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |
 
