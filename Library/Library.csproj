@@ -41,11 +41,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CADCarrito.cs" />
+    <Compile Include="CADCategoria.cs" />
+    <Compile Include="CADContactUs.cs" />
     <Compile Include="CADDireccion.cs" />
+    <Compile Include="CADInformes.cs" />
+    <Compile Include="CADLinCarr.cs" />
+    <Compile Include="CADLinPed.cs" />
     <Compile Include="CADLocker.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="CADPedido.cs" />
+    <Compile Include="CADProducto.cs" />
+    <Compile Include="CADPromociones.cs" />
+    <Compile Include="CADTestimonial.cs" />
+    <Compile Include="CADUsuario.cs" />
+    <Compile Include="CADValoraciones.cs" />
+    <Compile Include="ENCarrito.cs" />
+    <Compile Include="ENCategoria.cs" />
+    <Compile Include="ENContactUs.cs" />
     <Compile Include="ENDireccion.cs" />
+    <Compile Include="ENInformes.cs" />
+    <Compile Include="ENLinCarr.cs" />
+    <Compile Include="ENLinPed.cs" />
     <Compile Include="ENLocker.cs" />
+    <Compile Include="ENPedido.cs" />
+    <Compile Include="ENProducto.cs" />
+    <Compile Include="ENPromociones.cs" />
+    <Compile Include="ENTestimonial.cs" />
+    <Compile Include="ENUsuario.cs" />
+    <Compile Include="ENValoraciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
