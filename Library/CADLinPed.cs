@@ -8,5 +8,17 @@ namespace Library
 {
     class CADLinPed
     {
+        public bool update(ENLinPed en)
+        {
+            return true;
+        }
+        public bool read(ENLinPed en)
+        {
+            return true;
+        }
+        public bool delete(ENLinPed en)
+        {
+
+        }
     }
 }
