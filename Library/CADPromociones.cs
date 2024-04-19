@@ -8,5 +8,27 @@ namespace Library
 {
     class CADPromociones
     {
+        string miConexion;
+        public string MiConexion { get { return miConexion; } set { miConexion = value; } }
+
+        public CADPromociones() {
+
+           //miConexion = ConfigurationManager.ConnectionStrings["miconexion"].ToString();
+        }
+
+        public void getPromociones()
+        {
+
+        }
+
+        public void getDisponibilidad(ENPromociones en)
+        {
+
+        }
+
+        public void getNumberOfDaysRemaining(ENPromociones en)
+        {
+
+        }
     }
 }

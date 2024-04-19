@@ -11,6 +11,18 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 -  Daniel Alarcón Mena
 -  Abdelatif Boussaid
 
+## Reparto de Entidades de Negocio
+
+|   Alumno    | EN |
+| :----------- | :-----------: |
+| Emiliano Dovao      |    Promociones <br></br>  Informes                    |
+| Saúl Conejo         |    Producto <br></br>  Categoría                      |
+| Lucas Alberola      |    Usuario <br></br>  Testimonial                     |
+| Elías Iborra        |    Locker <br></br>  Dirección                        |
+| David Mas Almendros |    Carrito <br></br>  Línea de Carrito                |
+| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |
+| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |
+
 ## Parte Pública  
 La parte pública permite a los usuarios no registrados crear una cuenta, iniciar sesión, consultar los productos ofrecidos y su stock.  
 ## Listado EN Pública  
@@ -50,7 +62,11 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 #### Testimonial  -Lucas
 -  
 #### Valoraciones  -abdel
--  Sacar la media de las puntuaciones emitidas por los usuarios
+- Sacar la media de las puntuaciones emitidas por los usuario.
+- Método para valuar un producto del 1 al 5 y escribir un comentario acerca del producto.
+- Método para enseñar valoraciones anteriores.
+### Contacta con nosotros -abdel
+- método para poder escribir algo a los administradores de la tienda, puede ser una queja, una supuesta mejora de u producto etc...
 #### Locker -elias
 -  Obtener todos los lockers dada una provincia??
 -  Obtener todos los lockers
@@ -61,6 +77,8 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Apartado de valoración de usuarios.
 -  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
 
+## Esquema Entidad Relacion de la base de datos
+- El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.
 # Entrega 01 Propuesta - Comentarios
 
 La web que se propone es correcta y cumple con los requisitos de la práctica. El detalle de EN y funcionalidades es correcto. La descripción es correcta y además se cumple con todo lo que se pide para esta primera entrega en git.

@@ -8,5 +8,28 @@ namespace Library
 {
     class CADCategoria
     {
+        public string constring;
+        public SqlConnection connection;
+
+        public CADCategoria()
+        {
+
+        }
+        public bool Create(ENCategoria cat)
+        {
+
+        }
+        public bool Delete(ENCategoria cat)
+        {
+
+        }
+        public bool Update(ENCategoria cat)
+        {
+
+        }
+        public bool Read(ENCategoria cat)
+        {
+
+        }
     }
 }
