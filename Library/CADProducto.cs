@@ -27,7 +27,7 @@ namespace Library
         {
 
         }
-        public bool Read(ENLocker loc)
+        public bool Read(ENProducto prod)
         {
 
         }
