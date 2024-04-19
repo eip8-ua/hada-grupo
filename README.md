@@ -62,7 +62,11 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 #### Testimonial  -Lucas
 -  
 #### Valoraciones  -abdel
--  Sacar la media de las puntuaciones emitidas por los usuarios
+- Sacar la media de las puntuaciones emitidas por los usuario.
+- Método para valuar un producto del 1 al 5 y escribir un comentario acerca del producto.
+- Método para enseñar valoraciones anteriores.
+### Contacta con nosotros -abdel
+- método para poder escribir algo a los administradores de la tienda, puede ser una queja, una supuesta mejora de u producto etc...
 #### Locker -elias
 -  Obtener todos los lockers dada una provincia??
 -  Obtener todos los lockers
