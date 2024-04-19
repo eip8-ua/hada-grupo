@@ -8,5 +8,25 @@ namespace Library
 {
     class CADTestimonial
     {
+        private string conexion;
+
+        public CADTestimonial() { }
+        
+        public bool create(ENTestimonial en)
+        {
+            return true;
+        }
+        public bool update(ENTestimonial en)
+        {
+            return true;
+        }
+        public bool read(ENTestimonial en)
+        {
+            return true;
+        }
+        public bool delete(ENTestimonial en)
+        {
+            return true;
+        }
     }
 }
