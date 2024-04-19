@@ -11,6 +11,18 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 -  Daniel Alarcón Mena
 -  Abdelatif Boussaid
 
+## Reparto de Entidades de Negocio
+
+|   Alumno    | EN |
+| :----------- | :-----------: |
+| Emiliano Dovao      |    Promociones <br></br>  Informes                    |
+| Saúl Conejo         |    Producto <br></br>  Categoría                      |
+| Lucas Alberola      |    Usuario <br></br>  Testimonial                     |
+| Elías Iborra        |    Locker <br></br>  Dirección                        |
+| David Mas Almendros |    Carrito <br></br>  Línea de Carrito                |
+| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |
+| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |
+
 ## Parte Pública  
 La parte pública permite a los usuarios no registrados crear una cuenta, iniciar sesión, consultar los productos ofrecidos y su stock.  
 ## Listado EN Pública  
