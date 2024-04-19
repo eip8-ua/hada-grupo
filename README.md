@@ -73,6 +73,8 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Apartado de valoración de usuarios.
 -  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
 
+## Esquema Entidad Relacion de la base de datos
+- El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.
 # Entrega 01 Propuesta - Comentarios
 
 La web que se propone es correcta y cumple con los requisitos de la práctica. El detalle de EN y funcionalidades es correcto. La descripción es correcta y además se cumple con todo lo que se pide para esta primera entrega en git.
