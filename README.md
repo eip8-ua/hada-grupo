@@ -79,9 +79,17 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 
 ## Esquema Entidad Relacion de la base de datos
 - El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.
+
 # Entrega 01 Propuesta - Comentarios
 
 La web que se propone es correcta y cumple con los requisitos de la práctica. El detalle de EN y funcionalidades es correcto. La descripción es correcta y además se cumple con todo lo que se pide para esta primera entrega en git.
 
 Todo bien. Enhorabuena!!
+
+# Entrega 02 EN/CAD - Comentarios
+
+La entrega es correcta y cumple con todos los requisitos. Ahora vamos a por la siguiente entrega. Os recomiendo que creeis un proyecto en git hub en donde aparezca los .aspx que tiene que hacer cada uno y que la entrega la planteeis para el martes 30.
+
+Saludos!!!
+
 
