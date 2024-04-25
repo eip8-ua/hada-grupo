@@ -8,5 +8,28 @@ namespace Library
 {
     class ENPedido
     {
+        private int idPedido;
+        private DateTime fechaPedido;
+
+        public ENPedido()
+        {
+
+        }
+        public bool Create()
+        {
+
+        }
+        public bool Delete()
+        {
+
+        }
+        public bool Update()
+        {
+
+        }
+        public bool Read()
+        {
+
+        }
     }
 }
