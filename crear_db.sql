@@ -137,5 +137,13 @@ CREATE TABLE [dbo].[Testimonial]
 	CONSTRAINT pk PRIMARY KEY([id])
 )
 
+CREATE TABLE [dbo].[Califica]
+(
+	[testimonial] INT,
+	[usuario] NVARCHAR(9) UNIQUE,
+	CONSTRAINT pk PRIMARY KEY([testimonial])
+	CONSTRAINT fk_1 FOREIGN KEY ([testimonial]) REFERENCES Testimonial,
+	CONSTRAINT fk_2 FOREIGN KEY ([usuario]) REFERENCES Usuario
+)
 
 
