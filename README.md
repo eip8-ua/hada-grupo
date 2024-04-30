@@ -23,6 +23,17 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 | Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |
 | Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |
 
+## Aspx
+|   Alumno    | ASPX |
+| :----------- | :-----------: |
+| Emiliano Dovao      |    Master <br></br>  Index                            |
+| Saúl Conejo         |    Contacta                                           |
+| Lucas Alberola      |    Usuario											  |
+| Elías Iborra        |    Login <br></br> Crear Usuario                      |
+| David Mas Almendros |    Carrito							                  |
+| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |
+| Abdelatif Boussaid  |    **Por determinar**							      |
+
 ## Parte Pública  
 La parte pública permite a los usuarios no registrados crear una cuenta, iniciar sesión, consultar los productos ofrecidos y su stock.  
 ## Listado EN Pública  
