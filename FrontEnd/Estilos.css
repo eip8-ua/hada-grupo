@@ -1,0 +1,31 @@
+﻿body {
+    font-family: 'Pontano Sans';
+    font-size:20px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 35px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding:17px;
+}
+
+.navigationMenu {
+    font-family:'Pontano Sans';
+    font-size:30px;
+    background-color:white;
+}
+
+.menu {
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: 1px solid grey;
+    margin-right: 200px;
+    margin-left: 200px;
+    margin-top: 40px;
+    border-radius: 10px 10px 10px 10px;
+}
