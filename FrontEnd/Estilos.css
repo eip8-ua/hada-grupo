@@ -1,31 +1,86 @@
-﻿body {
-    font-family: 'Pontano Sans';
-    font-size:20px;
+﻿/*Clases para aspectos generales de la página web*/
+
+html {
+    height:100%;
 }
 
-.title {
+body {
+    font-family: 'Pontano Sans';
+    font-size: 20px;
+    background-color: #001cc8;
+    color: #a4d3ed;
+    min-height: 100%;
+    margin: 0;
+}
+
+/*Elementos de la página maestra*/
+
+/*Título de la página, la sección más superior*/
+#title {
     font-weight: bold;
     font-size: 35px;
     align-items: center;
     justify-content: center;
+    border-left: 2px solid #384179;
+    border-top: 2px solid #384179;
+    border-right: 2px solid #384179;
+    border-bottom: 3px solid #3c457a;
     display: flex;
-    padding:17px;
+    padding: 17px;
 }
 
-.navigationMenu {
-    font-family:'Pontano Sans';
-    font-size:30px;
-    background-color:white;
+/*Ventana para el contenido, es decir, las diferentes partes que se cambian al cambiar de página*/
+.content {
+    margin: 60px;
+    padding: 30px;
+    background-color: #425aed;
+    border-radius: 5px 5px 5px 5px;
 }
 
+/*Clase para la estructura interna del menú de navegación, el asp menu como tal*/
+.innerMenu {
+    font-size:26px;
+}
+
+/*Clase para el div que envuelve el menú de navegación*/
 .menu {
     padding: 10px;
     align-items: center;
     justify-content: center;
     display: flex;
-    border: 1px solid grey;
+    border: 1px none;
     margin-right: 200px;
     margin-left: 200px;
     margin-top: 40px;
     border-radius: 10px 10px 10px 10px;
+    background-color: #5790f2;
+}
+
+/*Elementos de la página index.aspx*/
+
+/*Sección superior, sección de bienvenida*/
+.index_showcasetext {
+    display: flex;
+    text-align: center;
+    border: 5px solid #5164d6;
+    padding: 10px;
+    background-color: #6475e3;
+}
+
+.index_showcasetext_left {
+    margin-top: 75px;
+    margin-left: 10%;
+}
+
+.index_showcasetext_right {
+    text-align: right;
+    margin-left: 20%;
+}
+
+#index_showcase1 {
+    margin-bottom: 40px;
+}
+
+#index_showcase2 {
+
 }

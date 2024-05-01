@@ -13,5 +13,15 @@ namespace proyecto
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/contact_us.aspx");
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/testimonial.aspx");
+        }
     }
 }

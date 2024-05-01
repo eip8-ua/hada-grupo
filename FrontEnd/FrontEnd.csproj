@@ -73,11 +73,16 @@
     </Content>
     <Content Include="contact_us.aspx" />
     <Content Include="Estilos.css" />
+    <Content Include="Images\nosotros.jpg" />
+    <Content Include="Images\shopping_cart.png" />
     <Content Include="index.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="Images\login.png" />
     <Content Include="register.aspx" />
     <Content Include="shop.aspx" />
     <Content Include="shopping_cart.aspx" />
+    <Content Include="Images\technology.jpg" />
+    <Content Include="Images\technology2.jpg" />
     <Content Include="testimonial.aspx" />
     <Content Include="user.aspx" />
     <Content Include="Web.config" />
