@@ -53,3 +53,43 @@
     width: 20%;
     padding: 10px;
 }
+
+
+.testimonial {
+    border: 4px double;
+    border-radius: 10px;
+    padding:40px;
+    margin-top: 30px;
+    border-color: darkgray;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:gainsboro;
+    text-align:center;
+
+}
+
+.testimonial_quote {
+    font-size: 18px;
+    color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#nombre_testimonial{
+    text-align: justify; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 24px; 
+    color: darkslategray; 
+    font-style:italic;
+    padding:20px;
+}
+
+#testimonialText {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#testimonialContainer {
+    width: 70%; 
+    margin: 0 auto; 
+}
+
+
