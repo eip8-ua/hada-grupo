@@ -14,8 +14,8 @@
     <form id="form1" runat="server">
         <div id="title">HADAshop</div>
         <div class="menu">
-            <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" CssClass="innerMenu" StaticHoverStyle-ForeColor="white" ForeColor="blue" 
-                StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="#73a1f0" DynamicHoverStyle-ForeColor="White">
+            <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" CssClass="innerMenu" StaticHoverStyle-ForeColor="#f2a761" ForeColor="Red" 
+                StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="#dedede" DynamicHoverStyle-ForeColor="#f2a761">
                 <Items>
                     <asp:MenuItem Text="INICIO" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="TIENDA" Value="shop" NavigateUrl="~/shop.aspx"></asp:MenuItem>

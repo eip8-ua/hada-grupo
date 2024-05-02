@@ -7,24 +7,44 @@ html {
 body {
     font-family: 'Pontano Sans';
     font-size: 20px;
-    background-color: #001cc8;
-    color: #a4d3ed;
+    background-color: white;
+    color: gray;
     min-height: 100%;
     margin: 0;
 }
+
+
+input[type=submit] {
+    background-color: red;
+    font-family: 'Pontano Sans';
+    font-size: 25px;
+    color: white;
+    border-radius: 7px 7px;
+}
+
+input[type=submit]:hover {
+    cursor:pointer;
+    background-color: white;
+    font-family: 'Pontano Sans';
+    font-size: 26px;
+    color: lightsalmon; 
+    border-radius: 7px 7px;
+    border-color: lightsalmon;
+ }
 
 /*Elementos de la página maestra*/
 
 /*Título de la página, la sección más superior*/
 #title {
+    color: salmon;
     font-weight: bold;
     font-size: 35px;
     align-items: center;
     justify-content: center;
-    border-left: 2px solid #384179;
-    border-top: 2px solid #384179;
-    border-right: 2px solid #384179;
-    border-bottom: 3px solid #3c457a;
+    border-left: 2px solid whitesmoke;
+    border-top: 2px solid whitesmoke;
+    border-right: 2px solid whitesmoke;
+    border-bottom: 4px solid whitesmoke;
     display: flex;
     padding: 17px;
 }
@@ -33,13 +53,14 @@ body {
 .content {
     margin: 60px;
     padding: 30px;
-    background-color: #425aed;
+    background-color: #f2f2f2;
     border-radius: 5px 5px 5px 5px;
 }
 
 /*Clase para la estructura interna del menú de navegación, el asp menu como tal*/
 .innerMenu {
-    font-size:26px;
+    vertical-align: middle;
+    font-size:23px
 }
 
 /*Clase para el div que envuelve el menú de navegación*/
@@ -53,7 +74,7 @@ body {
     margin-left: 200px;
     margin-top: 40px;
     border-radius: 10px 10px 10px 10px;
-    background-color: #5790f2;
+    background-color: #f2f2f2;
 }
 
 /*Elementos de la página index.aspx*/
@@ -62,9 +83,10 @@ body {
 .index_showcasetext {
     display: flex;
     text-align: center;
-    border: 5px solid #5164d6;
-    padding: 10px;
-    background-color: #6475e3;
+    border: 5px none;
+    border-radius: 5px;
+    padding: 30px;
+    background-color: #e8e8e4;
 }
 
 .index_showcasetext_left {
@@ -78,9 +100,60 @@ body {
 }
 
 #index_showcase1 {
-    margin-bottom: 40px;
+    margin-bottom: 70px;
 }
 
-#index_showcase2 {
+.imgSeeMore {
+    padding-left: 20%;
+    padding-right:20%;
+}
 
+.index_seeMore {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 5px none;
+    background-color: #e8e8e4;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.ButtonSeeMore {
+    margin-left: 45%;
+}
+
+.popProducts {
+    display: flex;
+    text-align:center;
+    justify-content:center;
+    margin-bottom: 60px;
+}
+
+.index_promoExpo {
+    display: flex;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 5px none;
+    vertical-align: middle;
+    background-color: #e8e8e4;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.index_promoExpo_left {
+    margin-left: 10%
+}
+
+.index_promoExpo_right {
+    margin-right: 20px;
+    display: flex;
+}
+
+.oferta {
+    border: 5px none;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    width: 50%;
+    margin-left: 30px;
 }
