@@ -1,0 +1,223 @@
+﻿/*Clases para aspectos generales de la página web*/
+
+html {
+    height:100%;
+}
+
+body {
+    font-family: 'Pontano Sans';
+    font-size: 20px;
+    background-color: white;
+    color: gray;
+    min-height: 100%;
+    margin: 0;
+}
+
+
+input[type=submit] {
+    background-color: red;
+    font-family: 'Pontano Sans';
+    font-size: 25px;
+    color: white;
+    border-radius: 7px 7px;
+}
+
+input[type=submit]:hover {
+    cursor:pointer;
+    background-color: white;
+    font-family: 'Pontano Sans';
+    font-size: 26px;
+    color: lightsalmon; 
+    border-radius: 7px 7px;
+    border-color: lightsalmon;
+ }
+
+/*Elementos de la página maestra*/
+
+/*Título de la página, la sección más superior*/
+#title {
+    color: salmon;
+    font-weight: bold;
+    font-size: 35px;
+    align-items: center;
+    justify-content: center;
+    border-left: 2px solid whitesmoke;
+    border-top: 2px solid whitesmoke;
+    border-right: 2px solid whitesmoke;
+    border-bottom: 4px solid whitesmoke;
+    display: flex;
+    padding: 17px;
+}
+
+/*Ventana para el contenido, es decir, las diferentes partes que se cambian al cambiar de página*/
+.content {
+    margin: 60px;
+    padding: 30px;
+    background-color: #f2f2f2;
+    border-radius: 5px 5px 5px 5px;
+}
+
+/*Clase para la estructura interna del menú de navegación, el asp menu como tal*/
+.innerMenu {
+    vertical-align: middle;
+    font-size:23px
+}
+
+/*Clase para el div que envuelve el menú de navegación*/
+.menu {
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: 1px none;
+    margin-right: 200px;
+    margin-left: 200px;
+    margin-top: 40px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #f2f2f2;
+}
+
+/*Elementos de la página index.aspx*/
+
+/*Sección superior, sección de bienvenida*/
+.index_showcasetext {
+    display: flex;
+    text-align: center;
+    border: 5px none;
+    border-radius: 5px;
+    padding: 30px;
+    background-color: #e8e8e4;
+}
+
+.index_showcasetext_left {
+    margin-top: 75px;
+    margin-left: 10%;
+}
+
+.index_showcasetext_right {
+    text-align: right;
+    margin-left: 20%;
+}
+
+#index_showcase1 {
+    margin-bottom: 70px;
+}
+
+.imgSeeMore {
+    padding-left: 20%;
+    padding-right:20%;
+}
+
+.index_seeMore {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 5px none;
+    background-color: #e8e8e4;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.ButtonSeeMore {
+    margin-left: 45%;
+}
+
+.popProducts {
+    display: flex;
+    text-align:center;
+    justify-content:center;
+    margin-bottom: 60px;
+}
+
+.index_promoExpo {
+    display: flex;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 5px none;
+    vertical-align: middle;
+    background-color: #e8e8e4;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.index_promoExpo_left {
+    margin-left: 10%
+}
+
+.index_promoExpo_right {
+    margin-right: 20px;
+    display: flex;
+}
+
+.oferta {
+    border: 5px none;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    width: 50%;
+    margin-left: 30px;
+}
+
+
+.user-data {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid grey;
+    margin-right: 200px;
+    margin-left: 200px;
+    margin-top: 20px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.user-side {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.user-buttons{
+    float: left;
+    width: 20%;
+    padding: 10px;
+}
+
+
+.testimonial {
+    border: 4px double;
+    border-radius: 10px;
+    padding:40px;
+    margin-top: 30px;
+    border-color: darkgray;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:gainsboro;
+    text-align:center;
+
+}
+
+.testimonial_quote {
+    font-size: 18px;
+    color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#nombre_testimonial{
+    text-align: justify; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 24px; 
+    color: darkslategray; 
+    font-style:italic;
+    padding:20px;
+}
+
+#testimonialText {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#testimonialContainer {
+    width: 70%; 
+    margin: 0 auto; 
+}
+
+

@@ -11,17 +11,18 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 -  Daniel Alarcón Mena
 -  Abdelatif Boussaid
 
-## Reparto de Entidades de Negocio
+## Reparto de Entidades y Aspx
 
-|   Alumno    | EN |
-| :----------- | :-----------: |
-| Emiliano Dovao      |    Promociones <br></br>  Informes                    |
-| Saúl Conejo         |    Producto <br></br>  Categoría                      |
-| Lucas Alberola      |    Usuario <br></br>  Testimonial                     |
-| Elías Iborra        |    Locker <br></br>  Dirección                        |
-| David Mas Almendros |    Carrito <br></br>  Línea de Carrito                |
-| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |
-| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |
+|   Alumno    | EN |	ASPX |
+| :----------- | :-----------: | :-----------: |
+| Emiliano Dovao      |    Promociones <br></br>  Informes                    |		Master <br></br>  Index                            |
+| Saúl Conejo         |    Producto <br></br>  Categoría                      |		Contacta                                           |
+| Lucas Alberola      |    Usuario <br></br>  Testimonial                     |		Usuario											   |
+| Elías Iborra        |    Locker <br></br>  Dirección                        |		Login <br></br> Crear Usuario                      |
+| David Mas Almendros |    Carrito <br></br>  Línea de Carrito                |		Carrito							                   |
+| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |		Testimoniales						               |
+| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |		Pedido											   |
+
 
 ## Parte Pública  
 La parte pública permite a los usuarios no registrados crear una cuenta, iniciar sesión, consultar los productos ofrecidos y su stock.  
