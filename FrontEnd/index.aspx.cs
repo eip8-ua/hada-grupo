@@ -11,7 +11,26 @@ namespace proyecto
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.popProduct2.Visible = false;
+            this.popProduct3.Visible = false;
+            this.ButtonSeeMore.Visible = true;
+        }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/contact_us.aspx");
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/testimonial.aspx");
+        }
+
+        protected void ButtonSeeMore_Click(object sender, EventArgs e)
+        {
+            this.popProduct2.Visible = true;
+            this.popProduct3.Visible = true;
+            this.ButtonSeeMore.Visible = false;
         }
     }
 }

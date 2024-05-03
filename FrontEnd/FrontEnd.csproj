@@ -73,11 +73,23 @@
     </Content>
     <Content Include="contact_us.aspx" />
     <Content Include="Estilos.css" />
+    <Content Include="Images\cascos 1.jpg" />
+    <Content Include="Images\login.png" />
+    <Content Include="Images\monitor 1.jpg" />
+    <Content Include="Images\nosotros.jpg" />
+    <Content Include="Images\raton 1.jpg" />
+    <Content Include="Images\shopping_cart.png" />
+    <Content Include="Images\teclado 2.jpg" />
+    <Content Include="Images\teclado1.jpg" />
+    <Content Include="Images\testimonio 1.jpg" />
+    <Content Include="Images\torre 1.jpg" />
     <Content Include="index.aspx" />
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
     <Content Include="shop.aspx" />
     <Content Include="shopping_cart.aspx" />
+    <Content Include="Images\technology.jpg" />
+    <Content Include="Images\technology2.jpg" />
     <Content Include="testimonial.aspx" />
     <Content Include="user.aspx" />
     <Content Include="Web.config" />
