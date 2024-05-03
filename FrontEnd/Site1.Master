@@ -6,24 +6,31 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="Estilos.css" />
-    <title></title>
+    <title>HADAshop, tu tienda</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="title">HADAshop</div>
+        <div id="title">HADAshop</div>
         <div class="menu">
-            <asp:Menu ID="NavigationMenu" runat="server" Orientation="Horizontal" CssClass="navigationMenu" StaticMenuItemStyle-ForeColor="Black" StaticMenuItemStyle-HorizontalPadding="25px">
+            <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" CssClass="innerMenu" StaticHoverStyle-ForeColor="#f2a761" ForeColor="Red" 
+                StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="#dedede" DynamicHoverStyle-ForeColor="#f2a761">
                 <Items>
                     <asp:MenuItem Text="INICIO" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="TIENDA" Value="shop" NavigateUrl="~/shop.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="CONTÁCTANOS" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="TESTIMONIAL" Value="testimonial" NavigateUrl="~/testimonial.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="PEDIDOS" Value="pedidos" NavigateUrl="~/pedidos.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login.png">
+                        <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Register" Value="register" NavigateUrl="~/register.aspx"></asp:MenuItem>
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="" Value="shopping_cart" NavigateUrl="~/shopping_cart.aspx" ImageUrl="Images/shopping_cart.png"></asp:MenuItem>
                 </Items>
             </asp:Menu>
         </div>
-        <div>
+        <div class="content">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
