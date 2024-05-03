@@ -21,6 +21,7 @@
                     <asp:MenuItem Text="TIENDA" Value="shop" NavigateUrl="~/shop.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="CONTÁCTANOS" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="TESTIMONIAL" Value="testimonial" NavigateUrl="~/testimonial.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="PEDIDOS" Value="pedidos" NavigateUrl="~/pedidos.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login.png">
                         <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
                         <asp:MenuItem Text="Register" Value="register" NavigateUrl="~/register.aspx"></asp:MenuItem>
