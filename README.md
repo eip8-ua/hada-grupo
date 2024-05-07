@@ -93,4 +93,10 @@ La entrega es correcta y cumple con todos los requisitos. Ahora vamos a por la s
 
 Saludos!!!
 
+# Entrega 03 Interfaz
+
+La entrega en git es correcta y cumple con todo. Simplemente hay dos inconvenientes, faltan .aspx por implementar. Por ejemplo registro.aspx no está, faltan los aspx de la administración. Además, el proyecto debia compilar y no compila. De todas formas es algo que podeis solventar con las mejoras.
+
+Enhorabuena, vais muy bien!!!
+
 
