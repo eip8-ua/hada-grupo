@@ -8,7 +8,7 @@ namespace Library
 {
     class ENProducto
     {
-        private ENPromociones promocion;
+        
         private ENCategoria categoria;
         private int _id;
         private int _stock;
@@ -16,6 +16,8 @@ namespace Library
         private string _nombre;
         private string _descripcion;
         private int _popularidad;
+        private string _url_image;
+        private int _promocion;
 
         public int id
         {
@@ -49,6 +51,18 @@ namespace Library
             set { _popularidad = popularidad; }
         }
 
+        public string url_image
+        {
+            get { return _url_image; }
+            set { _url_image = url_image; }
+        }
+
+        public int promocion
+        {
+            get { return _promocion; }
+            set { _promocion = promocion; }
+        }
+
         public ENProducto()
         {
 
@@ -65,27 +79,10 @@ namespace Library
             if (descripcion != "")
                 this.descripcion = descripcion;
             if (cat != null)
-                this.categoria = new ENCategoria(cat);
+                this.categoria = cat;
             if (prom != null)
-                this.promocion = new ENPromociones(prom);
+                this.promocion = prom;
         
-        }
-
-        public bool Create()
-        {
-
-        }
-        public bool Delete()
-        {
-
-        }
-        public bool Update()
-        {
-
-        }
-        public bool Read()
-        {
-
         }
     }
 }
