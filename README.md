@@ -20,10 +20,8 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 | Lucas Alberola      |    Usuario <br></br>  Testimonial                     |		Usuario											   |
 | Elías Iborra        |    Locker <br></br>  Dirección                        |		Login <br></br> Crear Usuario                      |
 | David Mas Almendros |    Carrito <br></br>  Línea de Carrito                |		Carrito							                   |
-| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |		Testimoniales						               |
-| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |		Pedido											   |
-
-
+| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |		Testimoniales<br></br>Página con todos los productos|
+| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |		Pedido<br></br>Página de producto específico       |
 ## Parte Pública  
 La parte pública permite a los usuarios no registrados crear una cuenta, iniciar sesión, consultar los productos ofrecidos y su stock.  
 ## Listado EN Pública  
