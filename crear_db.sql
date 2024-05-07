@@ -1,4 +1,5 @@
 ﻿-- TABLAS
+
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Usuario')
 BEGIN
 	CREATE TABLE [dbo].[Usuario]
@@ -8,7 +9,7 @@ BEGIN
 		[nombre] NVARCHAR(33) NOT NULL,
 		[apellidos] NVARCHAR(55) NOT NULL,
 		[telefono] NVARCHAR(15),
-		[cod_postal] NVARCHAR(5),
+		[fecha_nac] DATE,
 		[admin] BIT,
 		CONSTRAINT pk_usuario PRIMARY KEY ([dni])
 	);
@@ -45,8 +46,6 @@ BEGIN
 	(
 		[id] INT IDENTITY(1,1),
 		[nombre] NVARCHAR(50),
-		[calle] NVARCHAR(100),
-		[cod_postal] NVARCHAR(25),
 		CONSTRAINT pk_locker PRIMARY KEY ([id]),
 	)
 END;

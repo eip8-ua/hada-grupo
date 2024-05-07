@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Esquema_ERR_HADA_Grupo.drawio.pdf = Esquema_ERR_HADA_Grupo.drawio.pdf
 		Estilos_web.pdf = Estilos_web.pdf
 		README.md = README.md
+		SqlQuery_1.sql = SqlQuery_1.sql
 	EndProjectSection
 EndProject
 Global
