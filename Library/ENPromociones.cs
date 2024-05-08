@@ -22,6 +22,10 @@ namespace Library
             miId = Yd;
             descuento = desc;
         }
+        public ENPromociones(ENPromociones prom)
+        {
+
+        }
 
         public List<ENPromociones> getPromociones() {
 

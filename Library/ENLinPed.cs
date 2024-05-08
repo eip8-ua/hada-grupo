@@ -15,19 +15,19 @@ namespace Library
 
         public bool Create()
         {
-
+            return false;
         }
         public bool Delete()
         {
-
+            return false;
         }
         public bool Update()
         {
-
+            return false;
         }
         public bool Read()
         {
-
+            return false;
         }
     }
 }
