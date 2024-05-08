@@ -75,6 +75,18 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Apartado de devolución de artículos para usuarios registrados.
 -  Apartado de valoración de usuarios.
 -  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
+## Mejoras necesarias
+-  Botón Inicio pasa a ser Tienda
+-  Botón Pedido desaparece de ahí
+-  Botón Tienda pasa a ser Productos y al clickarlo aparecen las diferentes categorías de productos. En las categorías un botón será todo. Todos los botones llevarán a la página mostrar_productos.aspx pero con diferentes filtros dependiendo del botón pulsado.
+-  Si el usuario está registrado las opciones del icono de usuario pasarán a ser:
+	1. Mi cuenta (llevará a usuario.aspx)
+	2. Mis pedios. (llevará a pedidos.aspx)
+	3. Si es admin también aparecerán estas opciones:
+		1.1. Añadir artículo. (llevará a un nuevos aspx llamado admin_productos.aspx)
+		1.2. Administrar pedidos. (llevará a un aspx nuevo llamado admin_pedidos.aspx) MENOS PRIORITARIO
+		1.3. Administrar usuarios. (llevará a un aspx nuevo llamado admin_usuarios.aspx) MENOS PRIORITARIO
+	4. Cerrar sesión.
 
 ## Esquema Entidad Relacion de la base de datos
 - El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.

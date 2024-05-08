@@ -32,11 +32,11 @@ insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) 
 insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('18042860c', 'rfeehelyv@fastcompany.com', 'Roselia', 'Feehely', '2895223771', '12/31/1990', 1);
 insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('73996262f', 'sgourliew@issuu.com', 'Sebastiano', 'Gourlie', '1454187060', '6/4/1996', 1);
 
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ("33433323T","pdc@email.com", "Pepe", " Domingo Castaño", "883847575", "10/10/1950", 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ("95433838M","rnp@email.com", "Rafael", " Nadal Parera", "883837575", "03/06/1989", 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ("30325494L","lmp@email.com", "Lionel", "Momingo Pelelo", "883247575", "20/10/1980", 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ("45333292R","nmc@email.com", "Nadia", " Malacute Contreras", "883147575", "01/10/1990", 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ("33024959W","fnf@email.com", "Francesca", " Niso Franco", "883047575", "22/10/2000", 0);
+insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('33433323t','pdc@email.com', 'Pepe', ' Domingo Castaño', '883847575', '10/10/1950', 0);
+insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('95433838m','rnp@email.com', 'Rafael', ' Nadal Parera', '883837575', '03/06/1989', 0);
+insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('30325494l','lmp@email.com', 'Lionel', 'Momingo Pelelo', '883247575', '20/10/1980', 0);
+insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('45333292r','nmc@email.com', 'Nadia', ' Malacute Contreras', '883147575', '01/10/1990', 0);
+insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('33024959w','fnf@email.com', 'Francesca', ' Niso Franco', '883047575', '22/10/2000', 0);
 
 
 
@@ -141,27 +141,38 @@ insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('4468
 insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('44778 Forest Court', '97129', 'Vigo', null, 'Spain');
 insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('006 Bonner Crossing', '11298', null, null, null);
 
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ("La Mancha" "03610", "Petrer", "Alicante", "España");
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ("Mayor" "02811", "Alcornoque", "Pontevedra", "España");
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ("Muralla 12" "14859", "Ávila", "Ávila", "España");
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ("Brigadier Algarra" "03610", "Petrer", "Alicante", "España");
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ("Banyeres" "29734", "Cadaqués", "Gerona", "España");
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('La Mancha' '03610', 'Petrer', 'Alicante', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Mayor' '02811', 'Alcornoque', 'Pontevedra', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Muralla 12' '14859', 'Ávila', 'Ávila', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Brigadier Algarra' '03610', 'Petrer', 'Alicante', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Banyeres' '29734', 'Cadaqués', 'Gerona', 'España');
+
+
+insert into Direccion_en (usuario,direccion) values ('33433323t',1);
+insert into Direccion_en (usuario,direccion) values ('95433838m',2);
+insert into Direccion_en (usuario,direccion) values ('30325494l',3);
+insert into Direccion_en (usuario,direccion) values ('45333292r',4);
+insert into Direccion_en (usuario,direccion) values ('33024959w',33);
+insert into Direccion_en (usuario,direccion) values ('52715764a',2);
+insert into Direccion_en (usuario,direccion) values ('68399192b',9);
+insert into Direccion_en (usuario,direccion) values ('05062433h',12);
 
 
 
-INSERT INTO Locker(nombre) VALUES ("Kiosko Laura");
-INSERT INTO Locker(nombre) VALUES ("Casa Paquirrín");
-INSERT INTO Locker(nombre) VALUES ("Panadería Tomasa");
-INSERT INTO Locker(nombre) VALUES ("Habana");
-INSERT INTO Locker(nombre) VALUES ("Correos");
+INSERT INTO Locker(nombre) VALUES ('Kiosko Laura');
+INSERT INTO Locker(nombre) VALUES ('Casa Paquirrín');
+INSERT INTO Locker(nombre) VALUES ('Panadería Tomasa');
+INSERT INTO Locker(nombre) VALUES ('Habana');
+INSERT INTO Locker(nombre) VALUES ('Correos');
 
 
 
-insert into Categoria(tipo,descripcion) values("Ratones","El ratón es un dispositivo apuntador utilizado para facilitar el manejo de un entorno gráfico en una computadora");
-insert into Categoria(tipo,descripcion) values("Auriculares","El auricular es transductor que recibe una señal eléctrica originada desde una fuente electrónica");
-insert into Categoria(tipo,descripcion) values("Monitores","El monitor u ordenador es el principal dispositivo de salida que muestra los datos e información de los usuarios");
-insert into Categoria(tipo,descripcion) values("Teclados","El teclado es un dispositivo de entrada, en parte inspirado en el teclado de las máquinas de escribir");
-insert into Categoria(tipo,descripcion) values("Alfombrillas","La alfombrilla es una superficie que mejora el movimiento del ratón");
-insert into Categoria(tipo,descripcion) values("Ordenadores","Máquinas listas para usar con las mejores calidades");
+insert into Categoria(tipo,descripcion) values('Ratones','El ratón es un dispositivo apuntador utilizado para facilitar el manejo de un entorno gráfico en una computadora');
+insert into Categoria(tipo,descripcion) values('Auriculares','El auricular es transductor que recibe una señal eléctrica originada desde una fuente electrónica');
+insert into Categoria(tipo,descripcion) values('Monitores','El monitor u ordenador es el principal dispositivo de salida que muestra los datos e información de los usuarios');
+insert into Categoria(tipo,descripcion) values('Teclados','El teclado es un dispositivo de entrada, en parte inspirado en el teclado de las máquinas de escribir');
+insert into Categoria(tipo,descripcion) values('Alfombrillas','La alfombrilla es una superficie que mejora el movimiento del ratón');
+insert into Categoria(tipo,descripcion) values('Ordenadores','Máquinas listas para usar con las mejores calidades');
 
 
+insert into
