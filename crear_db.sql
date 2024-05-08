@@ -1,9 +1,11 @@
 ﻿-- TABLAS
 
+
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Usuario')
 BEGIN
 	CREATE TABLE [dbo].[Usuario]
 	(
+		[id] INT IDENTITY(1,1),
 		[dni] NVARCHAR(9) NOT NULL,
 		[email] NVARCHAR(50) NOT NULL,
 		[nombre] NVARCHAR(33) NOT NULL,
@@ -11,8 +13,8 @@ BEGIN
 		[telefono] NVARCHAR(15),
 		[fecha_nac] DATE,
 		[admin] BIT,
-		CONSTRAINT pk_usuario PRIMARY KEY ([dni])
-	);
+		CONSTRAINT pk_usuario PRIMARY KEY ([id])
+	)
 END;
 
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Direccion')
@@ -32,7 +34,7 @@ IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Direc
 BEGIN
 	CREATE TABLE [dbo].[Direccion_en]
 	(
-		[usuario] NVARCHAR(9),
+		[usuario] INT,
 		[direccion] INT,
 		CONSTRAINT pk_direccion_en PRIMARY KEY([usuario],[direccion]),
 		CONSTRAINT fk_direccion_en_1 FOREIGN KEY([usuario]) REFERENCES Usuario,
@@ -64,7 +66,7 @@ IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Carri
 BEGIN
 	CREATE TABLE [dbo].[Carrito_de]
 	(
-		[usuario] NVARCHAR(9), 
+		[usuario] INT, 
 		[carrito] int UNIQUE,
 		CONSTRAINT pk_carrito_de PRIMARY KEY([usuario]),
 		CONSTRAINT fk_carrito_de_1 FOREIGN KEY ([usuario]) REFERENCES Usuario,
@@ -90,7 +92,7 @@ BEGIN
 	(
 		[num_pedido] INT IDENTITY(1,1),
 		[fecha] DATE NOT NULL,
-		[usuario] NVARCHAR(9),
+		[usuario] INT,
 		CONSTRAINT pk_pedido PRIMARY KEY ([num_pedido]),
 		CONSTRAINT fk_pedido_1 FOREIGN KEY ([usuario]) REFERENCES Usuario
 	)
@@ -112,7 +114,7 @@ BEGIN
 	CREATE TABLE [dbo].[Categoria]
 	(
 		[tipo] NVARCHAR(30),
-		[descripcion] NVARCHAR(100),
+		[descripcion] NVARCHAR(200),
 		CONSTRAINT pk_categoria PRIMARY KEY([tipo])
 	)
 END;
@@ -122,10 +124,10 @@ BEGIN
 	CREATE TABLE [dbo].[Producto]
 	(
 		[id] INT IDENTITY(1,1),
-		[nombre] NVARCHAR(33),
-		[pvp] DECIMAL(3, 2),
+		[nombre] NVARCHAR(80),
+		[pvp] DECIMAL(7, 2),
 		[url_image] NVARCHAR(30),
-		[descripcion] VARCHAR(100),
+		[descripcion] VARCHAR(200),
 		[stock] INT,
 		[popularidad] INT,
 		[promocion] INT,
@@ -140,11 +142,11 @@ IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Valor
 BEGIN
 	CREATE TABLE [dbo].[Valora]
 	(
-		[usuario] NVARCHAR(9),
-		[producto] INT UNIQUE,
+		[usuario] INT,
+		[producto] INT,
 		[puntuacion] INT NOT NULL,
-		[descripcion] NVARCHAR(100),
-		CONSTRAINT pk_valora PRIMARY KEY ([usuario]),
+		[descripcion] NVARCHAR(200),
+		CONSTRAINT pk_valora PRIMARY KEY ([usuario],[producto]),
 		CONSTRAINT fk_valora_1 FOREIGN KEY ([usuario]) REFERENCES Usuario,
 		CONSTRAINT fk_valora_2 FOREIGN KEY ([producto]) REFERENCES Producto
 	)
@@ -183,7 +185,7 @@ BEGIN
 	CREATE TABLE [dbo].[Testimonial]
 	(
 		[id] INT IDENTITY(1,1),
-		[mensaje] NVARCHAR(30),
+		[mensaje] NVARCHAR(200),
 		CONSTRAINT pk_testimonial PRIMARY KEY([id])
 	)
 END;
@@ -193,7 +195,7 @@ BEGIN
 	CREATE TABLE [dbo].[Califica]
 	(
 		[testimonial] INT,
-		[usuario] NVARCHAR(9) UNIQUE,
+		[usuario] INT UNIQUE,
 		CONSTRAINT pk_califica PRIMARY KEY([testimonial]),
 		CONSTRAINT fk_califica_1 FOREIGN KEY ([testimonial]) REFERENCES Testimonial,
 		CONSTRAINT fk_califica_2 FOREIGN KEY ([usuario]) REFERENCES Usuario

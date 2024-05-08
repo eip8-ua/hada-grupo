@@ -1,4 +1,5 @@
-﻿insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('57094877i', 'jlount0@sohu.com', 'Jessi', 'Lount', '9538460968', '8/9/1996', 0);
+﻿
+insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('57094877i', 'jlount0@sohu.com', 'Jessi', 'Lount', '9538460968', '8/9/1996', 0);
 insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('69217764u', 'ibrunsen1@cnbc.com', 'Isabel', 'Brunsen', '6701312632', '11/8/1997', 0);
 insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('18239099h', 'gditzel2@tumblr.com', 'Gaye', 'Ditzel', '4828355955', '5/20/1994', 1);
 insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('14367034n', 'dbroadfoot3@surveymonkey.com', 'Dehlia', 'Broadfoot', '2251280503', '2/18/1999', 0);
@@ -32,11 +33,12 @@ insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) 
 insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('18042860c', 'rfeehelyv@fastcompany.com', 'Roselia', 'Feehely', '2895223771', '12/31/1990', 1);
 insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('73996262f', 'sgourliew@issuu.com', 'Sebastiano', 'Gourlie', '1454187060', '6/4/1996', 1);
 
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('33433323t','pdc@email.com', 'Pepe', ' Domingo Castaño', '883847575', '10/10/1950', 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('95433838m','rnp@email.com', 'Rafael', ' Nadal Parera', '883837575', '03/06/1989', 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('30325494l','lmp@email.com', 'Lionel', 'Momingo Pelelo', '883247575', '20/10/1980', 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('45333292r','nmc@email.com', 'Nadia', ' Malacute Contreras', '883147575', '01/10/1990', 0);
-insert into Usuario (dni, email, nombre, apellidos, teléfono, fecha_nac, admin) values ('33024959w','fnf@email.com', 'Francesca', ' Niso Franco', '883047575', '22/10/2000', 0);
+insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('33433323t','pdc@email.com', 'Pepe', ' Domingo Castaño', '883847575', '10/10/1950', 0);
+insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('95433838m','rnp@email.com', 'Rafael', ' Nadal Parera', '883837575', '03/06/1989', 0);
+
+insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('30325494l','lmp@email.com', 'Lionel', 'Momingo Pelelo', '883247575', '2/1/1980', 0);
+insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('45333292r','nmc@email.com', 'Nadia', ' Malacute Contreras', '883147575', '1/1/1990', 0);
+insert into Usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin) values ('33024959w','fnf@email.com', 'Francesca', ' Niso Franco', '883047575', '2/10/2000', 0);
 
 
 
@@ -141,38 +143,107 @@ insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('4468
 insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('44778 Forest Court', '97129', 'Vigo', null, 'Spain');
 insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('006 Bonner Crossing', '11298', null, null, null);
 
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('La Mancha' '03610', 'Petrer', 'Alicante', 'España');
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Mayor' '02811', 'Alcornoque', 'Pontevedra', 'España');
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Muralla 12' '14859', 'Ávila', 'Ávila', 'España');
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Brigadier Algarra' '03610', 'Petrer', 'Alicante', 'España');
-insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Banyeres' '29734', 'Cadaqués', 'Gerona', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('La Mancha', '03610', 'Petrer', 'Alicante', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Calle Mayor', '02811', 'Alcornoque', 'Pontevedra', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Muralla 12', '14859', 'Ávila', 'Ávila', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Brigadier Algarra', '03610', 'Petrer', 'Alicante', 'España');
+insert into Direccion (calle, cod_postal, ciudad, provincia, pais) values ('Banyeres', '29734', 'Cadaqués', 'Gerona', 'España');
 
 
-insert into Direccion_en (usuario,direccion) values ('33433323t',1);
-insert into Direccion_en (usuario,direccion) values ('95433838m',2);
-insert into Direccion_en (usuario,direccion) values ('30325494l',3);
-insert into Direccion_en (usuario,direccion) values ('45333292r',4);
-insert into Direccion_en (usuario,direccion) values ('33024959w',33);
-insert into Direccion_en (usuario,direccion) values ('52715764a',2);
-insert into Direccion_en (usuario,direccion) values ('68399192b',9);
-insert into Direccion_en (usuario,direccion) values ('05062433h',12);
-
-
-
-INSERT INTO Locker(nombre) VALUES ('Kiosko Laura');
-INSERT INTO Locker(nombre) VALUES ('Casa Paquirrín');
-INSERT INTO Locker(nombre) VALUES ('Panadería Tomasa');
-INSERT INTO Locker(nombre) VALUES ('Habana');
-INSERT INTO Locker(nombre) VALUES ('Correos');
+insert into Direccion_en ([usuario],[direccion]) values (3,1);
+insert into Direccion_en ([usuario],[direccion]) values (23,2);
+insert into Direccion_en ([usuario],[direccion]) values (12,3);
+insert into Direccion_en ([usuario],[direccion]) values (6,4);
+insert into Direccion_en ([usuario],[direccion]) values (9,33);
+insert into Direccion_en ([usuario],[direccion]) values (2,2);
+insert into Direccion_en ([usuario],[direccion]) values (12,9);
+insert into Direccion_en ([usuario],[direccion]) values (1,12);
 
 
 
-insert into Categoria(tipo,descripcion) values('Ratones','El ratón es un dispositivo apuntador utilizado para facilitar el manejo de un entorno gráfico en una computadora');
-insert into Categoria(tipo,descripcion) values('Auriculares','El auricular es transductor que recibe una señal eléctrica originada desde una fuente electrónica');
-insert into Categoria(tipo,descripcion) values('Monitores','El monitor u ordenador es el principal dispositivo de salida que muestra los datos e información de los usuarios');
-insert into Categoria(tipo,descripcion) values('Teclados','El teclado es un dispositivo de entrada, en parte inspirado en el teclado de las máquinas de escribir');
-insert into Categoria(tipo,descripcion) values('Alfombrillas','La alfombrilla es una superficie que mejora el movimiento del ratón');
-insert into Categoria(tipo,descripcion) values('Ordenadores','Máquinas listas para usar con las mejores calidades');
+INSERT INTO Locker (nombre) VALUES ('Kiosko Laura');
+INSERT INTO Locker (nombre) VALUES ('Casa Paquirrín');
+INSERT INTO Locker (nombre) VALUES ('Panadería Tomasa');
+INSERT INTO Locker (nombre) VALUES ('Habana');
+INSERT INTO Locker (nombre) VALUES ('Correos');
 
 
-insert into
+
+insert into Locker_en ([direccion],[locker]) values (110,1);
+insert into Locker_en ([direccion],[locker]) values (111,2);
+insert into Locker_en ([direccion],[locker]) values (112,3);
+insert into Locker_en ([direccion],[locker]) values (116,4);
+
+
+
+
+insert into Categoria(tipo,descripcion) values ('Ratones','El ratón es un dispositivo apuntador utilizado para facilitar el manejo de un entorno gráfico en una computadora');
+insert into Categoria(tipo,descripcion) values ('Auriculares','El auricular es transductor que recibe una señal eléctrica originada desde una fuente electrónica');
+insert into Categoria(tipo,descripcion) values ('Monitores','El monitor u ordenador es el principal dispositivo de salida que muestra los datos e información de los [usuario]s');
+insert into Categoria(tipo,descripcion) values ('Teclados','El teclado es un dispositivo de entrada, en parte inspirado en el teclado de las máquinas de escribir');
+insert into Categoria(tipo,descripcion) values ('Alfombrillas','La alfombrilla es una superficie que mejora el movimiento del ratón');
+insert into Categoria(tipo,descripcion) values ('Ordenadores','Máquinas listas para usar con las mejores calidades');
+
+
+
+insert into Promocion(descuento,disponibilidad) values (80,0);
+insert into Promocion(descuento,disponibilidad) values (60,0);
+insert into Promocion(descuento,disponibilidad) values (20,1);
+insert into Promocion(descuento,disponibilidad) values (30,1);
+insert into Promocion(descuento,disponibilidad) values (50,1);
+insert into Promocion(descuento,disponibilidad) values (90,1);
+insert into Promocion(descuento,disponibilidad) values (100,0);
+
+
+
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Newskill Sylvanus PRO Auriculares Gaming',54.99,'Images/Productos/1','Auriculares Gaming con Sonido Envolvente Virtual 7.1 Multiplataforma',40,100,null,'Auriculares');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Cool Kids Auriculares Bluetooth Infantiles',26.11,'Images/Productos/2','Cascos ergonómicos suaves y seguros, ideales para niños. Volumen limitado para una experiencia perfecta',20,5,null,'Auriculares');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech Headset PC 960 USB',27.99,'Images/Productos/3','Cascos del Xocas',25,100,null,'Auriculares');
+
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Forgeon Perdition RGB Ratón Gaming',35.99,'Images/Productos/4','Ratón ergonómico RGB con 16.000 DPI en color negro',10,60,3,'Ratones');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech M185 Ratón Inalámbrico',12.00,'Images/Productos/5','Ratón inalámbrico en color gris muy comodo',200,14,3,'Ratones');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Apple Magic Mouse Plata',85.00,'Images/Productos/6','Ratón Magic Mouse de Apple inalámbrico en color plata',76,65,3,'Ratones');
+
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('HP OMEN 27" LED IPS FullHD 165Hz FreeSync',169.00,'Images/Productos/7','Su excelente rendimiento y la nitidez de sus colores permiten que pueda perderse en los juegos que más le gustan',21,70,6,'Monitores');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('AOC 27B3HA2 LED IPS 27" FullHD 100Hz',109.90,'Images/Productos/8','Claridad de alto rendimiento con monitor FHD de 27" y 100Hz con HDMI. ',76,10,6,'Monitores');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('HP OMEN 34c 34" WQHD 165Hz FreeSync Premium Curva',389.00,'Images/Productos/9','No hay nada mejor que evadirse con el monitor gaming curvo OMEN by HP de 34", WQHD, 165 Hz. Inmersión total gracias a su pantalla curva ultrapanorámica de 1500R',3,0,null,'Monitores');
+
+
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech G915 TKL RGB',139.00,'Images/Productos/10','El G915 TKL es increíblemente refinado y sorprendentemente fino, duradero y hecho ante todo para ofrecer rendimiento y funciones.',10,32,null,'Teclados');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Newskill Serike V2 TKL',75.00,'Images/Productos/11','El teclado mecánico para juegos Serike V2 te ofrece la experiencia más completa para jugar',76,65,null,'Teclados');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Tempest K20 Beast',32.44,'Images/Productos/12','Teclado Mecánico Inalámbrico Gaming RGB TKL Mini Negro',500,100,null,'Monitores');
+
+
+
+
+
+insert into Testimonial(mensaje) values ('Explorar la tienda digital fue como navegar en un universo de posibilidades tecnológicas. ¡Una experiencia fascinante!');
+insert into Testimonial(mensaje) values ('Hallé la laptop perfecta entre brillantes pantallas y veloces procesadores. ¡Una elección que despierta sonrisas!');
+insert into Testimonial(mensaje) values ('Cada clic fue un descubrimiento. Encontré periféricos que potenciaron mi creatividad. ¡Una compra inolvidable');
+insert into Testimonial(mensaje) values ('Sumergirme en la tienda virtual fue como entrar en un oasis tecnológico. ¡Una aventura que despierta la imaginación');
+insert into Testimonial(mensaje) values ('Desde el primer contacto, la atención al cliente fue excepcional. ¡Un servicio que marca la diferencia!');
+insert into Testimonial(mensaje) values ('Explorar las ofertas de la tienda digital fue como encontrar tesoros en un mar de innovación. ¡Una experiencia emocionante');
+insert into Testimonial(mensaje) values ('La facilidad de navegación hizo que mi compra fuera un paseo por el paraíso digital. ¡Una sensación de satisfacción absoluta');
+insert into Testimonial(mensaje) values ('Cada artículo estaba envuelto en posibilidades infinitas. ¡Una visita que despierta la curiosidad!');
+insert into Testimonial(mensaje) 
+values ('Descubrir la tienda online fue como abrir una puerta a un mundo de tecnología. ¡Una experiencia que alimenta la pasión por lo digital!');
+insert into Testimonial(mensaje) values ('Explorar la tienda de informática fue como ser un niño en una juguetería, pero con gadgets. ¡Una emoción indescriptible!');
+
+
+
+insert into Califica(testimonial,[usuario]) values (1,1);
+insert into Califica(testimonial,[usuario]) values (2,2);
+insert into Califica(testimonial,[usuario]) values (3,3);
+insert into Califica(testimonial,[usuario]) values (4,4);
+insert into Califica(testimonial,[usuario]) values (5,5);
+insert into Califica(testimonial,[usuario]) values (6,6);
+insert into Califica(testimonial,[usuario]) values (7,7);
+insert into Califica(testimonial,[usuario]) values (8,8);
+insert into Califica(testimonial,[usuario]) values (9,9);
+insert into Califica(testimonial,[usuario]) values (10,10);
+
+
+-- insert into Valora([[usuario]],producto,puntuacion,descripcion) values (2,1,5,'Los mejores cascos que he probado en mi vida');
+insert into Valora([usuario],producto,puntuacion,descripcion) values (6,1,0,'No me han gustado nada, los he probado 100h y ya se están pelando');
+insert into Valora([usuario],producto,puntuacion,descripcion) values (32,1,2,'Demasido caros para lo que ofrecen');
+insert into Valora([usuario],producto,puntuacion,descripcion) values (1,1,4,null);
