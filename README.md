@@ -87,6 +87,10 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 		1.2. Administrar pedidos. (llevará a un aspx nuevo llamado admin_pedidos.aspx) MENOS PRIORITARIO
 		1.3. Administrar usuarios. (llevará a un aspx nuevo llamado admin_usuarios.aspx) MENOS PRIORITARIO
 	4. Cerrar sesión.
+## Cambios en el ER @emiliano
+- La entidad usuario ahora la clave primaria es un id autoincremental
+- Añade un asterisco que diga que el atributo puntuacion de valora puede tomar valores int de 0 a 5
+- Otro asterisco que diga que el atributo descuento de promocion es un int que puede tomar valores de 0 a 100 siendo el porcentaje de descuento
 
 ## Esquema Entidad Relacion de la base de datos
 - El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.
