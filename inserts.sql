@@ -169,14 +169,6 @@ INSERT INTO Locker (nombre) VALUES ('Correos');
 
 
 
-insert into Locker_en ([direccion],[locker]) values (110,1);
-insert into Locker_en ([direccion],[locker]) values (111,2);
-insert into Locker_en ([direccion],[locker]) values (112,3);
-insert into Locker_en ([direccion],[locker]) values (116,4);
-
-
-
-
 insert into Categoria(tipo,descripcion) values ('Ratones','El ratón es un dispositivo apuntador utilizado para facilitar el manejo de un entorno gráfico en una computadora');
 insert into Categoria(tipo,descripcion) values ('Auriculares','El auricular es transductor que recibe una señal eléctrica originada desde una fuente electrónica');
 insert into Categoria(tipo,descripcion) values ('Monitores','El monitor u ordenador es el principal dispositivo de salida que muestra los datos e información de los [usuario]s');
@@ -247,3 +239,10 @@ insert into Califica(testimonial,[usuario]) values (10,10);
 insert into Valora([usuario],producto,puntuacion,descripcion) values (6,1,0,'No me han gustado nada, los he probado 100h y ya se están pelando');
 insert into Valora([usuario],producto,puntuacion,descripcion) values (32,1,2,'Demasido caros para lo que ofrecen');
 insert into Valora([usuario],producto,puntuacion,descripcion) values (1,1,4,null);
+
+
+
+insert into Locker_en ([direccion],[locker]) values (82,1); 
+insert into Locker_en ([direccion],[locker]) values (83,2);
+insert into Locker_en ([direccion],[locker]) values (84,3);
+insert into Locker_en ([direccion],[locker]) values (85,4);
