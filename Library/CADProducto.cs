@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Library
 {
@@ -18,14 +19,42 @@ namespace Library
         }
         public bool Create(ENProducto prod)
         {
-
+            string consu = "Insert into Producto("
         }
+
         public bool Delete(ENProducto prod)
         {
 
         }
         public bool Update(ENProducto prod)
         {
+            SqlConnection conn = null;
+
+
+            string com = "Select * from Producto where id = " + prod.id;
+
+            SqlCommand command = new SqlCommand(com, conn);
+
+
+
+            try
+            {
+                conn = new SqlConnection(constring);
+                conn.Open();
+                DataSet bdvirtual = new 
+
+                
+            }
+            catch (SqlException)
+            {
+                //ERROR
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
 
         }
         public bool Read(ENProducto prod)
@@ -56,14 +85,19 @@ namespace Library
                     prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                     prod.stock = Convert.ToInt32(reader["stock"]);
                     prod.promocion = Convert.ToInt32(reader["promocion"]);
-
+                    return true;
                 }
             }
-            catch(SqlException sqlex)
+            catch(SqlException)
             {
                 //ERROR
                 return false;
             }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
 
         }
     }
