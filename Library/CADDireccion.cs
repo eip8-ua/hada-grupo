@@ -9,28 +9,29 @@ namespace Library
 {
     class CADDireccion
     {
-        private string constring = ConfigurationManager
+        private string constring;
         private SqlConnection connection;
 
-        public CAADireccion()
+        public CADDireccion()
         {
+            constring = "";
             connection = new SqlConnection(constring);
         }
         public bool Create(ENDireccion dir)
         {
-
+            return false;
         }
         public bool Delete(ENDireccion dir)
         {
-
+            return false;
         }
         public bool Update(ENDireccion dir)
         {
-
+            return false;
         }
         public bool Read(ENDireccion dir)
         {
-
+            return false;
         }
     }
 }

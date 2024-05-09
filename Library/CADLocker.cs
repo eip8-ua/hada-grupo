@@ -17,19 +17,19 @@ namespace Library
         }
         public bool Create(ENLocker loc)
         {
-
+            return false;
         }
         public bool Delete(ENLocker loc)
         {
-
+            return false;
         }
         public bool Update(ENLocker loc)
         {
-
+            return false;
         }
         public bool Read(ENLocker loc)
         {
-
+            return false;
         }
     }
 }

@@ -83,6 +83,25 @@ namespace Library
             if (prom != null)
                 this.promocion = prom;
         
+                this.promocion = new ENPromociones(prom);
+        
+        }
+
+        public bool Create()
+        {
+            return false;
+        }
+        public bool Delete()
+        {
+            return false;
+        }
+        public bool Update()
+        {
+            return false;
+        }
+        public bool Read()
+        {
+            return false;
         }
     }
 }

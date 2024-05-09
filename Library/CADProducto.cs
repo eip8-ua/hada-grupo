@@ -24,7 +24,7 @@ namespace Library
 
         public bool Delete(ENProducto prod)
         {
-
+            return false;
         }
         public bool Update(ENProducto prod)
         {
