@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENUsuario
+    public class ENUsuario
     {
         String _dni;
         String _email;
@@ -57,7 +57,7 @@ namespace Library
         public bool create()
         {
             CADUsuario cadUsu = new CADUsuario();
-            return cadUsu.create(this);
+            return false;// cadUsu.create();
         }
         /// <summary>
         /// Método que actualiza el usuario 

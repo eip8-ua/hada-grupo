@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Library;
 
 namespace proyecto
 {
@@ -12,6 +13,16 @@ namespace proyecto
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void cuandoActualizar(object sender, EventArgs e)
+        {
+            //Console.WriteLine("hola");
+            CADUsuario usu = new CADUsuario();
+            String a = usu.create();
+            
+                Salida.Text = a;
+            
         }
     }
 }

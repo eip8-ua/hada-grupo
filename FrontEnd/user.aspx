@@ -42,10 +42,10 @@
             <asp:TextBox runat="server" ID="dni" Width="220"></asp:TextBox>
         </div>
         <div class="user-buttons">
-            <asp:Button runat="server" ID="actualizar" Width="100" Text="Actualizar"></asp:Button>
+            <asp:Button runat="server" ID="actualizar" Width="100" Text="Actualizar" OnClick="cuandoActualizar"></asp:Button>
         </div>
         
         
     </div>
-
+    <asp:TextBox runat="server" ID="Salida"></asp:TextBox>
 </asp:Content>
