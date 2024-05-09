@@ -19,21 +19,40 @@ namespace Library
         }
         public bool Create(ENProducto prod)
         {
-            string consu = "Insert into Producto("
+            SqlConnection conn = null;
+            string consu = "insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (" + prod.nombre + "," + prod.pvp + "," + prod.url_image + "," + prod.descripcion + "," + prod.stock + "," + prod.popularidad + "," + prod.promocion + "," + prod.categoria + ")";
+
+            SqlCommand comm = new SqlCommand(consu, conn);
+
+            try
+            {
+                conn = new SqlConnection(constring);
+                conn.Open();
+
+                comm.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                //error
+                return false;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return true;
         }
 
         public bool Delete(ENProducto prod)
         {
-            return false;
-        }
-        public bool Update(ENProducto prod)
-        {
             SqlConnection conn = null;
 
 
-            string com = "Select * from Producto where id = " + prod.id;
+            string consu = "Delete from Producto where id =" + prod.id;
 
-            SqlCommand command = new SqlCommand(com, conn);
+            SqlCommand comm = new SqlCommand(consu, conn);
 
 
 
@@ -41,7 +60,37 @@ namespace Library
             {
                 conn = new SqlConnection(constring);
                 conn.Open();
-                DataSet bdvirtual = new 
+                comm.ExecuteNonQuery();
+
+
+            }
+            catch (SqlException)
+            {
+                //ERROR
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return true;
+        }
+        public bool Update(ENProducto prod)
+        {
+            SqlConnection conn = null;
+
+
+            string consu = "Update Producto set nombre =" + prod.nombre + ",pvp =" + prod.pvp + ",url_image=" + prod.url_image + ",descripcion=" + prod.descripcion + ",stock=" + prod.stock + ",popularidad=" + prod.popularidad + ",promocion=" + prod.promocion + ",categoria=" + prod.categoria + "where id =" + prod.id;
+
+            SqlCommand comm = new SqlCommand(consu, conn);
+
+
+
+            try
+            {
+                conn = new SqlConnection(constring);
+                conn.Open();
+                comm.ExecuteNonQuery();
 
                 
             }
@@ -54,7 +103,7 @@ namespace Library
             {
                 conn.Close();
             }
-            return false;
+            return true;
 
         }
         public bool Read(ENProducto prod)
@@ -100,5 +149,52 @@ namespace Library
             return false;
 
         }
+
+        public List<ENProducto>ProductosPorCategoria(string categ) //devolvera una lista vacia si no se puede hacer la consulta o si no ha encontrado ninngun producto de la categoria indicada
+        {
+            SqlConnection conn = null;
+
+            List<ENProducto> productos = new List<ENProducto>();
+
+            string com = "Select * from Producto where categoria=" + categ;
+
+            SqlCommand command = new SqlCommand(com, conn);
+
+            ENProducto prod = new ENProducto();
+
+            try
+            {
+                conn = new SqlConnection(constring);
+                conn.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    prod.nombre = reader["nombre"].ToString();
+                    prod.popularidad = Convert.ToInt32(reader["popularidad"]);
+                    prod.pvp = (float)reader["pvp"];
+                    int ordinal = reader.GetOrdinal("url_image");
+                    prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                    ordinal = reader.GetOrdinal("descripcion");
+                    prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                    prod.stock = Convert.ToInt32(reader["stock"]);
+                    prod.promocion = Convert.ToInt32(reader["promocion"]);
+                    productos.Add(prod);
+
+                }
+            }
+            catch (SqlException)
+            {
+                //ERROR
+                return productos;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return productos;
+
+        }
+    }
     }
 }

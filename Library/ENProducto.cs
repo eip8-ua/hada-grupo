@@ -9,7 +9,7 @@ namespace Library
     class ENProducto
     {
         
-        private ENCategoria categoria;
+        private string _categoria;
         private int _id;
         private int _stock;
         private float _pvp;
@@ -18,6 +18,12 @@ namespace Library
         private int _popularidad;
         private string _url_image;
         private int _promocion;
+
+        public string categoria
+        {
+            get { return _categoria; }
+            set { _categoria = categoria; }
+        }
 
         public int id
         {
