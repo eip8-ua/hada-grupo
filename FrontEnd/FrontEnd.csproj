@@ -72,7 +72,7 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="contact_us.aspx" />
-    <Content Include="Estilos.css" />
+    <Content Include="estilos\estilos.css" />
     <Content Include="estilos\login.css" />
     <Content Include="Images\cascos 1.jpg" />
     <Content Include="Images\login.png" />

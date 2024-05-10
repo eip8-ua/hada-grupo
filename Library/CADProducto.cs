@@ -133,7 +133,20 @@ namespace Library
                     ordinal = reader.GetOrdinal("descripcion");
                     prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                     prod.stock = Convert.ToInt32(reader["stock"]);
-                    prod.promocion = Convert.ToInt32(reader["promocion"]);
+                    
+                    prod.promocion = new ENPromociones();
+                    if (reader["promocion"] != null)
+                    {
+                        prod.promocion.MiId = Convert.ToInt32(reader["promocion"]);
+                        //TODO
+                        //prod.promocion.Read();
+                    }
+                    prod.categoria = new ENCategoria();
+                    if (reader["categoria"] != null)
+                    {
+                        prod.categoria.tipo = Convert.ToString(reader["categoria"]);
+                        prod.categoria.Read();
+                    }
                     return true;
                 }
             }
@@ -178,7 +191,21 @@ namespace Library
                     ordinal = reader.GetOrdinal("descripcion");
                     prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                     prod.stock = Convert.ToInt32(reader["stock"]);
-                    prod.promocion = Convert.ToInt32(reader["promocion"]);
+
+                    prod.promocion = new ENPromociones();
+                    if (reader["promocion"] != null)
+                    {
+                        prod.promocion.MiId = Convert.ToInt32(reader["promocion"]);
+                        //TODO
+                        //prod.promocion.Read();
+                    }
+                    prod.categoria = new ENCategoria();
+                    if (reader["categoria"] != null)
+                    {
+                        prod.categoria.tipo = Convert.ToString(reader["categoria"]);
+                        prod.categoria.Read();
+                    }
+
                     productos.Add(prod);
 
                 }
@@ -195,6 +222,5 @@ namespace Library
             return productos;
 
         }
-    }
     }
 }
