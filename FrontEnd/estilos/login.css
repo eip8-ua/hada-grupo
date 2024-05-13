@@ -14,7 +14,7 @@
 
 .txt_inicio_sesion {
     position relative;
-    width: 80%;
+    /*width: 60%;*/
     margin: 0 auto;
     display: grid;
     justify-content: center; /* Center content horizontally */
@@ -24,6 +24,8 @@
     padding: 20px; /* Add padding to create space between the content and the border */
     margin-top: 13px;
     margin-bottom: 13px;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .login_title{
@@ -56,12 +58,13 @@
     height: 140%;
     width: 80%;
     border-radius: 17px !important;
-    font-weight: 600;
+    font-weight: 500;
     font-family: 'Pontano Sans';
     font-size: 120%;
     border: 1px solid black;
     margin: 0 auto;
     background-color: #1F1A18 !important;
+    color: white !important;
 
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Configuration;
 namespace Library
 {
     class CADDireccion
@@ -12,8 +13,7 @@ namespace Library
         /// </summary>
         public CADDireccion()
         {
-            //constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
-            constring = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database1.mdf;Integrated Security=True";
+            constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
         }
         /// <summary>
         /// Añade una direccion a la base de datos
@@ -29,6 +29,7 @@ namespace Library
 
                 if (dir.is_correct())
                 {
+                    //Hace el insert y luego ejecuta una select que devuelve el ultimo id(el que acabas de insertar)
                     SqlCommand sql = new SqlCommand($"insert into Direccion(calle, cod_postal, ciudad, provincia, pais) values (@calle,@cod_postal,@ciudad,@provincia,@pais); select SCOPE_IDENTITY();", connection);
                     sql.Parameters.AddWithValue("@calle", dir.calle);
                     sql.Parameters.AddWithValue("@cod_postal", dir.cod_postal);
@@ -45,8 +46,8 @@ namespace Library
                         sql.Parameters.AddWithValue("@pais", DBNull.Value);
                     else
                         sql.Parameters.AddWithValue("@pais", dir.pais);
-                    //sql.ExecuteNonQuery();
 
+                    //Ejecuta la query y guarda el ultimo id
                     dir.id = Convert.ToInt32(sql.ExecuteScalar());
                     return true;
                 }
@@ -76,9 +77,18 @@ namespace Library
                 connection = new SqlConnection(constring);
                 connection.Open();
 
+                //primero hay que borrar las relaciones entre direccion y locker para poder borrar la direccion
+                SqlCommand check_locker = new SqlCommand("delete Locker_en where direccion=@dir", connection);
+                check_locker.Parameters.AddWithValue("@dir", dir.id);
+                check_locker.ExecuteNonQuery();
+
+
+                //Borrar de la tabla direccion
                 SqlCommand sql = new SqlCommand($"delete from Direccion where id=@id", connection);
                 sql.Parameters.AddWithValue("@id", dir.id);
-                sql.ExecuteNonQuery();
+                int rowsAffected = sql.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                    return false;
                 return true;
             }
             catch (SqlException e)
@@ -138,7 +148,7 @@ namespace Library
                 connection.Close();
             }
 
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -148,24 +158,60 @@ namespace Library
         /// <returns></returns>
         public bool Read(ENDireccion dir)
         {
-            connection = new SqlConnection(constring);
-            connection.Open();
-
-            SqlCommand sql = new SqlCommand("select * from Direccion where id=@id", connection);
-            sql.Parameters.AddWithValue("@id", dir.id);
-            SqlDataReader reader = sql.ExecuteReader();
-
-            if (reader.Read())
+            try
             {
-                dir.calle = reader["calle"].ToString();
-                dir.cod_postal = reader["cod_postal"].ToString();
-                dir.ciudad = reader["ciudad"].ToString();
-                dir.provincia = reader["provincia"].ToString();
-                dir.pais = reader["pais"].ToString();
+                connection = new SqlConnection(constring);
+                connection.Open();
 
-                return true;
+                SqlCommand sql = new SqlCommand("select * from Direccion where id=@id", connection);
+                sql.Parameters.AddWithValue("@id", dir.id);
+                SqlDataReader reader = sql.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    dir.calle = reader["calle"].ToString();
+                    dir.cod_postal = reader["cod_postal"].ToString();
+                    dir.ciudad = reader["ciudad"].ToString();
+                    dir.provincia = reader["provincia"].ToString();
+                    dir.pais = reader["pais"].ToString();
+
+                    return true;
+                }
             }
+            catch(SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            
             return false;
+        }
+
+        /// <summary>
+        /// Comprueba si un id existe en la base de datos
+        /// Si aparece un error devuelve una Sql Exception
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <returns></returns>
+        public bool Exists(ENDireccion dir)
+        {
+            try
+            {
+                connection = new SqlConnection(constring);
+                connection.Open();
+
+                SqlCommand sql = new SqlCommand("select * from Direccion where id=@id", connection);
+                sql.Parameters.AddWithValue("@id", dir.id);
+                SqlDataReader reader = sql.ExecuteReader();
+                return reader.HasRows;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         /// <summary>
