@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENUsuario
+    public class ENUsuario
     {
         String _dni;
         String _email;
@@ -16,13 +16,13 @@ namespace Library
         DateTime _fNacimiento;
         bool _admin;
 
-        String Dni { set { _dni = value; } get { return _dni; } }
-        String Email { set { _email = value; } get { return _email; } }
-        String Nombre { set { _nombre = value; } get { return _nombre; } }
-        String Apellidos { set { _apellidos = value; } get { return _apellidos; } }
-        String Tlfn { set { _tlfn = value; } get { return _tlfn; } }
-        DateTime FNacimiento { set { _fNacimiento = value; } get { return _fNacimiento; } }
-        bool Admin { set { _admin = value; } get { return _admin; } }
+        public String Dni { set { _dni = value; } get { return _dni; } }
+        public String Email { set { _email = value; } get { return _email; } }
+        public String Nombre { set { _nombre = value; } get { return _nombre; } }
+        public String Apellidos { set { _apellidos = value; } get { return _apellidos; } }
+        public String Tlfn { set { _tlfn = value; } get { return _tlfn; } }
+        public DateTime FNacimiento { set { _fNacimiento = value; } get { return _fNacimiento; } }
+        public bool Admin { set { _admin = value; } get { return _admin; } }
         CADUsuario cadUsuario;
 
         /// <summary>

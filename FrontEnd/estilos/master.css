@@ -1,0 +1,44 @@
+﻿
+html {
+    height: 100%;
+}
+
+body {
+    filter: brightness(1.15);
+    min-height: 100%;
+}
+
+#navigationMenu {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    font-family: 'Poppins';
+    background-color: #ffffff;
+    margin-top: 25px;
+    margin-bottom: 75px;
+}
+
+#leftMenu {
+}
+
+#rightMenu {
+    position: absolute;
+    margin-right: 50px;
+    right: 0;
+}
+
+.ButtonStyle1 {
+    font-family: "Poppins";
+    font-size: 15px;
+    color: white;
+    background-color: #b88e2f;
+    height: 50px;
+    width: 160px;
+    border: none;
+    font-weight: 500;
+}
+
+.ButtonStyle1:hover {
+    background-color: white;
+    color: #b88e2f;
+}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENProducto
+    public class ENProducto
     {
         private ENPromociones promocion;
         private ENCategoria categoria;

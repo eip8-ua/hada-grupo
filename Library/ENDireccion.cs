@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENDireccion
+    public class ENDireccion
     {
         private string _calle, _cod_postal, _ciudad,_provincia,_pais;
         private CADDireccion con;
