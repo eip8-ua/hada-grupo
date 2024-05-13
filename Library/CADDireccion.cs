@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Configuration;
 namespace Library
 {
     class CADDireccion
@@ -34,8 +29,25 @@ namespace Library
 
                 if (dir.is_correct())
                 {
-                    SqlCommand sql = new SqlCommand($"insert into Direccion(calle, cod_postal, ciudad, provincia, pais) values ('{dir.calle}','{dir.cod_postal}','{dir.ciudad}','{dir.provincia}','{dir.pais}')", connection);
-                    sql.ExecuteNonQuery();
+                    SqlCommand sql = new SqlCommand($"insert into Direccion(calle, cod_postal, ciudad, provincia, pais) values (@calle,@cod_postal,@ciudad,@provincia,@pais); select SCOPE_IDENTITY();", connection);
+                    sql.Parameters.AddWithValue("@calle", dir.calle);
+                    sql.Parameters.AddWithValue("@cod_postal", dir.cod_postal);
+
+                    if (dir.ciudad == null)
+                        sql.Parameters.AddWithValue("@ciudad", DBNull.Value);
+                    else
+                        sql.Parameters.AddWithValue("@ciudad", dir.ciudad);
+                    if (dir.provincia == null)
+                        sql.Parameters.AddWithValue("@provincia", DBNull.Value);
+                    else
+                        sql.Parameters.AddWithValue("@provincia", dir.provincia);
+                    if (dir.pais == null)
+                        sql.Parameters.AddWithValue("@pais", DBNull.Value);
+                    else
+                        sql.Parameters.AddWithValue("@pais", dir.pais);
+                    //sql.ExecuteNonQuery();
+
+                    dir.id = Convert.ToInt32(sql.ExecuteScalar());
                     return true;
                 }
             }
@@ -59,15 +71,100 @@ namespace Library
         /// <returns></returns>
         public bool Delete(ENDireccion dir)
         {
-            return false;
-        }
+            try
+            {
+                connection = new SqlConnection(constring);
+                connection.Open();
 
+                SqlCommand sql = new SqlCommand($"delete from Direccion where id=@id", connection);
+                sql.Parameters.AddWithValue("@id", dir.id);
+                sql.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Actualiza la direccion con id el id de dir
+        /// </summary>
+        /// <param name="dir">Datos a actualizar en la db</param>
+        /// <returns></returns>
         public bool Update(ENDireccion dir)
         {
-            return false;
+            try
+            {
+                connection = new SqlConnection(constring);
+                connection.Open();
+
+                if (dir.is_correct())
+                {
+                    SqlCommand sql = new SqlCommand("update Direccion set calle=@calle,cod_postal=@cod_postal,ciudad=@ciudad,provincia=@provincia,pais=@pais where id=@id",connection);
+                    sql.Parameters.AddWithValue("@calle", dir.calle);
+                    sql.Parameters.AddWithValue("@cod_postal", dir.cod_postal);
+                    sql.Parameters.AddWithValue("@id", dir.id);
+
+                    if (dir.ciudad == null || dir.ciudad == "")
+                        sql.Parameters.AddWithValue("@ciudad", DBNull.Value);
+                    else
+                        sql.Parameters.AddWithValue("@ciudad", dir.ciudad);
+                    if (dir.provincia == null || dir.provincia == "")
+                        sql.Parameters.AddWithValue("@provincia", DBNull.Value);
+                    else
+                        sql.Parameters.AddWithValue("@provincia", dir.provincia);
+                    if (dir.pais == null || dir.pais == "")
+                        sql.Parameters.AddWithValue("@pais", DBNull.Value);
+                    else
+                        sql.Parameters.AddWithValue("@pais", dir.pais);
+
+
+                    sql.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return true;
         }
+
+        /// <summary>
+        /// Introduce en dir todos los datos de la dirección usando el id de dir
+        /// </summary>
+        /// <param name="dir">Debe tener un id válido, la direccion se devuelve aquí</param>
+        /// <returns></returns>
         public bool Read(ENDireccion dir)
         {
+            connection = new SqlConnection(constring);
+            connection.Open();
+
+            SqlCommand sql = new SqlCommand("select * from Direccion where id=@id", connection);
+            sql.Parameters.AddWithValue("@id", dir.id);
+            SqlDataReader reader = sql.ExecuteReader();
+
+            if (reader.Read())
+            {
+                dir.calle = reader["calle"].ToString();
+                dir.cod_postal = reader["cod_postal"].ToString();
+                dir.ciudad = reader["ciudad"].ToString();
+                dir.provincia = reader["provincia"].ToString();
+                dir.pais = reader["pais"].ToString();
+
+                return true;
+            }
             return false;
         }
 
@@ -87,7 +184,7 @@ namespace Library
                 {
                     SqlCommand sql = new SqlCommand($"select id from direccion where calle = {dir.calle} and cod_postal = {dir.cod_postal}", connection);
                     dir.id = (int)sql.ExecuteScalar();
-                    
+
                     return true;
                 }
             }
