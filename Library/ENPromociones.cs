@@ -33,15 +33,13 @@ namespace Library
             disponibilidad = prom.Disponibilidad;
         }
 
-        public List<ENPromociones> getPromociones() {
+        public static bool getPromociones(List<ENPromociones> promos) {
 
-            List<ENPromociones> lista = new List<ENPromociones>();
             CADPromociones cad = new CADPromociones();
-            cad.getPromociones(lista);
-            return lista;
+            return cad.getPromociones(promos);
         }
 
-         public ENPromociones getPromocion(int idd) {
+         public static ENPromociones getPromocion(int idd) {
 
             CADPromociones cad = new CADPromociones();
             return cad.getPromocion(idd);
