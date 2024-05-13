@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-namespace Library
+﻿namespace Library
 {
     /// <summary>
     /// Representa una dirección, si ciudad,provinica o pais están vacios pasan a ser null
@@ -12,12 +6,12 @@ namespace Library
     public class ENDireccion
     {
         private int _id;
-        private string _calle, _cod_postal, _ciudad,_provincia,_pais;
+        private string _calle, _cod_postal, _ciudad, _provincia, _pais;
 
         public int id
         {
             get { return _id; }
-            set 
+            set
             {
                 if (value < 1)
                     _id = -1;
@@ -28,19 +22,21 @@ namespace Library
         public string calle
         {
             get { return _calle; }
-            set { 
-                _calle = value; }
+            set
+            {
+                _calle = value;
+            }
         }
         public string ciudad
         {
             get { return _ciudad; }
-            set {_ciudad = value; }
+            set { _ciudad = value; }
         }
         public string provincia
         {
             get { return _provincia; }
-            set 
-            { 
+            set
+            {
                 if (value != "")
                     _provincia = value;
                 else
@@ -50,7 +46,7 @@ namespace Library
         public string pais
         {
             get { return _pais; }
-            set 
+            set
             {
                 if (value != "")
                     _pais = value;
@@ -61,7 +57,7 @@ namespace Library
         public string cod_postal
         {
             get { return _cod_postal; }
-            set 
+            set
             {
                 if (value != "")
                     _cod_postal = value;
@@ -74,7 +70,7 @@ namespace Library
         {
 
         }
-        public ENDireccion(string calle,string cod_postal,string ciudad = "",string provincia="",string pais = "")
+        public ENDireccion(string calle, string cod_postal, string ciudad = null, string provincia = null, string pais = null)
         {
             this.calle = calle;
             this.cod_postal = cod_postal;
@@ -132,7 +128,7 @@ namespace Library
 
         public string str()
         {
-            return this.id.ToString() + " " + this.calle.ToString() + " " + this.cod_postal;
+            return this.id.ToString() + " " + this.calle.ToString() + " " + this.cod_postal + " " + this.ciudad + " " + this.provincia + " " + this.pais;
         }
     }
 }

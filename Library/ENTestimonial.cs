@@ -11,13 +11,14 @@ namespace Library
         int _id;
         String _message;
 
-        int Id { set { _id = value;  } get { return _id;  } }
-        String Message { set { _message = value; } get { return _message; } }
+        public int Id { set { _id = value;  } get { return _id;  } }
+        public String Message { set { _message = value; } get { return _message; } }
 
         /// <summary>
         /// Constructor vacío
         /// </summary>
         public ENTestimonial() { }
+
         /// <summary>
         /// Constructor con los datos del Testimonio
         /// </summary>
@@ -35,7 +36,7 @@ namespace Library
         public bool create() 
         {
             CADTestimonial cadTes = new CADTestimonial();
-            return cadTes.create(this);
+            return cadTes.Create(this);
         }
         /// <summary>
         /// Método que actualiza el testimonio
@@ -44,7 +45,7 @@ namespace Library
         public bool update()
         {
             CADTestimonial cadTes = new CADTestimonial();
-            return cadTes.update(this);
+            return cadTes.Update(this);
         }
         /// <summary>
         /// Método que extrae los datos del testimonio
@@ -53,7 +54,7 @@ namespace Library
         public bool read()
         {
             CADTestimonial cadTes = new CADTestimonial();
-            return cadTes.read(this);
+            return cadTes.Read(this);
         }
         /// <summary>
         /// Método que elimina el testimonio
@@ -62,7 +63,38 @@ namespace Library
         public bool delete()
         {
             CADTestimonial cadTes = new CADTestimonial();
-            return cadTes.delete(this);
+            return cadTes.Delete(this);
         }
+
+        // *****     MÉTODOS EXTRA     *****
+        /// <summary>
+        /// Método que lee el primer testimonio almacenado en la BD
+        /// </summary>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readFirst()
+        {
+            CADTestimonial cadTes = new CADTestimonial();
+            return cadTes.ReadFirst(this);
+        }
+        /// <summary>
+        /// Método que lee el testimonio almacenado justo después del actual  en la BD
+        /// </summary>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readNext()
+        {
+            CADTestimonial cadTes = new CADTestimonial();
+            return cadTes.ReadNext(this);
+        }
+
+        /// <summary>
+        /// Método que lee el testimonio almacenado justo antes del actual  en la BD
+        /// </summary>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readPrev()
+        {
+            CADTestimonial cadTes = new CADTestimonial();
+            return cadTes.ReadPrev(this);
+        }
+
     }
 }
