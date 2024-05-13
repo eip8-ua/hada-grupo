@@ -213,7 +213,7 @@ namespace Library
         // *****     MÉTODOS EXTRA     *****
 
         /// <summary>
-        /// 
+        /// Método que lee el primer Testimonio de la BD
         /// </summary>
         /// <param name="en">EN del testimonio actual</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
@@ -276,6 +276,10 @@ namespace Library
                             found = true;
                             break;
                         }
+                        else
+                        {
+                            Console.WriteLine("An error ocurred while reading the next element: The element doesn't exist");
+                        }
                     }
                 }
                 dr.Close();
@@ -301,7 +305,7 @@ namespace Library
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool ReadPrev(ENTestimonial en)
         {
-            int id_aux = 0;
+            int id_aux = -1;
             string message_aux = "";
             bool found = false;
             try
@@ -311,18 +315,20 @@ namespace Library
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    id_aux = dr.GetInt32(dr.GetOrdinal("id"));
-                    message_aux = dr["mensaje"].ToString();
-
                     if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
                     {
-                        if (dr.Read())
-                        { 
-                            found = true;
-                            break;
+                        if (id_aux == -1)
+                        {
+                            dr.Close();
+                            Console.WriteLine("An error ocurred while reading the previous element: The element doesn't exist");
+                            return false;
                         }
-
+                        else found = true;
+                        break;
                     }
+
+                    id_aux = dr.GetInt32(dr.GetOrdinal("id"));
+                    message_aux = dr["mensaje"].ToString();
                 }
                 dr.Close(); 
             }

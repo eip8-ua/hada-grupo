@@ -14,7 +14,7 @@ namespace Library
     public class CADUsuario
     {
         private string constring { get; set; }
-        //private SqlConnection connection;
+        private SqlConnection connection;
         ArrayList lista = new ArrayList();
 
         /// <summary>
@@ -23,78 +23,390 @@ namespace Library
         public CADUsuario()
         {
             constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            connection = new SqlConnection(constring);
         }
 
         /// <summary>
         /// Método que inserta un Usuario en la BD
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
-        /// <returns></returns>
-        public String create()//(ENUsuario en)
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool create()//(ENUsuario en)
         {
-            //Console.WriteLine("hola");
-            
-            SqlConnection connection = new SqlConnection(constring);
-            String primerValor = "";
-            
+            bool exists = false, inserted = false;
+            int nextId = 0;
             try
             {
                 connection.Open();
-               
-                SqlCommand com = new SqlCommand("Select * from producto", connection);
+
+                SqlCommand com = new SqlCommand("SELECT * FROM Usuario", connection);
                 SqlDataReader dr = com.ExecuteReader();
-                //while (dr.Read())
-                //{
-                //  lista.Add(dr["usuario"].ToString());
-                //}
-                if(dr.Read())
-                { primerValor = dr["nombre"].ToString(); }
-                
+                while (dr.Read())
+                {
+                    if (dr["id"].ToString() == en.Message) exists = true;
+                    nextId = dr.GetInt32(dr.GetOrdinal("id"));
+                }
                 dr.Close();
+                nextId += 1;
+                if (!exists)
+                {
+                    SqlCommand auth = new SqlCommand("SET IDENTITY_INSERT testimonial ON", connection);
+                    SqlCommand ins = new SqlCommand("INSERT INTO Testimonial (id, mensaje) VALUES (" + nextId + ", " + en.Message + ");", connection);
+                    SqlCommand deauth = new SqlCommand("SET IDENTITY_INSERT Testimonial ON", connection);
+
+                    auth.ExecuteNonQuery();
+                    ins.ExecuteNonQuery();
+                    deauth.ExecuteNonQuery();
+                    inserted = true;
+                }
+                else
+                {
+                    Console.WriteLine("An error ocurred while inserting on the Database: The given message for the Testimonial alredy exists");
+                }
+
                 connection.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                
+                //Falta indicar que ha habido un problema
+                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
             }
-           
-            return primerValor;
+            finally
+            {
+                connection.Close();
+            }
+            return inserted;
         }
+
         /// <summary>
         /// Método que actualiza un Usuario en la BD
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
-        /// <returns></returns>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool update(ENUsuario en)
         {
-            return true;
+            bool exists = false, updated = false;
+            try
+            {
+                connection.Open();
+
+                SqlCommand com = new SqlCommand("SELECT * FROM usuario", connection);
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
+                    {
+                        exists = true;
+                        break;
+                    }
+
+                }
+                dr.Close();
+
+                if (exists)
+                {
+                    SqlCommand updt = new SqlCommand("UPDATE usuario dni = '" + en.Dni + "' email = '" + en.Email + "' nombre = '" + en.Nombre +
+                        "' apellidos = '" + en.Apellidos + "' telefono = '" + en.Tlfn + "' fecha_nac = '" + en.FNacimiento + "' admin = '" + en.Admin +
+                        "' WHERE id = '" + dr.GetInt32(dr.GetOrdinal("id")) + "';", connection);
+
+                    updt.ExecuteNonQuery();
+                    updated = true;
+                }
+                else
+                {
+                    Console.WriteLine("An error ocurred while updating the Database: The given User doesn't exist");
+                }
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return updated;
         }
+
         /// <summary>
         /// Método que lee los datos de un Usuario de la BD
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
-        /// <returns></returns>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool read(ENUsuario en)
         {
-            return true;
+            //DateTime fecha_aux;
+            bool found = false;
+            try
+            {
+                connection.Open();
+                SqlCommand com = new SqlCommand("SELECT * FROM usuario", connection);
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
+                    {
+                        en.Dni = dr["dni"].ToString();
+                        en.Email = dr["email"].ToString();
+                        en.Nombre = dr["nombre"].ToString();
+                        en.Apellidos = dr["apellidos"].ToString();
+                        en.Tlfn = dr["telefono"].ToString();
+                        //DateTime.TryParse(dr["fecha_nac"].ToString(), out fecha_aux);
+                        en.FNacimiento = dr.GetDateTime(dr.GetOrdinal("fecha_nac"));//fecha_aux;
+                        en.Admin = dr.GetBoolean(dr.GetOrdinal("admin"));
+                        found = true;
+                        break;
+                    }
+                }
+                dr.Close();
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema 
+                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return found;
         }
+
         /// <summary>
         /// Método que elimina un Usuario de la BD
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
-        /// <returns></returns>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool delete(ENUsuario en)
         {
-            return true;
+            bool exists = false, deleted = false;
+            try
+            {
+                connection.Open();
+
+                SqlCommand com = new SqlCommand("SELECT * FROM usuario", connection);
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+                dr.Close();
+
+                if (exists)
+                {
+                    SqlCommand dlt = new SqlCommand("DELETE FROM usuario WHERE id = '" + dr.GetInt32(dr.GetOrdinal("id")) + "';", connection);
+
+                    dlt.ExecuteNonQuery();
+                    deleted = true;
+                }
+                else
+                {
+                    Console.WriteLine("An error ocurred while deleting on the Database: The given User doesn't exist");
+                }
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return deleted;
         }
+
+
+        // *****     MÉTODOS EXTRA     *****
+
         /// <summary>
-        /// Método que inserta un Usuario en la BD
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
-        /// <returns></returns>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool admin(ENUsuario en)
         {
             return true;
+        }
+
+        /// <summary>
+        /// Método que lee el primer Usuario de la BD
+        /// </summary>
+        /// <param name="en">EN del usuario actual</param>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readFirst(ENUsuario en)
+        {
+            bool firstExists = false, read = false;
+            try
+            {
+                connection.Open();
+                SqlCommand com = new SqlCommand("SELECT * FROM TESTIMONIAL", connection);
+                SqlDataReader dr = com.ExecuteReader();
+                firstExists = dr.Read();
+                if (firstExists)
+                {
+                    //Almacenamos en el EN de entrada los datos del nuevo elemento de testimonial
+                    en.Id = dr.GetInt32(dr.GetOrdinal("id"));
+                    en.Dni = dr["dni"].ToString();
+                    en.Email = dr["email"].ToString();
+                    en.Nombre = dr["nombre"].ToString();
+                    en.Apellidos = dr["apellidos"].ToString();
+                    en.Tlfn = dr["telefono"].ToString();
+                    //DateTime.TryParse(dr["fecha_nac"].ToString(), out fecha_aux);
+                    en.FNacimiento = dr.GetDateTime(dr.GetOrdinal("fecha_nac"));//fecha_aux;
+                    en.Admin = dr.GetBoolean(dr.GetOrdinal("admin"));
+                    read = true;
+                }
+                else
+                    Console.WriteLine("An error ocurred while reading the first element on the Database: There are no items on the Database");
+                dr.Close();
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return read;
+        }
+
+        /// <summary>
+        /// Método que lee el siguiente Usuario de la BD
+        /// </summary>
+        /// <param name="en">EN del usuario actual</param>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readNext(ENUsuario en)
+        {
+            bool found = false;
+            try
+            {
+                connection.Open();
+                SqlCommand com = new SqlCommand("SELECT * FROM usuario", connection);
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
+                    {
+                        if (dr.Read())
+                        {
+                            //Almacenamos en el EN de entrada los datos del nuevo elemento de testimonial
+                            en.Id = dr.GetInt32(dr.GetOrdinal("id"));
+                            en.Dni = dr["dni"].ToString();
+                            en.Email = dr["email"].ToString();
+                            en.Nombre = dr["nombre"].ToString();
+                            en.Apellidos = dr["apellidos"].ToString();
+                            en.Tlfn = dr["telefono"].ToString();
+                            //DateTime.TryParse(dr["fecha_nac"].ToString(), out fecha_aux);
+                            en.FNacimiento = dr.GetDateTime(dr.GetOrdinal("fecha_nac"));//fecha_aux;
+                            en.Admin = dr.GetBoolean(dr.GetOrdinal("admin"));
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                dr.Close();
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return found;
+        }
+
+        /// <summary>
+        /// Método que lee el anterior Usuario de la BD
+        /// </summary>
+        /// <param name="en">EN del testimonio actual</param>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readPrev(ENUsuario en)
+        {
+            int id_aux = 0;
+            string dni_aux = "", email_aux = "", nombre_aux = "", apellidos_aux = "", telefono_aux = "";
+            DateTime fecha_nac_aux = DateTime.Now;
+            bool admin_aux = false; ;
+            bool found = false;
+            try
+            {
+                connection.Open();
+                SqlCommand com = new SqlCommand("SELECT * FROM TESTIMONIAL", connection);
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
+                    {
+                        if (id_aux == -1)
+                        {
+                            dr.Close();
+                            Console.WriteLine("An error ocurred while reading the previous element: The element doesn't exist");
+                            return false;
+                        }
+                        else found = true;
+                        break;
+                    }
+
+                    id_aux = dr.GetInt32(dr.GetOrdinal("id"));
+                    dni_aux = dr["dni"].ToString();
+                    email_aux = dr["email"].ToString();
+                    nombre_aux = dr["nombre"].ToString();
+                    apellidos_aux = dr["apellidos"].ToString();
+                    telefono_aux = dr["telefono"].ToString();
+                    //DateTime.TryParse(dr["fecha_nac"].ToString(), out fecha_aux);
+                    fecha_nac_aux = dr.GetDateTime(dr.GetOrdinal("fecha_nac"));//fecha_aux;
+                    admin_aux = dr.GetBoolean(dr.GetOrdinal("admin"));
+                }
+                dr.Close();
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            if (found)
+            {
+                en.Id = id_aux;
+                en.Dni = dni_aux;
+                en.Email = email_aux;
+                en.Nombre = nombre_aux;
+                en.Apellidos = apellidos_aux;
+                en.Tlfn = telefono_aux;
+                en.FNacimiento = fecha_nac_aux;
+                en.Admin = admin_aux;
+            }
+            return found;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Library
 {
     public class ENUsuario
     {
+        int _id;
         String _dni;
         String _email;
         String _nombre;
@@ -16,6 +17,7 @@ namespace Library
         DateTime _fNacimiento;
         bool _admin;
 
+        public int Id { set { _id = value; } get { return _id; } }
         public String Dni { set { _dni = value; } get { return _dni; } }
         public String Email { set { _email = value; } get { return _email; } }
         public String Nombre { set { _nombre = value; } get { return _nombre; } }
@@ -40,8 +42,9 @@ namespace Library
         /// <param name="tlfn"></param>
         /// <param name="fNacimiento"></param>
         /// <param name="admin"></param>
-        public ENUsuario(String dni, String email, String nombre, String apellidos, String tlfn, DateTime fNacimiento, bool admin)
+        public ENUsuario(int id, String dni, String email, String nombre, String apellidos, String tlfn, DateTime fNacimiento, bool admin)
         {
+            Id = id;
             Dni = dni;
             Email = email;
             Nombre = nombre;
@@ -59,6 +62,7 @@ namespace Library
             CADUsuario cadUsu = new CADUsuario();
             return false;// cadUsu.create();
         }
+
         /// <summary>
         /// Método que actualiza el usuario 
         /// </summary>
@@ -68,6 +72,7 @@ namespace Library
             CADUsuario cadUsu = new CADUsuario();
             return cadUsu.update(this);
         }
+
         /// <summary>
         /// Método que extrae los datos del usuario 
         /// </summary>
@@ -77,6 +82,7 @@ namespace Library
             CADUsuario cadUsu = new CADUsuario();
             return cadUsu.read(this);
         }
+
         /// <summary>
         /// Método que elimina el usuario 
         /// </summary>
@@ -86,6 +92,10 @@ namespace Library
             CADUsuario cadUsu = new CADUsuario();
             return cadUsu.delete(this);
         }
+
+
+        // *****     MÉTODOS EXTRA     *****
+
 
         /// <summary>
         /// Método que comprueba si un usuario está registrado
@@ -104,6 +114,36 @@ namespace Library
         {         
             CADUsuario cadUsu = new CADUsuario();
             return cadUsu.admin(this);
+        }
+
+        /// <summary>
+        /// Método que extrae los datos del primer usuario encontrado en la base de datos
+        /// </summary>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readFirst()
+        {
+            CADUsuario cadUsu = new CADUsuario();
+            return cadUsu.readFirst(this);
+        }
+
+        /// <summary>
+        /// Método que extrae los datos del siguiente usuario encontrado en la base de datos
+        /// </summary>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readNext()
+        {
+            CADUsuario cadUsu = new CADUsuario();
+            return cadUsu.readNext(this);
+        }
+
+        /// <summary>
+        /// Método que extrae los datos del siguiente usuario encontrado en la base de datos
+        /// </summary>
+        /// <returns>True si lo ha realizado con éxito; False si no</returns>
+        public bool readPrev()
+        {
+            CADUsuario cadUsu = new CADUsuario();
+            return cadUsu.readPrev(this);
         }
 
 
