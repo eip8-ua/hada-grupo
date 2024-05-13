@@ -2,124 +2,56 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #cartContainer {
-            width: 80%;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #cartHeader {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
-            font-size: 24px;
-        }
-
-        #cartItems {
-            padding: 20px;
-            flex-grow: 1;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #dddddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #cartSummary {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        #cartSummary h2 {
-            margin-bottom: 10px;
-        }
-
-        #btnComprar {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #ffffff;
-            color: #007bff;
-            border: 2px solid #007bff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #btnComprar:hover {
-            background-color: #007bff;
-            color: #ffffff;
-        }
-
-        .btnEliminar {
-            padding: 8px 12px;
-            font-size: 14px;
-            background-color: #dc3545;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btnEliminar:hover {
-            background-color: #c82333;
-        }
-
-        .cantidadInput {
-            width: 60px;
-            padding: 5px;
-            font-size: 14px;
-            text-align: center;
-        }
-    </style>
+    
     <script>
+        function actualizarCantidad(index, cantidad) {
+            // Obtener el carrito actual desde la cookie
+            var cart = getCartFromCookie();
+
+            // Actualizar la cantidad del producto en el carrito
+            cart[index - 1].Cantidad = parseInt(cantidad);
+
+            // Guardar el carrito actualizado en la cookie
+            setCartCookie(cart);
+
+            // Recargar la página para reflejar los cambios
+            location.reload();
+        }
+
         function eliminarProducto(index) {
-            if (confirm("¿Estás seguro de eliminar este producto?")) {
-                // Lógica para eliminar el producto
-                alert("Producto eliminado del carrito");
+            // Obtener el carrito actual desde la cookie
+            var cart = getCartFromCookie();
+
+            // Eliminar el producto del carrito
+            cart.splice(index - 1, 1);
+
+            // Guardar el carrito actualizado en la cookie
+            setCartCookie(cart);
+
+            // Recargar la página para reflejar los cambios
+            location.reload();
+        }
+
+        function getCartFromCookie() {
+            // Obtener el valor de la cookie 'cartItems'
+            var cartCookie = document.cookie.split('; ').find(row => row.startsWith('cartItems='));
+
+            // Si la cookie existe, extraer el valor y convertirlo a un objeto
+            if (cartCookie) {
+                var cartJson = cartCookie.split('=')[1];
+                return JSON.parse(decodeURIComponent(cartJson));
+            } else {
+                return [];
             }
         }
 
-        function actualizarCantidad(index, newValue) {
-            // Lógica para actualizar la cantidad del producto en el carrito
-            // newValue: nuevo valor de cantidad seleccionado por el usuario
-            if (newValue >= 1 && newValue <= 10) {
-                alert("Cantidad actualizada a " + newValue);
-                // Aquí puedes enviar una solicitud al servidor para actualizar la cantidad del producto
-            } else {
-                alert("La cantidad debe estar entre 1 y 10");
-                // Restaurar el valor anterior o tomar otra acción según sea necesario
-            }
+        function setCartCookie(cart) {
+            // Convertir el carrito a JSON y codificarlo para almacenar en la cookie
+            var cartJson = JSON.stringify(cart);
+            document.cookie = 'cartItems=' + encodeURIComponent(cartJson) + ';path=/';
         }
     </script>
+
     <div id="body">
         <div id="cartContainer">
             <div id="cartHeader">Carrito de Compra</div>
