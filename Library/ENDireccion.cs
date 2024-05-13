@@ -70,8 +70,18 @@
         {
 
         }
-        public ENDireccion(string calle, string cod_postal, string ciudad = null, string provincia = null, string pais = null)
+        /// <summary>
+        /// Si el id es negativo se establecerá a -1
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="calle"></param>
+        /// <param name="cod_postal"></param>
+        /// <param name="ciudad"></param>
+        /// <param name="provincia"></param>
+        /// <param name="pais"></param>
+        public ENDireccion(int id,string calle, string cod_postal, string ciudad = null, string provincia = null, string pais = null)
         {
+            this.id = id;
             this.calle = calle;
             this.cod_postal = cod_postal;
             if (ciudad != "")
@@ -98,27 +108,54 @@
             this.pais = dir.pais;
         }
 
+        /// <summary>
+        /// Añade la direccion a la db
+        /// </summary>
+        /// <returns>Devuelve v o f si ha sido todo correcto</returns>
         public bool Create()
         {
             CADDireccion con = new CADDireccion();
             return con.Create(this);
         }
+
+        /// <summary>
+        /// Actualiza los datos de este objeto en la db
+        /// </summary>
+        /// <returns>Devuelve v o f si ha sido todo correcto</returns>
         public bool Update()
         {
             CADDireccion con = new CADDireccion();
             return con.Update(this);
         }
+
+        /// <summary>
+        /// Obtiene los datos de la direccion con el id de este objeto
+        /// </summary>
+        /// <returns>Devuelve v o f si ha sido todo correcto</returns>
         public bool Read()
         {
             CADDireccion con = new CADDireccion();
             return con.Read(this);
         }
+
+        /// <summary>
+        /// Borra la direccion con el id de este objeto
+        /// </summary>
+        /// <returns>Devuelve v o f si ha sido todo correcto</returns>
         public bool Delete()
         {
             CADDireccion con = new CADDireccion();
             return con.Delete(this);
         }
-
+        /// <summary>
+        /// Comprueba si la direccion existe en la base de datos
+        /// </summary>
+        /// <returns></returns>
+        public bool Exists()
+        {
+            CADDireccion con = new CADDireccion();
+            return con.Exists(this);
+        }
         public bool is_correct()
         {
             if (string.IsNullOrEmpty(calle) && string.IsNullOrEmpty(cod_postal))
@@ -128,7 +165,18 @@
 
         public string str()
         {
-            return this.id.ToString() + " " + this.calle.ToString() + " " + this.cod_postal + " " + this.ciudad + " " + this.provincia + " " + this.pais;
+            string out1 = "";
+            if(this.calle != null)
+                out1 += " "+calle;
+            if(this.cod_postal != null)
+                out1 += " "+cod_postal;
+            if (this.ciudad != null)
+                out1 += " "+ciudad;
+            if (this.provincia != null)
+                out1 += " "+provincia;
+            if (this.pais != null)
+                out1 += " "+pais;
+            return out1;
         }
     }
 }
