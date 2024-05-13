@@ -6,41 +6,45 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENPromociones
+    public class ENPromociones
     {
         int miId;
         float descuento;
+        bool disponibilidad;
 
         public int MiId { get { return miId; } set { miId = value; } }
 
         public float Descuento { get { return descuento; } set { descuento = value; } }
 
+        public bool Disponibilidad { get { return disponibilidad; } set { disponibilidad = value; } }
+
         public ENPromociones() { }
 
-        public ENPromociones(int Yd, float desc) {
+        public ENPromociones(int Yd, float desc, bool disp) {
 
             miId = Yd;
             descuento = desc;
+            disponibilidad = disp;
         }
         public ENPromociones(ENPromociones prom)
         {
-
+            miId = prom.MiId;
+            descuento = prom.Descuento;
+            disponibilidad = prom.Disponibilidad;
         }
 
         public List<ENPromociones> getPromociones() {
 
-            return null;
+            List<ENPromociones> lista = new List<ENPromociones>();
+            CADPromociones cad = new CADPromociones();
+            cad.getPromociones(lista);
+            return lista;
         }
 
-         public DateTime getDisponibilidad() {
+         public ENPromociones getPromocion(int idd) {
 
-            return new DateTime();
-         }
-
-        public int getNumberOfDaysRemaining() {
-
-            return 0;
+            CADPromociones cad = new CADPromociones();
+            return cad.getPromocion(idd);
         }
-  
     }
 }

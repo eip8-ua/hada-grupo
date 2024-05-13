@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENCategoria
+    public class ENCategoria
     {
         private string _tipo;
         private string _descripcion;
