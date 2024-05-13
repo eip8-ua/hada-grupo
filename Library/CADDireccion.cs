@@ -17,9 +17,9 @@ namespace Library
         /// </summary>
         public CADDireccion()
         {
-            constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            //constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            constring = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database1.mdf;Integrated Security=True";
         }
-
         /// <summary>
         /// Añade una direccion a la base de datos
         /// </summary>
@@ -34,14 +34,14 @@ namespace Library
 
                 if (dir.is_correct())
                 {
-                    SqlCommand sql = new SqlCommand($"insert into Direccion(calle, cod_postal, ciudad, provincia, pais) values ({dir.calle},{dir.cod_postal},{dir.ciudad},{dir.provincia},{dir.pais})", connection);
+                    SqlCommand sql = new SqlCommand($"insert into Direccion(calle, cod_postal, ciudad, provincia, pais) values ('{dir.calle}','{dir.cod_postal}','{dir.ciudad}','{dir.provincia}','{dir.pais}')", connection);
+                    sql.ExecuteNonQuery();
                     return true;
                 }
             }
             catch (SqlException e)
             {
-                //Falta poner el error
-
+                Console.WriteLine(e);
                 return false;
             }
             finally
@@ -49,7 +49,7 @@ namespace Library
                 connection.Close();
             }
 
-            return false;
+            return true;
         }
 
         /// <summary>

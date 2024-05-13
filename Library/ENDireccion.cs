@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.SqlClient;
 namespace Library
 {
     /// <summary>
     /// Representa una dirección, si ciudad,provinica o pais están vacios pasan a ser null
     /// </summary>
-    class ENDireccion
+    public class ENDireccion
     {
         private int _id;
         private string _calle, _cod_postal, _ciudad,_provincia,_pais;
@@ -19,29 +19,30 @@ namespace Library
             get { return _id; }
             set 
             {
-                if (id < 1)
+                if (value < 1)
                     _id = -1;
                 else
-                    _id = id;
+                    _id = value;
             }
         }
         public string calle
         {
             get { return _calle; }
-            set { _calle = calle; }
+            set { 
+                _calle = value; }
         }
         public string ciudad
         {
             get { return _ciudad; }
-            set {_ciudad = ciudad; }
+            set {_ciudad = value; }
         }
         public string provincia
         {
             get { return _provincia; }
             set 
             { 
-                if (provincia != "")
-                    _provincia = provincia;
+                if (value != "")
+                    _provincia = value;
                 else
                     _provincia = null;
             }
@@ -51,8 +52,8 @@ namespace Library
             get { return _pais; }
             set 
             {
-                if (pais != "")
-                    _pais = pais;
+                if (value != "")
+                    _pais = value;
                 else
                     _pais = null;
             }
@@ -62,8 +63,8 @@ namespace Library
             get { return _cod_postal; }
             set 
             {
-                if (cod_postal != "")
-                    _cod_postal = cod_postal;
+                if (value != "")
+                    _cod_postal = value;
                 else
                     _cod_postal = null;
             }
@@ -127,6 +128,11 @@ namespace Library
             if (string.IsNullOrEmpty(calle) && string.IsNullOrEmpty(cod_postal))
                 return false;
             return true;
+        }
+
+        public string str()
+        {
+            return this.id.ToString() + " " + this.calle.ToString() + " " + this.cod_postal;
         }
     }
 }

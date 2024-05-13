@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENLocker
+    public class ENLocker
     {
         private int _id;
         private string _nombre;
         private ENDireccion dir;
-        private CADLocker con;
 
         public int id
         {
             get { return _id; }
-            set { _id = id; }
+            set { _id = value; }
         }
         public string nombre
         {
             get { return _nombre; }
-            set { _nombre = nombre; }
+            set { _nombre = value; }
         }
 
         public ENLocker()

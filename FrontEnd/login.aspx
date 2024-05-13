@@ -52,7 +52,7 @@
                 class="boton-register"
                 OnClick="Register_Click"
                 runat="server" />
-
+            <!--<asp:label runat="server" id="botono1" Text="HOla"></asp:label> /!-->
         </div>
 
     </div>
