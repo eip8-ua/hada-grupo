@@ -31,38 +31,40 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool create()//(ENUsuario en)
+        public bool create(ENUsuario en)//(ENUsuario en)
         {
-            bool exists = false, inserted = false;
+            bool inserted = false;//, exists = false;
             int nextId = 0;
             try
             {
                 connection.Open();
 
-                SqlCommand com = new SqlCommand("SELECT * FROM Usuario", connection);
+                SqlCommand com = new SqlCommand("SELECT * FROM TESTIMONIAL", connection);
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    if (dr["id"].ToString() == en.Message) exists = true;
+                    //Pendiente de averiguar if (dr["mensaje"].ToString() == en.Message) exists = true;
                     nextId = dr.GetInt32(dr.GetOrdinal("id"));
                 }
                 dr.Close();
                 nextId += 1;
-                if (!exists)
-                {
-                    SqlCommand auth = new SqlCommand("SET IDENTITY_INSERT testimonial ON", connection);
-                    SqlCommand ins = new SqlCommand("INSERT INTO Testimonial (id, mensaje) VALUES (" + nextId + ", " + en.Message + ");", connection);
-                    SqlCommand deauth = new SqlCommand("SET IDENTITY_INSERT Testimonial ON", connection);
+                //if(!exists)
+                //{
+                SqlCommand auth = new SqlCommand("SET IDENTITY_INSERT testimonial ON", connection);
+                SqlCommand ins = new SqlCommand("INSERT INTO Testimonial (id, dni, email, nombre, apellidos, telefono, fecha_nac, admin)" +
+                    "VALUES (" + nextId.ToString() + ", '" + en.Dni + "', '" + en.Nombre + "', '" + en.Apellidos + "', '" + en.Tlfn + "', " +
+                    en.FNacimiento.ToString() + ", " + en.Admin.ToString() + ");", connection);
+                SqlCommand deauth = new SqlCommand("SET IDENTITY_INSERT Testimonial ON", connection);
 
-                    auth.ExecuteNonQuery();
-                    ins.ExecuteNonQuery();
-                    deauth.ExecuteNonQuery();
-                    inserted = true;
-                }
-                else
-                {
-                    Console.WriteLine("An error ocurred while inserting on the Database: The given message for the Testimonial alredy exists");
-                }
+                auth.ExecuteNonQuery();
+                ins.ExecuteNonQuery();
+                deauth.ExecuteNonQuery();
+                inserted = true;
+                // }
+                //else
+                //{
+                //    Console.WriteLine("An error ocurred while inserting on the Database: The given message for the Testimonial alredy exists");
+                //}
 
                 connection.Close();
             }
@@ -108,8 +110,8 @@ namespace Library
                 if (exists)
                 {
                     SqlCommand updt = new SqlCommand("UPDATE usuario dni = '" + en.Dni + "' email = '" + en.Email + "' nombre = '" + en.Nombre +
-                        "' apellidos = '" + en.Apellidos + "' telefono = '" + en.Tlfn + "' fecha_nac = '" + en.FNacimiento + "' admin = '" + en.Admin +
-                        "' WHERE id = '" + dr.GetInt32(dr.GetOrdinal("id")) + "';", connection);
+                        "' apellidos = '" + en.Apellidos + "' telefono = '" + en.Tlfn + "' fecha_nac = " + en.FNacimiento + " admin = " + en.Admin +
+                        " WHERE id = '" + dr.GetInt32(dr.GetOrdinal("id")) + "';", connection);
 
                     updt.ExecuteNonQuery();
                     updated = true;

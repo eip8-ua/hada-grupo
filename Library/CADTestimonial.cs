@@ -47,7 +47,7 @@ namespace Library
                 if(!exists)
                 {
                     SqlCommand auth = new SqlCommand("SET IDENTITY_INSERT testimonial ON", connection);
-                    SqlCommand ins = new SqlCommand("INSERT INTO Testimonial (id, mensaje) VALUES (" + nextId + ", " + en.Message + ");", connection);
+                    SqlCommand ins = new SqlCommand("INSERT INTO Testimonial (id, mensaje) VALUES (" + nextId + ", '" + en.Message + "');", connection);
                     SqlCommand deauth = new SqlCommand("SET IDENTITY_INSERT Testimonial ON", connection);
 
                     auth.ExecuteNonQuery();
