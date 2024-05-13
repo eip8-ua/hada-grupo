@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Library
 {
     class CADCarrito
     {
-        private string constring;
+        private string constring { get; set; }
 
         /// <summary>
         /// Constructor vacío
         /// </summary>
-        public CADCarrito() { }
+        public CADCarrito() {
+            constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+        }
 
         /// <summary>
         /// Método que inserta un Carrito en la BD
@@ -22,6 +25,7 @@ namespace Library
         /// <returns></returns>
         public bool Create(ENCarrito en)
         {
+          
             return true;
         }
 
