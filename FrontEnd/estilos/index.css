@@ -1,0 +1,67 @@
+﻿body {
+    font-family: "Poppins";
+}
+
+p {
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 45px;
+    color: #b88e2f;
+    font-weight: bold;
+}
+
+h2 {
+    font-weight: bolder;
+    font-size: 28px;
+}
+
+#welcome_screen {
+    display: flex;
+    flex-direction: row;
+}
+
+#left_welcome {
+    margin-left: 50px;
+    padding: 25px;
+    border: 5px hidden;
+    border-radius: 8px;
+    background-color: navajowhite;
+    width: 42%;
+}
+
+#right_welcome {
+    margin-top: 50px;
+    margin-left: 75px;
+}
+
+#button_welcome_screen {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+#popular_products_showcase {
+    margin-top: 200px;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+}
+
+#promotions_showcase {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    background-color: navajowhite;
+    border: 5px none;
+    padding: 60px;
+}
+
+#explore_more_promotions_Button {
+    margin-left: 50px;
+}
+
+#testimonies_showcase {
+    display: flex;
+    flex-direction: row;
+}

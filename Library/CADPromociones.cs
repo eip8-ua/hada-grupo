@@ -16,19 +16,16 @@ namespace Library
            //miConexion = ConfigurationManager.ConnectionStrings["miconexion"].ToString();
         }
 
-        public void getPromociones()
+        public void getPromociones(List<ENPromociones> promos)
         {
 
         }
 
-        public void getDisponibilidad(ENPromociones en)
+        public ENPromociones getPromocion(int idd)
         {
+            ENPromociones promo = new ENPromociones();
 
-        }
-
-        public void getNumberOfDaysRemaining(ENPromociones en)
-        {
-
+            return promo;
         }
     }
 }

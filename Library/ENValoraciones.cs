@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENValoraciones
+    public class ENValoraciones
     {
     }
 }
