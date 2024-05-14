@@ -117,5 +117,11 @@ namespace Library
                 connection.Close();
             }
         }
+
+        //Método que crea una promoción en la base de datos con la información pasada por el EN
+        public void create(ENPromociones promo) { }
+
+        //Método que elimina una promoción de la base de datos con los datos pasados por el EN
+        public void delete(ENPromociones promo) { }
     }
 }
