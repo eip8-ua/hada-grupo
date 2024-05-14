@@ -20,7 +20,7 @@ namespace Library
         public bool Create(ENProducto prod)
         {
             SqlConnection conn = null;
-            string consu = "insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (" + prod.nombre + "," + prod.pvp + "," + prod.url_image + "," + prod.descripcion + "," + prod.stock + "," + prod.popularidad + "," + prod.promocion + "," + prod.categoria + ")";
+            string consu = "Insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (" + prod.nombre + "," + prod.pvp + "," + prod.url_image + "," + prod.descripcion + "," + prod.stock + "," + prod.popularidad + "," + prod.promocion + "," + prod.categoria + ")";
 
             SqlCommand comm = new SqlCommand(consu, conn);
 
@@ -133,7 +133,18 @@ namespace Library
                     ordinal = reader.GetOrdinal("descripcion");
                     prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                     prod.stock = Convert.ToInt32(reader["stock"]);
-                    prod.promocion = Convert.ToInt32(reader["promocion"]);
+                    ordinal = reader.GetOrdinal("promocion");
+                    if (reader.IsDBNull(ordinal))
+                    {
+                        prod.promocion = null;
+                    }
+                    else
+                    {
+
+                    }
+                    prod.promocion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                    ENPromociones prom = new ENPromociones(Convert.ToInt32(reader["promocion"]), 0);
+                    if(Read()
                     return true;
                 }
             }

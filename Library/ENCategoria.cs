@@ -41,7 +41,14 @@ namespace Library
 
         public bool Create()
         {
-            return false;
+            CADCategoria cad = new CADCategoria();
+
+            if (cad.Create(this))
+            {
+                return true;
+            }
+
+            else return false;
         }
         public bool Delete()
         {
