@@ -21,43 +21,44 @@ namespace Library
             miConexion = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
         }
 
-        public void getTopProducts()
+        public bool getTopProducts(List<ENProducto> productos)
         {
-
+            return true;
         }
 
-        public void getTopClients()
+        public bool getTopClients(List<ENUsuario> ballenas)
         {
-
+            return true;
         }
 
-        public void getMostPopularProvince()
+        public bool getMostPopularProvince(ENDireccion direccion)
         {
 
-
+            return true;
         }
 
-        public void getProductIncome(ENProducto en)
+        public bool getProductIncome(ENProducto en)
         {
 
-
+            return true;
         }
 
-        public void getNumberOfSoldUnits(ENProducto en)
+        public bool getNumberOfSoldUnits(ENProducto en)
         {
 
-
+            return true;
         }
 
-        public void getNumberOfOrders(ENUsuario en)
+        public bool getNumberOfOrders(ENUsuario en)
         {
 
-  
+            return true;
         }
 
-        public void getAverageProductRating(ENProducto en)
+        public bool getAverageProductRating(ENProducto en)
         {
 
+            return true;
         }
     }
 }

@@ -15,10 +15,10 @@ namespace proyecto
         
             if (!IsPostBack)
             {   
-                if(usuario.Admin == true)
+                if(isAdmin(usuario))
                 {
                     SetAdminOptions();
-                } else if(usuario.Email != null) {
+                } else if(isLogged(usuario)) {
                     SetRegisteredOptions();
                 } else
                 {
@@ -90,6 +90,21 @@ namespace proyecto
             usr.ChildItems.Add(register);
         }
 
+        //Método que comprueba si está registrado
+        public bool isAdmin(ENUsuario usuario)
+        {
+            if (usuario.Admin == true) return true;
+            else return false;
+        }
+
+        //Método que comprueba si es admin
+        public bool isLogged(ENUsuario usuario)
+        {
+            if (usuario.Email != null) return true;
+            else return false;
+        }
+
+        //Método que establece las opciones para los usuarios registrados
         public void SetRegisteredOptions()
         {
 
@@ -128,6 +143,7 @@ namespace proyecto
             usr.ChildItems.Add(log_out);
         }
 
+        //Método que establece las opciones para los usuarios que a su vez son administradores
         public void SetAdminOptions()
         {
 
