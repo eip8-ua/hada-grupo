@@ -8,7 +8,7 @@ namespace Library
 {
     //Esta clase no posee ninguna propiedad, debido a que su función es simplemente la de hacer selects de las diferentes tablas
     //para conseguir la información de los informes
-    class ENInformes
+    public class ENInformes
     {
         static public List<ENProducto> getTopProducts() {
 

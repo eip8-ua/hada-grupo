@@ -12,7 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		crear_db.sql = crear_db.sql
 		Esquema_ERR.pdf = Esquema_ERR.pdf
 		Estilos_web.pdf = Estilos_web.pdf
-		inserts.sql = inserts.sql
 		README.md = README.md
 	EndProjectSection
 EndProject

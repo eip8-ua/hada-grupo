@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENProducto
+    public class ENProducto
     {
         
         private ENCategoria _categoria;
@@ -22,7 +22,7 @@ namespace Library
         public ENCategoria categoria
         {
             get { return _categoria; }
-            set { _categoria = categoria; }
+            set { _categoria = new ENCategoria(categoria); }
         }
 
         public int id
@@ -66,7 +66,7 @@ namespace Library
         public ENPromociones promocion
         {
             get { return _promocion; }
-            set { _promocion = promocion; }
+            set { _promocion = new ENPromociones(promocion); }
         }
 
         public ENProducto()

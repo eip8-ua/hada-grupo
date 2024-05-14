@@ -5,30 +5,54 @@
 <html>
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link rel="stylesheet" type="text/css" href="Estilos.css" />
+<link rel="stylesheet" type="text/css" href="estilos/master.css"/>
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
     <title>HADAshop, tu tienda</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="title">HADAshop</div>
-        <div class="menu">
-            <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" CssClass="innerMenu" StaticHoverStyle-ForeColor="#f2a761" ForeColor="Red" 
-                StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="#dedede" DynamicHoverStyle-ForeColor="#f2a761">
-                <Items>
-                    <asp:MenuItem Text="INICIO" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="TIENDA" Value="shop" NavigateUrl="~/shop.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="CONTÁCTANOS" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="TESTIMONIAL" Value="testimonial" NavigateUrl="~/testimonial.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="PEDIDOS" Value="pedidos" NavigateUrl="~/pedidos.aspx"></asp:MenuItem>
-                    <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login.png">
-                        <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text="Register" Value="register" NavigateUrl="~/register.aspx"></asp:MenuItem>
-                    </asp:MenuItem>
-                    <asp:MenuItem Text="" Value="shopping_cart" NavigateUrl="~/shopping_cart.aspx" ImageUrl="Images/shopping_cart.png"></asp:MenuItem>
-                </Items>
-            </asp:Menu>
+        <asp:TextBox Text="" runat="server" ID="textbox"></asp:TextBox>
+        <div ID="navigationMenu">
+            <div ID="leftMenu">
+                <asp:Menu ID="outerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
+                    StaticMenuItemStyle-HorizontalPadding="30px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" 
+                    CssClass="menuStyle" DynamicMenuItemStyle-CssClass="submenuStyle">
+                    <Items>
+                        <asp:MenuItem Text="Tienda" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Productos" Value="products">
+                            <asp:MenuItem Text="Teclados" Value="keyboards"></asp:MenuItem>
+                            <asp:MenuItem Text="Ratones" Value="mouses"></asp:MenuItem>
+                            <asp:MenuItem Text="Monitores" Value="screens"></asp:MenuItem>
+                            <asp:MenuItem Text="Ordenadores" Value="pcs"></asp:MenuItem>
+                            <asp:MenuItem Text="Auriculares" Value="headphones"></asp:MenuItem>
+                            <asp:MenuItem Text="Todo" Value="every_product"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Contáctanos" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Testimonios" Value="testimonial" NavigateUrl="~/testimonial.aspx"></asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </div>
+            <div ID="rightMenu">
+                <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
+                    StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" 
+                    CssClass="menuStyle" DynamicMenyItemStyle-CssClass="submenuStyle">
+                    <Items>
+                        <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login2.png">
+                            <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Register" Value="register" NavigateUrl="~/register.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Mi cuenta" Value="user" NavigateUrl="~/user.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Mis pedidos" Value="my_orders" NavigateUrl="~/pedidos.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Añadir artículo" Value="add_product" NavigateUrl="~/admin_productos.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Administrar pedidos" Value="admin_orders" NavigateUrl="~/admin_pedidos.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Administrar usuario" Value="admin_user" NavigateUrl="~/admin_usuarios.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Cerrar sesión" Value="log_out" NavigateUrl="~/index.aspx"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="" Value="shopping_cart" NavigateUrl="~/shopping_cart.aspx" ImageUrl="Images/shopping_cart2.png"></asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </div>
         </div>
         <div class="content">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
