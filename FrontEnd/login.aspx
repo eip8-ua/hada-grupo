@@ -18,7 +18,7 @@
                     <div class="div-parametros">
                         <div class="div-parametro">
                             <div class="texto">
-                                Correo o nombre de usuario
+                                Correo electrónico
                             </div>
                             <!-- <div class="separadorhorizontal"></div> -->
 
