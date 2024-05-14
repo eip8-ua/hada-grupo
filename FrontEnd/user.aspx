@@ -1,8 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="user.aspx.cs" Inherits="proyecto.user" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>User</title>
+    <link rel="stylesheet" type="text/css" href="estilos/usuario.css"/>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   <div class ="spacing">
     <h3>Datos del usuario</h3>
 
     <div class="user-data">
@@ -42,10 +46,11 @@
             <asp:TextBox runat="server" ID="dni" Width="220"></asp:TextBox>
         </div>
         <div class="user-buttons">
-            <asp:Button runat="server" ID="actualizar" Width="100" Text="Actualizar" OnClick="cuandoActualizar"></asp:Button>
+            <asp:Button runat="server" class=ButtonStyle2 ID="actualizar" Width="100" Text="Actualizar" OnClick="cuandoActualizar"></asp:Button>
         </div>
         
         
     </div>
     <asp:TextBox runat="server" ID="Salida"></asp:TextBox>
+    </div>
 </asp:Content>
