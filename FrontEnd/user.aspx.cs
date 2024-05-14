@@ -19,9 +19,9 @@ namespace proyecto
         {
             //Console.WriteLine("hola");
             CADUsuario usu = new CADUsuario();
-            String a = usu.create();
+            //String a = usu.create();
             
-                Salida.Text = a;
+            //Salida.Text = a;
             
         }
     }
