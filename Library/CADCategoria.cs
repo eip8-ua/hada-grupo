@@ -104,7 +104,7 @@ namespace Library
             }
             return true;
         }
-        public bool Read(ENCategoria cat)
+        public ENCategoria Read(ENCategoria cat)
         {
             SqlConnection conn = null;
 
@@ -126,7 +126,7 @@ namespace Library
                     cat.tipo = reader["tipo"].ToString();
                     cat.descripcion = reader["descripcion"].ToString();
                     
-                    return true;
+                    return cat;
                 }
 
                
@@ -134,13 +134,13 @@ namespace Library
             catch (SqlException)
             {
                 //ERROR
-                return false;
+                return null;
             }
             finally
             {
                 conn.Close();
             }
-            return false;
+            return null;
         }
     }
 }

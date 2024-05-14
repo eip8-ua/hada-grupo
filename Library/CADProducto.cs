@@ -29,7 +29,10 @@ namespace Library
                 conn = new SqlConnection(constring);
                 conn.Open();
 
-                comm.ExecuteNonQuery();
+                if (comm.ExecuteNonQuery() == 0)
+                {
+                    return false;
+                }
             }
             catch (SqlException)
             {
@@ -60,7 +63,10 @@ namespace Library
             {
                 conn = new SqlConnection(constring);
                 conn.Open();
-                comm.ExecuteNonQuery();
+                if (comm.ExecuteNonQuery() == 0)
+                {
+                    return false;
+                }
 
 
             }
@@ -90,9 +96,12 @@ namespace Library
             {
                 conn = new SqlConnection(constring);
                 conn.Open();
-                comm.ExecuteNonQuery();
+                if (comm.ExecuteNonQuery() == 0)
+                {
+                    return false;
+                }
 
-                
+
             }
             catch (SqlException)
             {
@@ -109,13 +118,10 @@ namespace Library
         public bool Read(ENProducto prod)
         {
             SqlConnection conn = null;
-           
 
             string com = "Select * from Producto where id = " + prod.id;
 
             SqlCommand command = new SqlCommand(com, conn);
-
-
 
             try
             {
@@ -134,21 +140,32 @@ namespace Library
                     prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                     prod.stock = Convert.ToInt32(reader["stock"]);
                     ordinal = reader.GetOrdinal("promocion");
+                    
                     if (reader.IsDBNull(ordinal))
                     {
                         prod.promocion = null;
                     }
                     else
                     {
+                        prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
+                    }
+
+                    ordinal = reader.GetOrdinal("categoria");
+
+                    if (reader.IsDBNull(ordinal))
+                    {
+                        prod.categoria = null;
+                    }
+                    else
+                    {   
+
+                        prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
 
                     }
-                    prod.promocion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                    ENPromociones prom = new ENPromociones(Convert.ToInt32(reader["promocion"]), 0);
-                    if(Read()
                     return true;
                 }
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 //ERROR
                 return false;
@@ -161,7 +178,7 @@ namespace Library
 
         }
 
-        public List<ENProducto>ProductosPorCategoria(string categ) //devolvera una lista vacia si no se puede hacer la consulta o si no ha encontrado ninngun producto de la categoria indicada
+        public List<ENProducto> ProductosPorCategoria(string categ) //devolvera una lista vacia si no se puede hacer la consulta o si no ha encontrado ninngun producto de la categoria indicada
         {
             SqlConnection conn = null;
 
@@ -220,5 +237,16 @@ namespace Library
             return productos;
 
         }
+
+        public bool isCorrect(string cat, int prom)
+        {
+            if(ENPromociones.getPromocion(prom).MiId == null || ENCategoria.getCategoria(cat) == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
+
 }

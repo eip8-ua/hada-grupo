@@ -63,5 +63,14 @@ namespace Library
             return false;
         }
 
+        public static ENCategoria getCategoria(string tipo)
+        {
+            CADCategoria categ = new CADCategoria();
+
+            ENCategoria cat = new ENCategoria(tipo);
+
+            return categ.Read(cat);
+        }
+
     }
 }
