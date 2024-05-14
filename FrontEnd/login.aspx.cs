@@ -17,7 +17,17 @@ namespace proyecto
 
         protected void Login_Click(object sender, EventArgs e)
         {
-
+            usuario.email = email.Text;
+            usuario.constrasena = password.Text;
+            usuario.id = usuario.Registrado();
+            if(usuario.id > 0)
+            {
+                usuario.Read();
+            }
+            else
+            {
+                //Debe dar el error
+            }
         }
         protected void Register_Click(object sender, EventArgs e)
         {
