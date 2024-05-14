@@ -35,6 +35,9 @@
                             <asp:TextBox ID="password" runat="server" TextMode="Password" name="password" class="input" />
 
                         </div>
+                        <div class="status-div">
+                            <asp:label runat="server" id="status-lbl"></asp:label>
+                        </div>
                     </div>
                     
                     

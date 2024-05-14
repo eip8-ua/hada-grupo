@@ -10,7 +10,7 @@ namespace proyecto
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
-        public ENUsuario usuario = new ENUsuario();
+        static public ENUsuario usuario = new ENUsuario();
         protected void Page_Load(object sender, EventArgs e) { 
         
             if (!IsPostBack)

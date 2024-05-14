@@ -17,12 +17,12 @@ namespace proyecto
 
         protected void Login_Click(object sender, EventArgs e)
         {
-            usuario.email = email.Text;
-            usuario.constrasena = password.Text;
-            usuario.id = usuario.Registrado();
-            if(usuario.id > 0)
+            Site1.usuario.Email = email.Text;
+            Site1.usuario.Passwd = password.Text;
+            Site1.usuario.Id = Site1.usuario.Registrado();
+            if(Site1.usuario.Id > 0)
             {
-                usuario.Read();
+                Site1.usuario.read();
             }
             else
             {
