@@ -123,6 +123,7 @@
     <Content Include="estilos\login.css" />
     <Content Include="estilos\master.css" />
     <Content Include="estilos\index.css" />
+    <Content Include="estilos\register.css" />
     <Content Include="estilos\usuario.css" />
     <Content Include="Images\cascos 1.jpg" />
     <Content Include="Images\login.png" />
