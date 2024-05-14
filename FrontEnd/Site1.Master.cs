@@ -10,12 +10,20 @@ namespace proyecto
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
-        public ENUsuario usuario;
+        public ENUsuario usuario = new ENUsuario();
         protected void Page_Load(object sender, EventArgs e) { 
         
             if (!IsPostBack)
             {   
-                SetUnregisteredOptions();
+                if(usuario.Admin == true)
+                {
+                    SetAdminOptions();
+                } else if(usuario.Email != null) {
+                    SetRegisteredOptions();
+                } else
+                {
+                    SetUnregisteredOptions();
+                }
                 textbox.Text = "No Post Back";
             }
             else { 
