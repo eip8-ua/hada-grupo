@@ -75,8 +75,8 @@ namespace proyecto
             login.NavigateUrl = "~/login.aspx";
 
             MenuItem register = new MenuItem("Register");
-            login.Value = "register";
-            login.NavigateUrl = "~/register.aspx";
+            register.Value = "register";
+            register.NavigateUrl = "~/register.aspx";
 
             usr.ChildItems.Add(login);
             usr.ChildItems.Add(register);
@@ -113,7 +113,7 @@ namespace proyecto
 
             MenuItem log_out = new MenuItem("Cerrar sesión");
             log_out.Value = "log_out";
-            log_out.NavigateUrl = "~/pedidos.aspx";
+            log_out.NavigateUrl = "~/index.aspx";
 
             usr.ChildItems.Add(account);
             usr.ChildItems.Add(orders);
@@ -151,19 +151,19 @@ namespace proyecto
 
             MenuItem log_out = new MenuItem("Cerrar sesión");
             log_out.Value = "log_out";
-            log_out.NavigateUrl = "~/pedidos.aspx";
+            log_out.NavigateUrl = "~/index.aspx";
 
             MenuItem admin_product = new MenuItem("Añadir artículo");
-            log_out.Value = "add_product";
-            log_out.NavigateUrl = "~/admin_productos.aspx";
+            admin_product.Value = "add_product";
+            admin_product.NavigateUrl = "~/admin_productos.aspx";
 
             MenuItem admin_order = new MenuItem("Administrar pedidos");
-            log_out.Value = "admin_orders";
-            log_out.NavigateUrl = "~/admin_pedidos.aspx";
+            admin_order.Value = "admin_orders";
+            admin_order.NavigateUrl = "~/admin_pedidos.aspx";
 
             MenuItem admin_user = new MenuItem("Administrar usuario");
-            log_out.Value = "admin_user";
-            log_out.NavigateUrl = "~/admin_usuarios.aspx";
+            admin_user.Value = "admin_user";
+            admin_user.NavigateUrl = "~/admin_usuarios.aspx";
 
             usr.ChildItems.Add(account);
             usr.ChildItems.Add(orders);

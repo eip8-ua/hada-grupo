@@ -17,7 +17,8 @@
         <div ID="navigationMenu">
             <div ID="leftMenu">
                 <asp:Menu ID="outerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
-                    StaticMenuItemStyle-HorizontalPadding="30px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" CssClass="menuStyle">
+                    StaticMenuItemStyle-HorizontalPadding="30px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" 
+                    CssClass="menuStyle" DynamicMenuItemStyle-CssClass="submenuStyle">
                     <Items>
                         <asp:MenuItem Text="Tienda" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
                         <asp:MenuItem Text="Productos" Value="products">
@@ -35,7 +36,8 @@
             </div>
             <div ID="rightMenu">
                 <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
-                    StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" CssClass="menuStyle">
+                    StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" 
+                    CssClass="menuStyle" DynamicMenyItemStyle-CssClass="submenuStyle">
                     <Items>
                         <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login2.png">
                             <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
