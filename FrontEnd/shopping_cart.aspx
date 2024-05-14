@@ -1,94 +1,141 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="shopping_cart.aspx.cs" Inherits="proyecto.shopping_cart" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="estilos/index.css"/>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-    <script>
-        function actualizarCantidad(index, cantidad) {
-            // Obtener el carrito actual desde la cookie
-            var cart = getCartFromCookie();
-
-            // Actualizar la cantidad del producto en el carrito
-            cart[index - 1].Cantidad = parseInt(cantidad);
-
-            // Guardar el carrito actualizado en la cookie
-            setCartCookie(cart);
-
-            // Recargar la página para reflejar los cambios
-            location.reload();
+    <style>
+        #body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
         }
-
-        function eliminarProducto(index) {
-            // Obtener el carrito actual desde la cookie
-            var cart = getCartFromCookie();
-
-            // Eliminar el producto del carrito
-            cart.splice(index - 1, 1);
-
-            // Guardar el carrito actualizado en la cookie
-            setCartCookie(cart);
-
-            // Recargar la página para reflejar los cambios
-            location.reload();
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
         }
-
-        function getCartFromCookie() {
-            // Obtener el valor de la cookie 'cartItems'
-            var cartCookie = document.cookie.split('; ').find(row => row.startsWith('cartItems='));
-
-            // Si la cookie existe, extraer el valor y convertirlo a un objeto
-            if (cartCookie) {
-                var cartJson = cartCookie.split('=')[1];
-                return JSON.parse(decodeURIComponent(cartJson));
-            } else {
-                return [];
-            }
+        .gridview-container {
+            width: 100%;
+            margin-bottom: 20px;
         }
-
-        function setCartCookie(cart) {
-            // Convertir el carrito a JSON y codificarlo para almacenar en la cookie
-            var cartJson = JSON.stringify(cart);
-            document.cookie = 'cartItems=' + encodeURIComponent(cartJson) + ';path=/';
+        .gridview-container table {
+            width: 100%;
+            border-collapse: collapse;
         }
-    </script>
-
+        .gridview-container th, .gridview-container td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+        .gridview-container th {
+            background-color: #007bff;
+            color: white;
+        }
+        .gridview-container tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .gridview-container tr:hover {
+            background-color: #e9ecef;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        .message {
+            margin: 20px 0;
+            color: #dc3545;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input {
+            padding: 10px;
+            width: calc(100% - 22px);
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-remove {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-remove:hover {
+            background-color: #c82333;
+        }
+    </style>
     <div id="body">
-        <div id="cartContainer">
-            <div id="cartHeader">Carrito de Compra</div>
-            
-            <div id="cartItems">
-                <table>
-                    <tr style="background-color: #007bff; color: #ffffff;">
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Subtotal</th>
-                        <th>Acciones</th>
-                    </tr>
-                    <asp:Repeater ID="rptCartItems" runat="server">
-                        <ItemTemplate>
-                            <tr>
-                                <td><%# Eval("Nombre") %></td>
-                                <td>$<%# Eval("Precio", "{0:N2}") %></td>
-                                <td>
-                                    <input type="number" class="cantidadInput" min="1" max="10" value='<%# Eval("Cantidad") %>'
-                                        onchange="actualizarCantidad(<%# Container.ItemIndex + 1 %>, this.value)" />
-                                </td>
-                                <td>$<%# Eval("Subtotal", "{0:N2}") %></td>
-                                <td>
-                                    <button class="btnEliminar" onclick="eliminarProducto(<%# Container.ItemIndex + 1 %>)">Eliminar</button>
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </table>
+        <div class="container">
+            <h2>Shopping Cart</h2>
+            <div class="gridview-container">
+                <asp:GridView ID="gvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="gvCart_RowCommand">
+                    <Columns>
+                        <asp:BoundField DataField="Id" HeaderText="ID" />
+                        <asp:BoundField DataField="Name" HeaderText="Name" />
+                        <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="{0:C}" />
+                        <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:Button ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("Id") %>' Text="Remove" CssClass="btn-remove" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <EmptyDataTemplate>
+                        <p class="message">Your cart is empty.</p>
+                    </EmptyDataTemplate>
+                </asp:GridView>
             </div>
-            
-            <div id="cartSummary">
-                <h2>Total: $<asp:Label ID="lblTotal" runat="server" Text="0.00"></asp:Label></h2>
-                <asp:Button ID="btnComprar" runat="server" Text="Comprar" OnClick="btnComprar_Click" />
+
+            <div id="divTotalAndBuy" runat="server">
+                <h2>Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label></h2>
+                <asp:Button ID="btnComprar" runat="server" Text="Comprar" CssClass="btn" OnClick="btnComprar_Click" />
             </div>
+
+            <h2>Add Product</h2>
+            <div class="form-group">
+                <asp:TextBox ID="txtProductId" runat="server" Placeholder="Product ID"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:TextBox ID="txtProductName" runat="server" Placeholder="Product Name"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:TextBox ID="txtProductPrice" runat="server" Placeholder="Product Price"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:TextBox ID="txtProductQuantity" runat="server" Placeholder="Quantity"></asp:TextBox>
+            </div>
+            <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" CssClass="btn" OnClick="btnAddToCart_Click" />
         </div>
     </div>
+            
+        
 </asp:Content>
-

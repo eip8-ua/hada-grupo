@@ -15,137 +15,104 @@ namespace proyecto
         {
             if (!IsPostBack)
             {
-                if (User.Identity.IsAuthenticated)
-                {
-                    // Usuario autenticado: cargar datos del carrito desde la base de datos
-                    int userId = ObtenerIdUsuarioAutenticado(); // Método para obtener el ID de usuario autenticado
-                    List<ProductoCarrito> cartItems = ObtenerItemsCarritoDesdeBaseDeDatos(userId);
-
-                    // Enlazar los datos al repeater u otros controles
-                    rptCartItems.DataSource = cartItems;
-                    rptCartItems.DataBind();
-
-                    // Calcular y mostrar el total
-                    decimal total = cartItems.Sum(item => item.Precio * item.Cantidad);
-                    lblTotal.Text = total.ToString("0.00");
-                }
-                else
-                {
-                    // Usuario no autenticado: cargar datos del carrito desde las cookies
-                    List<ProductoCarrito> cartItems = GetCartItemsFromCookie();
-
-                    // Enlazar los datos al repeater u otros controles
-                    rptCartItems.DataSource = cartItems;
-                    rptCartItems.DataBind();
-
-                    // Calcular y mostrar el total
-                    decimal total = cartItems.Sum(item => item.Precio * item.Cantidad);
-                    lblTotal.Text = total.ToString("0.00");
-                }
+                BindCart();
             }
         }
 
-        private List<ProductoCarrito> ObtenerItemsCarritoDesdeBaseDeDatos(int userId)
+        protected void BindCart()
         {
-            // Implementa la lógica para recuperar los datos del carrito desde la base de datos
-            // Ejemplo: consulta SQL para obtener los detalles del carrito del usuario con ID userId
-            // Puedes usar Entity Framework, ADO.NET u otros métodos de acceso a datos
+            List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
+            gvCart.DataSource = cart;
+            gvCart.DataBind();
 
-            List<ProductoCarrito> cartItems = new List<ProductoCarrito>();
-            // Ejemplo de consulta con Entity Framework:
-            /*using (var dbContext = new YourDbContext())
+            bool isCartEmpty = cart.Count == 0;
+            btnComprar.Visible = !isCartEmpty;
+
+            if (!isCartEmpty)
             {
-                cartItems = dbContext.CartItems
-                    .Where(c => c.UserId == userId)
-                    .ToList();
-            }*/
-
-            return cartItems;
+                divTotalAndBuy.Visible = true;
+                UpdateTotal(cart);
+            }
+            else
+            {
+                divTotalAndBuy.Visible = false;
+            }
         }
 
-        private int ObtenerIdUsuarioAutenticado()
+        protected void btnAddToCart_Click(object sender, EventArgs e)
         {
-            int userId = 0; // Valor por defecto si no hay usuario autenticado o no se puede obtener el ID
+            int productId = int.Parse(txtProductId.Text);
+            string productName = txtProductName.Text;
+            decimal productPrice = decimal.Parse(txtProductPrice.Text);
+            int productQuantity = int.Parse(txtProductQuantity.Text);
 
-            if (User.Identity.IsAuthenticated)
+            List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
+
+            Product existingProduct = cart.Find(p => p.Id == productId);
+            if (existingProduct != null)
             {
-                // Obtener el nombre de usuario (o ID) del usuario autenticado
-                string username = User.Identity.Name;
+                existingProduct.Quantity += productQuantity;
+            }
+            else
+            {
+                cart.Add(new Product(productId, productName, productPrice, productQuantity));
+            }
 
-                // Aquí deberías implementar la lógica para buscar el ID del usuario en la base de datos
-                // Por ejemplo, utilizando Entity Framework u otro método de acceso a datos
-                // Supongamos que tienes una tabla de usuarios donde puedes buscar por nombre de usuario
-                /*using (var dbContext = new YourDbContext())
+            Session["Cart"] = cart;
+            BindCart();
+        }
+
+        protected void gvCart_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Remove")
+            {
+                int productId = int.Parse(e.CommandArgument.ToString());
+                List<Product> cart = Session["Cart"] as List<Product>;
+
+                if (cart != null)
                 {
-                    var user = dbContext.Users.FirstOrDefault(u => u.UserName == username);
-                    if (user != null)
+                    Product productToRemove = cart.Find(p => p.Id == productId);
+                    if (productToRemove != null)
                     {
-                        userId = user.Id; // Suponiendo que 'Id' es el campo que representa el ID del usuario
+                        cart.Remove(productToRemove);
                     }
-                }*/
-            }
 
-            return userId;
+                    Session["Cart"] = cart;
+                    BindCart();
+                }
+            }
         }
 
-        private List<ProductoCarrito> GetCartItemsFromCookie()
-        {
-            List<ProductoCarrito> cartItems = new List<ProductoCarrito>();
-
-            // Obtener el valor de la cookie 'cartItems'
-            string cartJson = string.Empty;
-            if (Request.Cookies["cartItems"] != null)
-            {
-                cartJson = Request.Cookies["cartItems"].Value;
-            }
-
-            // Si hay datos en la cookie, parsearlos manualmente
-            if (!string.IsNullOrEmpty(cartJson))
-            {
-                // Decodificar el valor de la cookie y convertirlo a una lista de objetos CartItem
-                string decodedCartJson = Uri.UnescapeDataString(cartJson);
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-                cartItems = serializer.Deserialize<List<ProductoCarrito>>(decodedCartJson);
-            }
-
-            return cartItems;
-        }
-
-        protected void btnComprar_Click(object sender, EventArgs e)
-        {
-            // Lógica para finalizar la compra
-            // Aquí puedes agregar la funcionalidad necesaria al hacer clic en el botón "Comprar"
-            // Por ejemplo, redirigir a otra página para finalizar la transacción.
-            //Response.Redirect("ConfirmacionCompra.aspx");
-        }
-
-        private decimal CalcularTotal(List<ProductoCarrito> productos)
+        protected void UpdateTotal(List<Product> cart)
         {
             decimal total = 0;
-            foreach (var producto in productos)
+            foreach (Product product in cart)
             {
-                total += producto.Precio * producto.Cantidad;
+                total += product.Price * product.Quantity;
             }
-            return total;
+            lblTotal.Text = total.ToString("C");
         }
 
-        public class ProductoCarrito
+        protected void btnComprar_Click(object sender, EventArgs args)
         {
-            public string Nombre { get; set; }
-            public decimal Precio { get; set; }
-            public int Cantidad { get; set; }
+            // Redirigir a la página de pedido
+            Response.Redirect("pedidos.aspx");
+        }
+    }
+    
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
 
-            public ProductoCarrito(string nombre, decimal precio, int cantidad)
-            {
-                Nombre = nombre;
-                Precio = precio;
-                Cantidad = cantidad;
-            }
-
-            public decimal Subtotal
-            {
-                get { return Precio * Cantidad; }
-            }
+        public Product(int id, string name, decimal price, int quantity)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+            Quantity = quantity;
         }
     }
 }
