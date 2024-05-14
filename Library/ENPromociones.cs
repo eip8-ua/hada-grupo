@@ -8,11 +8,11 @@ namespace Library
 {
     public class ENPromociones
     {
-        int miId;
+        int? miId;
         float descuento;
         bool disponibilidad;
 
-        public int MiId { get { return miId; } set { miId = value; } }
+        public int? MiId { get { return miId; } set { miId = value; } }
 
         public float Descuento { get { return descuento; } set { descuento = value; } }
 

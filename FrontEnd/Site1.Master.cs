@@ -10,12 +10,20 @@ namespace proyecto
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
-        public ENUsuario usuario;
+        public ENUsuario usuario = new ENUsuario();
         protected void Page_Load(object sender, EventArgs e) { 
         
             if (!IsPostBack)
             {   
-                SetUnregisteredOptions();
+                if(isAdmin(usuario))
+                {
+                    SetAdminOptions();
+                } else if(isLogged(usuario)) {
+                    SetRegisteredOptions();
+                } else
+                {
+                    SetUnregisteredOptions();
+                }
                 textbox.Text = "No Post Back";
             }
             else { 
@@ -82,6 +90,21 @@ namespace proyecto
             usr.ChildItems.Add(register);
         }
 
+        //Método que comprueba si está registrado
+        public bool isAdmin(ENUsuario usuario)
+        {
+            if (usuario.Admin == true) return true;
+            else return false;
+        }
+
+        //Método que comprueba si es admin
+        public bool isLogged(ENUsuario usuario)
+        {
+            if (usuario.Email != null) return true;
+            else return false;
+        }
+
+        //Método que establece las opciones para los usuarios registrados
         public void SetRegisteredOptions()
         {
 
@@ -120,6 +143,7 @@ namespace proyecto
             usr.ChildItems.Add(log_out);
         }
 
+        //Método que establece las opciones para los usuarios que a su vez son administradores
         public void SetAdminOptions()
         {
 
