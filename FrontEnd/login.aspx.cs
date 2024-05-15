@@ -19,10 +19,10 @@ namespace proyecto
         {
             Site1.usuario.Email = email.Text;
             Site1.usuario.Passwd = password.Text;
-            Site1.usuario.Id = Site1.usuario.Registrado();
+            //Site1.usuario.Id = Site1.usuario.Registrado();
             if(Site1.usuario.Id > 0)
             {
-                Site1.usuario.read();
+                //Site1.usuario.read();
             }
             else
             {

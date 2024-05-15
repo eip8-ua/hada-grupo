@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENTestimonial
+    [Serializable]
+    public class ENTestimonial
     {
         int _id;
         String _message;
