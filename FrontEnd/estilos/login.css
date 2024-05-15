@@ -1,19 +1,17 @@
 ﻿body {
     background-color: white;
-
 }
 
 .central {
     position: relative;
-    width = 100%;
+    width: 100%;
     border-radius: 20px;
     display: grid;
-    
     /*height: 100vh;*/
 }
 
 .txt_inicio_sesion {
-    position relative;
+    position: relative;
     /*width: 60%;*/
     margin: 0 auto;
     display: grid;
@@ -28,14 +26,17 @@
     margin-right: 20%;
 }
 
-.login_title{
-    color:black;
+.login_title {
+    color: black;
     font-size: 40px;
     text-align: center;
     margin-bottom: 20px;
 }
 
-
+.status-div {
+    color: red;
+    margin-bottom: 3%;
+}
 
 .input {
     position: relative;
@@ -46,10 +47,8 @@
     border-radius: 8px;
     font-size: 90%;
     color: grey;
-    
     margin-top: 1%;
-    margin-bottom:9%;
-    
+    margin-bottom: 9%;
 }
 
 
@@ -61,13 +60,18 @@
     font-weight: 500;
     font-family: 'Pontano Sans';
     font-size: 120%;
-    border: 1px solid black;
+    border: 1px solid red;
     margin: 0 auto;
-    background-color: #1F1A18 !important;
-    color: white !important;
-    margin
-
+    background-color: #1F1A18;
+    color: white;
 }
+
+    .boton-login:hover {
+        font-weight: 600;
+        background: black;
+        color: white;
+        transform: scale(1.05);
+    }
 
 .boton-register {
     position: relative;
@@ -82,7 +86,12 @@
     background-color: transparent !important;
     color: black !important;
 }
-
+    .boton-register:hover {
+        font-weight: 600;
+        background: white;
+        color: black;
+        transform: scale(1.05);
+    }
 
 
 .logo {
@@ -93,13 +102,8 @@
     margin: 0 auto;
 }
 
-.logo img {
-    width: auto;
-    height: 100%;
-    display: block;
-}
-
-.status-lbl {
-    color: red;
-    margin-bottom: 3%;
-}
+    .logo img {
+        width: auto;
+        height: 100%;
+        display: block;
+    }
