@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace Library
 {
     class CADCategoria
     {
-        public string constring;
+        private string constring;
         public SqlConnection connection;
 
         public CADCategoria()
         {
-
+            constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
         }
         public bool Create(ENCategoria cat)
         {
-            SqlConnection conn = null;
+            connection = null;
 
             string consu = "Insert into Categoria(tipo, descripcion) values (" + cat.tipo + ", " + cat.descripcion + ")";
 
-            SqlCommand comm = new SqlCommand(consu, conn);
+            SqlCommand comm = new SqlCommand(consu, connection);
 
             try
             {
-                conn = new SqlConnection(constring);
-                conn.Open();
+                connection = new SqlConnection(constring);
+                connection.Open();
 
                 comm.ExecuteNonQuery();
             }
@@ -39,26 +40,26 @@ namespace Library
             }
             finally
             {
-                conn.Close();
+                connection.Close();
             }
 
             return true;
         }
         public bool Delete(ENCategoria cat)
         {
-            SqlConnection conn = null;
+            connection = null;
 
 
             string consu = "Delete from Categoria where id =" + cat.tipo;
 
-            SqlCommand comm = new SqlCommand(consu, conn);
+            SqlCommand comm = new SqlCommand(consu, connection);
 
 
 
             try
             {
-                conn = new SqlConnection(constring);
-                conn.Open();
+                connection = new SqlConnection(constring);
+                connection.Open();
                 comm.ExecuteNonQuery();
 
 
@@ -70,25 +71,25 @@ namespace Library
             }
             finally
             {
-                conn.Close();
+                connection.Close();
             }
             return true;
         }
         public bool Update(ENCategoria cat)
         {
-            SqlConnection conn = null;
+            connection = null;
 
 
             string consu = "Update Categoria set tipo =" + cat.tipo + ",descripcion =" + cat.descripcion + "where tipo =" + cat.tipo;
 
-            SqlCommand comm = new SqlCommand(consu, conn);
+            SqlCommand comm = new SqlCommand(consu, connection);
 
 
 
             try
             {
-                conn = new SqlConnection(constring);
-                conn.Open();
+                connection = new SqlConnection(constring);
+                connection.Open();
                 comm.ExecuteNonQuery();
 
 
@@ -100,25 +101,25 @@ namespace Library
             }
             finally
             {
-                conn.Close();
+                connection.Close();
             }
             return true;
         }
         public ENCategoria Read(ENCategoria cat)
         {
-            SqlConnection conn = null;
+            connection = null;
 
 
             string com = "Select * from Categoria where id = " + cat.tipo;
 
-            SqlCommand command = new SqlCommand(com, conn);
+            SqlCommand command = new SqlCommand(com, connection);
 
 
 
             try
             {
-                conn = new SqlConnection(constring);
-                conn.Open();
+                connection = new SqlConnection(constring);
+                connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
@@ -138,7 +139,7 @@ namespace Library
             }
             finally
             {
-                conn.Close();
+                connection.Close();
             }
             return null;
         }

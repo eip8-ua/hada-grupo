@@ -75,10 +75,13 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Apartado de devolución de artículos para usuarios registrados.
 -  Apartado de valoración de usuarios.
 -  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
+
+## Mejoras implementadas
+- Protección contra injecciones sql. Gracias a SqlCommand.Parameters.SetValuesWith(string,variable). hemos conseguido mejorar en la seguridad de la página web.
+- Apartado de testimonios de usuarios donde nuestros usuarios puedes expresar su opinión libremente sobre nuestra web y nuestros productos.
+
+
 ## Mejoras necesarias
--  Botón Inicio pasa a ser Tienda
--  Botón Pedido desaparece de ahí
--  Botón Tienda pasa a ser Productos y al clickarlo aparecen las diferentes categorías de productos. En las categorías un botón será todo. Todos los botones llevarán a la página mostrar_productos.aspx pero con diferentes filtros dependiendo del botón pulsado.
 -  Si el usuario está registrado las opciones del icono de usuario pasarán a ser:
 	1. Mi cuenta (llevará a usuario.aspx)
 	2. Mis pedios. (llevará a pedidos.aspx)
@@ -87,10 +90,12 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 		1.2. Administrar pedidos. (llevará a un aspx nuevo llamado admin_pedidos.aspx) MENOS PRIORITARIO
 		1.3. Administrar usuarios. (llevará a un aspx nuevo llamado admin_usuarios.aspx) MENOS PRIORITARIO
 	4. Cerrar sesión.
-## Cambios en el ER @emiliano
-- La entidad usuario ahora la clave primaria es un id autoincremental
-- Añade un asterisco que diga que el atributo puntuacion de valora puede tomar valores int de 0 a 5
-- Otro asterisco que diga que el atributo descuento de promocion es un int que puede tomar valores de 0 a 100 siendo el porcentaje de descuento
+
+## Usuarios de prueba
+|   Tipo    | Correo electrónico |	Contraseña |
+| :----------- | :-----------: | :-----------: |
+|Administrador | admin@ua.es   | 1234		   |
+| Usuario	   | user@ua.es    | 1234          |
 
 ## Esquema Entidad Relacion de la base de datos
 - El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.

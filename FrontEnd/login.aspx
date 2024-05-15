@@ -11,36 +11,36 @@
             <div class="logo">
                 <img src="images/logo.png" />
             </div>
-            
+
             <div class="txt_inicio_sesion">
                 <label class="login_title">Inicio de sesión</label>
 
-                    <div class="div-parametros">
-                        <div class="div-parametro">
-                            <div class="texto">
-                                Correo electrónico
-                            </div>
-                            <!-- <div class="separadorhorizontal"></div> -->
-
-                            <asp:TextBox ID="email" runat="server" TextMode="Email" name="email" class="input" />
+                <div class="div-parametros">
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Correo electrónico
                         </div>
+                        <!-- <div class="separadorhorizontal"></div> -->
 
-
-                        <div class="div-parametro">
-                            <div class="texto">
-                                Contraseña
-                            </div>
-                            <!-- <div class="separadorhorizontal"></div> -->
-
-                            <asp:TextBox ID="password" runat="server" TextMode="Password" name="password" class="input" />
-
-                        </div>
-                        <div class="status-div">
-                            <asp:label runat="server" id="status-lbl"></asp:label>
-                        </div>
+                        <asp:TextBox ID="email" runat="server" TextMode="Email" name="email" class="input" />
                     </div>
-                    
-                    
+
+
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Contraseña
+                        </div>
+                        <!-- <div class="separadorhorizontal"></div> -->
+
+                        <asp:TextBox ID="password" runat="server" TextMode="Password" name="password" class="input" />
+
+                    </div>
+                    <div class="status-div">
+                        <asp:Label class="status-lbl" runat="server" ID="status_lbl"></asp:Label>
+                    </div>
+                </div>
+
+
                 <asp:Button ID="login_btn"
                     Text="Iniciar sesión"
                     class="boton-login"
@@ -48,8 +48,8 @@
                     runat="server" />
 
             </div>
-                
-                
+
+
             <asp:Button ID="register_btn"
                 Text="Crear una nueva cuenta"
                 class="boton-register"

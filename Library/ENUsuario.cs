@@ -58,6 +58,24 @@ namespace Library
             FNacimiento = fNacimiento;
             Admin = admin;
         }
+
+        /// <summary>
+        /// Constructor de copia
+        /// </summary>
+        /// <param name="to_copy">Objeto a copiar</param>
+        public ENUsuario(ENUsuario to_copy)
+        {
+            Id = to_copy.Id;
+            Dni = to_copy.Dni;
+            Email = to_copy.Email;
+            Nombre = to_copy.Nombre;
+            Passwd = to_copy.Passwd;
+            Apellidos = to_copy.Apellidos;
+            Tlfn = to_copy.Tlfn;
+            FNacimiento = to_copy.FNacimiento;
+            Admin = to_copy.Admin;
+        }
+
         /// <summary>
         /// Método que crea un usuario con los datos almacenados en el objeto EN
         /// </summary>
@@ -151,20 +169,31 @@ namespace Library
             return cadUsu.ReadPrev(this);
         }
 
-        public int Validate()
+        /// <summary>
+        /// Si el usuario es válido cambia todos los datos del objeto 
+        /// por los de la base de datos, si no los deja igual. 
+        /// </summary>
+        /// <returns>Devuelve si el usuario es válido o no</returns>
+        public bool Validate()
         {
-            String givenPasswd = Passwd; 
-            CADUsuario cadUsu = new CADUsuario();
-            if(cadUsu.Read(this))
+            ENUsuario test = new ENUsuario(this);
+            CADUsuario cad = new CADUsuario();
+
+            if (cad.Read_Email_Con(test) && this.Email == test.Email && this.Passwd == test.Passwd)
             {
-                if (givenPasswd == Passwd)
-                    return Id;
-
+                Id = test.Id;
+                Dni = test.Dni;
+                Email = test.Email;
+                Nombre = test.Nombre;
+                Passwd = test.Passwd;
+                Apellidos = test.Apellidos;
+                Tlfn = test.Tlfn;
+                FNacimiento = test.FNacimiento;
+                Admin = test.Admin;
+                return true;
             }
-            return -1;
-            
-            
 
+            return false;
         }
 
 

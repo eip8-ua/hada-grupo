@@ -138,5 +138,86 @@ namespace Library
 
             return false;
         }
+
+        static public List<ENProducto> productosPorColumna(string col, string valor)
+        {
+
+            CADProducto cad = new CADProducto();
+            switch (col)
+            {
+                case "categoria":
+                    
+                    return cad.ProductosPorColumna(col, valor);
+
+                case "id":
+                    if (!Int32.TryParse(valor, out Int32 aux1))
+                    {
+                        Console.WriteLine("Valor no correcto");
+                        return null;
+                    }
+
+                    else return cad.ProductosPorColumna(col, valor);
+
+                case "stock":
+                    if (!Int32.TryParse(valor, out Int32 aux2))
+                    {
+                        Console.WriteLine("Valor no correcto");
+                        return null;
+                    }
+
+                    else return cad.ProductosPorColumna(col, valor);
+
+                case "descripcion":
+                    
+                    return cad.ProductosPorColumna(col, valor);
+
+                case "pvp":
+                    if (!Double.TryParse(valor, out Double aux4))
+                    {
+                        Console.WriteLine("Valor no correcto");
+                        return null;
+                    }
+
+                    else return cad.ProductosPorColumna(col, valor);
+
+                case "nombre":
+                    
+                    return cad.ProductosPorColumna(col, valor);
+
+                case "popularidad":
+                    if (!Int32.TryParse(valor, out Int32 aux6))
+                    {
+                        Console.WriteLine("Valor no correcto");
+                        return null;
+                    }
+
+                    else return cad.ProductosPorColumna(col, valor);
+
+                case "url_image":
+                    if (!Int32.TryParse(valor, out Int32 aux7))
+                    {
+                        Console.WriteLine("Valor no correcto");
+                        return null;
+                    }
+
+                    else return cad.ProductosPorColumna(col, valor);
+
+                case "promocion":
+                    if (!Int32.TryParse(valor, out Int32 aux8))
+                    {
+                        Console.WriteLine("Valor no correcto");
+                        return null;
+                    }
+
+                    else return cad.ProductosPorColumna(col, valor);
+
+                default:
+                    Console.WriteLine("Columna no correcta");
+                    return null;
+
+            }
+        }
+
+
     }
 }
