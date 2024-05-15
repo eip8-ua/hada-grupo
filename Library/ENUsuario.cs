@@ -178,7 +178,8 @@ namespace Library
         {
             ENUsuario test = new ENUsuario(this);
             CADUsuario cad = new CADUsuario();
-            if (cad.Validate(test) && this.Email == test.Email && this.Passwd == test.Passwd)
+
+            if (cad.Read_Email_Con(test) && this.Email == test.Email && this.Passwd == test.Passwd)
             {
                 Id = test.Id;
                 Dni = test.Dni;

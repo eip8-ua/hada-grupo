@@ -35,7 +35,10 @@
     margin-bottom: 20px;
 }
 
-
+.status-div {
+    color: red;
+    margin-bottom: 3%;
+}
 
 .input {
     position: relative;
@@ -97,9 +100,4 @@
     width: auto;
     height: 100%;
     display: block;
-}
-
-.status-lbl {
-    color: red;
-    margin-bottom: 3%;
 }

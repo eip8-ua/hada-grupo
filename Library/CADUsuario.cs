@@ -411,7 +411,12 @@ namespace Library
             return found;
         }
 
-        public bool Validate(ENUsuario en)
+        /// <summary>
+        /// Obtiene un objeto que tenga el mismo email y contraseña que el objeto en
+        /// </summary>
+        /// <param name="en"></param>
+        /// <returns>devuelve true o false dependiendo si ha encontrado el objeto o no</returns>
+        public bool Read_Email_Con(ENUsuario en)
         {
             try
             {
@@ -429,9 +434,10 @@ namespace Library
                     en.Tlfn = dr["telefono"].ToString();
                     en.FNacimiento = dr.GetDateTime(dr.GetOrdinal("fecha_nac"));//fecha_aux;
                     en.Admin = dr.GetBoolean(dr.GetOrdinal("admin"));
+                    
+                    dr.Close();
+                    return true;
                 }
-                dr.Close();
-                return true;
 
             }
             catch (Exception e)
