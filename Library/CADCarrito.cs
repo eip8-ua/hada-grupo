@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Library
 {
     class CADCarrito
     {
-        private string constring { get; set; }
+        private string connectionString { get; set; }
 
         /// <summary>
         /// Constructor vacío
         /// </summary>
         public CADCarrito() {
-            constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
         }
 
         /// <summary>
@@ -25,7 +26,44 @@ namespace Library
         /// <returns></returns>
         public bool Create(ENCarrito en)
         {
-          
+            // SQL query to insert a new shopping cart
+            string insertQuery = "INSERT INTO Carrito (num_carrito, fecha) VALUES (@num_carrito, @fecha)";
+
+            // Current date and time
+            DateTime currentDate = DateTime.Now;
+            int cartNumber = en.Num_carrito;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                    {
+                        // Set parameters for the SQL query
+                        command.Parameters.AddWithValue("@num_carrito", cartNumber);
+                        command.Parameters.AddWithValue("@fecha", currentDate);
+
+                        // Open the connection
+                        connection.Open();
+
+                        // Execute the SQL command
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine($"Shopping cart {cartNumber} created successfully!");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Failed to create shopping cart {cartNumber}.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating shopping cart: {ex.Message}");
+            }
             return true;
         }
 
@@ -36,6 +74,38 @@ namespace Library
         /// <returns></returns>
         public bool Update(ENCarrito en)
         {
+            string updateQuery = "UPDATE Carrito SET fecha = @NewDate WHERE numero_carrito = @CartNumber";
+            int cartNumber = en.Num_carrito;
+            DateTime newDate = en.Fecha;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@CartNumber", cartNumber);
+                        command.Parameters.AddWithValue("@NewDate", newDate);
+
+                        connection.Open();
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine($"Shopping cart {cartNumber} updated successfully!");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Shopping cart {cartNumber} not found.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating shopping cart: {ex.Message}");
+            }
             return true;
         }
 
@@ -46,6 +116,37 @@ namespace Library
         /// <returns></returns>
         public bool Read(ENCarrito en)
         {
+            string selectQuery = "SELECT * FROM Carrito WHERE num_carrito = @CartNumber";
+            int cartNumber = en.Num_carrito;
+
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@CartNumber", cartNumber);
+
+                        connection.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            Console.WriteLine($"Shopping cart details - Number: {reader["num_cart"]}, Date: {reader["date"]}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Shopping cart {cartNumber} not found.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading shopping cart: {ex.Message}");
+            }
             return true;
         }
 
@@ -56,6 +157,36 @@ namespace Library
         /// <returns></returns>
         public bool Delete(ENCarrito en)
         {
+            string deleteQuery = "DELETE FROM Carrito WHERE num_carrito = @CartNumber";
+            int cartNumber = en.Num_carrito;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(deleteQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@CartNumber", cartNumber);
+
+                        connection.Open();
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine($"Shopping cart {cartNumber} deleted successfully!");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Shopping cart {cartNumber} not found.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting shopping cart: {ex.Message}");
+            }
             return true;
         }
     }
