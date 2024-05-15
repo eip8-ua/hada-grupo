@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="proyecto.register" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Register</title>
@@ -17,7 +18,7 @@
                 <div class="div-parametros">
                     <div class="div-parametro">
                         <div class="texto">
-                            Correo electronico
+                            Correo electronico*
                         </div>
 
                         <asp:TextBox ID="email" runat="server" TextMode="Email" name="email" class="input" />
@@ -25,7 +26,7 @@
 
                     <div class="div-parametro">
                         <div class="texto">
-                            Contraseña
+                            Contraseña*
                         </div>
 
                         <asp:TextBox ID="password" runat="server" TextMode="Password" name="password" class="input" />
@@ -34,7 +35,7 @@
 
                     <div class="div-parametro">
                         <div class="texto">
-                            DNI
+                            DNI*
                         </div>
 
                         <asp:TextBox ID="dni" runat="server" name="dni" class="input" />
@@ -43,7 +44,7 @@
 
                     <div class="div-parametro">
                         <div class="texto">
-                            Nombre
+                            Nombre*
                         </div>
 
                         <asp:TextBox ID="nombre" runat="server" name="nombre" class="input" />
@@ -51,7 +52,7 @@
                     </div>
                     <div class="div-parametro">
                         <div class="texto">
-                            Apellidos
+                            Apellidos*
                         </div>
 
                         <asp:TextBox ID="apellidos" runat="server" name="apellidos" class="input" />
@@ -75,10 +76,13 @@
                         <asp:TextBox ID="fecha_nacimiento" TextMode="Date" runat="server" name="fecha_nacimiento" class="input" />
 
                     </div>
+                    <div class="status-div">
+                        <asp:Label class="status-lbl" runat="server" ID="status_lbl"></asp:Label>
+                    </div>
                 </div>
             </div>
-                
-                
+
+
             <asp:Button ID="create_account_btn"
                 Text="Crear cuenta"
                 class="create_account_btn"

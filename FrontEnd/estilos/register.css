@@ -34,7 +34,6 @@
 }
 
 
-
 .input {
     position: relative;
     width: 100%;
@@ -83,3 +82,8 @@
         height: 100%;
         display: block;
     }
+
+.status-div {
+    color: red;
+    margin-bottom: 6%;
+}
