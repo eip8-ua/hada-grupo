@@ -10,9 +10,14 @@ namespace Library
     {
         private int _id;
         private int _cantidad;
+        private int _carrito;
+        private int _producto;
 
         public int Id { set { _id = value; } get { return _id; } }
         public int Cantidad { set { _cantidad = value; } get { return _cantidad; } }
+        public int Carrito { set { _carrito = value; } get { return _carrito; } }
+        public int Producto { set { _producto = value; } get { return _producto; } }
+
 
 
         /// <summary>
