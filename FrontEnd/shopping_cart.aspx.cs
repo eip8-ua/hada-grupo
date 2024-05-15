@@ -24,19 +24,8 @@ namespace proyecto
             List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
             gvCart.DataSource = cart;
             gvCart.DataBind();
-
-            bool isCartEmpty = cart.Count == 0;
-            btnComprar.Visible = !isCartEmpty;
-
-            if (!isCartEmpty)
-            {
-                divTotalAndBuy.Visible = true;
-                UpdateTotal(cart);
-            }
-            else
-            {
-                divTotalAndBuy.Visible = false;
-            }
+            divTotalAndBuy.Visible = cart.Count > 0;
+            UpdateTotal(cart);
         }
 
         protected void btnAddToCart_Click(object sender, EventArgs e)
@@ -47,8 +36,8 @@ namespace proyecto
             int productQuantity = int.Parse(txtProductQuantity.Text);
 
             List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
-
             Product existingProduct = cart.Find(p => p.Id == productId);
+
             if (existingProduct != null)
             {
                 existingProduct.Quantity += productQuantity;
@@ -83,6 +72,44 @@ namespace proyecto
             }
         }
 
+        protected void gvCart_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Product product = (Product)e.Row.DataItem;
+                TextBox txtQuantity = (TextBox)e.Row.FindControl("txtQuantity");
+                txtQuantity.TextChanged += (s, ev) =>
+                {
+                    int newQuantity;
+                    if (int.TryParse(txtQuantity.Text, out newQuantity))
+                    {
+                        List<Product> cart = Session["Cart"] as List<Product>;
+                        Product productToUpdate = cart.Find(p => p.Id == product.Id);
+                        productToUpdate.Quantity = newQuantity;
+                        Session["Cart"] = cart;
+                        UpdateTotal(cart);
+                    }
+                };
+            }
+        }
+
+        protected void txtQuantity_TextChanged(object sender, EventArgs e)
+        {
+            TextBox txtQuantity = sender as TextBox;
+            GridViewRow row = txtQuantity.NamingContainer as GridViewRow;
+            int productId = Convert.ToInt32(gvCart.DataKeys[row.RowIndex].Value);
+
+            int newQuantity;
+            if (int.TryParse(txtQuantity.Text, out newQuantity))
+            {
+                List<Product> cart = Session["Cart"] as List<Product>;
+                Product productToUpdate = cart.Find(p => p.Id == productId);
+                productToUpdate.Quantity = newQuantity;
+                Session["Cart"] = cart;
+                UpdateTotal(cart);
+            }
+        }
+
         protected void UpdateTotal(List<Product> cart)
         {
             decimal total = 0;
@@ -93,10 +120,10 @@ namespace proyecto
             lblTotal.Text = total.ToString("C");
         }
 
-        protected void btnComprar_Click(object sender, EventArgs args)
+        protected void btnBuy_Click(object sender, EventArgs e)
         {
-            // Redirigir a la página de pedido
-            Response.Redirect("pedidos.aspx");
+            // Redirect to the Finish Purchase page
+            Response.Redirect("Pedidos.aspx");
         }
     }
     

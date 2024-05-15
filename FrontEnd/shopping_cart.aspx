@@ -97,12 +97,16 @@
         <div class="container">
             <h2>Shopping Cart</h2>
             <div class="gridview-container">
-                <asp:GridView ID="gvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="gvCart_RowCommand">
+                <asp:GridView ID="gvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="gvCart_RowCommand" OnRowDataBound="gvCart_RowDataBound" DataKeyNames="Id">
                     <Columns>
-                        <asp:BoundField DataField="Id" HeaderText="ID" />
-                        <asp:BoundField DataField="Name" HeaderText="Name" />
-                        <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="{0:C}" />
-                        <asp:BoundField DataField="Quantity" HeaderText="Quantity" />
+                        <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" />
+                        <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="True" />
+                        <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="{0:C}" ReadOnly="True" />
+                        <asp:TemplateField HeaderText="Quantity">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtQuantity" runat="server" Text='<%# Eval("Quantity") %>' AutoPostBack="True" OnTextChanged="txtQuantity_TextChanged"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField>
                             <ItemTemplate>
                                 <asp:Button ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("Id") %>' Text="Remove" CssClass="btn-remove" />
@@ -117,7 +121,7 @@
 
             <div id="divTotalAndBuy" runat="server">
                 <h2>Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label></h2>
-                <asp:Button ID="btnComprar" runat="server" Text="Comprar" CssClass="btn" OnClick="btnComprar_Click" />
+                <asp:Button ID="btnBuy" runat="server" Text="Buy" CssClass="btn" OnClick="btnBuy_Click" />
             </div>
 
             <h2>Add Product</h2>
