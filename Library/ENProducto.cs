@@ -85,26 +85,57 @@ namespace Library
             if (descripcion != "")
                 this.descripcion = descripcion;
             if (cat != null)
-                this.categoria = new ENCategoria(cat);
+            {
+                this.categoria.descripcion = cat.descripcion;
+                this.categoria.tipo = cat.tipo;
+            }
             if (prom != null)
-                this.promocion = new ENPromociones(prom);
+            {
+                this.promocion.Descuento = prom.Descuento;
+                this.promocion.MiId = prom.MiId;
+            }
+                
         
         }
 
         public bool Create()
         {
+            CADProducto cad = new CADProducto();
+            if (cad.Create(this))
+            {
+                return true;
+            }
+
             return false;
         }
         public bool Delete()
         {
+            CADProducto cad = new CADProducto();
+            if (cad.Delete(this))
+            {
+                return true;
+            }
+
             return false;
         }
         public bool Update()
         {
+            CADProducto cad = new CADProducto();
+            if (cad.Update(this))
+            {
+                return true;
+            }
+
             return false;
         }
         public bool Read()
         {
+            CADProducto cad = new CADProducto();
+            if (cad.Read(this))
+            {
+                return true;
+            }
+
             return false;
         }
     }

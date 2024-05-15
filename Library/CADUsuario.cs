@@ -31,7 +31,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool create(ENUsuario en)//(ENUsuario en)
+        public bool Create(ENUsuario en)//(ENUsuario en)
         {
             bool inserted = false;//, exists = false;
             int nextId = 0;
@@ -39,7 +39,7 @@ namespace Library
             {
                 connection.Open();
 
-                SqlCommand com = new SqlCommand("SELECT * FROM TESTIMONIAL", connection);
+                SqlCommand com = new SqlCommand("SELECT * FROM Usuario", connection);
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
                 {
@@ -50,11 +50,11 @@ namespace Library
                 nextId += 1;
                 //if(!exists)
                 //{
-                SqlCommand auth = new SqlCommand("SET IDENTITY_INSERT testimonial ON", connection);
-                SqlCommand ins = new SqlCommand("INSERT INTO Testimonial (id, dni, email, nombre, apellidos, telefono, fecha_nac, admin)" +
+                SqlCommand auth = new SqlCommand("SET IDENTITY_INSERT usuario ON", connection);
+                SqlCommand ins = new SqlCommand("INSERT INTO Usuario (id, dni, email, nombre, apellidos, telefono, fecha_nac, admin)" +
                     "VALUES (" + nextId.ToString() + ", '" + en.Dni + "', '" + en.Nombre + "', '" + en.Apellidos + "', '" + en.Tlfn + "', " +
                     en.FNacimiento.ToString() + ", " + en.Admin.ToString() + ");", connection);
-                SqlCommand deauth = new SqlCommand("SET IDENTITY_INSERT Testimonial ON", connection);
+                SqlCommand deauth = new SqlCommand("SET IDENTITY_INSERT usuario ON", connection);
 
                 auth.ExecuteNonQuery();
                 ins.ExecuteNonQuery();
@@ -87,7 +87,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool update(ENUsuario en)
+        public bool Update(ENUsuario en)
         {
             bool exists = false, updated = false;
             try
@@ -142,7 +142,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool read(ENUsuario en)
+        public bool Read(ENUsuario en)
         {
             //DateTime fecha_aux;
             bool found = false;
@@ -188,7 +188,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool delete(ENUsuario en)
+        public bool Delete(ENUsuario en)
         {
             bool exists = false, deleted = false;
             try
@@ -242,7 +242,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos del Usuario</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool admin(ENUsuario en)
+        public bool IsAdmin(ENUsuario en)
         {
             return true;
         }
@@ -252,7 +252,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN del usuario actual</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool readFirst(ENUsuario en)
+        public bool ReadFirst(ENUsuario en)
         {
             bool firstExists = false, read = false;
             try
@@ -298,7 +298,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN del usuario actual</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool readNext(ENUsuario en)
+        public bool ReadNext(ENUsuario en)
         {
             bool found = false;
             try
@@ -348,7 +348,7 @@ namespace Library
         /// </summary>
         /// <param name="en">EN del testimonio actual</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool readPrev(ENUsuario en)
+        public bool ReadPrev(ENUsuario en)
         {
             int id_aux = 0;
             string dni_aux = "", email_aux = "", nombre_aux = "", apellidos_aux = "", telefono_aux = "";

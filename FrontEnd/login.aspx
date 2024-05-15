@@ -18,7 +18,7 @@
                     <div class="div-parametros">
                         <div class="div-parametro">
                             <div class="texto">
-                                Correo o nombre de usuario
+                                Correo electrónico
                             </div>
                             <!-- <div class="separadorhorizontal"></div> -->
 
@@ -34,6 +34,9 @@
 
                             <asp:TextBox ID="password" runat="server" TextMode="Password" name="password" class="input" />
 
+                        </div>
+                        <div class="status-div">
+                            <asp:label runat="server" id="status-lbl"></asp:label>
                         </div>
                     </div>
                     

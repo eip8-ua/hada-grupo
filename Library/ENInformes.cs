@@ -12,32 +12,44 @@ namespace Library
     {
         static public List<ENProducto> getTopProducts() {
 
-            return null;
+            List<ENProducto> productosPopulares = new List<ENProducto>();
+            CADInformes cad = new CADInformes();
+            cad.getTopProducts(productosPopulares);
+            return productosPopulares;
         }
 
         static public List<ENUsuario> getTopClients() {
 
-            return null;
+            List<ENUsuario> ballenas = new List<ENUsuario>();
+            CADInformes cad = new CADInformes();
+            cad.getTopClients(ballenas);
+            return ballenas;
         }
 
         static public ENDireccion getMostPopularProvince() {
 
-            return null;
+            ENDireccion direccion = new ENDireccion();
+            CADInformes cad = new CADInformes();
+            cad.getMostPopularProvince(direccion);
+            return direccion;
         }
 
         static public int getProductIncome(ENProducto en) {
 
-            return 0;
+            CADInformes cad = new CADInformes();
+            if (true) return 0;
+            else
+                return -101;
         }
 
         static public int getNumberOfSoldUnits(ENProducto en) {
 
-            return 0;
+            return -101;
         }
 
         static public int getNumberOfOrders(ENUsuario en) {
 
-            return 0;
+            return -101;
         }
 
         static public ENValoraciones getAverageProductRating(ENProducto en) {

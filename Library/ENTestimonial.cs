@@ -33,7 +33,7 @@ namespace Library
         /// Método que crea un nuevo Testimonio con los datos almacenados en el objeto EN
         /// </summary>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool create() 
+        public bool Create() 
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.Create(this);
@@ -42,7 +42,7 @@ namespace Library
         /// Método que actualiza el testimonio
         /// </summary>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool update()
+        public bool Update()
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.Update(this);
@@ -51,7 +51,7 @@ namespace Library
         /// Método que extrae los datos del testimonio
         /// </summary>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool read()
+        public bool Read()
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.Read(this);
@@ -60,7 +60,7 @@ namespace Library
         /// Método que elimina el testimonio
         /// </summary>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool delete()
+        public bool Delete()
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.Delete(this);
@@ -71,7 +71,7 @@ namespace Library
         /// Método que lee el primer testimonio almacenado en la BD
         /// </summary>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool readFirst()
+        public bool ReadFirst()
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.ReadFirst(this);
@@ -80,7 +80,7 @@ namespace Library
         /// Método que lee el testimonio almacenado justo después del actual  en la BD
         /// </summary>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool readNext()
+        public bool ReadNext()
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.ReadNext(this);
@@ -90,7 +90,7 @@ namespace Library
         /// Método que lee el testimonio almacenado justo antes del actual  en la BD
         /// </summary>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
-        public bool readPrev()
+        public bool ReadPrev()
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.ReadPrev(this);

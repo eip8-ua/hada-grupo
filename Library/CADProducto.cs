@@ -20,7 +20,7 @@ namespace Library
         public bool Create(ENProducto prod)
         {
             SqlConnection conn = null;
-            string consu = "insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (" + prod.nombre + "," + prod.pvp + "," + prod.url_image + "," + prod.descripcion + "," + prod.stock + "," + prod.popularidad + "," + prod.promocion + "," + prod.categoria + ")";
+            string consu = "Insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (" + prod.nombre + "," + prod.pvp + "," + prod.url_image + "," + prod.descripcion + "," + prod.stock + "," + prod.popularidad + "," + prod.promocion + "," + prod.categoria + ")";
 
             SqlCommand comm = new SqlCommand(consu, conn);
 
@@ -29,7 +29,10 @@ namespace Library
                 conn = new SqlConnection(constring);
                 conn.Open();
 
-                comm.ExecuteNonQuery();
+                if (comm.ExecuteNonQuery() == 0)
+                {
+                    return false;
+                }
             }
             catch (SqlException)
             {
@@ -60,7 +63,10 @@ namespace Library
             {
                 conn = new SqlConnection(constring);
                 conn.Open();
-                comm.ExecuteNonQuery();
+                if (comm.ExecuteNonQuery() == 0)
+                {
+                    return false;
+                }
 
 
             }
@@ -90,9 +96,12 @@ namespace Library
             {
                 conn = new SqlConnection(constring);
                 conn.Open();
-                comm.ExecuteNonQuery();
+                if (comm.ExecuteNonQuery() == 0)
+                {
+                    return false;
+                }
 
-                
+
             }
             catch (SqlException)
             {
@@ -109,13 +118,10 @@ namespace Library
         public bool Read(ENProducto prod)
         {
             SqlConnection conn = null;
-           
 
             string com = "Select * from Producto where id = " + prod.id;
 
             SqlCommand command = new SqlCommand(com, conn);
-
-
 
             try
             {
@@ -133,24 +139,33 @@ namespace Library
                     ordinal = reader.GetOrdinal("descripcion");
                     prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                     prod.stock = Convert.ToInt32(reader["stock"]);
+                    ordinal = reader.GetOrdinal("promocion");
                     
-                    prod.promocion = new ENPromociones();
-                    if (reader["promocion"] != null)
+                    if (reader.IsDBNull(ordinal))
                     {
-                        prod.promocion.MiId = Convert.ToInt32(reader["promocion"]);
-                        //TODO
-                        //prod.promocion.Read();
+                        prod.promocion = null;
                     }
-                    prod.categoria = new ENCategoria();
-                    if (reader["categoria"] != null)
+                    else
                     {
-                        prod.categoria.tipo = Convert.ToString(reader["categoria"]);
-                        prod.categoria.Read();
+                        prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
+                    }
+
+                    ordinal = reader.GetOrdinal("categoria");
+
+                    if (reader.IsDBNull(ordinal))
+                    {
+                        prod.categoria = null;
+                    }
+                    else
+                    {   
+
+                        prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
+
                     }
                     return true;
                 }
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 //ERROR
                 return false;
@@ -163,7 +178,7 @@ namespace Library
 
         }
 
-        public List<ENProducto>ProductosPorCategoria(string categ) //devolvera una lista vacia si no se puede hacer la consulta o si no ha encontrado ninngun producto de la categoria indicada
+        public List<ENProducto> ProductosPorCategoria(string categ) //devolvera una lista vacia si no se puede hacer la consulta o si no ha encontrado ninngun producto de la categoria indicada
         {
             SqlConnection conn = null;
 
@@ -222,5 +237,16 @@ namespace Library
             return productos;
 
         }
+
+        public bool isCorrect(string cat, int prom)
+        {
+            if(ENPromociones.getPromocion(prom).MiId == null || ENCategoria.getCategoria(cat) == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
+
 }

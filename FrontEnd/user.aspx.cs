@@ -17,11 +17,7 @@ namespace proyecto
 
         protected void cuandoActualizar(object sender, EventArgs e)
         {
-            //Console.WriteLine("hola");
-            CADUsuario usu = new CADUsuario();
-            //String a = usu.create();
-            
-            //Salida.Text = a;
+
             
         }
     }

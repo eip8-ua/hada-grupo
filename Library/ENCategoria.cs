@@ -41,7 +41,14 @@ namespace Library
 
         public bool Create()
         {
-            return false;
+            CADCategoria cad = new CADCategoria();
+
+            if (cad.Create(this))
+            {
+                return true;
+            }
+
+            else return false;
         }
         public bool Delete()
         {
@@ -54,6 +61,15 @@ namespace Library
         public bool Read()
         {
             return false;
+        }
+
+        public static ENCategoria getCategoria(string tipo)
+        {
+            CADCategoria categ = new CADCategoria();
+
+            ENCategoria cat = new ENCategoria(tipo);
+
+            return categ.Read(cat);
         }
 
     }
