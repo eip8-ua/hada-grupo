@@ -78,6 +78,15 @@ namespace proyecto
         protected global::System.Web.UI.WebControls.TextBox fecha_nacimiento;
 
         /// <summary>
+        /// Control status_lbl.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label status_lbl;
+
+        /// <summary>
         /// Control create_account_btn.
         /// </summary>
         /// <remarks>
