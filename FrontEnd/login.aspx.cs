@@ -19,11 +19,10 @@ namespace proyecto
         {
             Site1.usuario.Email = email.Text;
             Site1.usuario.Passwd = password.Text;
-
-
-            if (Site1.usuario.Validate())
+            Site1.usuario.Id = Site1.usuario.Registrado();
+            if(Site1.usuario.Id > 0)
             {
-                Response.Redirect("~/user.aspx");
+                Site1.usuario.read();
             }
             else
             {
