@@ -36,7 +36,7 @@
 
                         </div>
                         <div class="status-div">
-                            <asp:label runat="server" id="status-lbl"></asp:label>
+                            <asp:label class="status-lbl" runat="server" id="status_lbl"></asp:label>
                         </div>
                     </div>
                     

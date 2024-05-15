@@ -202,6 +202,11 @@ BEGIN
 	)
 END;
 
+
+insert into Usuario (dni, email, nombre, apellidos, contrasena, telefono, fecha_nac, admin) values ('68870720r', 'admin@ua.es', 'Alberto', 'Sales Paredes', '1234', '3107258331', '7/22/1990', '1');
+insert into Usuario (dni, email, nombre, apellidos, contrasena, telefono, fecha_nac, admin) values ('40556862m', 'user@ua.es', 'Filomeno', 'Bueno Prados', '1234', '3107258331', '1/1/1959', '0');
+
+
 insert into Usuario (dni, email, nombre, apellidos, contrasena, telefono, fecha_nac, admin) values ('60996872i', 'emaylin0@va.gov', 'Elle', 'Maylin', 'vQ8<X<CiZ1', '3107258331', '4/15/1989', '0');
 insert into Usuario (dni, email, nombre, apellidos, contrasena, telefono, fecha_nac, admin) values ('38481257g', 'jrattenberie1@ameblo.jp', 'Johnathon', 'Rattenberie', 'eG3~A!x6p', '9606954639', '12/25/1984', '0');
 insert into Usuario (dni, email, nombre, apellidos, contrasena, telefono, fecha_nac, admin) values ('82330828n', 'rmcphelimey2@harvard.edu', 'Rozelle', 'McPhelimey', 'iW7|tk|#xc', '5452430414', '5/3/1986', '0');

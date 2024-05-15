@@ -65,6 +65,7 @@
     margin: 0 auto;
     background-color: #1F1A18 !important;
     color: white !important;
+    margin
 
 }
 
@@ -96,4 +97,9 @@
     width: auto;
     height: 100%;
     display: block;
+}
+
+.status-lbl {
+    color: red;
+    margin-bottom: 3%;
 }

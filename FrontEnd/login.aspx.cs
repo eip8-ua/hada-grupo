@@ -19,19 +19,21 @@ namespace proyecto
         {
             Site1.usuario.Email = email.Text;
             Site1.usuario.Passwd = password.Text;
-            Site1.usuario.Id = Site1.usuario.Registrado();
-            if(Site1.usuario.Id > 0)
+
+
+            if (Site1.usuario.Validate())
             {
-                Site1.usuario.read();
+                Response.Redirect("~/user.aspx");
             }
             else
             {
-                //Debe dar el error
+                status_lbl.Text = "Correo electrónico o contraseña incorrecto";
             }
+
         }
         protected void Register_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/register.aspx");
         }
     }
 }
