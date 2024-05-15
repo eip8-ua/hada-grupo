@@ -17,17 +17,26 @@ namespace proyecto
 
         protected void Login_Click(object sender, EventArgs e)
         {
-            Site1.usuario.Email = email.Text;
-            Site1.usuario.Passwd = password.Text;
-
-
-            if (Site1.usuario.Validate())
+            if (!string.IsNullOrEmpty(email.Text) && !string.IsNullOrEmpty(password.Text) && email.Text.Contains("@"))
             {
-                Response.Redirect("~/user.aspx");
-            }
+                Site1.usuario.Email = email.Text;
+                Site1.usuario.Passwd = password.Text;
+
+
+                if (Site1.usuario.Validate())
+                {
+                    Response.Redirect("~/user.aspx");
+                }
+                else
+                {
+                    Site1.usuario = new ENUsuario();
+                    status_lbl.Text = "Correo electrónico o contraseña incorrecto";
+                }
+             }
             else
             {
-                status_lbl.Text = "Correo electrónico o contraseña incorrecto";
+                Site1.usuario = new ENUsuario();
+                status_lbl.Text = "Algún campo vacio o falta el @";
             }
 
         }
