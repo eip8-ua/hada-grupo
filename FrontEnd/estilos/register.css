@@ -4,14 +4,14 @@
 
 .central {
     position: relative;
-    width = 100%;
+    width: 100%;
     border-radius: 20px;
     display: grid;
     /*height: 100vh;*/
 }
 
 .txt_inicio_sesion {
-    position relative;
+    position: relative;
     /*width: 60%;*/
     margin: 0 auto;
     display: grid;
@@ -49,7 +49,7 @@
 }
 
 
-.boton-login {
+.create_account_btn {
     position: relative;
     height: 140%;
     width: 80%;
@@ -59,26 +59,17 @@
     font-size: 120%;
     border: 1px solid black;
     margin: 0 auto;
-    background-color: #1F1A18 !important;
-    color: white !important;
+    background-color: #1F1A18;
+    color: white;
+
+    transition-duration: 0.4s;
 }
-
-.boton-register {
-    position: relative;
-    height: 125%;
-    width: 60%;
-    border-radius: 17px !important;
-    font-weight: 600;
-    font-family: 'Pontano Sans';
-    font-size: 120%;
-    border: 1px solid black;
-    margin: 0 auto;
-    background-color: transparent !important;
-    color: black !important;
-}
-
-
-
+    .create_account_btn:hover {
+        font-weight: 600;
+        background: white;
+        color: black;
+        transform: scale(1.05);
+    }
 .logo {
     position: relative;
     height: 80px;

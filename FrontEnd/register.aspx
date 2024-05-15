@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Register</title>
-    <link rel="stylesheet" href="estilos/l.css" />
+    <link rel="stylesheet" href="estilos/register.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
@@ -76,21 +76,13 @@
 
                     </div>
                 </div>
-                    
-                    
-                <asp:Button ID="login_btn"
-                    Text="Iniciar sesión"
-                    class="boton-login"
-                    OnClick="Login_Click"
-                    runat="server" />
-
             </div>
                 
                 
-            <asp:Button ID="register_btn"
-                Text="Crear una nueva cuenta"
-                class="boton-register"
-                OnClick="Register_Click"
+            <asp:Button ID="create_account_btn"
+                Text="Crear cuenta"
+                class="create_account_btn"
+                OnClick="Create_Account_Click"
                 runat="server" />
             <!--<asp:label runat="server" id="botono1" Text="HOla"></asp:label> /!-->
         </div>

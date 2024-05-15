@@ -78,22 +78,13 @@ namespace proyecto
         protected global::System.Web.UI.WebControls.TextBox fecha_nacimiento;
 
         /// <summary>
-        /// Control login_btn.
+        /// Control create_account_btn.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button login_btn;
-
-        /// <summary>
-        /// Control register_btn.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button register_btn;
+        protected global::System.Web.UI.WebControls.Button create_account_btn;
 
         /// <summary>
         /// Control botono1.
