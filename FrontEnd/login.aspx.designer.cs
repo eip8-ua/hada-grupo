@@ -33,14 +33,14 @@ namespace proyecto
         protected global::System.Web.UI.WebControls.TextBox password;
 
         /// <summary>
-        /// Control status-lbl.
+        /// Control status_lbl.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-       // protected global::System.Web.UI.WebControls.Label status-lbl;
-        
+        protected global::System.Web.UI.WebControls.Label status_lbl;
+
         /// <summary>
         /// Control login_btn.
         /// </summary>
