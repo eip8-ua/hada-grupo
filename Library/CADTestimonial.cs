@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 
 namespace Library
 {
+    [Serializable]
     public class CADTestimonial
     {
         private string constring { get; set; }
@@ -314,11 +315,10 @@ namespace Library
                     };
                     testimonios.Add(testimonio);
                 }
-                dr.Close(); 
+                dr.Close();
             }
             catch (Exception e)
             {
-                // Handle exceptions here
                 Console.WriteLine("An error occurred while accessing the Database: " + e.Message);
             }
             finally
