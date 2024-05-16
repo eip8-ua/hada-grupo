@@ -143,5 +143,45 @@ namespace Library
             }
             return null;
         }
+
+        public List<ENCategoria> listarCategoria()
+        {
+            connection = null;
+
+
+            string com = "Select * from Categoria order by nombre [ASC]";
+
+            SqlCommand command = new SqlCommand(com, connection);
+
+            ENCategoria aux = new ENCategoria();
+
+            List<ENCategoria> lista = new List<ENCategoria>();
+            try
+            {
+                connection = new SqlConnection(constring);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    aux.tipo = reader["tipo"].ToString();
+                    aux.descripcion = reader["descripcion"].ToString();
+
+                    lista.Add(aux);
+                }
+
+                
+            }
+            catch (SqlException)
+            {
+                //ERROR
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return lista;
+        }
     }
 }

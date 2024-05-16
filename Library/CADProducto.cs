@@ -184,7 +184,7 @@ namespace Library
 
             List<ENProducto> productos = new List<ENProducto>();
 
-            string com = "Select * from Producto where " + columna +  "=" + valor;
+            string com = "Select * from Producto where " + columna +  "=" + valor + "order by nombre[ASC]";
 
             SqlCommand command = new SqlCommand(com, connection);
 

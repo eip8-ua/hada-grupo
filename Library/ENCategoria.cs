@@ -72,5 +72,12 @@ namespace Library
             return categ.Read(cat);
         }
 
+        public static List<ENCategoria> listarCategorias()
+        {
+            CADCategoria cad = new CADCategoria();
+
+            return cad.listarCategoria();
+        }
+
     }
 }
