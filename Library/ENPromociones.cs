@@ -18,7 +18,10 @@ namespace Library
 
         public bool Disponibilidad { get { return disponibilidad; } set { disponibilidad = value; } }
 
-        public ENPromociones() { }
+        public ENPromociones() {
+            descuento = 0;
+            disponibilidad = false;
+        }
 
         public ENPromociones(int Yd, float desc, bool disp) {
 

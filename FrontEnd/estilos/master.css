@@ -18,6 +18,12 @@ body {
     margin-bottom: 75px;
 }
 
+.border_shadow {
+    -webkit-box-shadow: 20px 15px 10px 0px rgba(0,0,0,0.37);
+    -moz-box-shadow: 20px 15px 10px 0px rgba(0,0,0,0.37);
+    box-shadow: 20px 15px 10px 0px rgba(0,0,0,0.37);
+}
+
 .submenuStyle {
     padding-left: 20px;
     padding-right: 40px;

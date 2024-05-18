@@ -24,8 +24,9 @@ namespace Library
 
         //Método que modifica la lista pasada para que contenga los diez productos más populares
         //Devuelve verdadero si no hay ningún error al acceder a la BD SQL, si no devuelve falso
-        public bool getTopProducts(List<ENProducto> productos)
+        public List<ENProducto> getTopProducts()
         {
+            List<ENProducto> productos = new List<ENProducto>();
             //Creamos las conexión
             SqlConnection connection = new SqlConnection(miConexion);
 
@@ -71,13 +72,13 @@ namespace Library
                     contador--;
                 }
 
-                return true;
+                return productos;
                 //En caso de fallar la operación Sql
             }
             catch (SqlException ex)
             {
                 Console.WriteLine("Error con la parte SQL en CADInformes: {0}", ex.Message);
-                return false;
+                return productos;
             }
             finally
             {
@@ -289,16 +290,73 @@ namespace Library
         //En caso de no encontrar el producto, o al haber algún error, devuelve -101
         public int getNumberOfSoldUnits(ENProducto en)
         {
+            //Creamos la conexión y la variable que contenga la cantidad de unidades vendidas
+            SqlConnection connection = new SqlConnection(miConexion);
+            int unitsSold = 0;
+            //Habrímos un bloque try/catch para contener las posibles excepciones
+            try
+            {
+                //Abrimos la conexión
+                connection.Open();
+                //Creamos el comando necesario
+                SqlCommand command = new SqlCommand("SELECT SUM(lp.cantidad) AS 'Unidades' FROM Producto p " +
+                    "INNER JOIN Linea_pedido lp ON p.id = lp.producto WHERE p.id = " + en.id.ToString() +";", connection);
+                //Creamos el DataReader
+                SqlDataReader dr = command.ExecuteReader();
 
-            return -101;
+                //Leemos el valor recogido
+                if(dr.Read()) int.TryParse(dr["Unidades"].ToString(), out unitsSold);
+
+                //Devolvemos las unidades vendidas
+                return unitsSold;
+
+                //En caso de error
+            } catch (SqlException ex) {
+                Console.WriteLine("Error con la parte SQL en CADInformes: {0}", ex.Message);
+                return -101;
+            } finally
+            {   
+                //Cerramos la conexión
+                connection.Close();
+            }
         }
 
         //Método que devuelve el número de unidades vendidas del producto pasado por parámetro
         //En caso de no encontrar el producto, o al haber algún error, devuelve -101
         public int getNumberOfOrders(ENUsuario en)
         {
+            //Creamos la conexión y la variable que contenga la cantidad de pedidos
+            SqlConnection connection = new SqlConnection(miConexion);
+            int pedidos = 0;
+            //Habrímos un bloque try/catch para contener las posibles excepciones
+            try
+            {
+                //Abrimos la conexión
+                connection.Open();
+                //Creamos el comando necesario
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) AS 'Pedidos' FROM Usuario u " +
+                    "INNER JOIN Pedido p ON u.id = p.usuario WHERE u.id = " + en.Id.ToString() + ";", connection);
+                //Creamos el DataReader
+                SqlDataReader dr = command.ExecuteReader();
 
-            return -101;
+                //Leemos el valor recogido
+                if (dr.Read()) int.TryParse(dr["Pedidos"].ToString(), out pedidos);
+
+                //Devolvemos las unidades vendidas
+                return pedidos;
+
+                //En caso de error
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Error con la parte SQL en CADInformes: {0}", ex.Message);
+                return -101;
+            }
+            finally
+            {
+                //Cerramos la conexión
+                connection.Close();
+            }
         }
 
         //Método que devuelve la puntuación media de un producto pasado por parámetro

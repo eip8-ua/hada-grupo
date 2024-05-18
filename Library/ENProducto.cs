@@ -28,39 +28,39 @@ namespace Library
         public int id
         {
             get { return _id; }
-            set { _id = id; }
+            set { _id = value; }
         }
         public string nombre
         {
             get { return _nombre; }
-            set { _nombre = nombre; }
+            set { _nombre = value; }
         }
         public int stock
         {
             get { return _stock; }
-            set { _stock = stock; }
+            set { _stock = value; }
         }
         public float pvp
         {
             get { return _pvp; }
-            set { _pvp = pvp; }
+            set { _pvp = value; }
         }
 
         public string descripcion
         {
             get { return _descripcion; }
-            set { _descripcion = descripcion; }
+            set { _descripcion = value; }
         }
         public int popularidad
         {
             get { return _popularidad; }
-            set { _popularidad = popularidad; }
+            set { _popularidad = value; }
         }
 
         public string url_image
         {
             get { return _url_image; }
-            set { _url_image = url_image; }
+            set { _url_image = value; }
         }
 
         public ENPromociones promocion
@@ -71,7 +71,7 @@ namespace Library
 
         public ENProducto()
         {
-
+            _promocion = new ENPromociones();
         }
         public ENProducto(int id, int stock, string descripcion, int popularidad, string nombre = "", ENCategoria cat = null, ENPromociones prom = null)
         {
