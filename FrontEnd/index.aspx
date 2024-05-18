@@ -18,7 +18,11 @@
 
     <div id="popular_products_showcase">
         <h2>Nuestros productos más populares</h2>
-        <div id="popular_products"></div>
+        <div id="popular_products">
+            <div id="popular_column1" runat="server" class="popular_column"></div>
+            <div id="popular_column2" runat="server" class="popular_column"></div>
+        </div>
+        <asp:Button ID="see_more_pop_products" runat="server" Text="Ver más" OnClick="see_more_pop_products_Click" CssClass="ButtonStyle2 see_more_button"></asp:Button>
     </div>
 
     <div id="promotions_showcase">

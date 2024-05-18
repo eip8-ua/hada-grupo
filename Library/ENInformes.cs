@@ -12,10 +12,8 @@ namespace Library
     {
         static public List<ENProducto> getTopProducts() {
 
-            List<ENProducto> productosPopulares = new List<ENProducto>();
             CADInformes cad = new CADInformes();
-            cad.getTopProducts(productosPopulares);
-            return productosPopulares;
+            return cad.getTopProducts();
         }
 
         static public List<ENProducto> getAllProducts()
