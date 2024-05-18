@@ -56,7 +56,7 @@ namespace proyecto
             }
 
 
-            Site1.usuario = new ENUsuario(-1, dni.Text, email.Text, nombre.Text, password.Text, apellidos.Text, telefono.Text, age, false);
+            Site1.usuario = new ENUsuario(-1, dni.Text, email.Text, nombre.Text, password.Text, apellidos.Text, age, false, telefono.Text);
             if(!Site1.usuario.Create())
             {
                 status_lbl.Text = "Error creando el usuario. Este correo electronico ya tiene una cuenta asociada";
