@@ -20,4 +20,11 @@
 
 th, td {
     padding: 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.element {
+    padding: 10px;
+    font-size: 15px;
 }

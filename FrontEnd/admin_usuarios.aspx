@@ -38,14 +38,14 @@
             <asp:Repeater ID="rptListUsers" runat="server">
                 <ItemTemplate>
                     <tr>
-                        <td><%# Eval("Email") %></td>
-                        <td><%# Eval("Nombre") %></td>
-                        <td><%# Eval("Apellidos") %></td>
-                        <td><%# Eval("Admin") %></td>
-                        <td><%# Eval("Fecha") %></td>
-                        <td><%# Eval("Dni") %></td>
-                        <td><%# Eval("Telefono") %></td>
-                        <td>
+                        <td class="element"><%# Eval("Email") %></td>
+                        <td class="element"><%# Eval("Nombre") %></td>
+                        <td class="element"><%# Eval("Apellidos") %></td>
+                        <td class="element"><%# Eval("Admin") %></td>
+                        <td class="element"><%# Eval("Fecha") %></td>
+                        <td class="element"><%# Eval("Dni") %></td>
+                        <td class="element"><%# Eval("Telefono") %></td>
+                        <td class="element">
                             <button class="Button" onclick="eliminarProducto(<%# Container.ItemIndex + 1 %>)">Eliminar</button>
                         </td>
                     </tr>

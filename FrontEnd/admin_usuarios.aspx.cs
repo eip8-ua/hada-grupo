@@ -15,8 +15,11 @@ namespace FrontEnd
             if (!IsPostBack)
             {
                 ENUsuario usu = new ENUsuario();
-                UsuarioLista usuPrimeroLista = new UsuarioLista(usu.Email, usu.Nombre, usu.Apellidos, usu.Admin, usu.FNacimiento, usu.Dni, usu.Tlfn);
-                List<UsuarioLista> listaUsuarios = new List<UsuarioLista> { usuPrimeroLista };
+                usu.ReadFirst();
+                if(usu.ReadNext())
+                { 
+                }
+                List<UsuarioLista> listaUsuarios = new List<UsuarioLista>();
                 
                 while(usu.ReadNext())
                 {
@@ -50,6 +53,7 @@ namespace FrontEnd
                 Admin = admin;
                 Fecha = fecha;
                 Telefono = telefono;
+                Dni = dni;
             }
         }
     }
