@@ -1,0 +1,30 @@
+﻿body {
+    font-family: 'Poppins';
+    font-size: 20px;
+    background-color: white;
+    color: gray;
+    min-height: 100%;
+    margin: 0;
+}
+
+.user-data {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #b88e2f;
+    margin-right: 200px;
+    margin-left: 200px;
+    margin-top: 20px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+th, td {
+    padding: 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.element {
+    padding: 10px;
+    font-size: 15px;
+}
