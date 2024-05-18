@@ -22,7 +22,6 @@ namespace Library
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        // Otras propiedades relevantes
 
         public ENValoracionUsuario()
         {
