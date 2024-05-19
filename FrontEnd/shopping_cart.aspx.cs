@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
+using Library;
 
 
 namespace proyecto
@@ -16,6 +17,16 @@ namespace proyecto
             if (!IsPostBack)
             {
                 BindCart();
+
+                if (Site1.usuario != null)
+                {
+                    ENCarrito enCar = new ENCarrito(1, new DateTime());
+                    enCar.Create();
+
+                    ENLinCarr enLinCar = new ENLinCarr();
+                    //int cantidad = Session[+]
+                    //enLinCar.Create(1,);
+                }
             }
         }
 

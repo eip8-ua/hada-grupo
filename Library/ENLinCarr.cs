@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENLinCarr
+    public class ENLinCarr
     {
         private int _id;
         private int _cantidad;
@@ -30,10 +30,12 @@ namespace Library
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cantidad"></param>
-        public ENLinCarr(int id, int cantidad)
+        public ENLinCarr(int id, int cantidad, int carrito, int producto)
         {
             Id = id;
             Cantidad = cantidad;
+            Carrito = carrito;
+            Producto = producto;
         }
         /// <summary>
         /// Método que crea una linea de carrito con los datos almacenados en el objeto EN

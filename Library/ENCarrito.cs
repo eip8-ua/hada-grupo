@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENCarrito
+    public class ENCarrito
     {
         private int _num_carrito;
         private DateTime _fecha;
