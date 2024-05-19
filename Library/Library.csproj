@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CADCarrito.cs" />
+    <Compile Include="CADCarritoDe.cs" />
     <Compile Include="CADCategoria.cs" />
     <Compile Include="CADContactUs.cs" />
     <Compile Include="CADDireccion.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="CADUsuario.cs" />
     <Compile Include="CADValoraciones.cs" />
     <Compile Include="ENCarrito.cs" />
+    <Compile Include="ENCarritoDe.cs" />
     <Compile Include="ENCategoria.cs" />
     <Compile Include="ENContactUs.cs" />
     <Compile Include="ENDireccion.cs" />
