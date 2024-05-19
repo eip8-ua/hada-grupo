@@ -18,7 +18,7 @@ namespace Library
         /// <summary>
         /// Constructor vacío
         /// </summary>
-        public ENTestimonial() { }
+        public ENTestimonial(){}
 
         /// <summary>
         /// Constructor con los datos del Testimonio
@@ -95,6 +95,12 @@ namespace Library
         {
             CADTestimonial cadTes = new CADTestimonial();
             return cadTes.ReadPrev(this);
+        }
+
+        public List<ENTestimonial> ObtenerTestimonios()
+        {
+            CADTestimonial cadTes = new CADTestimonial();
+            return cadTes.ObtenerTestimonios();
         }
 
     }

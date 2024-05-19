@@ -29,13 +29,18 @@ namespace proyecto
                 }
                 else
                 {
+                    email.Text = "";
+                    password.Text = "";
                     Site1.usuario = new ENUsuario();
                     status_lbl.Text = "Correo electrónico o contraseña incorrecto";
                 }
              }
             else
             {
-                //Debe dar el error
+                email.Text = "";
+                password.Text = "";
+                Site1.usuario = new ENUsuario();
+                status_lbl.Text = "Algún campo vacio o falta el @";
             }
         }
         protected void Register_Click(object sender, EventArgs e)

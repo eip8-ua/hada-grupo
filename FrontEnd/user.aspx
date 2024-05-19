@@ -36,7 +36,7 @@
             <asp:TextBox runat="server" ID="tlfno" Width="220"></asp:TextBox>
 
             <p>
-                Dirección:
+                Fecha de nacimiento:
             </p>
             <asp:TextBox runat="server" ID="direccion" Width="220"></asp:TextBox>
 
@@ -47,6 +47,7 @@
         </div>
         <div class="user-buttons">
             <asp:Button runat="server" class=ButtonStyle2 ID="actualizar" Width="100" Text="Actualizar" OnClick="cuandoActualizar"></asp:Button>
+            <asp:Label runat="server" ID="error"></asp:Label>
         </div>
         
         

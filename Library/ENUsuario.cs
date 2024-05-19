@@ -28,7 +28,6 @@ namespace Library
         public String Tlfn { set { _tlfn = value; } get { return _tlfn; } }
         public DateTime FNacimiento { set { _fNacimiento = value; } get { return _fNacimiento; } }
         public bool Admin { set { _admin = value; } get { return _admin; } }
-        CADUsuario cadUsuario;
 
         /// <summary>
         /// Constructor vacío
@@ -46,7 +45,7 @@ namespace Library
         /// <param name="tlfn"></param>
         /// <param name="fNacimiento"></param>
         /// <param name="admin"></param>
-        public ENUsuario(int id, String dni, String email, String nombre, String passwd, String apellidos, String tlfn, DateTime fNacimiento, bool admin)
+        public ENUsuario(int id, String dni, String email, String nombre, String passwd, String apellidos, DateTime fNacimiento, bool admin, String tlfn = "")
         {
             Id = id;
             Dni = dni;
