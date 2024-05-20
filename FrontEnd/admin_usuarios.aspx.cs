@@ -16,20 +16,25 @@ namespace FrontEnd
             {
                 ENUsuario usu = new ENUsuario();
                 usu.ReadFirst();
-                if(usu.ReadNext())
-                { 
-                }
-                List<UsuarioLista> listaUsuarios = new List<UsuarioLista>();
-                
-                while(usu.ReadNext())
+                if (!usu.ReadNext())
                 {
-                    UsuarioLista usuLista = new UsuarioLista(usu.Email, usu.Nombre, usu.Apellidos, usu.Admin, usu.FNacimiento, usu.Dni, usu.Tlfn);
-                    listaUsuarios.Add(usuLista);
+                    problem.Text = "No hay usuarios que administrar";
+                }
+                else
+                {
+                    List<UsuarioLista> listaUsuarios = new List<UsuarioLista>();
+
+                    while (usu.ReadNext())
+                    {
+                        UsuarioLista usuLista = new UsuarioLista(usu.Email, usu.Nombre, usu.Apellidos, usu.Admin, usu.FNacimiento, usu.Dni, usu.Tlfn);
+                        listaUsuarios.Add(usuLista);
+                    }
+
+                    rptListUsers.DataSource = listaUsuarios;
+                    rptListUsers.DataBind();
                 }
 
-                // Asignar lista de productos al repeater
-                rptListUsers.DataSource = listaUsuarios;
-                rptListUsers.DataBind();
+                
             }
         }
 
@@ -39,7 +44,7 @@ namespace FrontEnd
             public string Nombre { get; set; }
             public string Apellidos { get; set; }
             public bool Admin { get; set; }
-            public DateTime Fecha { get; set; }
+            public string Fecha { get; set; }
             public string Dni { get; set; }
             public string Telefono { get; set; }
 
@@ -51,7 +56,7 @@ namespace FrontEnd
                 Nombre = nombre;
                 Apellidos = apellidos;
                 Admin = admin;
-                Fecha = fecha;
+                Fecha = fecha.ToString("yyyy-MM-dd").ToString();
                 Telefono = telefono;
                 Dni = dni;
             }
