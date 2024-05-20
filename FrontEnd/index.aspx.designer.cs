@@ -60,6 +60,24 @@ namespace proyecto
         protected global::System.Web.UI.WebControls.Button explore_more_promotions_Button;
 
         /// <summary>
+        /// Control right_promotions1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl right_promotions1;
+
+        /// <summary>
+        /// Control right_promotions2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl right_promotions2;
+
+        /// <summary>
         /// Control testimonies_Button.
         /// </summary>
         /// <remarks>

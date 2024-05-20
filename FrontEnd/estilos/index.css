@@ -100,6 +100,22 @@ h2 {
     padding-left: 100px;
 }
 
+.promo_product {
+    background-color: white;
+    border: 3px none;
+    border-radius: 10px;
+    padding: 50px;
+    width: 250px;
+    height: 300px;
+    margin-left: 100px;
+    transition: transform 0.4s;
+    text-align: center;
+}
+
+.promo_product:hover {
+    transform: scale(1.15);
+}
+
 #explore_more_promotions_Button {
     margin-left: 50px;
 }

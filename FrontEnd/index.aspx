@@ -31,7 +31,8 @@
             <p>¡Descubre nuestras mejores promociones!</p><br>
             <asp:Button ID="explore_more_promotions_Button" runat="server" Text="Explorar más" CssClass="ButtonStyle1" OnClick="explore_more_promotions_Button_Click"></asp:Button>
         </div>
-        <div id="right_promotions"></div>
+        <div id="right_promotions1" runat="server"></div>
+        <div id="right_promotions2" runat="server"></div>
     </div>
 
     <div id="testimonies_showcase">
