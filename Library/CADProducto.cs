@@ -177,46 +177,45 @@ namespace Library
         public List<ENProducto> ProductosPorColumna(string columna, string valor)
         {
             SqlConnection connection = null;
-
             List<ENProducto> productos = new List<ENProducto>();
-
-            string com = "Select * from Producto where " + columna + "=" + valor;
-
-            SqlCommand command = new SqlCommand(com, connection);
+            string com = "SELECT * FROM Producto WHERE " + columna + "=@valor";
 
             try
             {
-                connection = new SqlConnection(constring);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                using (connection = new SqlConnection(constring))
                 {
-                    ENProducto prod = new ENProducto
-                    {
-                        id = reader.GetInt32(reader.GetOrdinal("id")),
-                        nombre = reader.GetString(reader.GetOrdinal("nombre")),
-                        pvp = Convert.ToSingle(reader["pvp"]),
-                        url_image = reader["url_image"] as string,
-                        descripcion = reader["descripcion"] as string,
-                        stock = Convert.ToInt32(reader["stock"]),
-                        popularidad = Convert.ToInt32(reader["popularidad"]),
-                        promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? null : new ENPromociones { MiId = reader.GetInt32(reader.GetOrdinal("promocion")) },
-                        categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? null : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
-                    };
+                    SqlCommand command = new SqlCommand(com, connection);
+                    command.Parameters.AddWithValue("@valor", valor);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    if (prod.promocion != null)
+                    while (reader.Read())
                     {
-                        prod.promocion = prod.promocion.read();
+                        ENProducto prod = new ENProducto
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("id")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            pvp = Convert.ToSingle(reader["pvp"]),
+                            url_image = reader["url_image"] as string,
+                            descripcion = reader["descripcion"] as string,
+                            stock = Convert.ToInt32(reader["stock"]),
+                            popularidad = Convert.ToInt32(reader["popularidad"]),
+                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? null : new ENPromociones { MiId = reader.GetInt32(reader.GetOrdinal("promocion")) },
+                            categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? null : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
+                        };
+
+                        if (prod.promocion != null)
+                        {
+                            prod.promocion = prod.promocion.read();
+                        }
+
+                        productos.Add(prod);
                     }
-
-                    productos.Add(prod);
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                Console.Write("Excepción SQL");
-                return productos;
+                Console.Write("Excepción SQL: " + ex.Message);
             }
             finally
             {
@@ -227,6 +226,7 @@ namespace Library
             }
             return productos;
         }
+
 
         public bool isCorrect(string cat, int prom)
         {
