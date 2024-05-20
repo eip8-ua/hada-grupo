@@ -74,5 +74,11 @@ namespace Library
             CADLinCarr cadLinCarr = new CADLinCarr();
             return cadLinCarr.Delete(this);
         }
+
+        public List<ENProducto> getItemsByCartId(int cartId)
+        {
+            CADLinCarr cadLinCarr = new CADLinCarr();
+            return cadLinCarr.getItemsByCartId(cartId);
+        }
     }
 }

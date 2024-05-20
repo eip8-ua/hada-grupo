@@ -189,5 +189,46 @@ namespace Library
             }
             return true;
         }
+
+        public List<ENProducto> getItemsByCartId(int cartId)
+        {
+            string selectQuery = "SELECT * FROM Linea_carrito carrito id = @CartId";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@CartId", cartId);
+
+                        connection.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        List<ENProducto> products = new List<ENProducto>();
+                        while (reader.Read())
+                        {
+                            ENProducto enProd = new ENProducto((int)reader["producto"], 1, "", 1);
+                            enProd.Read();
+                            products.Add(enProd);
+                        }
+
+                        return products;
+                        
+
+                        if (!reader.HasRows)
+                        {
+                            Console.WriteLine("No line items found in the shopping cart.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading line items: {ex.Message}");
+            }
+            return null;
+        }
     }
 }

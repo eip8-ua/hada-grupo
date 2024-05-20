@@ -66,5 +66,17 @@ namespace Library
             CADCarritoDe cadCarritoDe = new CADCarritoDe();
             return cadCarritoDe.Delete(this);
         }
+
+        public bool UserExists(ENUsuario user)
+        {
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.UserExists(user);
+        }
+
+        public int GetCartIdByUser(ENUsuario user)
+        {
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.GetCartIdByUser(user);
+        }
     }
 }

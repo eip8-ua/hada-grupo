@@ -121,48 +121,57 @@ namespace Library
 
             string com = "Select * from Producto where id = " + prod.id;
 
-            SqlCommand command = new SqlCommand(com, connection);
+            //SqlCommand command = new SqlCommand(com, connection);
 
             try
             {
-                connection = new SqlConnection(constring);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlConnection connection = new SqlConnection(constring))
                 {
-                    prod.nombre = reader["nombre"].ToString();
-                    prod.popularidad = Convert.ToInt32(reader["popularidad"]);
-                    prod.pvp = (float)reader["pvp"];
-                    int ordinal = reader.GetOrdinal("url_image");
-                    prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                    ordinal = reader.GetOrdinal("descripcion");
-                    prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                    prod.stock = Convert.ToInt32(reader["stock"]);
-                    ordinal = reader.GetOrdinal("promocion");
-                    
-                    if (reader.IsDBNull(ordinal))
+                    using (SqlCommand command = new SqlCommand(com, connection))
                     {
-                        prod.promocion = null;
-                    }
-                    else
-                    {
-                        prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
-                    }
 
-                    ordinal = reader.GetOrdinal("categoria");
+                        //connection = new SqlConnection(constring);
+                        connection.Open();
 
-                    if (reader.IsDBNull(ordinal))
-                    {
-                        prod.categoria = null;
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            prod.nombre = reader["nombre"].ToString();
+                            prod.popularidad = Convert.ToInt32(reader["popularidad"]);
+                            prod.pvp = (float)reader["pvp"];
+                            int ordinal = reader.GetOrdinal("url_image");
+                            prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                            ordinal = reader.GetOrdinal("descripcion");
+                            prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                            prod.stock = Convert.ToInt32(reader["stock"]);
+                            ordinal = reader.GetOrdinal("promocion");
+
+                            if (reader.IsDBNull(ordinal))
+                            {
+                                prod.promocion = null;
+                            }
+                            else
+                            {
+                                prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
+                            }
+
+                            ordinal = reader.GetOrdinal("categoria");
+
+                            if (reader.IsDBNull(ordinal))
+                            {
+                                prod.categoria = null;
+                            }
+                            else
+                            {
+
+                                prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
+
+                            }
+                            return true;
+                        }
                     }
-                    else
-                    {   
-
-                        prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
-
-                    }
-                    return true;
                 }
             }
             catch (SqlException)

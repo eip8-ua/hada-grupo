@@ -113,10 +113,8 @@ namespace Library
         /// <returns></returns>
         public bool Read(ENCarritoDe en)
         {
-
             string selectQuery = "SELECT * FROM Carrito_de WHERE id = @UserId";
             int userId = en.Usuario;
-            int cartId = en.Carrito;
 
             try
             {
@@ -188,6 +186,73 @@ namespace Library
                 Console.WriteLine($"Error deleting line item: {ex.Message}");
             }
             return true;
+        }
+        
+        public bool UserExists(ENUsuario User)
+        {
+            string selectQuery = "SELECT * FROM Carrito_de WHERE id = @UserId";
+            int userId = User.Id;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserId", userId);
+
+                        connection.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            return true;
+                        }
+
+                        if (!reader.HasRows)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading line items: {ex.Message}");
+            }
+            return false;
+        }
+
+        public int GetCartIdByUser(ENUsuario User)
+        {
+            string selectQuery = "SELECT carrito FROM Carrito_de WHERE id = @UserId";
+            int userId = User.Id;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserId", userId);
+
+                        connection.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            return (int)reader["carrito"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading line items: {ex.Message}");
+            }
+            return 0;
         }
     }
 }
