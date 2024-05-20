@@ -147,7 +147,8 @@ namespace Library
                     }
                     else
                     {
-                        prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
+                        prod.promocion.MiId = reader.GetInt32(ordinal);
+                        prod.promocion = prod.promocion.read();
                     }
 
                     ordinal = reader.GetOrdinal("categoria");
@@ -242,7 +243,9 @@ namespace Library
 
         public bool isCorrect(string cat, int prom)
         {
-            if(ENPromociones.getPromocion(prom).MiId == null || ENCategoria.getCategoria(cat) == null)
+            ENPromociones promo = new ENPromociones();
+            promo.MiId = prom; promo = promo.read();
+            if(promo.MiId == null || ENCategoria.getCategoria(cat) == null)
             {
                 return false;
             }
@@ -260,10 +263,13 @@ namespace Library
                 SqlCommand command = new SqlCommand(consulta, connection);
                 try
                 {
+                    ENPromociones promo = new ENPromociones();
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
+
+                        promo.MiId = reader.GetInt32(reader.GetOrdinal("promocion"));
                         ENProducto producto = new ENProducto
                         {
                             id = reader.GetInt32(reader.GetOrdinal("id")),
@@ -273,23 +279,27 @@ namespace Library
                             descripcion = reader.GetString(reader.GetOrdinal("descripcion")),
                             stock = reader.GetInt32(reader.GetOrdinal("stock")),
                             popularidad = reader.GetInt32(reader.GetOrdinal("popularidad")),
-                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? new ENPromociones() : ENPromociones.getPromocion(reader.GetInt32(reader.GetOrdinal("promocion"))),
+                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? new ENPromociones() : promo.read(),
                             categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? new ENCategoria() : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
                         };
                         productos.Add(producto);
                     }
+
+                    return productos;
                 }
+
                 catch (SqlException ex)
                 {
                     Console.WriteLine("Excepción SQL: " + ex.Message);
+                    return productos;
                 }
             }
-            return productos;
+
+            }
         }
 
 
     }
 
-}
 
 
