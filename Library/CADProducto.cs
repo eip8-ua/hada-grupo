@@ -112,67 +112,73 @@ namespace Library
 
         public bool Read(ENProducto prod)
         {
-            SqlConnection connection = null;
-
-            string com = "Select * from Producto where id = " + prod.id;
-
-            SqlCommand command = new SqlCommand(com, connection);
+            SqlConnection connection = null; // Declarar la conexión como nula
 
             try
             {
-                connection = new SqlConnection(constring);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
+                using (connection = new SqlConnection(constring)) // Crear y abrir la conexión dentro del bloque try
                 {
-                    prod.nombre = reader["nombre"].ToString();
-                    prod.popularidad = Convert.ToInt32(reader["popularidad"]);
-                    prod.pvp = Convert.ToSingle(reader["pvp"]);
-                    int ordinal = reader.GetOrdinal("url_image");
-                    prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                    ordinal = reader.GetOrdinal("descripcion");
-                    prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                    prod.stock = Convert.ToInt32(reader["stock"]);
-                    ordinal = reader.GetOrdinal("promocion");
+                    string com = "Select * from Producto where id = @id"; // Consulta SQL con parámetro
+                    SqlCommand command = new SqlCommand(com, connection); // Crear el comando SQL con la consulta y la conexión
+                    command.Parameters.AddWithValue("@id", prod.id); // Asignar el valor del parámetro
 
-                    if (reader.IsDBNull(ordinal))
+                    connection.Open(); // Abrir la conexión
+                    SqlDataReader reader = command.ExecuteReader(); // Ejecutar la consulta SQL
+
+                    if (reader.Read()) // Verificar si se encontró un registro
                     {
-                        prod.promocion = null;
+                        prod.nombre = reader["nombre"].ToString();
+                        prod.popularidad = Convert.ToInt32(reader["popularidad"]);
+                        prod.pvp = Convert.ToSingle(reader["pvp"]);
+                        int ordinal = reader.GetOrdinal("url_image");
+                        prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                        ordinal = reader.GetOrdinal("descripcion");
+                        prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                        prod.stock = Convert.ToInt32(reader["stock"]);
+                        ordinal = reader.GetOrdinal("promocion");
+
+                        if (reader.IsDBNull(ordinal))
+                        {
+                            prod.promocion = null;
+                        }
+                        else
+                        {
+                            prod.promocion = new ENPromociones { MiId = reader.GetInt32(ordinal) };
+                            prod.promocion = prod.promocion.read();
+                        }
+
+                        ordinal = reader.GetOrdinal("categoria");
+
+                        if (reader.IsDBNull(ordinal))
+                        {
+                            prod.categoria = null;
+                        }
+                        else
+                        {
+                            prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
+                        }
+                        return true;
                     }
                     else
                     {
-                        prod.promocion = new ENPromociones { MiId = reader.GetInt32(ordinal) };
-                        prod.promocion = prod.promocion.read();
+                        return false; // No se encontró el producto
                     }
-
-                    ordinal = reader.GetOrdinal("categoria");
-
-                    if (reader.IsDBNull(ordinal))
-                    {
-                        prod.categoria = null;
-                    }
-                    else
-                    {
-                        prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
-                    }
-                    return true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                Console.Write("Excepción SQL");
-                return false;
+                Console.Write("Excepción SQL: " + ex.Message);
+                return false; // Error al ejecutar la consulta SQL
             }
             finally
             {
                 if (connection != null)
                 {
-                    connection.Close();
+                    connection.Close(); // Cerrar la conexión en el bloque finally
                 }
             }
-            return false;
         }
+
 
         public List<ENProducto> ProductosPorColumna(string columna, string valor)
         {

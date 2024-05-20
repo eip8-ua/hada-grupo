@@ -216,6 +216,20 @@ namespace Library
             return cad.ObtenerProductos();
         }
 
+        private ENProducto ObtenerProductoPorId(int productId)
+        {
+            // Implementa este método para obtener los detalles del producto desde la base de datos
+            CADProducto cadProducto = new CADProducto();
+            ENProducto producto = new ENProducto();
+            producto.id = productId;
+
+            if (cadProducto.Read(producto))
+            {
+                return producto;
+            }
+            return null;
+        }
+
 
     }
 }

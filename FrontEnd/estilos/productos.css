@@ -78,3 +78,13 @@ button {
     button:hover {
         background-color: #e2b33b;
     }
+
+.no-underline {
+    text-decoration: none;
+    color: black;
+}
+
+.no-underline:hover {
+    color: black; /* Color del texto al pasar el mouse */
+}
+

@@ -251,6 +251,7 @@
     <Content Include="index.aspx" />
     <Content Include="login.aspx" />
     <Content Include="pedidos.aspx" />
+    <Content Include="producto-seleccionado.aspx" />
     <Content Include="productosCategoria.aspx" />
     <Content Include="productos.aspx" />
     <Content Include="register.aspx" />
@@ -311,6 +312,13 @@
     </Compile>
     <Compile Include="pedidos.aspx.designer.cs">
       <DependentUpon>pedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="producto-seleccionado.aspx.cs">
+      <DependentUpon>producto-seleccionado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="producto-seleccionado.aspx.designer.cs">
+      <DependentUpon>producto-seleccionado.aspx</DependentUpon>
     </Compile>
     <Compile Include="productosCategoria.aspx.cs">
       <DependentUpon>productosCategoria.aspx</DependentUpon>
