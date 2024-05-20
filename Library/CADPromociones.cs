@@ -72,7 +72,7 @@ namespace Library
         }
 
         //Método que devuelve una promoción determinada en base a una id pasada
-        public ENPromociones getPromocion(int idd)
+        public ENPromociones read(int idd)
         {
             //Declaramos la conexión y la promoción
             ENPromociones promo = new ENPromociones();
