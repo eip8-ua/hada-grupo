@@ -73,7 +73,7 @@ namespace Library
         {
             _promocion = new ENPromociones();
         }
-        public ENProducto(int id, int stock, string descripcion, int popularidad, string nombre = "", ENCategoria cat = null, ENPromociones prom = null)
+        public ENProducto(int id, int pvp, int stock, int popularidad, string descripcion="", string nombre = "", string url_image="", ENCategoria cat = null, ENPromociones prom = null)
         {
             this.id = id;
             this.pvp = pvp;
@@ -84,18 +84,11 @@ namespace Library
                 this.nombre = nombre;
             if (descripcion != "")
                 this.descripcion = descripcion;
-            if (cat != null)
-            {
-                this.categoria.descripcion = cat.descripcion;
-                this.categoria.tipo = cat.tipo;
-            }
-            if (prom != null)
-            {
-                this.promocion.Descuento = prom.Descuento;
-                this.promocion.MiId = prom.MiId;
-            }
-                
-        
+            if (url_image != "")
+                this.url_image = url_image;
+
+            categoria = cat;
+            promocion = prom;
         }
 
         public bool Create()

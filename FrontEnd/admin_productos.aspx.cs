@@ -41,15 +41,9 @@ namespace FrontEnd
             promocion.MiId = Convert.ToInt32(list_promocion.SelectedValue);
             //promocion.Read();
 
-            ENProducto producto = new ENProducto(
-                -1,
-                Convert.ToInt32(stock.Text),
-                descripcion.Text,
-                0,
-                nombre.Text,
-                categoria,
-                promocion);
+            ENProducto producto = new ENProducto(-1,Convert.ToInt32(precio.Text),Convert.ToInt32(stock.Text),0,descripcion.Text,nombre.Text,"",categoria,promocion);
             //producto.url_image = "";
+            
         }
         /*protected void UploadButton_Click(object sender, EventArgs e)
         {
