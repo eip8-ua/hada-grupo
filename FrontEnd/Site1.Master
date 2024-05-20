@@ -27,7 +27,7 @@
                             <asp:MenuItem Text="Monitores" Value="screens"></asp:MenuItem>
                             <asp:MenuItem Text="Ordenadores" Value="pcs"></asp:MenuItem>
                             <asp:MenuItem Text="Auriculares" Value="headphones"></asp:MenuItem>
-                            <asp:MenuItem Text="Todo" Value="every_product"></asp:MenuItem>
+                            <asp:MenuItem Text="Todo" Value="every_product" NavigateUrl="~/productos.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Contáctanos" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
                         <asp:MenuItem Text="Testimonios" Value="testimonial" NavigateUrl="~/testimonial.aspx"></asp:MenuItem>
