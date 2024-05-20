@@ -71,6 +71,8 @@ namespace proyecto
                 boton_pop_product.ID = "pop_Button" + contador.ToString();
                 boton_pop_product.Text = "Ver producto";
                 boton_pop_product.CssClass = "ButtonStyle2";
+                boton_pop_product.CommandArgument = producto.id.ToString();
+                boton_pop_product.Click += new EventHandler(Boton_pop_product_Click);
                 div.Controls.Add(boton_pop_product);
 
                 if (contador % 2 != 0)
@@ -85,6 +87,14 @@ namespace proyecto
                 contador++;
                 if (contador > num) break;
             }
+        }
+
+        //Evento para llevarle a la página del producto cuando pulsan el botón de ver página
+        protected void Boton_pop_product_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string cadena = "producto-seleccionado.aspx?id=" + btn.CommandArgument;
+            Response.Redirect(cadena);
         }
 
         //Evento al pulsar el botón contáctanos
