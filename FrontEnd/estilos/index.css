@@ -108,7 +108,7 @@ h2 {
     display: flex;
     flex-direction: row;
     margin-left: 75px;
-    margin-top: 150px;
+    margin-top: 90px;
 }
 
 #testimonies_Button_wrap {
@@ -119,4 +119,18 @@ h2 {
 
 #testimonies_Button {
     padding-bottom: 75px;
+}
+
+#left_testimonies {
+    margin-top: 50px;
+}
+
+#right_testimonies {
+    float: right;
+    margin-left: 300px;
+    transition: transform 0.2s;
+}
+
+#right_testimonies:hover {
+    transform: scale(1.1);
 }
