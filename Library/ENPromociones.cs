@@ -42,10 +42,18 @@ namespace Library
             return cad.getPromociones(promos);
         }
 
-         public static ENPromociones getPromocion(int idd) {
-
-            CADPromociones cad = new CADPromociones();
-            return cad.getPromocion(idd);
+        public ENPromociones read()
+        {
+            if (miId != null)
+            {
+                int id = (int)miId;
+                CADPromociones cad = new CADPromociones();
+                return cad.read(id);
+            }
+            else
+            {
+                return new ENPromociones();
+            }
         }
     }
 }

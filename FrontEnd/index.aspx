@@ -41,7 +41,9 @@
                 <asp:Button ID="testimonies_Button" runat="server" Text="Testimonios" CssClass="ButtonStyle2" OnClick="testimonies_Button_Click"></asp:Button>
             </div>
         </div>
-        <div id="right_testimonies"></div>
+        <div id="right_testimonies">
+            <img id="testimony_showcase" src="Images/testimonio.jpg">
+        </div>
     </div>
     
 </asp:Content>

@@ -45,6 +45,8 @@ namespace proyecto
                 productImage.ID = "popular_product" + contador.ToString() + "_Image";
                 productImage.ImageUrl = producto.url_image;
                 productImage.AlternateText = "Imagen producto";
+                productImage.Width = 200;
+                productImage.Height = 200;
                 div.Controls.Add(productImage);
 
                 //Creamos las cadenas de texto del nombre, descripción, y la que contiene el precio
@@ -62,7 +64,7 @@ namespace proyecto
                 //Creamos un botón para (ir a la página del producto o añadirlo al carrito de la compra)
                 Button boton_pop_product = new Button();
                 boton_pop_product.ID = "pop_Button" + contador.ToString();
-                boton_pop_product.Text = "Algo" + contador.ToString();
+                boton_pop_product.Text = "Ver producto";
                 boton_pop_product.CssClass = "ButtonStyle2";
                 div.Controls.Add(boton_pop_product);
 

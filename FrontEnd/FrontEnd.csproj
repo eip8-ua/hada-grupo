@@ -213,17 +213,26 @@
     <Content Include="estilos\index.css" />
     <Content Include="estilos\register.css" />
     <Content Include="estilos\admin.css" />
+    <Content Include="estilos\productos.css" />
     <Content Include="estilos\usuario.css" />
     <Content Include="Images\cascos 1.jpg" />
     <Content Include="Images\login.png" />
-    <Content Include="Images\monitor 1.jpg" />
     <Content Include="Images\nosotros.jpg" />
+    <Content Include="Images\Productos\1.jpg" />
+    <Content Include="Images\Productos\10.jpg" />
+    <Content Include="Images\Productos\11.jpg" />
+    <Content Include="Images\Productos\12.jpg" />
+    <Content Include="Images\Productos\2.jpg" />
+    <Content Include="Images\Productos\3.jpg" />
+    <Content Include="Images\Productos\4.jpg" />
+    <Content Include="Images\Productos\5.jpg" />
+    <Content Include="Images\Productos\6.jpg" />
+    <Content Include="Images\Productos\7.jpg" />
+    <Content Include="Images\Productos\8.jpg" />
+    <Content Include="Images\Productos\9.jpg" />
     <Content Include="Images\raton 1.jpg" />
     <Content Include="Images\shopping_cart.png" />
-    <Content Include="Images\teclado 2.jpg" />
-    <Content Include="Images\teclado1.jpg" />
-    <Content Include="Images\testimonio 1.jpg" />
-    <Content Include="Images\torre 1.jpg" />
+    <Content Include="Images\testimonio.jpg" />
     <Content Include="index.aspx" />
     <Content Include="login.aspx" />
     <Content Include="pedidos.aspx" />
@@ -349,9 +358,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\Productos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Library\Library.csproj">
       <Project>{22715e58-16b3-47ab-b1a0-5fd3c34bbc50}</Project>
