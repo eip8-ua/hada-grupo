@@ -249,6 +249,65 @@ namespace Library
 
             return true;
         }
+
+        public List<ENProducto> ObtenerProductos()
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            string consulta = "SELECT * FROM Producto";
+
+            using (SqlConnection connection = new SqlConnection(constring))
+            {
+                SqlCommand command = new SqlCommand(consulta, connection);
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ENProducto producto = new ENProducto
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("id")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            pvp = Convert.ToSingle(reader["pvp"]),
+                            url_image = reader.GetString(reader.GetOrdinal("url_image")),
+                            descripcion = reader.GetString(reader.GetOrdinal("descripcion")),
+                            stock = reader.GetInt32(reader.GetOrdinal("stock")),
+                            popularidad = reader.GetInt32(reader.GetOrdinal("popularidad"))
+                        };
+
+                        if (!reader.IsDBNull(reader.GetOrdinal("promocion")))
+                        {
+                            int promocionId = reader.GetInt32(reader.GetOrdinal("promocion"));
+                            producto.promocion = ENPromociones.getPromocion(promocionId);
+                        }
+                        else
+                        {
+                            producto.promocion = new ENPromociones();
+                        }
+
+                        if (!reader.IsDBNull(reader.GetOrdinal("categoria")))
+                        {
+                            string categoriaTipo = reader.GetString(reader.GetOrdinal("categoria"));
+                            producto.categoria = ENCategoria.getCategoria(categoriaTipo);
+                        }
+                        else
+                        {
+                            producto.categoria = new ENCategoria();
+                        }
+
+                        productos.Add(producto);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Excepción SQL: " + ex.Message);
+                }
+            }
+
+            return productos;
+        }
     }
 
 }
+
+
