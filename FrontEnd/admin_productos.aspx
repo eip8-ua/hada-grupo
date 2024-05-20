@@ -20,7 +20,7 @@
                             Producto*
                         </div>
 
-                        <asp:TextBox ID="producto" runat="server" TextMode="SingleLine" name="producto" class="input" />
+                        <asp:TextBox ID="nombre" runat="server" TextMode="SingleLine" name="nombre" class="input" />
                     </div>
 
                     <div class="div-parametro">
@@ -46,7 +46,7 @@
                             Stock*
                         </div>
 
-                        <asp:TextBox ID="stock" runat="server" name="stock" class="input" />
+                        <asp:TextBox ID="stock" runat="server" TextMode="Number" name="stock" class="input" />
 
                     </div>
                     <div class="div-parametro">
@@ -54,7 +54,7 @@
                             Imagen*
                         </div>
 
-                        <asp:TextBox ID="imagen" runat="server" name="imagen" class="input" />
+                        <!--<asp:FileUpload ID="fileInput" runat="server" />-->
 
                     </div>
 
@@ -63,7 +63,7 @@
                             Categoría
                         </div>
 
-                        <asp:DropDownList ID="categoria" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="list_categoria" runat="server"></asp:DropDownList>
 
                     </div>
 
@@ -71,7 +71,7 @@
                         <div class="texto">
                             Promoción
                         </div>
-                        <asp:DropDownList ID="promocion" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="list_promocion" runat="server"></asp:DropDownList>
                     </div>
                     <div class="status-div">
                         <asp:Label class="status-lbl" runat="server" ID="status_lbl"></asp:Label>
