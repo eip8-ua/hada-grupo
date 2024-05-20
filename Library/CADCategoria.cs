@@ -10,12 +10,12 @@ namespace Library
 {
     class CADCategoria
     {
-        private string constring;
+        private string constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
         public SqlConnection connection;
 
         public CADCategoria()
         {
-            constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+        
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Library
         public List<ENCategoria> Read_All()
         {
             List<ENCategoria> categorias = new List<ENCategoria>();
-            string com = "Select * from Categoria";
+            string com = "Select tipo,descripcion from Categoria";
 
             //No usamos el finally para cerrar la conexión porque usamos el using
             // que se encarga de ello
@@ -171,9 +171,11 @@ namespace Library
                     SqlDataReader reader = command.ExecuteReader();
 
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         ENCategoria categoria = new ENCategoria();
+                        Object a = reader["tipo"];
+                        string ab = reader["tipo"].ToString();
                         categoria.tipo = reader["tipo"].ToString();
                         categoria.descripcion = reader["descripcion"].ToString();
 
