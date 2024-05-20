@@ -36,9 +36,18 @@ namespace Library
         }
         public ENCategoria(ENCategoria cat)
         {
-            tipo = cat.tipo;
-            descripcion = cat.descripcion;
+            if (cat != null)
+            {
+                tipo = cat.tipo;
+                descripcion = cat.descripcion;
+            }
+            else
+            {
+                tipo = string.Empty;
+                descripcion = string.Empty;
+            }
         }
+
 
         public bool Create()
         {
