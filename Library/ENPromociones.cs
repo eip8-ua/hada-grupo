@@ -52,7 +52,7 @@ namespace Library
             {
                 int id = (int)miId;
                 CADPromociones cad = new CADPromociones();
-                return cad.getPromocion(id);
+                return cad.read(id);
             } else
             {
                 return new ENPromociones();
