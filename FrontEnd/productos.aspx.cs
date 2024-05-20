@@ -16,7 +16,7 @@ namespace proyecto
 
         private void CargarProductos()
         {
-            List<ENProducto> productos = ENProducto.ObtenerProductosDesdeBD();
+            List<ENProducto> productos = ENProducto.ObtenerTodosLosProductos();
             RepeaterProductos.DataSource = productos;
             RepeaterProductos.DataBind();
         }

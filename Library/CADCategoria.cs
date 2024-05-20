@@ -107,39 +107,30 @@ namespace Library
         }
         public ENCategoria Read(ENCategoria cat)
         {
-            connection = null;
+            string com = "Select * from Categoria where tipo = @tipo";
 
-
-            string com = "Select * from Categoria where id = " + cat.tipo;
-
-            SqlCommand command = new SqlCommand(com, connection);
-
-
-
-            try
+            using (SqlConnection connection = new SqlConnection(constring))
             {
-                connection = new SqlConnection(constring);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                SqlCommand command = new SqlCommand(com, connection);
+                command.Parameters.AddWithValue("@tipo", cat.tipo);
 
-                if (reader.Read())
+                try
                 {
-                    cat.tipo = reader["tipo"].ToString();
-                    cat.descripcion = reader["descripcion"].ToString();
-                    
-                    return cat;
-                }
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-               
-            }
-            catch (SqlException)
-            {
-                //ERROR
-                return null;
-            }
-            finally
-            {
-                connection.Close();
+                    if (reader.Read())
+                    {
+                        cat.tipo = reader["tipo"].ToString();
+                        cat.descripcion = reader["descripcion"].ToString();
+                        return cat;
+                    }
+                }
+                catch (SqlException)
+                {
+                    //ERROR
+                    return null;
+                }
             }
             return null;
         }

@@ -272,29 +272,10 @@ namespace Library
                             url_image = reader.GetString(reader.GetOrdinal("url_image")),
                             descripcion = reader.GetString(reader.GetOrdinal("descripcion")),
                             stock = reader.GetInt32(reader.GetOrdinal("stock")),
-                            popularidad = reader.GetInt32(reader.GetOrdinal("popularidad"))
+                            popularidad = reader.GetInt32(reader.GetOrdinal("popularidad")),
+                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? new ENPromociones() : ENPromociones.getPromocion(reader.GetInt32(reader.GetOrdinal("promocion"))),
+                            categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? new ENCategoria() : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
                         };
-
-                        if (!reader.IsDBNull(reader.GetOrdinal("promocion")))
-                        {
-                            int promocionId = reader.GetInt32(reader.GetOrdinal("promocion"));
-                            producto.promocion = ENPromociones.getPromocion(promocionId);
-                        }
-                        else
-                        {
-                            producto.promocion = new ENPromociones();
-                        }
-
-                        if (!reader.IsDBNull(reader.GetOrdinal("categoria")))
-                        {
-                            string categoriaTipo = reader.GetString(reader.GetOrdinal("categoria"));
-                            producto.categoria = ENCategoria.getCategoria(categoriaTipo);
-                        }
-                        else
-                        {
-                            producto.categoria = new ENCategoria();
-                        }
-
                         productos.Add(producto);
                     }
                 }
@@ -303,9 +284,10 @@ namespace Library
                     Console.WriteLine("Excepción SQL: " + ex.Message);
                 }
             }
-
             return productos;
         }
+
+
     }
 
 }
