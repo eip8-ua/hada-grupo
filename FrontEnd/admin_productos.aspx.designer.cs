@@ -15,13 +15,13 @@ namespace FrontEnd
     {
 
         /// <summary>
-        /// Control producto.
+        /// Control nombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox producto;
+        protected global::System.Web.UI.WebControls.TextBox nombre;
 
         /// <summary>
         /// Control precio.
@@ -51,31 +51,31 @@ namespace FrontEnd
         protected global::System.Web.UI.WebControls.TextBox stock;
 
         /// <summary>
-        /// Control imagen.
+        /// Control fileInput.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox imagen;
+        protected global::System.Web.UI.WebControls.FileUpload fileInput;
 
         /// <summary>
-        /// Control categoria.
+        /// Control list_categoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList categoria;
+        protected global::System.Web.UI.WebControls.DropDownList list_categoria;
 
         /// <summary>
-        /// Control promocion.
+        /// Control list_promocion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList promocion;
+        protected global::System.Web.UI.WebControls.DropDownList list_promocion;
 
         /// <summary>
         /// Control status_lbl.
