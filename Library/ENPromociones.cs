@@ -45,7 +45,7 @@ namespace Library
          public static ENPromociones getPromocion(int idd) {
 
             CADPromociones cad = new CADPromociones();
-            return cad.getPromocion(idd);
+            return cad.read(idd);
         }
     }
 }
