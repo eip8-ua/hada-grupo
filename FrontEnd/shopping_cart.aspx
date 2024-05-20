@@ -18,7 +18,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            background-color: #ffffff;
+            background-color: #6b551d;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -95,33 +95,33 @@
     </style>
     <div id="body">
         <div class="container">
-            <h2>Shopping Cart</h2>
+            <h2 id="titulo">Carrito de la compra</h2>
             <div class="gridview-container">
                 <asp:GridView ID="gvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="gvCart_RowCommand" OnRowDataBound="gvCart_RowDataBound" DataKeyNames="Id">
                     <Columns>
                         <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" />
-                        <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="True" />
-                        <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="{0:C}" ReadOnly="True" />
-                        <asp:TemplateField HeaderText="Quantity">
+                        <asp:BoundField DataField="Name" HeaderText="Nombre" ReadOnly="True" />
+                        <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" ReadOnly="True" />
+                        <asp:TemplateField HeaderText="Cantidad">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtQuantity" runat="server" Text='<%# Eval("Quantity") %>' AutoPostBack="True" OnTextChanged="txtQuantity_TextChanged"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:Button ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("Id") %>' Text="Remove" CssClass="btn-remove" />
+                                <asp:Button ID="btnRemove" runat="server" CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>' Text="Remove" CssClass="btn-remove" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                     <EmptyDataTemplate>
-                        <p class="message">Your cart is empty.</p>
+                        <p class="message">Tu carrito está vacío.</p>
                     </EmptyDataTemplate>
                 </asp:GridView>
             </div>
 
             <div id="divTotalAndBuy" runat="server">
                 <h2>Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label></h2>
-                <asp:Button ID="btnBuy" runat="server" Text="Buy" CssClass="btn" OnClick="btnBuy_Click" />
+                <asp:Button ID="btnBuy" runat="server" Text="Comprar" CssClass="btn" OnClick="btnBuy_Click" />
             </div>
 
             <h2>Add Product</h2>
