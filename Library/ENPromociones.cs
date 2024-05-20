@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    //Clase que representa las diferentes promociones y ofertas que puede haber en la base de datos
     public class ENPromociones
     {
-        //Id la promoción
         int? miId;
-        //El porcentaje de descuento del producto de 0-100
         float descuento;
-        //Condicional: verdadero, el descuento se aplica; falso, no se aplica
         bool disponibilidad;
 
-        //Propiedades de la clase
         public int? MiId { get { return miId; } set { miId = value; } }
 
         public float Descuento { get { return descuento; } set { descuento = value; } }
@@ -47,7 +42,8 @@ namespace Library
             return cad.getPromociones(promos);
         }
 
-         public ENPromociones read() {
+        public ENPromociones read()
+        {
             if (miId != null)
             {
                 int id = (int)miId;

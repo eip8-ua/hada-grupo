@@ -14,12 +14,12 @@ namespace Library
         public string tipo
         {
             get { return _tipo; }
-            set { _tipo = tipo; }
+            set { _tipo = value; }
         }
         public string descripcion
         {
             get { return _descripcion; }
-            set { _descripcion = descripcion; }
+            set { _descripcion = value; }
         }
 
         public ENCategoria()
