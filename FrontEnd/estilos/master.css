@@ -1,11 +1,8 @@
-﻿
-html {
-    height: 100%;
+﻿html {
+    filter: brightness(1.15);
 }
 
 body {
-    filter: brightness(1.15);
-    min-height: 100%;
 }
 
 #navigationMenu {
@@ -14,7 +11,7 @@ body {
     font-size: 15px;
     font-family: 'Poppins';
     background-color: #ffffff;
-    margin-top: 25px;
+    margin-top: 40px;
     margin-bottom: 75px;
 }
 
