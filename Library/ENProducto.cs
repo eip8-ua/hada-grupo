@@ -217,6 +217,11 @@ namespace Library
 
             }
         }
+        static public List<ENProducto> ObtenerTodosLosProductos()
+        {
+            CADProducto cad = new CADProducto();
+            return cad.ObtenerProductos();
+        }
 
 
     }

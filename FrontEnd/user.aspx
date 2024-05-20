@@ -18,7 +18,7 @@
             <p>
                 Contraseña:
             </p>
-            <asp:TextBox runat="server" ID="contrasena" Width="220"></asp:TextBox>
+            <asp:TextBox runat="server" TextMode="Password" ID="contrasena" Width="220"></asp:TextBox>
         </div>    
             
         <div class="user-side">
@@ -34,11 +34,10 @@
                 Número de teléfono:
             </p>
             <asp:TextBox runat="server" ID="tlfno" Width="220"></asp:TextBox>
-
             <p>
                 Fecha de nacimiento:
             </p>
-            <asp:TextBox runat="server" ID="direccion" Width="220"></asp:TextBox>
+            <asp:TextBox runat="server" TextMode="Date" ID="fechaNac" Width="220"></asp:TextBox>
 
             <p>
                 DNI: 

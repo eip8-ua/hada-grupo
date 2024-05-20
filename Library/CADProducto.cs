@@ -258,6 +258,47 @@ namespace Library
 
             return true;
         }
+
+        public List<ENProducto> ObtenerProductos()
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            string consulta = "SELECT * FROM Producto";
+
+            using (SqlConnection connection = new SqlConnection(constring))
+            {
+                SqlCommand command = new SqlCommand(consulta, connection);
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ENProducto producto = new ENProducto
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("id")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            pvp = Convert.ToSingle(reader["pvp"]),
+                            url_image = reader.GetString(reader.GetOrdinal("url_image")),
+                            descripcion = reader.GetString(reader.GetOrdinal("descripcion")),
+                            stock = reader.GetInt32(reader.GetOrdinal("stock")),
+                            popularidad = reader.GetInt32(reader.GetOrdinal("popularidad")),
+                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? new ENPromociones() : ENPromociones.getPromocion(reader.GetInt32(reader.GetOrdinal("promocion"))),
+                            categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? new ENCategoria() : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
+                        };
+                        productos.Add(producto);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Excepción SQL: " + ex.Message);
+                }
+            }
+            return productos;
+        }
+
+
     }
 
 }
+
+

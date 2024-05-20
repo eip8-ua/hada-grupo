@@ -24,12 +24,7 @@ namespace proyecto
                 {
                     SetUnregisteredOptions();
                 }
-                textbox.Text = "No Post Back";
-            }
-            else { 
-                textbox.Text = "Post Back";
-            }
-                
+            }        
         }
 
         //Método para encontrar los objetos del menú en base a su valor
@@ -136,7 +131,6 @@ namespace proyecto
 
             MenuItem log_out = new MenuItem("Cerrar sesión");
             log_out.Value = "log_out";
-            log_out.NavigateUrl = "~/index.aspx";
 
             usr.ChildItems.Add(account);
             usr.ChildItems.Add(orders);
@@ -173,9 +167,8 @@ namespace proyecto
             orders.Value = "my_orders";
             orders.NavigateUrl = "~/pedidos.aspx";
 
-            MenuItem log_out = new MenuItem("Cerrar sesión");
+            var log_out = new MenuItem("Cerrar sesión");
             log_out.Value = "log_out";
-            log_out.NavigateUrl = "~/index.aspx";
 
             MenuItem admin_product = new MenuItem("Añadir artículo");
             admin_product.Value = "add_product";
@@ -185,7 +178,7 @@ namespace proyecto
             admin_order.Value = "admin_orders";
             admin_order.NavigateUrl = "~/admin_pedidos.aspx";
 
-            MenuItem admin_user = new MenuItem("Administrar usuario");
+            MenuItem admin_user = new MenuItem("Administrar usuarios");
             admin_user.Value = "admin_user";
             admin_user.NavigateUrl = "~/admin_usuarios.aspx";
 
@@ -195,6 +188,19 @@ namespace proyecto
             usr.ChildItems.Add(admin_product);
             usr.ChildItems.Add(admin_order);
             usr.ChildItems.Add(admin_user);
+        }
+
+        //Método con los eventos OnClick del menú de usuario y carrito
+        protected void innerMenu_MenuItemClick(object sender, MenuEventArgs e)
+        {
+            string item = e.Item.Value;
+
+            if(item == "log_out")
+            {
+                usuario = new ENUsuario();
+                Response.Redirect("~/index.aspx");
+            }
+
         }
     }
 }
