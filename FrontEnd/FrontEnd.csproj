@@ -230,13 +230,28 @@
     <Content Include="Images\Productos\7.jpg" />
     <Content Include="Images\Productos\8.jpg" />
     <Content Include="Images\Productos\9.jpg" />
+    <Content Include="Images\Productos\cascos\1.jpg" />
+    <Content Include="Images\Productos\cascos\2.jpg" />
+    <Content Include="Images\Productos\cascos\3.jpg" />
+    <Content Include="Images\Productos\monitores\7.jpg" />
+    <Content Include="Images\Productos\monitores\8.jpg" />
+    <Content Include="Images\Productos\monitores\9.jpg" />
+    <Content Include="Images\Productos\ordenadores\10.jpg" />
+    <Content Include="Images\Productos\ordenadores\2.jpg" />
+    <Content Include="Images\Productos\ordenadores\6.jpg" />
+    <Content Include="Images\Productos\ratones\4.jpg" />
+    <Content Include="Images\Productos\ratones\5.jpg" />
+    <Content Include="Images\Productos\ratones\6.jpg" />
+    <Content Include="Images\Productos\teclados\10.jpg" />
+    <Content Include="Images\Productos\teclados\11.jpg" />
+    <Content Include="Images\Productos\teclados\12.jpg" />
     <Content Include="Images\raton 1.jpg" />
     <Content Include="Images\shopping_cart.png" />
     <Content Include="Images\testimonio.jpg" />
     <Content Include="index.aspx" />
     <Content Include="login.aspx" />
     <Content Include="pedidos.aspx" />
-    <Content Include="ProductoCategoria.aspx" />
+    <Content Include="productosCategoria.aspx" />
     <Content Include="productos.aspx" />
     <Content Include="register.aspx" />
     <Content Include="shop.aspx" />
@@ -297,12 +312,12 @@
     <Compile Include="pedidos.aspx.designer.cs">
       <DependentUpon>pedidos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ProductoCategoria.aspx.cs">
-      <DependentUpon>ProductoCategoria.aspx</DependentUpon>
+    <Compile Include="productosCategoria.aspx.cs">
+      <DependentUpon>productosCategoria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ProductoCategoria.aspx.designer.cs">
-      <DependentUpon>ProductoCategoria.aspx</DependentUpon>
+    <Compile Include="productosCategoria.aspx.designer.cs">
+      <DependentUpon>productosCategoria.aspx</DependentUpon>
     </Compile>
     <Compile Include="productos.aspx.cs">
       <DependentUpon>productos.aspx</DependentUpon>
