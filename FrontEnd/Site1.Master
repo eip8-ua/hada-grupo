@@ -13,7 +13,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:TextBox Text="" runat="server" ID="textbox"></asp:TextBox>
         <div ID="navigationMenu">
             <div ID="leftMenu">
                 <asp:Menu ID="outerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
@@ -37,7 +36,7 @@
             <div ID="rightMenu">
                 <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
                     StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" 
-                    CssClass="menuStyle" DynamicMenyItemStyle-CssClass="submenuStyle">
+                    CssClass="menuStyle" DynamicMenyItemStyle-CssClass="submenuStyle" OnMenuItemClick="innerMenu_MenuItemClick">
                     <Items>
                         <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login2.png">
                             <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
@@ -47,7 +46,7 @@
                             <asp:MenuItem Text="Añadir artículo" Value="add_product" NavigateUrl="~/admin_productos.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="Administrar pedidos" Value="admin_orders" NavigateUrl="~/admin_pedidos.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="Administrar usuario" Value="admin_user" NavigateUrl="~/admin_usuarios.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Cerrar sesión" Value="log_out" NavigateUrl="~/index.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Cerrar sesión" Value="log_out"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="" Value="shopping_cart" NavigateUrl="~/shopping_cart.aspx" ImageUrl="Images/shopping_cart2.png"></asp:MenuItem>
                     </Items>
