@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Library;
 
 namespace FrontEnd
 {
@@ -11,7 +12,54 @@ namespace FrontEnd
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                ENUsuario usu = new ENUsuario();
+                usu.ReadFirst();
+                if (!usu.ReadNext())
+                {
+                    problem.Text = "No hay usuarios que administrar";
+                }
+                else
+                {
+                    List<UsuarioLista> listaUsuarios = new List<UsuarioLista>();
 
+                    while (usu.ReadNext())
+                    {
+                        UsuarioLista usuLista = new UsuarioLista(usu.Email, usu.Nombre, usu.Apellidos, usu.Admin, usu.FNacimiento, usu.Dni, usu.Tlfn);
+                        listaUsuarios.Add(usuLista);
+                    }
+
+                    rptListUsers.DataSource = listaUsuarios;
+                    rptListUsers.DataBind();
+                }
+
+                
+            }
+        }
+
+        public class UsuarioLista
+        {
+            public string Email { get; set; }
+            public string Nombre { get; set; }
+            public string Apellidos { get; set; }
+            public bool Admin { get; set; }
+            public string Fecha { get; set; }
+            public string Dni { get; set; }
+            public string Telefono { get; set; }
+
+
+
+            public UsuarioLista(string email, string nombre, string apellidos, bool admin, DateTime fecha, string dni, string telefono = null)
+            {
+                Email = email;
+                Nombre = nombre;
+                Apellidos = apellidos;
+                Admin = admin;
+                Fecha = fecha.ToString("yyyy-MM-dd").ToString();
+                Telefono = telefono;
+                Dni = dni;
+            }
         }
     }
 }
