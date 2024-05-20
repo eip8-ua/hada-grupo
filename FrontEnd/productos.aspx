@@ -15,7 +15,7 @@
                         <div class="product-card">
                             <div class="product-image">
                                 <div class="product-image">
-                                    <img src='<%# Eval("url_image", "{0}.webp") %>' alt="Producto" />
+                                    <img src='<%# Eval("url_image", "{0}.jpg") %>' alt="Producto" />
                                 </div>
                                 <div class="discount-tag">
                                     <%# Eval("promocion.Descuento") %>% OFF
