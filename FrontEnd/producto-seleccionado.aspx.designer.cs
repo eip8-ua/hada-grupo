@@ -15,13 +15,13 @@ namespace proyecto
     {
 
         /// <summary>
-        /// Control form1.
+        /// Control imgProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Image imgProducto;
 
         /// <summary>
         /// Control lblNombreProducto.
@@ -51,13 +51,13 @@ namespace proyecto
         protected global::System.Web.UI.WebControls.Label lblPrecioProducto;
 
         /// <summary>
-        /// Control imgProducto.
+        /// Control ddlQuantity.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProducto;
+        protected global::System.Web.UI.WebControls.DropDownList ddlQuantity;
 
         /// <summary>
         /// Control btnAddToCart.

@@ -38,5 +38,16 @@ namespace proyecto
                 }
             }
         }
+        protected void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            // Obtener el ID del producto y la cantidad seleccionada
+            int productId = Convert.ToInt32(Request.QueryString["id"]);
+            int quantity = Convert.ToInt32(ddlQuantity.SelectedValue);
+
+            
+
+            Response.Redirect("shopping_cart.aspx");
+        }
+
     }
 }

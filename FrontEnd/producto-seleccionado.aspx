@@ -1,23 +1,35 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="producto-seleccionado.aspx.cs" Inherits="proyecto.ProductoSeleccionado" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.master" CodeBehind="producto-seleccionado.aspx.cs" Inherits="proyecto.ProductoSeleccionado" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Producto Seleccionado</title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            <h1>Detalles del Producto</h1>
-            <div>
-                <asp:Label ID="lblNombreProducto" runat="server" Text=""></asp:Label><br />
-                <asp:Label ID="lblDescripcionProducto" runat="server" Text=""></asp:Label><br />
-                <asp:Label ID="lblPrecioProducto" runat="server" Text=""></asp:Label><br />
-                <asp:Image ID="imgProducto" runat="server" AlternateText="Producto" />
-                <asp:Button ID="btnAddToCart" runat="server" Text="Añadir al carrito" />
-            </div>
+    <link rel="stylesheet" type="text/css" href="estilos/producto-seleccionado.css" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="product-detail-container">
+        <div class="product-image">
+            <asp:Image ID="imgProducto" runat="server" AlternateText="Producto" CssClass="product-image" />
         </div>
-    </form>
-</body>
-</html>
+        <div class="product-details">
+            <h1><asp:Label ID="lblNombreProducto" runat="server" Text=""></asp:Label></h1>
+            <p><asp:Label ID="lblDescripcionProducto" runat="server" Text=""></asp:Label></p>
+            <p class="price"><asp:Label ID="lblPrecioProducto" runat="server" Text=""></asp:Label></p>
+            <div class="quantity-selection">
+                <label for="quantity">Cantidad:</label>
+                <asp:DropDownList ID="ddlQuantity" runat="server">
+                    <asp:ListItem Text="1" Value="1" />
+                    <asp:ListItem Text="2" Value="2" />
+                    <asp:ListItem Text="3" Value="3" />
+                    <asp:ListItem Text="4" Value="4" />
+                    <asp:ListItem Text="5" Value="5" />
+                    <asp:ListItem Text="6" Value="6" />
+                    <asp:ListItem Text="7" Value="7" />
+                    <asp:ListItem Text="8" Value="8" />
+                    <asp:ListItem Text="9" Value="9" />
+                    <asp:ListItem Text="10" Value="10" />
+                </asp:DropDownList>
+            </div>
+            <asp:Button ID="btnAddToCart" runat="server" Text="Añadir al carrito" CssClass="btnAddToCart" OnClick="btnAddToCart_Click" />
+        </div>
+    </div>
+</asp:Content>
