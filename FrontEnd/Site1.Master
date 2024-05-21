@@ -20,7 +20,7 @@
                     CssClass="menuStyle" DynamicMenuItemStyle-CssClass="submenuStyle">
                     <Items>
                         <asp:MenuItem Text="Tienda" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text="Productos" Value="products">
+                        <asp:MenuItem Text="Productos" Value="products" NavigateUrl="~/productos.aspx">
                             <asp:MenuItem Text="Teclados" Value="keyboards" NavigateUrl="~/productosCategoria.aspx?categoria=keyboards"></asp:MenuItem>
                             <asp:MenuItem Text="Ratones" Value="mouses" NavigateUrl="~/productosCategoria.aspx?categoria=mouses"></asp:MenuItem>
                             <asp:MenuItem Text="Monitores" Value="screens" NavigateUrl="~/productosCategoria.aspx?categoria=screens"></asp:MenuItem>
