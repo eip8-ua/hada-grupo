@@ -15,6 +15,15 @@ namespace proyecto
     {
 
         /// <summary>
+        /// Control btn1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn1;
+
+        /// <summary>
         /// Control lblNombreTestimonial.
         /// </summary>
         /// <remarks>
@@ -22,15 +31,6 @@ namespace proyecto
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNombreTestimonial;
-
-        /// <summary>
-        /// Control btn1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn1;
 
         /// <summary>
         /// Control lblCita.
@@ -48,6 +48,6 @@ namespace proyecto
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn2;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn2;
     }
 }

@@ -135,20 +135,22 @@ namespace Library
                         ordinal = reader.GetOrdinal("descripcion");
                         prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                         prod.stock = Convert.ToInt32(reader["stock"]);
-                        ordinal = reader.GetOrdinal("promocion");
 
+                        // Handle promocion
+                        ordinal = reader.GetOrdinal("promocion");
                         if (reader.IsDBNull(ordinal))
                         {
                             prod.promocion = null;
                         }
                         else
                         {
-                            prod.promocion = new ENPromociones { MiId = reader.GetInt32(ordinal) };
+                            int promocionId = reader.GetInt32(ordinal);
+                            prod.promocion = new ENPromociones { MiId = promocionId };
                             prod.promocion = prod.promocion.read();
                         }
 
+                        // Handle categoria
                         ordinal = reader.GetOrdinal("categoria");
-
                         if (reader.IsDBNull(ordinal))
                         {
                             prod.categoria = null;
@@ -178,6 +180,7 @@ namespace Library
                 }
             }
         }
+
 
 
         public List<ENProducto> ProductosPorColumna(string columna, string valor)
@@ -298,5 +301,6 @@ namespace Library
             }
             return productos;
         }
+
     }
 }
