@@ -13,7 +13,13 @@ namespace FrontEnd
     public partial class admin_productos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {          
+        {
+            if (!Site1.usuario.Admin)
+            {
+                Response.Redirect("~/index.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 List<ENCategoria> categorias = ENCategoria.Get_All_Categorias();

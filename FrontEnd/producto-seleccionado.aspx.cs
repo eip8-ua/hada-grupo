@@ -2,7 +2,7 @@
 using System.Web.UI;
 using Library; // Asegúrate de importar el espacio de nombres donde están definidas las clases ENProducto y CADProducto
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class ProductoSeleccionado : Page
     {

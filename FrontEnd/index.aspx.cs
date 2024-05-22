@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using Library;
 
-namespace proyecto
+namespace FrontEnd
 {
 
     public partial class index : System.Web.UI.Page

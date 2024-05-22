@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="productosCategoria.aspx.cs" Inherits="proyecto.productosCategoria" MasterPageFile="~/Site1.master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="productosCategoria.aspx.cs" Inherits="FrontEnd.productosCategoria" MasterPageFile="~/Site1.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
         <h1>Productos de la Categoría: <asp:Literal ID="litCategoria" runat="server"></asp:Literal></h1>

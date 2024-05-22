@@ -11,7 +11,11 @@ namespace FrontEnd
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Site1.usuario.Admin)
+            {
+                Response.Redirect("~/index.aspx");
+                return;
+            }
         }
     }
 }

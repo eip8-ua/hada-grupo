@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.UI;
 using Library;
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class productosCategoria : Page
     {
