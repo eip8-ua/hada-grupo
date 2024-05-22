@@ -64,5 +64,11 @@ namespace Library
             CADInformes cad = new CADInformes();
             return cad.getAverageProductRating(en);
         }
+
+        static public List<ENProducto> getPairPromoProducts()
+        {
+            CADInformes cad = new CADInformes();
+            return cad.getPairPromoProducts();
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Library;
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class login : System.Web.UI.Page
     {

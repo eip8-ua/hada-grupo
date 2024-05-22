@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
 
@@ -11,38 +8,58 @@ namespace Library
     class CADProducto
     {
         public string constring;
-        public SqlConnection connection;
-
+        private SqlConnection connection;
         public CADProducto()
         {
             constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
         }
+
         public bool Create(ENProducto prod)
         {
-            SqlConnection connection = null;
-            string consu = "Insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (" + prod.nombre + "," + prod.pvp + "," + prod.url_image + "," + prod.descripcion + "," + prod.stock + "," + prod.popularidad + "," + prod.promocion + "," + prod.categoria + ")";
-
-            SqlCommand comm = new SqlCommand(consu, connection);
+            string consu = "Insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (@nom,@pvp,@url_image,@descripcion,@stock,@pop,@promo,@cat); select SCOPE_IDENTITY();";
 
             try
             {
                 connection = new SqlConnection(constring);
                 connection.Open();
+                SqlCommand comm = new SqlCommand(consu, connection);
+                comm.Parameters.AddWithValue("@nom", prod.nombre);
+                comm.Parameters.AddWithValue("@pvp", prod.pvp);
+                if (prod.url_image == null)
+                    comm.Parameters.AddWithValue("@url_image", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@url_image", prod.url_image);
+                if (prod.descripcion == null)
+                    comm.Parameters.AddWithValue("@descripcion", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@descripcion", prod.descripcion);
 
-                if (comm.ExecuteNonQuery() == 0)
-                {
-                    return false;
-                }
+
+                comm.Parameters.AddWithValue("@stock", prod.stock);
+                comm.Parameters.AddWithValue("@pop", prod.popularidad);
+                if(prod.promocion == null)
+                    comm.Parameters.AddWithValue("@promo", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
+
+                if (prod.categoria == null)
+                    comm.Parameters.AddWithValue("@cat", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
+
+                prod.id = Convert.ToInt32(comm.ExecuteScalar());
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL");
+                Console.Write(e);
                 return false;
-
             }
             finally
             {
-                connection.Close();
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
 
             return true;
@@ -52,13 +69,10 @@ namespace Library
         {
             SqlConnection connection = null;
 
-
             string consu = "Delete from Producto where id =" + prod.id;
 
             SqlCommand comm = new SqlCommand(consu, connection);
 
-
-
             try
             {
                 connection = new SqlConnection(constring);
@@ -67,8 +81,6 @@ namespace Library
                 {
                     return false;
                 }
-
-
             }
             catch (SqlException)
             {
@@ -77,35 +89,56 @@ namespace Library
             }
             finally
             {
-                connection.Close();
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return true;
         }
+
         public bool Update(ENProducto prod)
         {
-            connection = null;
 
-
-            string consu = "Update Producto set nombre =" + prod.nombre + ",pvp =" + prod.pvp + ",url_image=" + prod.url_image + ",descripcion=" + prod.descripcion + ",stock=" + prod.stock + ",popularidad=" + prod.popularidad + ",promocion=" + prod.promocion + ",categoria=" + prod.categoria + "where id =" + prod.id;
-
-            SqlCommand comm = new SqlCommand(consu, connection);
-
-
+            string consu = "Update Producto set nombre=@name,pvp=@pvp,url_image=@url_image,descripcion=@descripcion,stock=@stock,popularidad=@pop,promocion=@promo,categoria=@cat where id =@id";
 
             try
             {
                 connection = new SqlConnection(constring);
                 connection.Open();
-                if (comm.ExecuteNonQuery() == 0)
-                {
-                    return false;
-                }
+                SqlCommand comm = new SqlCommand(consu, connection);
+                comm.Parameters.AddWithValue("@name", prod.nombre);
+                comm.Parameters.AddWithValue("@pvp", prod.pvp);
+                if (prod.url_image == null)
+                    comm.Parameters.AddWithValue("@url_image", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@url_image", prod.url_image);
+                if (prod.descripcion == null)
+                    comm.Parameters.AddWithValue("@descripcion", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@descripcion", prod.descripcion);
 
 
+                comm.Parameters.AddWithValue("@stock", prod.stock);
+                comm.Parameters.AddWithValue("@pop", prod.popularidad);
+                
+                if (prod.promocion == null)
+                    comm.Parameters.AddWithValue("@promo", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
+
+                if (prod.categoria == null)
+                    comm.Parameters.AddWithValue("@cat", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
+                
+                comm.Parameters.AddWithValue("@id", prod.id);
+
+                return comm.ExecuteNonQuery() > 0;
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL");
+                Console.Write(e);
                 return false;
             }
             finally
@@ -113,148 +146,144 @@ namespace Library
                 connection.Close();
             }
             return true;
-
         }
+
         public bool Read(ENProducto prod)
         {
-            connection = null;
-
-            string com = "Select * from Producto where id = " + prod.id;
-
-            //SqlCommand command = new SqlCommand(com, connection);
+            SqlConnection connection = null; // Declarar la conexión como nula
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(constring))
+                using (connection = new SqlConnection(constring)) // Crear y abrir la conexión dentro del bloque try
                 {
-                    using (SqlCommand command = new SqlCommand(com, connection))
+                    string com = "Select * from Producto where id = @id"; // Consulta SQL con parámetro
+                    SqlCommand command = new SqlCommand(com, connection); // Crear el comando SQL con la consulta y la conexión
+                    command.Parameters.AddWithValue("@id", prod.id); // Asignar el valor del parámetro
+
+                    connection.Open(); // Abrir la conexión
+                    SqlDataReader reader = command.ExecuteReader(); // Ejecutar la consulta SQL
+
+                    if (reader.Read()) // Verificar si se encontró un registro
                     {
+                        prod.nombre = reader["nombre"].ToString();
+                        prod.popularidad = Convert.ToInt32(reader["popularidad"]);
+                        prod.pvp = Convert.ToSingle(reader["pvp"]);
+                        int ordinal = reader.GetOrdinal("url_image");
+                        prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                        ordinal = reader.GetOrdinal("descripcion");
+                        prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
+                        prod.stock = Convert.ToInt32(reader["stock"]);
 
-                        //connection = new SqlConnection(constring);
-                        connection.Open();
-
-
-                        SqlDataReader reader = command.ExecuteReader();
-
-                        if (reader.Read())
+                        // Handle promocion
+                        ordinal = reader.GetOrdinal("promocion");
+                        if (reader.IsDBNull(ordinal))
                         {
-                            prod.nombre = reader["nombre"].ToString();
-                            prod.popularidad = Convert.ToInt32(reader["popularidad"]);
-                            prod.pvp = Convert.ToSingle(reader["pvp"]);
-                            int ordinal = reader.GetOrdinal("url_image");
-                            prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                            ordinal = reader.GetOrdinal("descripcion");
-                            prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                            prod.stock = Convert.ToInt32(reader["stock"]);
-                            ordinal = reader.GetOrdinal("promocion");
-
-                            if (reader.IsDBNull(ordinal))
-                            {
-                                prod.promocion = null;
-                            }
-                            else
-                            {
-                                //prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
-                            }
-
-                            ordinal = reader.GetOrdinal("categoria");
-
-                            if (reader.IsDBNull(ordinal))
-                            {
-                                prod.categoria = null;
-                            }
-                            else
-                            {
-
-                                prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
-
-                            }
-                            return true;
+                            prod.promocion = null;
                         }
+                        else
+                        {
+                            int promocionId = reader.GetInt32(ordinal);
+                            prod.promocion = new ENPromociones { MiId = promocionId };
+                            prod.promocion = prod.promocion.read();
+                        }
+
+                        // Handle categoria
+                        ordinal = reader.GetOrdinal("categoria");
+                        if (reader.IsDBNull(ordinal))
+                        {
+                            prod.categoria = null;
+                        }
+                        else
+                        {
+                            prod.categoria = ENCategoria.getCategoria(reader.GetString(ordinal));
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        return false; // No se encontró el producto
                     }
                 }
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL");
-                return false;
+                Console.Write(e);
+                return false; // Error al ejecutar la consulta SQL
             }
             finally
             {
-                connection.Close();
+                if (connection != null)
+                {
+                    connection.Close(); // Cerrar la conexión en el bloque finally
+                }
             }
-            return false;
-
         }
-        //Funcion que considera que estará bien el nombre de la columna pero dará una excepcion en caso de no ser correcta, y si el valor no es del mismo tipo no encontrara nada
-        public List<ENProducto> ProductosPorColumna(string columna, string valor) //devolvera una lista vacia si no se puede hacer la consulta o si no ha encontrado ninngun producto de la categoria indicada
+
+
+
+        public List<ENProducto> ProductosPorColumna(string columna, string valor)
         {
-            connection = null;
-
+            SqlConnection connection = null;
             List<ENProducto> productos = new List<ENProducto>();
-
-            string com = "Select * from Producto where " + columna +  "=" + valor;
-
-            SqlCommand command = new SqlCommand(com, connection);
-
-            ENProducto prod = new ENProducto();
+            string com = "SELECT * FROM Producto WHERE " + columna + "=@valor";
 
             try
             {
-                connection = new SqlConnection(constring);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                using (connection = new SqlConnection(constring))
                 {
-                    prod.nombre = reader["nombre"].ToString();
-                    prod.popularidad = Convert.ToInt32(reader["popularidad"]);
-                    prod.pvp = (float)reader["pvp"];
-                    int ordinal = reader.GetOrdinal("url_image");
-                    prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                    ordinal = reader.GetOrdinal("descripcion");
-                    prod.descripcion = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
-                    prod.stock = Convert.ToInt32(reader["stock"]);
+                    SqlCommand command = new SqlCommand(com, connection);
+                    command.Parameters.AddWithValue("@valor", valor);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                    ordinal = reader.GetOrdinal("promocion");
-
-                    prod.promocion = new ENPromociones();
-                    if (reader["promocion"] != null)
+                    while (reader.Read())
                     {
-                        prod.promocion.MiId = Convert.ToInt32(reader["promocion"]);
-                        //TODO
-                        //prod.promocion.Read();
-                    }
-                    prod.categoria = new ENCategoria();
-                    if (reader["categoria"] != null)
-                    {
-                        prod.categoria.tipo = Convert.ToString(reader["categoria"]);
-                        prod.categoria.Read();
-                    }
+                        ENProducto prod = new ENProducto
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("id")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            pvp = Convert.ToSingle(reader["pvp"]),
+                            url_image = reader["url_image"] as string,
+                            descripcion = reader["descripcion"] as string,
+                            stock = Convert.ToInt32(reader["stock"]),
+                            popularidad = Convert.ToInt32(reader["popularidad"]),
+                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? null : new ENPromociones { MiId = reader.GetInt32(reader.GetOrdinal("promocion")) },
+                            categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? null : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
+                        };
 
-                    productos.Add(prod);
+                        if (prod.promocion != null)
+                        {
+                            prod.promocion = prod.promocion.read();
+                        }
 
+                        productos.Add(prod);
+                    }
                 }
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL");
-                return productos;
+                Console.Write(e);
             }
             finally
             {
-                connection.Close();
+                if (connection != null)
+                {
+                    connection.Close();
+                }
             }
             return productos;
-
         }
+
 
         public bool isCorrect(string cat, int prom)
         {
-            /*if(ENPromociones.getPromocion(prom).MiId == null || ENCategoria.getCategoria(cat) == null)
+            ENPromociones promo = new ENPromociones { MiId = prom };
+            promo = promo.read();
+
+            if (promo == null || ENCategoria.getCategoria(cat) == null)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }
@@ -267,10 +296,12 @@ namespace Library
             using (SqlConnection connection = new SqlConnection(constring))
             {
                 SqlCommand command = new SqlCommand(consulta, connection);
+
                 try
                 {
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
+
                     while (reader.Read())
                     {
                         ENProducto producto = new ENProducto
@@ -278,13 +309,19 @@ namespace Library
                             id = reader.GetInt32(reader.GetOrdinal("id")),
                             nombre = reader.GetString(reader.GetOrdinal("nombre")),
                             pvp = Convert.ToSingle(reader["pvp"]),
-                            url_image = reader.GetString(reader.GetOrdinal("url_image")),
-                            descripcion = reader.GetString(reader.GetOrdinal("descripcion")),
-                            stock = reader.GetInt32(reader.GetOrdinal("stock")),
-                            popularidad = reader.GetInt32(reader.GetOrdinal("popularidad")),
-                            //promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? new ENPromociones() : ENPromociones.getPromocion(reader.GetInt32(reader.GetOrdinal("promocion"))),
-                            categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? new ENCategoria() : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
+                            url_image = reader["url_image"] as string,
+                            descripcion = reader["descripcion"] as string,
+                            stock = Convert.ToInt32(reader["stock"]),
+                            popularidad = Convert.ToInt32(reader["popularidad"]),
+                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? null : new ENPromociones { MiId = reader.GetInt32(reader.GetOrdinal("promocion")) },
+                            categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? null : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
                         };
+
+                        if (producto.promocion != null)
+                        {
+                            producto.promocion = producto.promocion.read();
+                        }
+
                         productos.Add(producto);
                     }
                 }
@@ -292,13 +329,16 @@ namespace Library
                 {
                     Console.WriteLine("Excepción SQL: " + ex.Message);
                 }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
             }
             return productos;
         }
 
-
     }
-
 }
-
-

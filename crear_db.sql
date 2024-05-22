@@ -1358,22 +1358,22 @@ insert into Promocion(descuento,disponibilidad) values (100,0);
 
 
 
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Newskill Sylvanus PRO Auriculares Gaming',54.99,'Images/Productos/1','Auriculares Gaming con Sonido Envolvente Virtual 7.1 Multiplataforma',40,100,null,'Auriculares');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Cool Kids Auriculares Bluetooth Infantiles',26.11,'Images/Productos/2','Cascos ergonómicos suaves y seguros, ideales para niños. Volumen limitado para una experiencia perfecta',20,5,null,'Auriculares');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech Headset PC 960 USB',27.99,'Images/Productos/3','Cascos del Xocas',25,100,null,'Auriculares');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Newskill Sylvanus PRO Auriculares Gaming',54.99,'Images/Productos/1.jpg','Auriculares Gaming con Sonido Envolvente Virtual 7.1 Multiplataforma',40,100,null,'Auriculares');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Cool Kids Auriculares Bluetooth Infantiles',26.11,'Images/Productos/2.jpg','Cascos ergonómicos suaves y seguros, ideales para niños. Volumen limitado para una experiencia perfecta',20,5,null,'Auriculares');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech Headset PC 960 USB',27.99,'Images/Productos/3.jpg','Cascos del Xocas',25,100,null,'Auriculares');
 
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Forgeon Perdition RGB Ratón Gaming',35.99,'Images/Productos/4','Ratón ergonómico RGB con 16.000 DPI en color negro',10,60,3,'Ratones');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech M185 Ratón Inalámbrico',12.00,'Images/Productos/5','Ratón inalámbrico en color gris muy comodo',200,14,3,'Ratones');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Apple Magic Mouse Plata',85.00,'Images/Productos/6','Ratón Magic Mouse de Apple inalámbrico en color plata',76,65,3,'Ratones');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Forgeon Perdition RGB Ratón Gaming',35.99,'Images/Productos/4.jpg','Ratón ergonómico RGB con 16.000 DPI en color negro',10,60,3,'Ratones');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech M185 Ratón Inalámbrico',12.00,'Images/Productos/5.jpg','Ratón inalámbrico en color gris muy comodo',200,14,3,'Ratones');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Apple Magic Mouse Plata',85.00,'Images/Productos/6.jpg','Ratón Magic Mouse de Apple inalámbrico en color plata',76,65,3,'Ratones');
 
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('HP OMEN 27" LED IPS FullHD 165Hz FreeSync',169.00,'Images/Productos/7','Su excelente rendimiento y la nitidez de sus colores permiten que pueda perderse en los juegos que más le gustan',21,70,6,'Monitores');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('AOC 27B3HA2 LED IPS 27" FullHD 100Hz',109.90,'Images/Productos/8','Claridad de alto rendimiento con monitor FHD de 27" y 100Hz con HDMI. ',76,10,6,'Monitores');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('HP OMEN 34c 34" WQHD 165Hz FreeSync Premium Curva',389.00,'Images/Productos/9','No hay nada mejor que evadirse con el monitor gaming curvo OMEN by HP de 34", WQHD, 165 Hz. Inmersión total gracias a su pantalla curva ultrapanorámica de 1500R',3,0,null,'Monitores');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('HP OMEN 27" LED IPS FullHD 165Hz FreeSync',169.00,'Images/Productos/7.jpg','Su excelente rendimiento y la nitidez de sus colores permiten que pueda perderse en los juegos que más le gustan',21,70,6,'Monitores');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('AOC 27B3HA2 LED IPS 27" FullHD 100Hz',109.90,'Images/Productos/8.jpg','Claridad de alto rendimiento con monitor FHD de 27" y 100Hz con HDMI. ',76,10,6,'Monitores');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('HP OMEN 34c 34" WQHD 165Hz FreeSync Premium Curva',389.00,'Images/Productos/9.jpg','No hay nada mejor que evadirse con el monitor gaming curvo OMEN by HP de 34", WQHD, 165 Hz. Inmersión total gracias a su pantalla curva ultrapanorámica de 1500R',3,0,null,'Monitores');
 
 
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech G915 TKL RGB',139.00,'Images/Productos/10','El G915 TKL es increíblemente refinado y sorprendentemente fino, duradero y hecho ante todo para ofrecer rendimiento y funciones.',10,32,null,'Teclados');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Newskill Serike V2 TKL',75.00,'Images/Productos/11','El teclado mecánico para juegos Serike V2 te ofrece la experiencia más completa para jugar',76,65,null,'Teclados');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Tempest K20 Beast',32.44,'Images/Productos/12','Teclado Mecánico Inalámbrico Gaming RGB TKL Mini Negro',500,100,null,'Monitores');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech G915 TKL RGB',139.00,'Images/Productos/10.jpg','El G915 TKL es increíblemente refinado y sorprendentemente fino, duradero y hecho ante todo para ofrecer rendimiento y funciones.',10,32,null,'Teclados');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Newskill Serike V2 TKL',75.00,'Images/Productos/11.jpg','El teclado mecánico para juegos Serike V2 te ofrece la experiencia más completa para jugar',76,65,null,'Teclados');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Tempest K20 Beast',32.44,'Images/Productos/12.jpg','Teclado Mecánico Inalámbrico Gaming RGB TKL Mini Negro',500,100,null,'Monitores');
 
 
 

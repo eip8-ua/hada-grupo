@@ -8,7 +8,7 @@ using System.Web.Script.Serialization;
 using Library;
 
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class shopping_cart : System.Web.UI.Page
     {
@@ -75,7 +75,7 @@ namespace proyecto
             
             foreach (ENLinCarr linCarr in cart)
             {
-                ENProducto enProd = new ENProducto(linCarr.Producto, 1, "", 1);
+                ENProducto enProd = new ENProducto(linCarr.Producto, 1, 1, 1);
                 enProd.Read();
                 Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad);
                 cartFormat.Add(prod);
