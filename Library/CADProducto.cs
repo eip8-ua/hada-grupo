@@ -37,8 +37,15 @@ namespace Library
 
                 comm.Parameters.AddWithValue("@stock", prod.stock);
                 comm.Parameters.AddWithValue("@pop", prod.popularidad);
-                comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
-                comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
+                if(prod.promocion == null)
+                    comm.Parameters.AddWithValue("@promo", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
+
+                if (prod.categoria == null)
+                    comm.Parameters.AddWithValue("@cat", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
 
                 prod.id = Convert.ToInt32(comm.ExecuteScalar());
             }
@@ -114,8 +121,17 @@ namespace Library
 
                 comm.Parameters.AddWithValue("@stock", prod.stock);
                 comm.Parameters.AddWithValue("@pop", prod.popularidad);
-                comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
-                comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
+                
+                if (prod.promocion == null)
+                    comm.Parameters.AddWithValue("@promo", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
+
+                if (prod.categoria == null)
+                    comm.Parameters.AddWithValue("@cat", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
+                
                 comm.Parameters.AddWithValue("@id", prod.id);
 
                 return comm.ExecuteNonQuery() > 0;

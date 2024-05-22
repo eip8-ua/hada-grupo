@@ -85,7 +85,7 @@ namespace Library
         {
             _promocion = new ENPromociones();
         }
-        public ENProducto(int id, int pvp, int stock, int popularidad, string descripcion = "", string nombre = "", string url_image = "", ENCategoria cat = null, ENPromociones prom = null)
+        public ENProducto(int id, float pvp, int stock, int popularidad, string descripcion = "", string nombre = "", string url_image = "", ENCategoria cat = null, ENPromociones prom = null)
         {
             this.id = id;
             this.pvp = pvp;

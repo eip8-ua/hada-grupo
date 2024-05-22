@@ -37,7 +37,7 @@
                             Descripción
                         </div>
 
-                        <asp:TextBox ID="descripcion" runat="server" name="descripcion" class="input" />
+                        <asp:TextBox ID="descripcion" runat="server" name="descripcion" TextMode="MultiLine" class="input" />
 
                     </div>
 
@@ -51,10 +51,10 @@
                     </div>
                     <div class="div-parametro">
                         <div class="texto">
-                            Imagen*
+                            Imagen (solo .jpg)*
                         </div>
 
-                        <asp:FileUpload ID="fileInput" runat="server" />
+                        <asp:FileUpload ID="fileInput" runat="server" class="input"/>
 
                     </div>
 
@@ -63,7 +63,7 @@
                             Categoría
                         </div>
 
-                        <asp:DropDownList ID="list_categoria" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="list_categoria" runat="server" class="input"></asp:DropDownList>
 
                     </div>
 
@@ -71,7 +71,7 @@
                         <div class="texto">
                             Promoción
                         </div>
-                        <asp:DropDownList ID="list_promocion" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="list_promocion" runat="server" class="input"></asp:DropDownList>
                     </div>
                     <div class="status-div">
                         <asp:Label class="status-lbl" runat="server" ID="status_lbl"></asp:Label>

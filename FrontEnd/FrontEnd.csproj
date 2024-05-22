@@ -207,6 +207,7 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="contact_us.aspx" />
+    <Content Include="estilos\admin_productos.css" />
     <Content Include="estilos\estilos.css" />
     <Content Include="estilos\login.css" />
     <Content Include="estilos\master.css" />
