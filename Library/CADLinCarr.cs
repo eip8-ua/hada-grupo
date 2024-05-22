@@ -209,7 +209,7 @@ namespace Library
                         List<ENProducto> products = new List<ENProducto>();
                         while (reader.Read())
                         {
-                            ENProducto enProd = new ENProducto((int)reader["producto"], 1, "", 1);
+                            ENProducto enProd = new ENProducto((int)reader["producto"], 1, 1, 1);
                             enProd.Read();
                             products.Add(enProd);
                         }
