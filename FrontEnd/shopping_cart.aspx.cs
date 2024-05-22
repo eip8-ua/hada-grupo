@@ -14,19 +14,17 @@ namespace proyecto
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-
             if (!IsPostBack)
             {
                 // Debugging: Check session data at the start of Page_Load
                 List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
                 if (cart.Count > 0)
                 {
-                    Response.Write("Cart items count: " + cart.Count);
+                   //Response.Write("Cart items count: " + cart.Count);
                 }
                 else
                 {
-                    Response.Write("Cart is empty");
+                    //Response.Write("Cart is empty");
                 }
                 BindCart();
 
@@ -63,6 +61,18 @@ namespace proyecto
         {
             List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
             List<Product> cartFormat = new List<Product>();
+            /*
+            Product prod1 = new Product(12, "Tempest K20 Beast", 32.44f, 3);
+            Product prod2 = new Product(10, "Logitech G915 TKL RGB", 139f, 1);
+            Product prod3 = new Product(6, "Apple Magic Mouse Plata", 85f, 2);
+            Product prod4 = new Product(5, "Logitech M185 Ratón Inalámbrico", 12f, 2);
+
+            cartFormat.Add(prod1);
+            cartFormat.Add(prod2);
+            cartFormat.Add(prod3);
+            cartFormat.Add(prod4);
+            */
+            
             foreach (ENLinCarr linCarr in cart)
             {
                 ENProducto enProd = new ENProducto(linCarr.Producto, 1, "", 1);
@@ -74,7 +84,7 @@ namespace proyecto
             gvCart.DataSource = cartFormat;
             gvCart.DataBind();
             divTotalAndBuy.Visible = cartFormat.Count > 0;
-            UpdateTotal(cart);
+            UpdateTotal(cartFormat);
         }
 
         protected void SaveCartToDataBase()
@@ -83,6 +93,7 @@ namespace proyecto
             //List<Product> cart  cartItems = enCarritoDe.GetCartByUser();
         }
 
+        /*
         protected void btnAddToCart_Click(object sender, EventArgs e)
         {
             int productId = int.Parse(txtProductId.Text);
@@ -104,7 +115,7 @@ namespace proyecto
 
             Session["Cart"] = cart;
             BindCart();
-        }
+        }*/
 
         protected void gvCart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -132,16 +143,16 @@ namespace proyecto
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ENProducto product = (ENProducto)e.Row.DataItem;
+                Product product = (Product)e.Row.DataItem;
                 TextBox txtQuantity = (TextBox)e.Row.FindControl("txtQuantity");
                 txtQuantity.TextChanged += (s, ev) =>
                 {
                     int newQuantity;
                     if (int.TryParse(txtQuantity.Text, out newQuantity))
                     {
-                        List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr>;
-                        ENLinCarr productToUpdate = cart.Find(p => p.Id == product.id);
-                        productToUpdate.Cantidad = newQuantity;
+                        List<Product> cart = Session["Cart"] as List<Product>;
+                        Product productToUpdate = cart.Find(p => p.Id == product.Id);
+                        productToUpdate.Quantity = newQuantity;
                         Session["Cart"] = cart;
                         UpdateTotal(cart);
                     }
@@ -159,23 +170,21 @@ namespace proyecto
             int newQuantity;
             if (int.TryParse(txtQuantity.Text, out newQuantity))
             {
-                List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr>;
-                ENLinCarr productToUpdate = cart.Find(p => p.Id == productId);
-                productToUpdate.Cantidad = newQuantity;
+                List<Product> cart = Session["Cart"] as List<Product>;
+                Product productToUpdate = cart.Find(p => p.Id == productId);
+                productToUpdate.Quantity = newQuantity;
                 Session["Cart"] = cart;
                 UpdateTotal(cart);
             }
         }
         
 
-        protected void UpdateTotal(List<ENLinCarr> cart)
+        protected void UpdateTotal(List<Product> cart)
         {
             float total = 0;
-            foreach (ENLinCarr linCarr in cart)
+            foreach (Product product in cart)
             {
-                ENProducto enProd = new ENProducto(linCarr.Carrito, 1, "", 1);
-                enProd.Read();
-                total += enProd.pvp * linCarr.Cantidad;
+                total += product.Price * product.Quantity;
             }
             lblTotal.Text = total.ToString("C");
         }
