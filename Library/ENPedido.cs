@@ -67,10 +67,10 @@ namespace Library
             return Numpedido > 0 && IdUsuario > 0;
         }
 
-        static public List<ENPedido> ReadAll()
+        public static List<ENPedido> ReadAll()
         {
-            CADPedido cad = new CADPedido();
-            return cad.ReadAll();
+            CADPedido cadPedido = new CADPedido();
+            return cadPedido.ReadAll();
         }
     }
 }
