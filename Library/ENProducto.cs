@@ -28,39 +28,39 @@ namespace Library
         public int id
         {
             get { return _id; }
-            set { _id = id; }
+            set { _id = value; }
         }
         public string nombre
         {
             get { return _nombre; }
-            set { _nombre = nombre; }
+            set { _nombre = value; }
         }
         public int stock
         {
             get { return _stock; }
-            set { _stock = stock; }
+            set { _stock = value; }
         }
         public float pvp
         {
             get { return _pvp; }
-            set { _pvp = pvp; }
+            set { _pvp = value; }
         }
 
         public string descripcion
         {
             get { return _descripcion; }
-            set { _descripcion = descripcion; }
+            set { _descripcion = value; }
         }
         public int popularidad
         {
             get { return _popularidad; }
-            set { _popularidad = popularidad; }
+            set { _popularidad = value; }
         }
 
         public string url_image
         {
             get { return _url_image; }
-            set { _url_image = url_image; }
+            set { _url_image = value; }
         }
 
         public ENPromociones promocion
@@ -71,9 +71,9 @@ namespace Library
 
         public ENProducto()
         {
-
+            _promocion = new ENPromociones();
         }
-        public ENProducto(int id, int stock, string descripcion, int popularidad, string nombre = "", ENCategoria cat = null, ENPromociones prom = null)
+        public ENProducto(int id, int pvp, int stock, int popularidad, string descripcion="", string nombre = "", string url_image="", ENCategoria cat = null, ENPromociones prom = null)
         {
             this.id = id;
             this.pvp = pvp;
@@ -84,18 +84,11 @@ namespace Library
                 this.nombre = nombre;
             if (descripcion != "")
                 this.descripcion = descripcion;
-            if (cat != null)
-            {
-                this.categoria.descripcion = cat.descripcion;
-                this.categoria.tipo = cat.tipo;
-            }
-            if (prom != null)
-            {
-                this.promocion.Descuento = prom.Descuento;
-                this.promocion.MiId = prom.MiId;
-            }
-                
-        
+            if (url_image != "")
+                this.url_image = url_image;
+
+            categoria = cat;
+            promocion = prom;
         }
 
         public bool Create()
@@ -216,6 +209,25 @@ namespace Library
                     return null;
 
             }
+        }
+        static public List<ENProducto> ObtenerTodosLosProductos()
+        {
+            CADProducto cad = new CADProducto();
+            return cad.ObtenerProductos();
+        }
+
+        private ENProducto ObtenerProductoPorId(int productId)
+        {
+            // Implementa este método para obtener los detalles del producto desde la base de datos
+            CADProducto cadProducto = new CADProducto();
+            ENProducto producto = new ENProducto();
+            producto.id = productId;
+
+            if (cadProducto.Read(producto))
+            {
+                return producto;
+            }
+            return null;
         }
 
 

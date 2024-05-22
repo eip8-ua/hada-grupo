@@ -33,7 +33,7 @@ namespace Library
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool Create(ENUsuario en)//(ENUsuario en)
         {
-            bool inserted = false;//, exists = false;
+            bool inserted = false, exists = false;
             int nextId = 0;
             try
             {
@@ -43,28 +43,36 @@ namespace Library
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    //Pendiente de averiguar if (dr["mensaje"].ToString() == en.Message) exists = true;
+                    if (dr["email"].ToString() == en.Email) exists = true;
                     nextId = dr.GetInt32(dr.GetOrdinal("id"));
                 }
                 dr.Close();
                 nextId += 1;
-                //if(!exists)
-                //{
-                SqlCommand auth = new SqlCommand("SET IDENTITY_INSERT usuario ON", connection);
-                SqlCommand ins = new SqlCommand("INSERT INTO Usuario (id, dni, email, nombre, apellidos, telefono, fecha_nac, admin)" +
-                    "VALUES (" + nextId.ToString() + ", '" + en.Dni + "', '" + en.Nombre + "', '" + en.Apellidos + "', '" + en.Tlfn + "', " +
-                    en.FNacimiento.ToString() + ", " + en.Admin.ToString() + ");", connection);
-                SqlCommand deauth = new SqlCommand("SET IDENTITY_INSERT usuario ON", connection);
+                if(!exists)
+                {
+                    SqlCommand ins = new SqlCommand($"insert into usuario (id, dni, email, nombre, apellidos, telefono, fecha_nac, admin, dir, contrasena) values (@id,@dni,@email,@nombre,@apellidos,@telefono,@fecha_nac,@admin,@contrasena); select SCOPE_IDENTITY();", connection);
+                    ins.Parameters.AddWithValue("@id", nextId);
+                    ins.Parameters.AddWithValue("@dni", en.Dni);
+                    ins.Parameters.AddWithValue("@email", en.Email);
+                    ins.Parameters.AddWithValue("@nombre", en.Nombre);
+                    ins.Parameters.AddWithValue("@apellidos", en.Apellidos);
+                    ins.Parameters.AddWithValue("@fecha_nac", en.FNacimiento);
+                    ins.Parameters.AddWithValue("@admin", en.Admin);
+                    ins.Parameters.AddWithValue("@contrasena", en.Passwd);
+                    
 
-                auth.ExecuteNonQuery();
-                ins.ExecuteNonQuery();
-                deauth.ExecuteNonQuery();
-                inserted = true;
-                // }
-                //else
-                //{
-                //    Console.WriteLine("An error ocurred while inserting on the Database: The given message for the Testimonial alredy exists");
-                //}
+                    if (en.Tlfn == "")
+                        ins.Parameters.AddWithValue("@telefono", DBNull.Value);
+                    else
+                        ins.Parameters.AddWithValue("@telefono", en.Tlfn);
+
+                    ins.ExecuteNonQuery();
+                    inserted = true;
+                }
+                else
+                {
+                    Console.WriteLine("An error ocurred while inserting on the Database: The given email for the User is alredy used");
+                }
 
                 connection.Close();
             }
@@ -90,49 +98,69 @@ namespace Library
         public bool Update(ENUsuario en)
         {
             bool exists = false, updated = false;
+            int id = 0;
             try
             {
-                connection.Open();
-
-                SqlCommand com = new SqlCommand("SELECT * FROM usuario", connection);
-                SqlDataReader dr = com.ExecuteReader();
-                while (dr.Read())
+                try
                 {
-                    if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
+
+                    connection.Open();
+                    SqlCommand com = new SqlCommand("SELECT * FROM usuario;", connection);
+                    SqlDataReader dr = com.ExecuteReader();
+                    while (dr.Read())
                     {
-                        exists = true;
-                        break;
+                        if (dr["email"].ToString() == en.Email && dr.GetInt32(dr.GetOrdinal("id")) != en.Id)
+                        {
+                            exists = true;
+                            break;
+                        }
+
+                    }
+                    dr.Close();
+
+                    if (!exists)
+                    {
+
+                        SqlCommand updt = new SqlCommand($"UPDATE usuario set dni = @dni,email = @email,nombre = @nombre,apellidos = @apellidos,telefono = @telefono,fecha_nac = @fecha_nac,admin = @admin,contrasena = @contrasena WHERE id = @id;", connection);
+                        updt.Parameters.Add("@id", SqlDbType.Int).Value = en.Id;
+                        updt.Parameters.Add("@dni", SqlDbType.NVarChar).Value = en.Dni;
+                        updt.Parameters.Add("@email", SqlDbType.NVarChar).Value = en.Email;
+                        updt.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = en.Nombre;
+                        updt.Parameters.Add("@apellidos", SqlDbType.NVarChar).Value = en.Apellidos;
+                        updt.Parameters.Add("@fecha_nac", SqlDbType.Date).Value = en.FNacimiento;
+                        updt.Parameters.Add("@admin", SqlDbType.Bit).Value = en.Admin;
+                        updt.Parameters.Add("@contrasena", SqlDbType.NVarChar).Value = en.Passwd;
+
+                        if (en.Tlfn == "")
+                            updt.Parameters.AddWithValue("@telefono", DBNull.Value);
+                        else
+                            updt.Parameters.Add("@telefono", SqlDbType.NVarChar).Value = en.Tlfn;
+                        updt.ExecuteNonQuery();
+                        updated = true;
+                    }
+                    else
+                    {
+                        throw new Exception("Puto puto");
+                        Console.WriteLine("An error ocurred while updating the Database: The given Email is alredy used by another user");
                     }
 
+                    connection.Close();
                 }
-                dr.Close();
-
-                if (exists)
+                catch (Exception e)
                 {
-                    SqlCommand updt = new SqlCommand("UPDATE usuario dni = '" + en.Dni + "' email = '" + en.Email + "' nombre = '" + en.Nombre +
-                        "' apellidos = '" + en.Apellidos + "' telefono = '" + en.Tlfn + "' fecha_nac = " + en.FNacimiento + " admin = " + en.Admin +
-                        " WHERE id = '" + dr.GetInt32(dr.GetOrdinal("id")) + "';", connection);
-
-                    updt.ExecuteNonQuery();
-                    updated = true;
+                    //Falta indicar que ha habido un problema
+                    Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                    connection.Close();
+                    return false;
                 }
-                else
+                finally
                 {
-                    Console.WriteLine("An error ocurred while updating the Database: The given User doesn't exist");
+                    connection.Close();
                 }
-
-                connection.Close();
             }
-            catch (Exception e)
+            catch (System.Threading.ThreadAbortException)
             {
-                //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
-                connection.Close();
-                return false;
-            }
-            finally
-            {
-                connection.Close();
+                //Do nothing.  The exception will get rethrown by the framework when this block terminates.
             }
             return updated;
         }
@@ -153,7 +181,7 @@ namespace Library
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
+                    if (dr["email"].ToString() == en.Email)
                     {
                         en.Dni = dr["dni"].ToString();
                         en.Email = dr["email"].ToString();

@@ -14,12 +14,12 @@ namespace Library
         public string tipo
         {
             get { return _tipo; }
-            set { _tipo = tipo; }
+            set { _tipo = value; }
         }
         public string descripcion
         {
             get { return _descripcion; }
-            set { _descripcion = descripcion; }
+            set { _descripcion = value; }
         }
 
         public ENCategoria()
@@ -36,31 +36,38 @@ namespace Library
         }
         public ENCategoria(ENCategoria cat)
         {
-
+            if (cat != null)
+            {
+                tipo = cat.tipo;
+                descripcion = cat.descripcion;
+            }
+            else
+            {
+                tipo = string.Empty;
+                descripcion = string.Empty;
+            }
         }
+
 
         public bool Create()
         {
             CADCategoria cad = new CADCategoria();
-
-            if (cad.Create(this))
-            {
-                return true;
-            }
-
-            else return false;
+            return cad.Create(this);
         }
         public bool Delete()
         {
-            return false;
+            CADCategoria cad = new CADCategoria();
+            return cad.Delete(this);
         }
         public bool Update()
         {
-            return false;
+            CADCategoria cad = new CADCategoria();
+            return cad.Update(this);
         }
         public bool Read()
         {
-            return false;
+            CADCategoria cad = new CADCategoria();
+            return cad.Read(this);
         }
 
         public static ENCategoria getCategoria(string tipo)
@@ -68,16 +75,20 @@ namespace Library
             CADCategoria categ = new CADCategoria();
 
             ENCategoria cat = new ENCategoria(tipo);
-
-            return categ.Read(cat);
+            categ.Read(cat);
+            
+            return cat;
         }
 
-        public static List<ENCategoria> listarCategorias()
+        /// <summary>
+        /// Devuelve una lista con todas las categorías. 
+        /// Si da error devuelve una lista vacía 
+        /// </summary>
+        /// <returns></returns>
+        public static List<ENCategoria> Get_All_Categorias()
         {
-            CADCategoria cad = new CADCategoria();
-
-            return cad.listarCategoria();
+            CADCategoria cad = new CADCategoria();        
+            return cad.Read_All();
         }
-
     }
 }

@@ -18,7 +18,11 @@
 
     <div id="popular_products_showcase">
         <h2>Nuestros productos más populares</h2>
-        <div id="popular_products"></div>
+        <div id="popular_products">
+            <div id="popular_column1" runat="server" class="popular_column"></div>
+            <div id="popular_column2" runat="server" class="popular_column"></div>
+        </div>
+        <asp:Button ID="see_more_pop_products" runat="server" Text="Ver más" OnClick="see_more_pop_products_Click" CssClass="ButtonStyle2 see_more_button"></asp:Button>
     </div>
 
     <div id="promotions_showcase">
@@ -27,7 +31,8 @@
             <p>¡Descubre nuestras mejores promociones!</p><br>
             <asp:Button ID="explore_more_promotions_Button" runat="server" Text="Explorar más" CssClass="ButtonStyle1" OnClick="explore_more_promotions_Button_Click"></asp:Button>
         </div>
-        <div id="right_promotions"></div>
+        <div id="right_promotions1" runat="server"></div>
+        <div id="right_promotions2" runat="server"></div>
     </div>
 
     <div id="testimonies_showcase">
@@ -37,7 +42,9 @@
                 <asp:Button ID="testimonies_Button" runat="server" Text="Testimonios" CssClass="ButtonStyle2" OnClick="testimonies_Button_Click"></asp:Button>
             </div>
         </div>
-        <div id="right_testimonies"></div>
+        <div id="right_testimonies">
+            <img id="testimony_showcase" src="Images/testimonio.jpg">
+        </div>
     </div>
     
 </asp:Content>

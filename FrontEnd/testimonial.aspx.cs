@@ -5,66 +5,86 @@ namespace proyecto
 {
     public partial class testimonial : System.Web.UI.Page
     {
-        // Variable para mantener el estado del testimonio actual
         private ENTestimonial testimonioActual;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                // Aquí lees los testimonios de la base de datos
-                // Supongamos que tienes un objeto de la clase CADTestimonial llamado cadTestimonial
-                CADTestimonial cadTestimonial = new CADTestimonial();
-                testimonioActual = new ENTestimonial();
-
-                // Leer el primer testimonio y mostrarlo
-                bool success = cadTestimonial.ReadFirst(testimonioActual);
-                if (success)
+                if (!IsPostBack)
                 {
-                    lblNombreTestimonial.Text = testimonioActual.Id.ToString(); // Suponiendo que lblNombreTestimonial es para el ID del testimonio
-                    lblCita.Text = testimonioActual.Message;
-                }
+                    testimonioActual = new ENTestimonial();
+                    bool success = testimonioActual.ReadFirst();
+                    if (success)
+                    {
+                        lblNombreTestimonial.Text = testimonioActual.Id.ToString();
+                        lblCita.Text = testimonioActual.Message;
+                        System.Diagnostics.Debug.WriteLine("First testimonial loaded successfully.");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load the first testimonial.");
+                    }
 
-                // Guardar el estado del testimonio actual en la vista de estado de ASP.NET
-                ViewState["TestimonioActual"] = testimonioActual;
+                    ViewState["TestimonioActual"] = testimonioActual;
+                }
+                else
+                {
+                    testimonioActual = (ENTestimonial)ViewState["TestimonioActual"];
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Restaurar el estado del testimonio actual desde la vista de estado de ASP.NET
-                testimonioActual = (ENTestimonial)ViewState["TestimonioActual"];
+                System.Diagnostics.Debug.WriteLine("Error in Page_Load: " + ex.Message);
             }
         }
 
-
         protected void btn1_Click(object sender, EventArgs e)
         {
-            // Leer el testimonio anterior y mostrarlo
-            CADTestimonial cadTestimonial = new CADTestimonial();
-            bool success = cadTestimonial.ReadPrev(testimonioActual);
-            if (success)
+            try
             {
-                lblNombreTestimonial.Text = testimonioActual.Id.ToString(); // Suponiendo que lblNombreTestimonial es para el ID del testimonio
-                lblCita.Text = testimonioActual.Message;
-            }
+                bool success = testimonioActual.ReadPrev();
+                if (success)
+                {
+                    lblNombreTestimonial.Text = testimonioActual.Id.ToString();
+                    lblCita.Text = testimonioActual.Message;
+                    System.Diagnostics.Debug.WriteLine("Previous testimonial loaded successfully.");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Failed to load the previous testimonial.");
+                }
 
-            // Guardar el estado actualizado del testimonio actual en la vista de estado de ASP.NET
-            ViewState["TestimonioActual"] = testimonioActual;
+                ViewState["TestimonioActual"] = testimonioActual;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in btn1_Click: " + ex.Message);
+            }
         }
 
         protected void btn2_Click(object sender, EventArgs e)
         {
-            // Leer el siguiente testimonio y mostrarlo
-            CADTestimonial cadTestimonial = new CADTestimonial();
-            bool success = cadTestimonial.ReadNext(testimonioActual);
-            if (success)
+            try
             {
-                lblNombreTestimonial.Text = testimonioActual.Id.ToString(); // Suponiendo que lblNombreTestimonial es para el ID del testimonio
-                lblCita.Text = testimonioActual.Message;
+                bool success = testimonioActual.ReadNext();
+                if (success)
+                {
+                    lblNombreTestimonial.Text = testimonioActual.Id.ToString();
+                    lblCita.Text = testimonioActual.Message;
+                    System.Diagnostics.Debug.WriteLine("Next testimonial loaded successfully.");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Failed to load the next testimonial.");
+                }
+
+                ViewState["TestimonioActual"] = testimonioActual;
             }
-
-            // Guardar el estado actualizado del testimonio actual en la vista de estado de ASP.NET
-            ViewState["TestimonioActual"] = testimonioActual;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in btn2_Click: " + ex.Message);
+            }
         }
-
     }
 }

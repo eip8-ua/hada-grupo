@@ -13,7 +13,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:TextBox Text="" runat="server" ID="textbox"></asp:TextBox>
         <div ID="navigationMenu">
             <div ID="leftMenu">
                 <asp:Menu ID="outerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
@@ -21,13 +20,13 @@
                     CssClass="menuStyle" DynamicMenuItemStyle-CssClass="submenuStyle">
                     <Items>
                         <asp:MenuItem Text="Tienda" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text="Productos" Value="products">
-                            <asp:MenuItem Text="Teclados" Value="keyboards"></asp:MenuItem>
-                            <asp:MenuItem Text="Ratones" Value="mouses"></asp:MenuItem>
-                            <asp:MenuItem Text="Monitores" Value="screens"></asp:MenuItem>
-                            <asp:MenuItem Text="Ordenadores" Value="pcs"></asp:MenuItem>
-                            <asp:MenuItem Text="Auriculares" Value="headphones"></asp:MenuItem>
-                            <asp:MenuItem Text="Todo" Value="every_product"></asp:MenuItem>
+                        <asp:MenuItem Text="Productos" Value="products" NavigateUrl="~/productos.aspx">
+                            <asp:MenuItem Text="Teclados" Value="keyboards" NavigateUrl="~/productosCategoria.aspx?categoria=keyboards"></asp:MenuItem>
+                            <asp:MenuItem Text="Ratones" Value="mouses" NavigateUrl="~/productosCategoria.aspx?categoria=mouses"></asp:MenuItem>
+                            <asp:MenuItem Text="Monitores" Value="screens" NavigateUrl="~/productosCategoria.aspx?categoria=screens"></asp:MenuItem>
+                            <asp:MenuItem Text="Ordenadores" Value="pcs" NavigateUrl="~/productosCategoria.aspx?categoria=pcs"></asp:MenuItem>
+                            <asp:MenuItem Text="Auriculares" Value="headphones" NavigateUrl="~/productosCategoria.aspx?categoria=headphones"></asp:MenuItem>
+                            <asp:MenuItem Text="Todo" Value="every_product" NavigateUrl="~/productos.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Contáctanos" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
                         <asp:MenuItem Text="Testimonios" Value="testimonial" NavigateUrl="~/testimonial.aspx"></asp:MenuItem>
@@ -37,7 +36,7 @@
             <div ID="rightMenu">
                 <asp:Menu ID="innerMenu" runat="server" Orientation="Horizontal" StaticHoverStyle-ForeColor="#b88e2f" ForeColor="Black" 
                     StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" 
-                    CssClass="menuStyle" DynamicMenyItemStyle-CssClass="submenuStyle">
+                    CssClass="menuStyle" DynamicMenyItemStyle-CssClass="submenuStyle" OnMenuItemClick="innerMenu_MenuItemClick">
                     <Items>
                         <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login2.png">
                             <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
@@ -47,7 +46,7 @@
                             <asp:MenuItem Text="Añadir artículo" Value="add_product" NavigateUrl="~/admin_productos.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="Administrar pedidos" Value="admin_orders" NavigateUrl="~/admin_pedidos.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="Administrar usuario" Value="admin_user" NavigateUrl="~/admin_usuarios.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Cerrar sesión" Value="log_out" NavigateUrl="~/index.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Cerrar sesión" Value="log_out"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="" Value="shopping_cart" NavigateUrl="~/shopping_cart.aspx" ImageUrl="Images/shopping_cart2.png"></asp:MenuItem>
                     </Items>
