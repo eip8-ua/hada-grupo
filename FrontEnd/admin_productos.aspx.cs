@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Library;
@@ -41,9 +42,12 @@ namespace FrontEnd
             promocion.MiId = Convert.ToInt32(list_promocion.SelectedValue);
             //promocion.Read();
 
-            ENProducto producto = new ENProducto(-1,Convert.ToInt32(precio.Text),Convert.ToInt32(stock.Text),0,descripcion.Text,nombre.Text,"",categoria,promocion);
-            //producto.url_image = "";
-            
+
+            ENProducto producto = new ENProducto(-1, Convert.ToInt32(precio.Text), Convert.ToInt32(stock.Text), 0, descripcion.Text, nombre.Text, "", categoria, promocion);
+            producto.Create();
+            producto.url_image = "/Images/Productos/" + producto.id + Path.GetExtension(fileInput.PostedFile.FileName);
+            fileInput.SaveAs(Server.MapPath(producto.url_image));
+            status_lbl.Text = producto.Update().ToString();
         }
         /*protected void UploadButton_Click(object sender, EventArgs e)
         {

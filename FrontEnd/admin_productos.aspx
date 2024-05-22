@@ -28,7 +28,7 @@
                             Precio*
                         </div>
 
-                        <asp:TextBox ID="precio" runat="server" TextMode="SingleLine" name="precio" class="input" />
+                        <asp:TextBox ID="precio" runat="server" TextMode="Number" name="precio" class="input" />
 
                     </div>
 
@@ -54,7 +54,7 @@
                             Imagen*
                         </div>
 
-                        <!--<asp:FileUpload ID="fileInput" runat="server" />-->
+                        <asp:FileUpload ID="fileInput" runat="server" />
 
                     </div>
 
