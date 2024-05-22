@@ -61,7 +61,7 @@ namespace Library
                     int.TryParse(dr["popularidad"].ToString(), out rpopularidad);
                     producto.popularidad = rpopularidad;
                     int.TryParse(dr["promocion"].ToString(), out rpromocion);
-                    producto.promocion = ENPromociones.getPromocion(rpromocion);
+                    //producto.promocion = ENPromociones.getPromocion(rpromocion);
                     if (producto.promocion.MiId != rpromocion) producto.promocion = new ENPromociones();
                     //producto.categoria = ENCategoria.getCategoria(dr["categoria"].ToString());
 
@@ -124,7 +124,7 @@ namespace Library
                     int.TryParse(dr["popularidad"].ToString(), out rpopularidad);
                     producto.popularidad = rpopularidad;
                     int.TryParse(dr["promocion"].ToString(), out rpromocion);
-                    producto.promocion = ENPromociones.getPromocion(rpromocion);
+                    //producto.promocion = ENPromociones.getPromocion(rpromocion);
                     if (producto.promocion.MiId != rpromocion) producto.promocion = new ENPromociones();
                     //producto.categoria = ENCategoria.getCategoria(dr["categoria"].ToString());
 

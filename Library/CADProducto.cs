@@ -140,7 +140,7 @@ namespace Library
                         {
                             prod.nombre = reader["nombre"].ToString();
                             prod.popularidad = Convert.ToInt32(reader["popularidad"]);
-                            prod.pvp = (float)reader["pvp"];
+                            prod.pvp = Convert.ToSingle(reader["pvp"]);
                             int ordinal = reader.GetOrdinal("url_image");
                             prod.url_image = reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
                             ordinal = reader.GetOrdinal("descripcion");
@@ -154,7 +154,7 @@ namespace Library
                             }
                             else
                             {
-                                prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
+                                //prod.promocion = ENPromociones.getPromocion(reader.GetInt32(ordinal));
                             }
 
                             ordinal = reader.GetOrdinal("categoria");
@@ -251,10 +251,10 @@ namespace Library
 
         public bool isCorrect(string cat, int prom)
         {
-            if(ENPromociones.getPromocion(prom).MiId == null || ENCategoria.getCategoria(cat) == null)
+            /*if(ENPromociones.getPromocion(prom).MiId == null || ENCategoria.getCategoria(cat) == null)
             {
                 return false;
-            }
+            }*/
 
             return true;
         }
@@ -282,7 +282,7 @@ namespace Library
                             descripcion = reader.GetString(reader.GetOrdinal("descripcion")),
                             stock = reader.GetInt32(reader.GetOrdinal("stock")),
                             popularidad = reader.GetInt32(reader.GetOrdinal("popularidad")),
-                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? new ENPromociones() : ENPromociones.getPromocion(reader.GetInt32(reader.GetOrdinal("promocion"))),
+                            //promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? new ENPromociones() : ENPromociones.getPromocion(reader.GetInt32(reader.GetOrdinal("promocion"))),
                             categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? new ENCategoria() : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
                         };
                         productos.Add(producto);
