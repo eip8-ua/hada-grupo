@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Library;
 
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class user : System.Web.UI.Page
     {

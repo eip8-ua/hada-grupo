@@ -61,9 +61,25 @@ namespace Library
                     int.TryParse(dr["popularidad"].ToString(), out rpopularidad);
                     producto.popularidad = rpopularidad;
                     int.TryParse(dr["promocion"].ToString(), out rpromocion);
-                    producto.promocion = ENPromociones.getPromocion(rpromocion);
-                    if (producto.promocion.MiId != rpromocion) producto.promocion = new ENPromociones();
-                    //producto.categoria = ENCategoria.getCategoria(dr["categoria"].ToString());
+
+                    // Inicializamos y asignamos el valor a la promoción
+                    producto.promocion = new ENPromociones();
+                    producto.promocion.MiId = rpromocion;
+
+                    // Realizamos la lectura
+                    ENPromociones promocionLeida = producto.promocion.read();
+
+                    // Validamos si la promoción leída es válida
+                    if (promocionLeida.MiId == rpromocion)
+                    {
+                        producto.promocion.MiId = promocionLeida.MiId;
+                        producto.promocion.Descuento = promocionLeida.Descuento;
+                        producto.promocion.Disponibilidad = promocionLeida.Disponibilidad;
+                    }
+                    else
+                    {
+                        producto.promocion = new ENPromociones();
+                    }
 
                     //Añadimos el producto a la lista de productos
                     productos.Add(producto);
@@ -124,9 +140,25 @@ namespace Library
                     int.TryParse(dr["popularidad"].ToString(), out rpopularidad);
                     producto.popularidad = rpopularidad;
                     int.TryParse(dr["promocion"].ToString(), out rpromocion);
-                    producto.promocion = ENPromociones.getPromocion(rpromocion);
-                    if (producto.promocion.MiId != rpromocion) producto.promocion = new ENPromociones();
-                    //producto.categoria = ENCategoria.getCategoria(dr["categoria"].ToString());
+
+                    // Inicializamos y asignamos el valor a la promoción
+                    producto.promocion = new ENPromociones();
+                    producto.promocion.MiId = rpromocion;
+
+                    // Realizamos la lectura
+                    ENPromociones promocionLeida = producto.promocion.read();
+
+                    // Validamos si la promoción leída es válida
+                    if (promocionLeida.MiId == rpromocion)
+                    {
+                        producto.promocion.MiId = promocionLeida.MiId;
+                        producto.promocion.Descuento = promocionLeida.Descuento;
+                        producto.promocion.Disponibilidad = promocionLeida.Disponibilidad;
+                    }
+                    else
+                    {
+                        producto.promocion = new ENPromociones();
+                    }
 
                     //Añadimos el producto a la lista de productos
                     productos.Add(producto);
@@ -365,6 +397,84 @@ namespace Library
         {
 
             return null;
+        }
+
+        public List<ENProducto> getPairPromoProducts()
+        {
+            //Creamos la conexión y la pareja a devolver, y el contador de la cantidad de objetos a devolver
+            List<ENProducto> pareja = new List<ENProducto>();
+            SqlConnection connection = new SqlConnection(miConexion);
+            int contador = 2;
+
+            try
+            {
+                //Abrimos la conexión
+                connection.Open();
+
+                //Creamos el comando, y el data reader con la ejecución del comando
+                SqlCommand command = new SqlCommand("SELECT * FROM Producto p" +
+                    " INNER JOIN Promocion pr ON p.promocion = pr.id WHERE p.promocion IS NOT NULL " +
+                    "ORDER BY p.popularidad DESC; ", connection);
+                SqlDataReader dr = command.ExecuteReader();
+
+                //Bucle en el que vamos leyendo mientras hayan filas o el contador no haya llegado a 0
+                while(dr.Read() && contador > 0)
+                {
+                    //Definimos las variables para pasar los valores correctamente a la entidad EN
+                    ENProducto producto = new ENProducto();
+                    int rid, rstock, rpopularidad, rpromocion;
+                    float rpvp;
+
+                    //Pasamos los valores leídos a la entidad producto
+                    int.TryParse(dr["id"].ToString(), out rid);
+                    producto.id = rid;
+                    producto.nombre = dr["nombre"].ToString();
+                    float.TryParse(dr["pvp"].ToString(), out rpvp);
+                    producto.pvp = rpvp;
+                    producto.url_image = dr["url_image"].ToString();
+                    producto.descripcion = dr["descripcion"].ToString();
+                    int.TryParse(dr["stock"].ToString(), out rstock);
+                    producto.stock = rstock;
+                    int.TryParse(dr["popularidad"].ToString(), out rpopularidad);
+                    producto.popularidad = rpopularidad;
+                    int.TryParse(dr["promocion"].ToString(), out rpromocion);
+
+                    // Inicializamos y asignamos el valor a la promoción
+                    producto.promocion = new ENPromociones();
+                    producto.promocion.MiId = rpromocion;
+
+                    // Realizamos la lectura
+                    ENPromociones promocionLeida = producto.promocion.read();
+
+                    // Validamos si la promoción leída es válida
+                    if (promocionLeida.MiId == rpromocion)
+                    {
+                        producto.promocion.MiId = promocionLeida.MiId;
+                        producto.promocion.Descuento = promocionLeida.Descuento;
+                        producto.promocion.Disponibilidad = promocionLeida.Disponibilidad;
+                    }
+                    else
+                    {
+                        producto.promocion = new ENPromociones();
+                    }
+
+                    //Añadimos el producto a la pareja
+                    pareja.Add(producto);
+
+                    contador--;
+                }
+
+                return pareja;
+
+                //En caso de error
+            } catch (SqlException ex)
+            {
+                Console.WriteLine("Error con la parte SQL en CADInformes: {0}", ex.Message);
+                return pareja;
+            } finally
+            {   //Cerramos la conexión
+                connection.Close();
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class contact_us : System.Web.UI.Page
     {

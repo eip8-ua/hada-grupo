@@ -9,11 +9,11 @@ namespace Library
 {
     class ENPedido
     {
-        private int? numpedido;
+        private int numpedido;
         private DateTime fechaPedido;
         private int idUsuario;
 
-        public int? Numpedido
+        public int Numpedido
         {
             get { return numpedido; }
             set { numpedido = value; }
@@ -30,6 +30,9 @@ namespace Library
             get { return idUsuario; }
             set { idUsuario = value; }
         }
+
+        public ENPedido() { }
+
 
         public ENPedido(int numpedido, DateTime fechaPedido, int idUsuario)
         {
@@ -61,7 +64,13 @@ namespace Library
 
         public bool is_correct()
         {
-            return numpedido != null;
+            return Numpedido > 0 && IdUsuario > 0;
+        }
+
+        public static List<ENPedido> ReadAll()
+        {
+            CADPedido cadPedido = new CADPedido();
+            return cadPedido.ReadAll();
         }
     }
 }

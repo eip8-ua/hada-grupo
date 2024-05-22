@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Library;
-namespace proyecto
+namespace FrontEnd
 {
     public partial class register : System.Web.UI.Page
     {

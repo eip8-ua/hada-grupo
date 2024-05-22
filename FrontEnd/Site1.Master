@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="proyecto.Site1" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="FrontEnd.Site1" %>
 
 <!DOCTYPE html>
 
@@ -20,12 +20,12 @@
                     CssClass="menuStyle" DynamicMenuItemStyle-CssClass="submenuStyle">
                     <Items>
                         <asp:MenuItem Text="Tienda" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text="Productos" Value="products">
-                            <asp:MenuItem Text="Teclados" Value="keyboards"></asp:MenuItem>
-                            <asp:MenuItem Text="Ratones" Value="mouses"></asp:MenuItem>
-                            <asp:MenuItem Text="Monitores" Value="screens"></asp:MenuItem>
-                            <asp:MenuItem Text="Ordenadores" Value="pcs"></asp:MenuItem>
-                            <asp:MenuItem Text="Auriculares" Value="headphones"></asp:MenuItem>
+                        <asp:MenuItem Text="Productos" Value="products" NavigateUrl="~/productos.aspx">
+                            <asp:MenuItem Text="Teclados" Value="keyboards" NavigateUrl="~/productosCategoria.aspx?categoria=keyboards"></asp:MenuItem>
+                            <asp:MenuItem Text="Ratones" Value="mouses" NavigateUrl="~/productosCategoria.aspx?categoria=mouses"></asp:MenuItem>
+                            <asp:MenuItem Text="Monitores" Value="screens" NavigateUrl="~/productosCategoria.aspx?categoria=screens"></asp:MenuItem>
+                            <asp:MenuItem Text="Ordenadores" Value="pcs" NavigateUrl="~/productosCategoria.aspx?categoria=pcs"></asp:MenuItem>
+                            <asp:MenuItem Text="Auriculares" Value="headphones" NavigateUrl="~/productosCategoria.aspx?categoria=headphones"></asp:MenuItem>
                             <asp:MenuItem Text="Todo" Value="every_product" NavigateUrl="~/productos.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Contáctanos" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
