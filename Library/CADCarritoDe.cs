@@ -8,14 +8,14 @@ using System.Data.SqlClient;
 
 namespace Library
 {
-    class CADLinCarr
+    class CADCarritoDe
     {
         public string connectionString;
 
         /// <summary>
         /// Constructor vacío
         /// </summary>
-        public CADLinCarr() 
+        public CADCarritoDe()
         {
             this.connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
@@ -25,13 +25,12 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos de la Linea de Carrito</param>
         /// <returns></returns>
-        public bool Create(ENLinCarr en)
+        public bool Create(ENCarritoDe en)
         {
-            string insertQuery = "INSERT INTO Linea_carrito (id, cantidad, carrito, producto) VALUES (@LineCartId, @Quantity, @CartId, @ProductId)";
-            int lineCartId = en.Id;
-            int quantity = en.Cantidad;
+            string insertQuery = "INSERT INTO Carrito_de (usuario, carrito, producto) VALUES (@UserId, @CartId)";
+            int userId = en.Usuario;
             int cartId = en.Carrito;
-            int productId = en.Producto;
+
 
             try
             {
@@ -39,11 +38,10 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@LineCartId", lineCartId);
-                        command.Parameters.AddWithValue("@Quantity", quantity);
+                      
+                        command.Parameters.AddWithValue("@UserId", userId);
                         command.Parameters.AddWithValue("@CartId", cartId);
-                        command.Parameters.AddWithValue("@ProductId", productId);
-
+                        
                         connection.Open();
 
                         int rowsAffected = command.ExecuteNonQuery();
@@ -71,11 +69,11 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos de la Linea de Carrito</param>
         /// <returns></returns>
-        public bool Update(ENLinCarr en)
+        public bool Update(ENCarritoDe en)
         {
-            string updateQuery = "UPDATE Linea_carrito SET cantidad = @NewQuantity WHERE id = @LineCartId";
-            int lineCartId = en.Id;
-            int newQuantity = en.Cantidad;
+            string updateQuery = "UPDATE Carrito_de SET carrito = @CartId WHERE id = @UserId";
+            int userId = en.Usuario;
+            int cartId = en.Carrito;
 
             try
             {
@@ -83,8 +81,8 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@NewQuantity", newQuantity);
-                        command.Parameters.AddWithValue("@LineItemId", lineCartId);
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@CartId", cartId);
 
                         connection.Open();
 
@@ -113,11 +111,10 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos de la Linea de Carrito</param>
         /// <returns></returns>
-        public bool Read(ENLinCarr en)
+        public bool Read(ENCarritoDe en)
         {
-
-            string selectQuery = "SELECT * FROM Linea_carrito WHERE id = @LineCartId";
-            int lineCartId = en.Id;
+            string selectQuery = "SELECT * FROM Carrito_de WHERE id = @UserId";
+            int userId = en.Usuario;
 
             try
             {
@@ -125,7 +122,7 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(selectQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@CartId", lineCartId);
+                        command.Parameters.AddWithValue("@UserId", userId);
 
                         connection.Open();
 
@@ -133,7 +130,7 @@ namespace Library
 
                         while (reader.Read())
                         {
-                            Console.WriteLine($"ID: {reader["id"]}, Quantity: {reader["quantity"]}, Product ID: {reader["product"]}");
+                            Console.WriteLine($"ID: ");
                         }
 
                         if (!reader.HasRows)
@@ -155,10 +152,11 @@ namespace Library
         /// </summary>
         /// <param name="en">EN con los datos de la Linea de Carrito</param>
         /// <returns></returns>
-        public bool Delete(ENLinCarr en)
+        public bool Delete(ENCarritoDe en)
         {
-            string deleteQuery = "DELETE FROM Linea_carrito WHERE id = @LineCartId";
-            int lineCartId = en.Id;
+            string deleteQuery = "DELETE FROM Carrito_de WHERE usuario = @UserId";
+            int userId = en.Usuario;
+            int cartId = en.Carrito;
 
             try
             {
@@ -166,7 +164,7 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(deleteQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@LineItemId", lineCartId);
+                        command.Parameters.AddWithValue("@UserId", userId);
 
                         connection.Open();
 
@@ -189,10 +187,11 @@ namespace Library
             }
             return true;
         }
-
-        public List<ENProducto> getItemsByCartId(int cartId)
+        
+        public bool UserExists(ENUsuario User)
         {
-            string selectQuery = "SELECT * FROM Linea_carrito carrito id = @CartId";
+            string selectQuery = "SELECT * FROM Carrito_de WHERE id = @UserId";
+            int userId = User.Id;
 
             try
             {
@@ -200,26 +199,20 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(selectQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@CartId", cartId);
+                        command.Parameters.AddWithValue("@UserId", userId);
 
                         connection.Open();
 
                         SqlDataReader reader = command.ExecuteReader();
 
-                        List<ENProducto> products = new List<ENProducto>();
                         while (reader.Read())
                         {
-                            ENProducto enProd = new ENProducto((int)reader["producto"], 1, 1, 1);
-                            enProd.Read();
-                            products.Add(enProd);
+                            return true;
                         }
-
-                        return products;
-                        
 
                         if (!reader.HasRows)
                         {
-                            Console.WriteLine("No line items found in the shopping cart.");
+                            return false;
                         }
                     }
                 }
@@ -228,7 +221,38 @@ namespace Library
             {
                 Console.WriteLine($"Error reading line items: {ex.Message}");
             }
-            return null;
+            return false;
+        }
+
+        public int GetCartIdByUser(ENUsuario User)
+        {
+            string selectQuery = "SELECT carrito FROM Carrito_de WHERE id = @UserId";
+            int userId = User.Id;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserId", userId);
+
+                        connection.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            return (int)reader["carrito"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading line items: {ex.Message}");
+            }
+            return 0;
         }
     }
 }

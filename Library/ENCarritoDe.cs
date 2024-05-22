@@ -6,36 +6,28 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    public class ENLinCarr
+    public class ENCarritoDe
     {
-        private int _id;
-        private int _cantidad;
+        private int _usuario;
         private int _carrito;
-        private int _producto;
 
-        public int Id { set { _id = value; } get { return _id; } }
-        public int Cantidad { set { _cantidad = value; } get { return _cantidad; } }
+        public int Usuario { set { _usuario = value; } get { return _usuario; } }
         public int Carrito { set { _carrito = value; } get { return _carrito; } }
-        public int Producto { set { _producto = value; } get { return _producto; } }
-
-
-
+       
         /// <summary>
         /// Constructor vacío
         /// </summary>
-        public ENLinCarr() { }
+        public ENCarritoDe() { }
 
         /// <summary>
         /// Constructor con los todos los datos de la linea de Carrito
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="usuario"></param>
         /// <param name="cantidad"></param>
-        public ENLinCarr(int id, int cantidad, int carrito, int producto)
+        public ENCarritoDe(int usuario, int carrito)
         {
-            Id = id;
-            Cantidad = cantidad;
+            Usuario = usuario;
             Carrito = carrito;
-            Producto = producto;
         }
         /// <summary>
         /// Método que crea una linea de carrito con los datos almacenados en el objeto EN
@@ -43,8 +35,8 @@ namespace Library
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool Create()
         {
-            CADLinCarr cadLinCarr = new CADLinCarr();
-            return cadLinCarr.Create(this);
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.Create(this);
         }
 
         /// <summary>
@@ -53,8 +45,8 @@ namespace Library
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool Update()
         {
-            CADLinCarr cadLinCarr = new CADLinCarr();
-            return cadLinCarr.Update(this);
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.Update(this);
         }
         /// <summary>
         /// Método que extrae los datos de la linea de carrito 
@@ -62,8 +54,8 @@ namespace Library
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool Read()
         {
-            CADLinCarr cadLinCarr = new CADLinCarr();
-            return cadLinCarr.Read(this);
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.Read(this);
         }
         /// <summary>
         /// Método que elimina la linea de carrito 
@@ -71,14 +63,20 @@ namespace Library
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool Delete()
         {
-            CADLinCarr cadLinCarr = new CADLinCarr();
-            return cadLinCarr.Delete(this);
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.Delete(this);
         }
 
-        public List<ENProducto> getItemsByCartId(int cartId)
+        public bool UserExists(ENUsuario user)
         {
-            CADLinCarr cadLinCarr = new CADLinCarr();
-            return cadLinCarr.getItemsByCartId(cartId);
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.UserExists(user);
+        }
+
+        public int GetCartIdByUser(ENUsuario user)
+        {
+            CADCarritoDe cadCarritoDe = new CADCarritoDe();
+            return cadCarritoDe.GetCartIdByUser(user);
         }
     }
 }

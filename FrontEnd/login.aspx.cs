@@ -42,7 +42,6 @@ namespace FrontEnd
                 Site1.usuario = new ENUsuario();
                 status_lbl.Text = "Algún campo vacio o falta el @";
             }
-
         }
         protected void Register_Click(object sender, EventArgs e)
         {

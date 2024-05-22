@@ -125,7 +125,7 @@ BEGIN
 	(
 		[id] INT IDENTITY(1,1),
 		[nombre] NVARCHAR(80),
-		[pvp] DECIMAL(7, 2),
+		[pvp] FLOAT,
 		[url_image] NVARCHAR(30),
 		[descripcion] VARCHAR(200),
 		[stock] INT,

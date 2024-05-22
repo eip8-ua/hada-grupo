@@ -15,13 +15,22 @@ namespace FrontEnd
     {
 
         /// <summary>
-        /// Control rptCartItems.
+        /// Control gvCart.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCartItems;
+        protected global::System.Web.UI.WebControls.GridView gvCart;
+
+        /// <summary>
+        /// Control divTotalAndBuy.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTotalAndBuy;
 
         /// <summary>
         /// Control lblTotal.
@@ -33,12 +42,12 @@ namespace FrontEnd
         protected global::System.Web.UI.WebControls.Label lblTotal;
 
         /// <summary>
-        /// Control btnComprar.
+        /// Control btnBuy.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnComprar;
+        protected global::System.Web.UI.WebControls.Button btnBuy;
     }
 }
