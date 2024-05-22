@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENPedido
+    public class ENPedido
     {
         private int numpedido;
         private DateTime fechaPedido;
@@ -65,6 +65,12 @@ namespace Library
         public bool is_correct()
         {
             return Numpedido > 0 && IdUsuario > 0;
+        }
+
+        static public List<ENPedido> ReadAll()
+        {
+            CADPedido cad = new CADPedido();
+            return cad.ReadAll();
         }
     }
 }

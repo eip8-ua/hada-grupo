@@ -13,10 +13,9 @@ namespace FrontEnd
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                ENPedido ped = new ENPedido(0, new DateTime(2000, 10, 01), 0);
+            { 
 
-                rptListPedidos.DataSource = ped.listPedidos();
+                rptListPedidos.DataSource = ENPedido.ReadAll();
                 rptListPedidos.DataBind();
             }
 
