@@ -23,7 +23,7 @@ namespace proyecto
                         lblNombreProducto.Text = producto.nombre;
                         lblDescripcionProducto.Text = producto.descripcion;
                         lblPrecioProducto.Text = producto.pvp.ToString("N2") + " EUR";
-                        imgProducto.ImageUrl = producto.url_image+".jpg";
+                        imgProducto.ImageUrl = producto.url_image;
                     }
                     else
                     {

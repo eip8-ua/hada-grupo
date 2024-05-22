@@ -62,7 +62,7 @@ namespace proyecto
                 //Creamos la imagen del producto
                 Image productImage = new Image();
                 productImage.ID = "popular_product" + contador.ToString() + "_Image";
-                productImage.ImageUrl = producto.url_image + ".jpg";
+                productImage.ImageUrl = producto.url_image;
                 productImage.AlternateText = "Imagen producto";
                 productImage.Width = 200;
                 productImage.Height = 200;
@@ -161,7 +161,7 @@ namespace proyecto
                 //Creamos la imagen del producto
                 Image productImage = new Image();
                 productImage.ID = "promo_product" + contador.ToString() + "_Image";
-                productImage.ImageUrl = producto.url_image + ".jpg";
+                productImage.ImageUrl = producto.url_image;
                 productImage.AlternateText = "Imagen producto";
                 productImage.Width = 200;
                 productImage.Height = 200;
