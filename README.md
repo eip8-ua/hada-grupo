@@ -33,7 +33,9 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
     - Esbribe aqui
 
 - Daniel Alarcón Mena
-    - Esbribe aqui
+	-Entidades Pedido y Línea Pedido
+  	-Aspx de Testimoniales
+  	-Aspx de Productos (por categoria,todos y de manera individual) 
 
 - Abdelatif Boussaid
     - Esbribe aqui
