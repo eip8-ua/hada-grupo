@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.UI;
 using Library; // Asegúrate de importar el espacio de nombres donde están definidas las clases ENProducto y CADProducto
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FrontEnd
 {
@@ -52,7 +54,6 @@ namespace FrontEnd
                 }
             }
         }
-
         protected void btnAddToCart_Click(object sender, EventArgs e)
         {
             // Obtener el ID del producto y la cantidad seleccionada

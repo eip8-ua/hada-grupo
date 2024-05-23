@@ -31,7 +31,7 @@
                                     $"<span class='original-price'>{Eval("Pvp", "{0:N2} EUR")}</span> <span class='discounted-price'>{(Convert.ToDecimal(Eval("Pvp")) * (1 - Convert.ToDecimal(Eval("Promocion.Descuento")) / 100)).ToString("N2")} EUR</span>" : 
                                     $"<span class='normal-price'>{Eval("Pvp", "{0:N2} EUR")}</span>" %>
                             </p>
-                            <asp:Button ID="btnAddToCart" runat="server" CssClass="btnAddToCart" Text="Añadir al carrito" />
+                            <asp:Button ID="btnAddToCart" runat="server" CssClass="btnAddToCart" Text="Añadir al carrito" CommandArgument='<%# Eval("id") %>' CommandName="AddToCart" OnCommand="btnAddToCart_Command" />
                         </div>
                     </div>
                 </ItemTemplate>

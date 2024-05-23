@@ -18,14 +18,6 @@ namespace FrontEnd
             {
                 // Debugging: Check session data at the start of Page_Load
                 List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
-                if (cart.Count > 0)
-                {
-                   //Response.Write("Cart items count: " + cart.Count);
-                }
-                else
-                {
-                    //Response.Write("Cart is empty");
-                }
                 BindCart();
 
                 if (Site1.usuario != null)
@@ -51,8 +43,13 @@ namespace FrontEnd
                     {
                         // Si no existe crear una base de datos con el usuario y el carrito actual
                         enCarritoDe.Create();
+                        BindCart();
                     }
                         
+                }
+                else
+                {
+                    BindCart();
                 }
             }
         }
