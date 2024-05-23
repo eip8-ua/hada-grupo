@@ -38,7 +38,9 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
   	-Aspx de Productos (por categoria,todos y de manera individual) 
 
 - Abdelatif Boussaid
-    - Esbribe aqui
+    - Entidades valoraciones y contactanos.
+    - Apsx de pedidos.
+    - Aspx categorias, ayudando a Daniel. 
 
 
 
