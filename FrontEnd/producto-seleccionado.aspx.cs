@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.UI;
 using Library; // Asegúrate de importar el espacio de nombres donde están definidas las clases ENProducto y CADProducto
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FrontEnd
 {
@@ -43,10 +45,12 @@ namespace FrontEnd
             // Obtener el ID del producto y la cantidad seleccionada
             int productId = Convert.ToInt32(Request.QueryString["id"]);
             int quantity = Convert.ToInt32(ddlQuantity.SelectedValue);
+            List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
 
-            
+            ENLinCarr enLinCarr = new ENLinCarr(1,quantity,1,productId);
 
-            Response.Redirect("shopping_cart.aspx");
+            cart.Add(enLinCarr);
+            Session["Cart"] = cart;
         }
 
     }

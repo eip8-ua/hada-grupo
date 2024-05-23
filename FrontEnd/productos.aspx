@@ -29,7 +29,7 @@
                             <p class="price">
                                 <%# Eval("pvp", "{0:N2} EUR") %>
                             </p>
-                            <asp:Button ID="btnAddToCart" runat="server" CssClass="btnAddToCart" Text="Añadir al carrito" />
+                            <asp:Button ID="btnAddToCart" runat="server" CssClass="btnAddToCart" Text="Añadir al carrito" CommandArgument='<%# Eval("id") %>' CommandName="AddToCart" OnCommand="btnAddToCart_Command" />
                         </div>
                     </div>
                 </ItemTemplate>
