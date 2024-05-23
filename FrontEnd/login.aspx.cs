@@ -22,9 +22,10 @@ namespace FrontEnd
                 Site1.usuario.Email = email.Text;
                 Site1.usuario.Passwd = password.Text;
 
-
                 if (Site1.usuario.Validate())
                 {
+                    // Almacenar el ID del usuario en la sesión
+                    Session["UserID"] = Site1.usuario.Id;
                     Response.Redirect("~/user.aspx");
                 }
                 else
@@ -34,7 +35,7 @@ namespace FrontEnd
                     Site1.usuario = new ENUsuario();
                     status_lbl.Text = "Correo electrónico o contraseña incorrecto";
                 }
-             }
+            }
             else
             {
                 email.Text = "";

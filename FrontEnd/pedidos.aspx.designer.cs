@@ -11,7 +11,25 @@ namespace FrontEnd
 {
 
 
-    public partial class shop
+    public partial class pedidos
     {
+
+        /// <summary>
+        /// Control NoOrdersLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NoOrdersLabel;
+
+        /// <summary>
+        /// Control OrdersGridView.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView OrdersGridView;
     }
 }
