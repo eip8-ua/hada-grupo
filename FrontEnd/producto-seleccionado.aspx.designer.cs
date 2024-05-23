@@ -42,13 +42,22 @@ namespace FrontEnd
         protected global::System.Web.UI.WebControls.Label lblDescripcionProducto;
 
         /// <summary>
-        /// Control lblPrecioProducto.
+        /// Control lblPrecioOriginal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrecioProducto;
+        protected global::System.Web.UI.WebControls.Label lblPrecioOriginal;
+
+        /// <summary>
+        /// Control lblPrecioRebajado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrecioRebajado;
 
         /// <summary>
         /// Control ddlQuantity.

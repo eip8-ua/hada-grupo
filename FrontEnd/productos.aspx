@@ -12,22 +12,24 @@
             <asp:Repeater ID="RepeaterProductos" runat="server">
                 <ItemTemplate>
                     <div class="product-card">
-                        <asp:HyperLink ID="HyperLinkImage" runat="server" NavigateUrl='<%# "producto-seleccionado.aspx?id=" + Eval("id") %>'>
+                        <asp:HyperLink ID="HyperLinkImage" runat="server" NavigateUrl='<%# "producto-seleccionado.aspx?id=" + Eval("Id") %>'>
                             <img src='<%# Eval("url_image") %>' alt="Producto" class="product-image" />
                         </asp:HyperLink>
-                        <div class="discount-tag" style='<%# Convert.ToDecimal(Eval("promocion.Descuento")) > 0 ? "" : "display:none;" %>'>
-                            <%# Eval("promocion.Descuento") %>% OFF
+                        <div class="discount-tag" style='<%# Convert.ToDecimal(Eval("Promocion.Descuento")) > 0 ? "" : "display:none;" %>'>
+                            <%# Eval("Promocion.Descuento") %>% OFF
                         </div>
                         <div class="product-info">
                             <h3>
                                 <asp:HyperLink ID="HyperLinkProductName" runat="server" 
-                                               NavigateUrl='<%# "producto-seleccionado.aspx?id=" + Eval("id") %>'
+                                               NavigateUrl='<%# "producto-seleccionado.aspx?id=" + Eval("Id") %>'
                                                Style="text-decoration:none; color:black;">
-                                    <%# Eval("nombre") %>
+                                    <%# Eval("Nombre") %>
                                 </asp:HyperLink>
                             </h3>
                             <p class="price">
-                                <%# Eval("pvp", "{0:N2} EUR") %>
+                                <%# Convert.ToDecimal(Eval("Promocion.Descuento")) > 0 ? 
+                                    $"<span class='original-price'>{Eval("Pvp", "{0:N2} EUR")}</span> <span class='discounted-price'>{(Convert.ToDecimal(Eval("Pvp")) * (1 - Convert.ToDecimal(Eval("Promocion.Descuento")) / 100)).ToString("N2")} EUR</span>" : 
+                                    $"<span class='normal-price'>{Eval("Pvp", "{0:N2} EUR")}</span>" %>
                             </p>
                             <asp:Button ID="btnAddToCart" runat="server" CssClass="btnAddToCart" Text="Añadir al carrito" />
                         </div>

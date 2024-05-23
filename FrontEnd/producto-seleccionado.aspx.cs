@@ -22,8 +22,22 @@ namespace FrontEnd
                         // Si se encuentra el producto, asignarlo a los controles de la página para mostrar la información
                         lblNombreProducto.Text = producto.nombre;
                         lblDescripcionProducto.Text = producto.descripcion;
-                        lblPrecioProducto.Text = producto.pvp.ToString("N2") + " EUR";
                         imgProducto.ImageUrl = producto.url_image;
+
+                        // Mostrar el precio original y el precio con descuento si aplica
+                        if (producto.promocion != null && producto.promocion.Descuento > 0)
+                        {
+                            lblPrecioOriginal.Text = producto.pvp.ToString("N2") + " EUR";
+                            lblPrecioOriginal.CssClass = "original-price"; // Aplicar clase solo si hay descuento
+                            lblPrecioRebajado.Text = (producto.pvp * (1 - producto.promocion.Descuento / 100)).ToString("N2") + " EUR";
+                            lblPrecioRebajado.Visible = true;
+                        }
+                        else
+                        {
+                            lblPrecioOriginal.Text = producto.pvp.ToString("N2") + " EUR";
+                            lblPrecioOriginal.CssClass = ""; // Remover cualquier clase si no hay descuento
+                            lblPrecioRebajado.Visible = false; // Ocultar etiqueta de precio rebajado si no hay descuento
+                        }
                     }
                     else
                     {
@@ -38,16 +52,16 @@ namespace FrontEnd
                 }
             }
         }
+
         protected void btnAddToCart_Click(object sender, EventArgs e)
         {
             // Obtener el ID del producto y la cantidad seleccionada
             int productId = Convert.ToInt32(Request.QueryString["id"]);
             int quantity = Convert.ToInt32(ddlQuantity.SelectedValue);
 
-            
+            // Agregar el producto al carrito de compras (lógica necesaria)
 
             Response.Redirect("shopping_cart.aspx");
         }
-
     }
 }
