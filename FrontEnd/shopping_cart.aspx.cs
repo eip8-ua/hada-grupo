@@ -237,7 +237,17 @@ namespace FrontEnd
 
         protected void btnBuy_Click(object sender, EventArgs e)
         {
-            // Redirect to the Finish Purchase page
+            ENPedido enPedido = new ENPedido(1, DateTime.Now, Site1.usuario.Id);
+            enPedido.Create();
+
+            List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
+
+            foreach (ENLinCarr item in cart)
+            {
+                ENLinPed enLinPed = new ENLinPed(item.Id, item.Carrito, item.Producto, item.Cantidad);
+                enLinPed.Create();
+            }
+
             Response.Redirect("Pedidos.aspx");
         }
 

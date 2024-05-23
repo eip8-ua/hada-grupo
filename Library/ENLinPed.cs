@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENLinPed
+    public class ENLinPed
     {
         private int? idLinPedido;
         private int? idPedido;
