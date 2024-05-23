@@ -24,8 +24,22 @@ namespace FrontEnd
                         // Si se encuentra el producto, asignarlo a los controles de la página para mostrar la información
                         lblNombreProducto.Text = producto.nombre;
                         lblDescripcionProducto.Text = producto.descripcion;
-                        lblPrecioProducto.Text = producto.pvp.ToString("N2") + " EUR";
                         imgProducto.ImageUrl = producto.url_image;
+
+                        // Mostrar el precio original y el precio con descuento si aplica
+                        if (producto.promocion != null && producto.promocion.Descuento > 0)
+                        {
+                            lblPrecioOriginal.Text = producto.pvp.ToString("N2") + " EUR";
+                            lblPrecioOriginal.CssClass = "original-price"; // Aplicar clase solo si hay descuento
+                            lblPrecioRebajado.Text = (producto.pvp * (1 - producto.promocion.Descuento / 100)).ToString("N2") + " EUR";
+                            lblPrecioRebajado.Visible = true;
+                        }
+                        else
+                        {
+                            lblPrecioOriginal.Text = producto.pvp.ToString("N2") + " EUR";
+                            lblPrecioOriginal.CssClass = ""; // Remover cualquier clase si no hay descuento
+                            lblPrecioRebajado.Visible = false; // Ocultar etiqueta de precio rebajado si no hay descuento
+                        }
                     }
                     else
                     {
@@ -38,6 +52,15 @@ namespace FrontEnd
                     // Manejar el caso en que no se haya proporcionado un ID de producto en la URL
                     Response.Redirect("productos.aspx"); // Redirigir a la página de productos
                 }
+
+
+
+                //Añadir valoraciones
+                ENValoraciones val = new ENValoraciones();
+                val.Producto.id = Convert.ToInt32(Request.QueryString["id"]);
+                val.Producto.Read();
+                rptListReviews.DataSource = val.Get_All_Product_Reviews();
+                rptListReviews.DataBind();
             }
         }
         protected void btnAddToCart_Click(object sender, EventArgs e)
@@ -47,20 +70,9 @@ namespace FrontEnd
             int quantity = Convert.ToInt32(ddlQuantity.SelectedValue);
             List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
 
-
-            ENLinCarr existingProduct = cart.Find(p => p.Producto == productId);
-
-            if (existingProduct != null)
-            {
-                existingProduct.Cantidad += quantity;
-            }
-            else
-            {
-                cart.Add(new ENLinCarr(1, quantity, 1, productId));
-            }
+            ENLinCarr enLinCarr = new ENLinCarr(1, quantity, 1, productId);
 
             Session["Cart"] = cart;
         }
-
     }
 }

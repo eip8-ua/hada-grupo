@@ -8,8 +8,6 @@ namespace Library
 {
     public class ENProducto
     {
-
-        private ENCategoria _categoria;
         private int _id;
         private int _stock;
         private float _pvp;
@@ -18,6 +16,7 @@ namespace Library
         private int _popularidad;
         private string _url_image;
         private ENPromociones _promocion;
+        private ENCategoria _categoria;
 
         public ENCategoria categoria
         {
@@ -103,6 +102,19 @@ namespace Library
             promocion = prom;
         }
 
+        public ENProducto(ENProducto prod)
+        {
+            id = prod.id;
+            pvp = prod.pvp;
+            stock = prod.stock;
+            popularidad = prod.popularidad;
+            nombre = prod.nombre;
+            descripcion = prod.descripcion;
+            url_image = prod.url_image;
+            categoria = prod.categoria;
+            promocion = prod.promocion;
+
+        }
         public bool Create()
         {
             CADProducto cad = new CADProducto();

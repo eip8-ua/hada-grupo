@@ -13,7 +13,10 @@
         <div class="product-details">
             <h1><asp:Label ID="lblNombreProducto" runat="server" Text=""></asp:Label></h1>
             <p><asp:Label ID="lblDescripcionProducto" runat="server" Text=""></asp:Label></p>
-            <p class="price"><asp:Label ID="lblPrecioProducto" runat="server" Text=""></asp:Label></p>
+            <p class="price">
+                <asp:Label ID="lblPrecioOriginal" runat="server" CssClass="original-price" Text=""></asp:Label>
+                <asp:Label ID="lblPrecioRebajado" runat="server" CssClass="discounted-price" Text=""></asp:Label>
+            </p>
             <div class="quantity-selection">
                 <label for="quantity">Cantidad:</label>
                 <asp:DropDownList ID="ddlQuantity" runat="server">
@@ -31,5 +34,21 @@
             </div>
             <asp:Button ID="btnAddToCart" runat="server" Text="Añadir al carrito" CssClass="btnAddToCart" OnClick="btnAddToCart_Click" />
         </div>
+    </div>
+
+    <div class="reviews">
+        <table width: 100%, display: flex>
+            <asp:Repeater ID="rptListReviews" runat="server">
+                    <ItemTemplate>
+               <tr>
+                    <td class="email"><%# Eval("Usuario.email") %></td>
+                    <td class="puntuacion"> <%# Eval("puntuacion") %></td>
+                </tr>
+                <tr>
+                    <td class="descripcion" colspan="4"><%# Eval("descripcion") %></td>
+                </tr>
+                    </ItemTemplate>
+            </asp:Repeater>
+        </table>
     </div>
 </asp:Content>
