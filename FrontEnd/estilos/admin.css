@@ -24,7 +24,40 @@ th, td {
 }
 
 
-.element {
+/*.element {
     padding: 10px;
     font-size: 15px;
+}*/
+
+.centered-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .centered-table th, .centered-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center; /* Centramos el texto */
+    }
+
+    .centered-table th {
+        background-color: #f2f2f2;
+        color: black;
+    }
+
+.element {
+    text-align: center; /* Aseguramos que los elementos estén centrados */
+}
+
+.button {
+    background-color: #4CAF50; /* Verde */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }

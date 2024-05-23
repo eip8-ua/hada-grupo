@@ -12,13 +12,14 @@ namespace FrontEnd
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            status_lbl.Text = "";
         }
 
         protected void Login_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(email.Text) || String.IsNullOrEmpty(nombre.Text) || String.IsNullOrEmpty(telf.Text) || String.IsNullOrEmpty(mensaje.Text))
             {
+                status_lbl.ForeColor = System.Drawing.Color.Red;
                 status_lbl.Text = "Campo vacío";
             }
 
@@ -34,6 +35,9 @@ namespace FrontEnd
 
 
                 }
+
+                status_lbl.ForeColor = System.Drawing.Color.Green;
+                status_lbl.Text = "Mensaje enviado con éxito";
 
             }
         }
