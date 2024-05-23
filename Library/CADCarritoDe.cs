@@ -205,15 +205,12 @@ namespace Library
 
                         SqlDataReader reader = command.ExecuteReader();
 
-                        while (reader.Read())
-                        {
-                            return true;
-                        }
-
                         if (!reader.HasRows)
                         {
                             return false;
                         }
+
+                        return true;
                     }
                 }
             }

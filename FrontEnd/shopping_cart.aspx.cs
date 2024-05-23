@@ -18,29 +18,78 @@ namespace FrontEnd
             if (!IsPostBack)
             {
   
-                if (Site1.usuario != null)
+                if (Site1.usuario.Email!=null)
                 {
-                    //List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
                     ENCarritoDe enCarritoDe = new ENCarritoDe();
 
                     // Ver si existe el usuario en la base de datos
                     if (enCarritoDe.UserExists(Site1.usuario))
                     {
-                        // Consegir Id del carrito ligada al usuario
+                        ENLinCarr enLinCarr = new ENLinCarr();
+
+                        // Conseguir Id del carrito ligada al usuario
                         int cartDataBase = enCarritoDe.GetCartIdByUser(Site1.usuario);
 
+                        // Añadir los productos de la Variable Session a la base de datos
+                        if (Session["Cart"] != null)
+                        {
+                            List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
+
+                            foreach (ENLinCarr item in cart)
+                            {
+                                item.Carrito = cartDataBase;
+                                item.Create();
+                            }
+                        }
+
                         // Conseguir Productos del carrito con la Id anterior
-                        ENLinCarr enLinCarr = new ENLinCarr();
                         List<ENProducto> cartDBItems = enLinCarr.getItemsByCartId(cartDataBase);
 
                         // Añadir los Productos al GridView
-                        Session["CartItems"] = cartDBItems;
+                        Session["Cart"] = cartDBItems;
                         BindCart();
                     }
                     else
                     {
-                        // Si no existe crear una base de datos con el usuario y el carrito actual
-                        enCarritoDe.Create();
+                        Response.Write("No tenia carrito");
+
+                        if(Session["Cart"] != null) 
+                        {
+                            Response.Write("Carrito con algo");
+                            
+                            // Si no existe crear una linea de la base de datos con el usuario y el carrito actual
+                            ENCarrito enCarrito = new ENCarrito();
+                            enCarrito.Num_carrito = enCarrito.getNextCartId(); // Generar id del carrito
+                            enCarrito.Fecha = DateTime.Now;
+                            if (enCarrito.Create())
+                            {
+                                Response.Write("SUU");
+                            }
+
+                            enCarritoDe.Carrito = enCarrito.getNextCartId(); ;
+                            enCarritoDe.Usuario = Site1.usuario.Id;
+
+                            enCarritoDe.Create();
+
+                            ENLinCarr enLinCarr = new ENLinCarr();
+
+                            // Conseguir Id del carrito ligada al usuario
+                            int cartDataBase = enCarritoDe.GetCartIdByUser(Site1.usuario);
+
+                            // Añadir los productos de la Variable Session a la base de datos
+                            if (Session["Cart"] != null)
+                            {
+                                List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
+
+                                foreach (ENLinCarr item in cart)
+                                {
+                                    item.Carrito = cartDataBase;
+                                    item.Create();
+                                }
+                            }
+
+                            
+                        }
                         BindCart();
                     }
                         

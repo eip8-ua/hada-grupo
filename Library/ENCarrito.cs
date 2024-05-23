@@ -67,5 +67,11 @@ namespace Library
             CADCarrito cadCarr = new CADCarrito();
             return cadCarr.Delete(this);
         }
+
+        public int getNextCartId()
+        {
+            CADCarrito cadCarr = new CADCarrito();
+            return cadCarr.getNextCartId();
+        }
     }
 }

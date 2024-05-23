@@ -52,10 +52,12 @@ namespace Library
                         if (rowsAffected > 0)
                         {
                             Console.WriteLine($"Shopping cart {cartNumber} created successfully!");
+                            return true;
                         }
                         else
                         {
                             Console.WriteLine($"Failed to create shopping cart {cartNumber}.");
+                            return false;
                         }
                     }
                 }
@@ -188,6 +190,42 @@ namespace Library
                 Console.WriteLine($"Error deleting shopping cart: {ex.Message}");
             }
             return true;
+        }
+
+        public int getNextCartId()
+        {
+            string selectQuery = "SELECT MAX(num_carrito) AS max_id FROM Carrito";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
+                    {
+
+                        connection.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            if((int)reader["max_id"] > 0)
+                                return (int)reader["max_id"] + 1;
+
+                            return 1;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Shopping cart not found.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading shopping cart: {ex.Message}");
+            }
+            return 1;
         }
     }
 }
