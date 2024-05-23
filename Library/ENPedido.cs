@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENPedido
+    public class ENPedido
     {
         private int numpedido;
         private DateTime fechaPedido;

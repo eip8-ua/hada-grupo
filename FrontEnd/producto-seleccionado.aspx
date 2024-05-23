@@ -13,7 +13,10 @@
         <div class="product-details">
             <h1><asp:Label ID="lblNombreProducto" runat="server" Text=""></asp:Label></h1>
             <p><asp:Label ID="lblDescripcionProducto" runat="server" Text=""></asp:Label></p>
-            <p class="price"><asp:Label ID="lblPrecioProducto" runat="server" Text=""></asp:Label></p>
+            <p class="price">
+                <asp:Label ID="lblPrecioOriginal" runat="server" CssClass="original-price" Text=""></asp:Label>
+                <asp:Label ID="lblPrecioRebajado" runat="server" CssClass="discounted-price" Text=""></asp:Label>
+            </p>
             <div class="quantity-selection">
                 <label for="quantity">Cantidad:</label>
                 <asp:DropDownList ID="ddlQuantity" runat="server">

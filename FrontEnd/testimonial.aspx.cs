@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using Library;
 
 namespace FrontEnd
@@ -17,7 +19,7 @@ namespace FrontEnd
                     bool success = testimonioActual.ReadFirst();
                     if (success)
                     {
-                        lblNombreTestimonial.Text = testimonioActual.Id.ToString();
+                        LoadUserName(testimonioActual.Id);
                         lblCita.Text = testimonioActual.Message;
                         System.Diagnostics.Debug.WriteLine("First testimonial loaded successfully.");
                     }
@@ -46,7 +48,7 @@ namespace FrontEnd
                 bool success = testimonioActual.ReadPrev();
                 if (success)
                 {
-                    lblNombreTestimonial.Text = testimonioActual.Id.ToString();
+                    LoadUserName(testimonioActual.Id);
                     lblCita.Text = testimonioActual.Message;
                     System.Diagnostics.Debug.WriteLine("Previous testimonial loaded successfully.");
                 }
@@ -70,7 +72,7 @@ namespace FrontEnd
                 bool success = testimonioActual.ReadNext();
                 if (success)
                 {
-                    lblNombreTestimonial.Text = testimonioActual.Id.ToString();
+                    LoadUserName(testimonioActual.Id);
                     lblCita.Text = testimonioActual.Message;
                     System.Diagnostics.Debug.WriteLine("Next testimonial loaded successfully.");
                 }
@@ -86,5 +88,47 @@ namespace FrontEnd
                 System.Diagnostics.Debug.WriteLine("Error in btn2_Click: " + ex.Message);
             }
         }
+
+        private void LoadUserName(int testimonialId)
+        {
+            try
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT testimonial.*, usuario.nombre " +
+                                   "FROM testimonial " +
+                                   "INNER JOIN califica ON testimonial.id = califica.testimonial " +
+                                   "INNER JOIN usuario ON califica.usuario = usuario.id " +
+                                   "WHERE testimonial.id = @id";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@id", testimonialId);
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        string userName = reader["nombre"].ToString();
+                        lblNombreTestimonial.Text = userName;
+                    }
+                    else
+                    {
+                        lblNombreTestimonial.Text = "Usuario desconocido";
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción apropiadamente
+                lblNombreTestimonial.Text = "Error al cargar el nombre del usuario";
+                Console.WriteLine("An error occurred while loading user name: " + ex.Message);
+            }
+        }
+
+
     }
 }
