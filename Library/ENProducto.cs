@@ -254,6 +254,12 @@ namespace Library
             return null;
         }
 
+        public static List<ENProducto> FiltrarProductos(string categoria, decimal minPrice, decimal maxPrice)
+        {
+            CADProducto cadProducto = new CADProducto();
+            return cadProducto.FiltrarProductos(categoria, minPrice, maxPrice);
+        }
+
 
     }
 }

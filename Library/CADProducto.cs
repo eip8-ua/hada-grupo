@@ -340,5 +340,75 @@ namespace Library
             return productos;
         }
 
+        public List<ENProducto> FiltrarProductos(string categoria, decimal minPrice, decimal maxPrice)
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            string query = @"
+        SELECT *, 
+            CASE
+                WHEN Promocion IS NOT NULL THEN Pvp * (1 - (SELECT Descuento FROM Promocion WHERE Promocion.id = Producto.promocion) / 100.0)
+                ELSE Pvp
+            END AS PrecioConDescuento
+        FROM Producto
+        WHERE (@categoria = 'all' OR Categoria = @categoria)
+        AND 
+        (
+            (Promocion IS NOT NULL AND Pvp * (1 - (SELECT Descuento FROM Promocion WHERE Promocion.id = Producto.promocion) / 100.0) BETWEEN @minPrice AND @maxPrice)
+            OR
+            (Promocion IS NULL AND Pvp BETWEEN @minPrice AND @maxPrice)
+        )";
+
+            using (SqlConnection connection = new SqlConnection(constring))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@categoria", categoria);
+                command.Parameters.AddWithValue("@minPrice", minPrice);
+                command.Parameters.AddWithValue("@maxPrice", maxPrice);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ENProducto producto = new ENProducto
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("id")),
+                            nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                            pvp = Convert.ToSingle(reader["pvp"]),
+                            url_image = reader["url_image"] as string,
+                            descripcion = reader["descripcion"] as string,
+                            stock = Convert.ToInt32(reader["stock"]),
+                            popularidad = Convert.ToInt32(reader["popularidad"]),
+                            promocion = reader.IsDBNull(reader.GetOrdinal("promocion")) ? null : new ENPromociones { MiId = reader.GetInt32(reader.GetOrdinal("promocion")) },
+                            categoria = reader.IsDBNull(reader.GetOrdinal("categoria")) ? null : ENCategoria.getCategoria(reader.GetString(reader.GetOrdinal("categoria")))
+                        };
+
+                        if (producto.promocion != null)
+                        {
+                            producto.promocion = producto.promocion.read();
+                        }
+
+                        productos.Add(producto);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Excepción SQL: " + ex.Message);
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return productos;
+        }
+
+
     }
 }

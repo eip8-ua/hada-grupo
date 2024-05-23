@@ -22,20 +22,15 @@ namespace FrontEnd
             RepeaterProductos.DataBind();
         }
 
-        protected void RepeaterProductos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void FilterProducts(object sender, EventArgs e)
         {
-            if (e.CommandName == "AddToCart")
-            {
-                // Obtener la ID del producto desde el CommandArgument
-                int productId = Convert.ToInt32(e.CommandArgument);
+            string categoria = ddlCategory.SelectedValue;
+            decimal minPrice = string.IsNullOrEmpty(txtMinPrice.Text) ? 0 : Convert.ToDecimal(txtMinPrice.Text);
+            decimal maxPrice = string.IsNullOrEmpty(txtMaxPrice.Text) ? decimal.MaxValue : Convert.ToDecimal(txtMaxPrice.Text);
 
-                // Aquí puedes agregar la lógica para añadir el producto al carrito
-                // Por ejemplo:
-                // AddToCart(productId);
-
-                // Mostrar un mensaje o redirigir a otra página
-                Response.Write("Producto añadido al carrito: " + productId);
-            }
+            List<ENProducto> productosFiltrados = ENProducto.FiltrarProductos(categoria, minPrice, maxPrice);
+            RepeaterProductos.DataSource = productosFiltrados;
+            RepeaterProductos.DataBind();
         }
 
         protected void btnAddToCart_Command(object sender, CommandEventArgs e)
@@ -59,6 +54,5 @@ namespace FrontEnd
 
             Session["Cart"] = cart;
         }
-   
     }
 }

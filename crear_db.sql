@@ -202,6 +202,18 @@ BEGIN
 	)
 END;
 
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Contactanos')
+BEGIN
+	CREATE TABLE [dbo].[Contactanos]
+	(
+		[id] INT IDENTITY(1,1),
+		[nombre] NVARCHAR(33),
+		[email] NVARCHAR(50),
+		[telefono] NVARCHAR(15),
+		[mensaje] NVARCHAR (1000),
+		CONSTRAINT pk_contactanos PRIMARY KEY([id])
+	)
+END;
 
 insert into Usuario (dni, email, nombre, apellidos, contrasena, telefono, fecha_nac, admin) values ('68870720r', 'admin@ua.es', 'Alberto', 'Sales Paredes', '1234', '607258331', '7/22/1990', '1');
 insert into Usuario (dni, email, nombre, apellidos, contrasena, telefono, fecha_nac, admin) values ('40556862m', 'user@ua.es', 'Filomeno', 'Bueno Prados', '1234', '972583351', '1/1/1959', '0');
