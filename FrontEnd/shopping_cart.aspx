@@ -120,7 +120,12 @@
                     <Columns>
                         <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" />
                         <asp:BoundField DataField="Name" HeaderText="Nombre" ReadOnly="True" />
-                        <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" ReadOnly="True" />
+                        <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" ReadOnly="True"/>
+                        <asp:TemplateField HeaderText="Precio con Descuento">
+                            <ItemTemplate>
+                                <%# GetDiscountedPrice((float)Eval("Price"), (float)Eval("Discount")) %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Cantidad">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtQuantity" runat="server" Text='<%# Eval("Quantity") %>' AutoPostBack="True" OnTextChanged="txtQuantity_TextChanged"></asp:TextBox>
@@ -142,6 +147,8 @@
             </div>
         </div>
         <div id="divTotalAndBuy" class="totalMenu" runat="server">
+            <h3>Total sin descuentos: <asp:Label ID="lblTotalPvp" runat="server" Text="0"></asp:Label></h3>
+            <h3>Total ahorrado con descuentos: <asp:Label ID="lblTotalDesc" runat="server" Text="0"></asp:Label></h3>
             <h2>Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label></h2>
             <asp:Button ID="btnBuy" runat="server" Text="Comprar" CssClass="btn" OnClick="btnBuy_Click" />
         </div>

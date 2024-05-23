@@ -110,7 +110,7 @@ namespace FrontEnd
             {
                 ENProducto enProd = new ENProducto(linCarr.Producto, 1, 1, 1);
                 enProd.Read();
-                Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad);
+                Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad, enProd.promocion != null ? enProd.promocion.Descuento : 0);
                 cartFormat.Add(prod);
             }
 
@@ -118,12 +118,6 @@ namespace FrontEnd
             gvCart.DataBind();
             divTotalAndBuy.Visible = cartFormat.Count > 0;
             UpdateTotal(cartFormat);
-        }
-
-        protected void SaveCartToDataBase()
-        {
-            ENCarritoDe enCarritoDe = new ENCarritoDe();
-            //List<Product> cart  cartItems = enCarritoDe.GetCartByUser();
         }
 
         protected void gvCart_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -170,7 +164,7 @@ namespace FrontEnd
                         {
                             ENProducto enProd = new ENProducto(linCarr.Producto, 1, 1, 1);
                             enProd.Read();
-                            Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad);
+                            Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad, enProd.promocion != null ? enProd.promocion.Descuento : 0);
                             cartFormat.Add(prod);
                         }
 
@@ -211,7 +205,7 @@ namespace FrontEnd
                 {
                     ENProducto enProd = new ENProducto(linCarr.Producto, 1, 1, 1);
                     enProd.Read();
-                    Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad);
+                    Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad, enProd.promocion != null ? enProd.promocion.Descuento : 0);
                     cartFormat.Add(prod);
                 }
 
@@ -222,11 +216,22 @@ namespace FrontEnd
 
         protected void UpdateTotal(List<Product> cart)
         {
-            float total = 0;
+            float totalPvp = 0;
             foreach (Product product in cart)
             {
-                total += product.Price * product.Quantity;
+                totalPvp += product.Price * product.Quantity;
             }
+            lblTotalPvp.Text = totalPvp.ToString("C");
+
+            float totalDesc = 0;
+            foreach (Product product in cart)
+            {
+                totalDesc += (product.Price - (product.Price * (1 - product.Discount / 100))) * product.Quantity;
+            }
+            lblTotalDesc.Text = totalDesc.ToString("C");
+
+            float total = 0;    
+            total += totalPvp - totalDesc;
             lblTotal.Text = total.ToString("C");
         }
 
@@ -235,21 +240,30 @@ namespace FrontEnd
             // Redirect to the Finish Purchase page
             Response.Redirect("Pedidos.aspx");
         }
+
+        protected string GetDiscountedPrice(float price, float discount)
+        {
+            float discountedPrice = price * (1 - discount / 100); // Calcular el precio con descuento
+            return discountedPrice.ToString("C"); // Formatear el precio con descuento como una moneda
+        }
+
     }
-    
+
     public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public float Price { get; set; }
         public int Quantity { get; set; }
+        public float Discount { get; set; }
 
-        public Product(int id, string name, float price, int quantity)
+        public Product(int id, string name, float price, int quantity, float discount)
         {
             Id = id;
             Name = name;
             Price = price;
             Quantity = quantity;
+            Discount = discount;
         }
     }
 }

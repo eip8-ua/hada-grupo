@@ -33,6 +33,24 @@ namespace FrontEnd
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTotalAndBuy;
 
         /// <summary>
+        /// Control lblTotalPvp.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalPvp;
+
+        /// <summary>
+        /// Control lblTotalDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalDesc;
+
+        /// <summary>
         /// Control lblTotal.
         /// </summary>
         /// <remarks>
