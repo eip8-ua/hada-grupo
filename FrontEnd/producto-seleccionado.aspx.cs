@@ -59,10 +59,12 @@ namespace FrontEnd
             // Obtener el ID del producto y la cantidad seleccionada
             int productId = Convert.ToInt32(Request.QueryString["id"]);
             int quantity = Convert.ToInt32(ddlQuantity.SelectedValue);
+            List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
 
-            // Agregar el producto al carrito de compras (lógica necesaria)
+            ENLinCarr enLinCarr = new ENLinCarr(1, quantity, 1, productId);
 
-            Response.Redirect("shopping_cart.aspx");
+            cart.Add(enLinCarr);
+            Session["Cart"] = cart;
         }
     }
 }
