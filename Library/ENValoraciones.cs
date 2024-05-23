@@ -1,41 +1,84 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Library
 {
     public class ENValoraciones
     {
-        public int UsuarioId { get; set; }
-        public int ProductoId { get; set; }
-        public int Puntuacion { get; set; }
-        public string Descripcion { get; set; }
+        private ENUsuario _usuario;
+        private ENProducto _producto;
+        private int? _puntuacion;
+        private string _descripcion;
 
-        // Relaciones
-        public ENValoracionUsuario Usuario { get; set; }
-        public ENValoracionProducto Producto { get; set; }
+        public ENUsuario Usuario
+        {
+            get { return _usuario; }
+            set { _usuario = new ENUsuario(value); }
+        }
+        public ENProducto Producto
+        {
+            get { return _producto; }
+            set { _producto = new ENProducto(value); }
+        }
+        public int? Puntuacion 
+        {
+            get { return _puntuacion; }
+            set { _puntuacion = value; } 
+        }
+        public string Descripcion 
+        {
+            get { return _descripcion; }
+            set { _descripcion = value; }
+        }
+
 
         public ENValoraciones()
         {
+            Usuario = new ENUsuario();
+            Producto = new ENProducto();
         }
-    }
 
-    public class ENValoracionUsuario
-    {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-
-        public ENValoracionUsuario()
+        public ENValoraciones(ENValoraciones val)
         {
+            Usuario = val.Usuario;
+            Producto = val.Producto;
+            Puntuacion = val.Puntuacion;
+            Descripcion = val.Descripcion;
         }
-    }
 
-    public class ENValoracionProducto
-    {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        // Otras propiedades relevantes
-
-        public ENValoracionProducto()
+        /// <summary>
+        /// Devuelve todas las reviews de este producto
+        /// </summary>
+        /// <returns></returns>
+        public List<ENValoraciones> Get_All_Product_Reviews()
         {
+            List<ENValoraciones> list_vals = new List<ENValoraciones>();
+            CADValoraciones cad = new CADValoraciones();
+            DataTable table = cad.ObtenerValoracionesAnteriores(this);
+
+            foreach(DataRow i in table.Rows)
+            {
+                ENValoraciones val = new ENValoraciones();
+                val.Usuario.Id = Convert.ToInt32(i["usuario"]);
+                val.Usuario.Read_Id();
+                val.Puntuacion = Convert.ToInt32(i["puntuacion"]);
+                val.Descripcion = i["descripcion"].ToString();
+
+                list_vals.Add(val);
+            }
+
+            return list_vals;
+        }
+
+        /// <summary>
+        /// Añade esta valoracion a la db
+        /// </summary>
+        /// <returns></returns>
+        public bool Add_Review()
+        {
+            CADValoraciones cad = new CADValoraciones();
+            return cad.Create(this);
         }
     }
 }

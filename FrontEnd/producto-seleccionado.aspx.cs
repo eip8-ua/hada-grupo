@@ -36,6 +36,15 @@ namespace FrontEnd
                     // Manejar el caso en que no se haya proporcionado un ID de producto en la URL
                     Response.Redirect("productos.aspx"); // Redirigir a la página de productos
                 }
+
+
+
+                //Añadir valoraciones
+                ENValoraciones val = new ENValoraciones();
+                val.Producto.id = Convert.ToInt32(Request.QueryString["id"]);
+                val.Producto.Read();
+                rptListReviews.DataSource = val.Get_All_Product_Reviews();
+                rptListReviews.DataBind();
             }
         }
         protected void btnAddToCart_Click(object sender, EventArgs e)

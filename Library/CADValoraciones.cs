@@ -5,21 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-
+using System.Configuration;
 namespace Library
 {
     public class CADValoraciones
     {
         private string constring;
-
+        private SqlConnection conn;
         public CADValoraciones()
         {
-            constring = "Data Source=localhost;Initial Catalog=mydb;Integrated Security=True";
+            constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
         }
 
         public DataTable getValoraciones()
         {
-            SqlConnection conn = new SqlConnection(constring);
+            conn = new SqlConnection(constring);
             SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Valora", conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -28,7 +28,7 @@ namespace Library
 
         public double GetMediaEvaluaciones(int productoId)
         {
-            SqlConnection conn = new SqlConnection(constring);
+            conn = new SqlConnection(constring);
             SqlCommand cmd = new SqlCommand("SELECT AVG(Puntuacion) FROM Valora WHERE ProductoId = @ProductoId", conn);
             cmd.Parameters.AddWithValue("@ProductoId", productoId);
             conn.Open();
@@ -37,30 +37,46 @@ namespace Library
             return result != DBNull.Value ? Convert.ToDouble(result) : 0;
         }
 
-        public void ValorarProducto(int usuarioId, int productoId, int puntuacion, string descripcion)
+        public bool Create(ENValoraciones val)
         {
-            SqlConnection conn = new SqlConnection(constring);
-            SqlCommand cmd = new SqlCommand("IF EXISTS (SELECT 1 FROM Valora WHERE UsuarioId = @UsuarioId AND ProductoId = @ProductoId) " +
-                                             "UPDATE Valora SET Puntuacion = @Puntuacion, Descripcion = @Descripcion WHERE UsuarioId = @UsuarioId AND ProductoId = @ProductoId " +
-                                             "ELSE " +
-                                             "INSERT INTO Valora (UsuarioId, ProductoId, Puntuacion, Descripcion) VALUES (@UsuarioId, @ProductoId, @Puntuacion, @Descripcion)", conn);
-            cmd.Parameters.AddWithValue("@UsuarioId", usuarioId);
-            cmd.Parameters.AddWithValue("@ProductoId", productoId);
-            cmd.Parameters.AddWithValue("@Puntuacion", puntuacion);
-            cmd.Parameters.AddWithValue("@Descripcion", descripcion);
-            conn.Open();
-            cmd.ExecuteNonQuery();
-            conn.Close();
+            try
+            {
+                conn = new SqlConnection(constring);
+                SqlCommand cmd = new SqlCommand("IF EXISTS (SELECT 1 FROM Valora WHERE usuario = @UsuarioId AND producto = @ProductoId) " +
+                                                 "UPDATE Valora SET Puntuacion = @Puntuacion, descripcion = @Descripcion WHERE usuario = @UsuarioId AND prodcuto = @ProductoId " +
+                                                 "ELSE " +
+                                                 "INSERT INTO Valora (usuario, producto, puntuacion, descripcion) VALUES (@UsuarioId, @ProductoId, @Puntuacion, @Descripcion)", conn);
+                cmd.Parameters.AddWithValue("@UsuarioId", val.Usuario.Id);
+                cmd.Parameters.AddWithValue("@ProductoId", val.Producto.id);
+                cmd.Parameters.AddWithValue("@Puntuacion", val.Puntuacion);
+                cmd.Parameters.AddWithValue("@Descripcion", val.Descripcion);
+                conn.Open();
+                
+                //Filas a las que afecta
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return false;
         }
 
-        public DataTable ObtenerValoracionesAnteriores(int productoId)
+        public DataTable ObtenerValoracionesAnteriores(ENValoraciones val)
         {
-            SqlConnection conn = new SqlConnection(constring);
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Valora WHERE ProductoId = @ProductoId", conn);
-            da.SelectCommand.Parameters.AddWithValue("@ProductoId", productoId);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            return dt;
+            using (conn = new SqlConnection(constring))
+            {
+                SqlDataAdapter da = new SqlDataAdapter("SELECT usuario,puntuacion,descripcion FROM Valora WHERE producto = @ProductoId", conn);
+                da.SelectCommand.Parameters.AddWithValue("@ProductoId", val.Producto.id);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
         }
     }
 }
