@@ -481,5 +481,41 @@ namespace Library
             }
             return false;
         }
+
+
+        public bool Read_Id(ENUsuario en)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand com = new SqlCommand("select * from usuario where id=@id", connection);
+                com.Parameters.AddWithValue("@id", en.Id);
+                SqlDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    en.Email = reader["email"].ToString();
+                    en.Nombre = reader["nombre"].ToString();
+                    en.Apellidos = reader["apellidos"].ToString();
+                    en.Dni = reader["dni"].ToString();
+                    en.Passwd = reader["contrasena"].ToString();
+                    en.Tlfn = reader["telefono"].ToString();
+                    en.FNacimiento = reader.GetDateTime(reader.GetOrdinal("fecha_nac"));//fecha_aux;
+                    en.Admin = reader.GetBoolean(reader.GetOrdinal("admin"));
+
+                    return true;
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return false;
+        }
     }
 }

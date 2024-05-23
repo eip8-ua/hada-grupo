@@ -196,7 +196,11 @@ namespace Library
         }
 
 
-
+        public bool Read_Id()
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.Read_Id(this);
+        }
 
     }
 }

@@ -35,4 +35,20 @@
             <asp:Button ID="btnAddToCart" runat="server" Text="Añadir al carrito" CssClass="btnAddToCart" OnClick="btnAddToCart_Click" />
         </div>
     </div>
+
+    <div class="reviews">
+        <table width: 100%, display: flex>
+            <asp:Repeater ID="rptListReviews" runat="server">
+                    <ItemTemplate>
+               <tr>
+                    <td class="email"><%# Eval("Usuario.email") %></td>
+                    <td class="puntuacion"> <%# Eval("puntuacion") %></td>
+                </tr>
+                <tr>
+                    <td class="descripcion" colspan="4"><%# Eval("descripcion") %></td>
+                </tr>
+                    </ItemTemplate>
+            </asp:Repeater>
+        </table>
+    </div>
 </asp:Content>
