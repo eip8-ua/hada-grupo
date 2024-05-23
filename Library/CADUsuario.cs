@@ -34,7 +34,6 @@ namespace Library
         public bool Create(ENUsuario en)//(ENUsuario en)
         {
             bool inserted = false, exists = false;
-            int nextId = 0;
             try
             {
                 connection.Open();
@@ -44,14 +43,11 @@ namespace Library
                 while (dr.Read())
                 {
                     if (dr["email"].ToString() == en.Email) exists = true;
-                    nextId = dr.GetInt32(dr.GetOrdinal("id"));
                 }
                 dr.Close();
-                nextId += 1;
                 if(!exists)
                 {
-                    SqlCommand ins = new SqlCommand($"insert into usuario (id, dni, email, nombre, apellidos, telefono, fecha_nac, admin, dir, contrasena) values (@id,@dni,@email,@nombre,@apellidos,@telefono,@fecha_nac,@admin,@contrasena); select SCOPE_IDENTITY();", connection);
-                    ins.Parameters.AddWithValue("@id", nextId);
+                    SqlCommand ins = new SqlCommand($"insert into usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin, contrasena) values (@dni,@email,@nombre,@apellidos,@telefono,@fecha_nac,@admin,@contrasena); select SCOPE_IDENTITY();", connection);
                     ins.Parameters.AddWithValue("@dni", en.Dni);
                     ins.Parameters.AddWithValue("@email", en.Email);
                     ins.Parameters.AddWithValue("@nombre", en.Nombre);
@@ -76,9 +72,10 @@ namespace Library
 
                 connection.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
