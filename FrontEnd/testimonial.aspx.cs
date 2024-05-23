@@ -121,9 +121,8 @@ namespace FrontEnd
                     reader.Close();
                 }
             }
-            catch (Exception ex)
-            {
-                // Manejar la excepción apropiadamente
+            catch (Exception ex) { 
+            
                 lblNombreTestimonial.Text = "Error al cargar el nombre del usuario";
                 Console.WriteLine("An error occurred while loading user name: " + ex.Message);
             }

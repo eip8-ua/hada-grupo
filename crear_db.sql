@@ -1373,7 +1373,7 @@ insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocio
 
 insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Logitech G915 TKL RGB',139.00,'Images/Productos/10.jpg','El G915 TKL es increíblemente refinado y sorprendentemente fino, duradero y hecho ante todo para ofrecer rendimiento y funciones.',10,32,null,'Teclados');
 insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Newskill Serike V2 TKL',75.00,'Images/Productos/11.jpg','El teclado mecánico para juegos Serike V2 te ofrece la experiencia más completa para jugar',76,65,null,'Teclados');
-insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Tempest K20 Beast',32.44,'Images/Productos/12.jpg','Teclado Mecánico Inalámbrico Gaming RGB TKL Mini Negro',500,100,null,'Monitores');
+insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('Tempest K20 Beast',32.44,'Images/Productos/12.jpg','Teclado Mecánico Inalámbrico Gaming RGB TKL Mini Negro',500,100,null,'Teclados');
 
 
 
