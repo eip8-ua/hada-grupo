@@ -110,6 +110,8 @@
             background-color: #c82333;
         }
     </style>
+
+
     <h2 id="titulo">Carrito de la compra</h2>
     <div class="container">
         <div class="cartMenu">

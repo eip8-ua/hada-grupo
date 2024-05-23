@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using Library;
 
 
+
 namespace FrontEnd
 {
     public partial class shopping_cart : System.Web.UI.Page
@@ -16,10 +17,7 @@ namespace FrontEnd
         {
             if (!IsPostBack)
             {
-                // Debugging: Check session data at the start of Page_Load
-                List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
-                BindCart();
-
+  
                 if (Site1.usuario != null)
                 {
                     //List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
@@ -58,17 +56,6 @@ namespace FrontEnd
         {
             List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
             List<Product> cartFormat = new List<Product>();
-            /*
-            Product prod1 = new Product(12, "Tempest K20 Beast", 32.44f, 3);
-            Product prod2 = new Product(10, "Logitech G915 TKL RGB", 139f, 1);
-            Product prod3 = new Product(6, "Apple Magic Mouse Plata", 85f, 2);
-            Product prod4 = new Product(5, "Logitech M185 Ratón Inalámbrico", 12f, 2);
-
-            cartFormat.Add(prod1);
-            cartFormat.Add(prod2);
-            cartFormat.Add(prod3);
-            cartFormat.Add(prod4);
-            */
             
             foreach (ENLinCarr linCarr in cart)
             {
@@ -90,40 +77,16 @@ namespace FrontEnd
             //List<Product> cart  cartItems = enCarritoDe.GetCartByUser();
         }
 
-        /*
-        protected void btnAddToCart_Click(object sender, EventArgs e)
-        {
-            int productId = int.Parse(txtProductId.Text);
-            string productName = txtProductName.Text;
-            float productPrice = float.Parse(txtProductPrice.Text);
-            int productQuantity = int.Parse(txtProductQuantity.Text);
-
-            List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
-            Product existingProduct = cart.Find(p => p.Id == productId);
-
-            if (existingProduct != null)
-            {
-                existingProduct.Quantity += productQuantity;
-            }
-            else
-            {
-                cart.Add(new Product(productId, productName, productPrice, productQuantity));
-            }
-
-            Session["Cart"] = cart;
-            BindCart();
-        }*/
-
         protected void gvCart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Remove")
             {
                 int productId = int.Parse(e.CommandArgument.ToString());
-                List<Product> cart = Session["Cart"] as List<Product>;
+                List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr>;
 
                 if (cart != null)
                 {
-                    Product productToRemove = cart.Find(p => p.Id == productId);
+                    ENLinCarr productToRemove = cart.Find(p => p.Producto == productId);
                     if (productToRemove != null)
                     {
                         cart.Remove(productToRemove);
@@ -147,11 +110,22 @@ namespace FrontEnd
                     int newQuantity;
                     if (int.TryParse(txtQuantity.Text, out newQuantity))
                     {
-                        List<Product> cart = Session["Cart"] as List<Product>;
-                        Product productToUpdate = cart.Find(p => p.Id == product.Id);
-                        productToUpdate.Quantity = newQuantity;
+                        List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr>;
+                        ENLinCarr productToUpdate = cart.Find(p => p.Producto == product.Id);
+                        productToUpdate.Cantidad = newQuantity;
                         Session["Cart"] = cart;
-                        UpdateTotal(cart);
+
+                        List<Product> cartFormat = new List<Product>();
+
+                        foreach (ENLinCarr linCarr in cart)
+                        {
+                            ENProducto enProd = new ENProducto(linCarr.Producto, 1, 1, 1);
+                            enProd.Read();
+                            Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad);
+                            cartFormat.Add(prod);
+                        }
+
+                        UpdateTotal(cartFormat);
                     }
                 };
             }
@@ -161,17 +135,38 @@ namespace FrontEnd
         protected void txtQuantity_TextChanged(object sender, EventArgs e)
         {
             TextBox txtQuantity = sender as TextBox;
+
+            txtQuantity.Attributes["type"] = "number";
+            txtQuantity.Attributes["min"] = "1";
+
             GridViewRow row = txtQuantity.NamingContainer as GridViewRow;
             int productId = Convert.ToInt32(gvCart.DataKeys[row.RowIndex].Value);
 
             int newQuantity;
             if (int.TryParse(txtQuantity.Text, out newQuantity))
             {
-                List<Product> cart = Session["Cart"] as List<Product>;
-                Product productToUpdate = cart.Find(p => p.Id == productId);
-                productToUpdate.Quantity = newQuantity;
+                if (newQuantity < 1)
+                {
+                    newQuantity = 1;
+                    txtQuantity.Text = "1";
+                }
+
+                List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr>;
+                ENLinCarr productToUpdate = cart.Find(p => p.Producto == productId);
+                productToUpdate.Cantidad = newQuantity;
                 Session["Cart"] = cart;
-                UpdateTotal(cart);
+
+                List<Product> cartFormat = new List<Product>();
+
+                foreach (ENLinCarr linCarr in cart)
+                {
+                    ENProducto enProd = new ENProducto(linCarr.Producto, 1, 1, 1);
+                    enProd.Read();
+                    Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad);
+                    cartFormat.Add(prod);
+                }
+
+                UpdateTotal(cartFormat);
             }
         }
         

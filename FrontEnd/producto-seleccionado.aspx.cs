@@ -47,9 +47,18 @@ namespace FrontEnd
             int quantity = Convert.ToInt32(ddlQuantity.SelectedValue);
             List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
 
-            ENLinCarr enLinCarr = new ENLinCarr(1,quantity,1,productId);
 
-            cart.Add(enLinCarr);
+            ENLinCarr existingProduct = cart.Find(p => p.Producto == productId);
+
+            if (existingProduct != null)
+            {
+                existingProduct.Cantidad += quantity;
+            }
+            else
+            {
+                cart.Add(new ENLinCarr(1, quantity, 1, productId));
+            }
+
             Session["Cart"] = cart;
         }
 
