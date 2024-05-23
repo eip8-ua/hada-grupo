@@ -20,14 +20,7 @@
                     CssClass="menuStyle" DynamicMenuItemStyle-CssClass="submenuStyle">
                     <Items>
                         <asp:MenuItem Text="Tienda" Value="index" NavigateUrl="~/index.aspx"></asp:MenuItem>
-                        <asp:MenuItem Text="Productos" Value="products" NavigateUrl="~/productos.aspx">
-                            <asp:MenuItem Text="Teclados" Value="keyboards" NavigateUrl="~/productosCategoria.aspx?categoria=Teclados"></asp:MenuItem>
-                            <asp:MenuItem Text="Ratones" Value="mouses" NavigateUrl="~/productosCategoria.aspx?categoria=Ratones"></asp:MenuItem>
-                            <asp:MenuItem Text="Monitores" Value="screens" NavigateUrl="~/productosCategoria.aspx?categoria=Monitores"></asp:MenuItem>
-                            <asp:MenuItem Text="Ordenadores" Value="pcs" NavigateUrl="~/productosCategoria.aspx?categoria=Ordenadores"></asp:MenuItem>
-                            <asp:MenuItem Text="Auriculares" Value="headphones" NavigateUrl="~/productosCategoria.aspx?categoria=Auriculares"></asp:MenuItem>
-                            <asp:MenuItem Text="Todo" Value="every_product" NavigateUrl="~/productos.aspx"></asp:MenuItem>
-                        </asp:MenuItem>
+                        <asp:MenuItem Text="Productos" Value="products" NavigateUrl="~/productos.aspx"></asp:MenuItem>
                         <asp:MenuItem Text="Contáctanos" Value="contact_us" NavigateUrl="~/contact_us.aspx"></asp:MenuItem>
                         <asp:MenuItem Text="Testimonios" Value="testimonial" NavigateUrl="~/testimonial.aspx"></asp:MenuItem>
                     </Items>
@@ -38,16 +31,7 @@
                     StaticMenuItemStyle-HorizontalPadding="25px" DynamicMenuStyle-BackColor="white" DynamicHoverStyle-ForeColor="#b88e2f" 
                     CssClass="menuStyle" DynamicMenyItemStyle-CssClass="submenuStyle" OnMenuItemClick="innerMenu_MenuItemClick">
                     <Items>
-                        <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login2.png">
-                            <asp:MenuItem Text="Login" Value="login" NavigateUrl="~/login.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Register" Value="register" NavigateUrl="~/register.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Mi cuenta" Value="user" NavigateUrl="~/user.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Mis pedidos" Value="my_orders" NavigateUrl="~/pedidos.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Añadir artículo" Value="add_product" NavigateUrl="~/admin_productos.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Administrar pedidos" Value="admin_orders" NavigateUrl="~/admin_pedidos.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Administrar usuario" Value="admin_user" NavigateUrl="~/admin_usuarios.aspx"></asp:MenuItem>
-                            <asp:MenuItem Text="Cerrar sesión" Value="log_out"></asp:MenuItem>
-                        </asp:MenuItem>
+                        <asp:MenuItem Text="" Value="usr_option" ImageUrl="Images/login2.png"></asp:MenuItem>
                         <asp:MenuItem Text="" Value="shopping_cart" NavigateUrl="~/shopping_cart.aspx" ImageUrl="Images/shopping_cart2.png"></asp:MenuItem>
                     </Items>
                 </asp:Menu>

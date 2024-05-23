@@ -24,6 +24,8 @@ namespace FrontEnd
                 {
                     SetUnregisteredOptions();
                 }
+
+                SetProductCategories();
             }        
         }
 
@@ -52,10 +54,40 @@ namespace FrontEnd
             return null; // No se encontró el elemento con el valor buscado
         }
 
+        //Método que establece las categorías en el menú de navegación (Productos)
+        protected void SetProductCategories()
+        {
+            //Cogemos el objeto correspondiente a la opción productos
+            MenuItem products = FindMenuItemByValue(outerMenu.Items, "products");
+
+            //Creamos las diferentes opciones según las categorías
+            List<ENCategoria> categorias = ENCategoria.Get_All_Categorias();
+
+            //Bucle en el que vamos añadiendo la categoría una por una
+            foreach(ENCategoria categoria in categorias)
+            {
+                MenuItem option = new MenuItem(categoria.tipo);
+                option.Value = categoria.tipo;
+                option.NavigateUrl = "~/productosCategoria.aspx?categoria=" + categoria.tipo;
+                products.ChildItems.Add(option);
+            }
+
+            //Creamos la opción para todo
+            MenuItem all = new MenuItem("Todo");
+            all.Value = "every_product";
+            all.NavigateUrl = "~/productos.aspx";
+            products.ChildItems.Add(all);
+        }
+
         //Método que establece las opciones para los usuarios no loggeados
         public void SetUnregisteredOptions() {
 
+            //Cojemos el elemento al que le vamos a añadir los valores dependiendo del valor de la variable global Usuario
             MenuItem usr = FindMenuItemByValue(innerMenu.Items, "usr_option");
+
+            //Establecemos la página de login como dirección a ir en caso de pulsar la imágen del usuraio
+            MenuItem log = FindMenuItemByValue(innerMenu.Items, "usr_option");
+            log.NavigateUrl = "~/login.aspx";
 
             // Crear una lista para almacenar los elementos a eliminar
             List<MenuItem> itemsToRemove = new List<MenuItem>();
@@ -102,8 +134,12 @@ namespace FrontEnd
         //Método que establece las opciones para los usuarios registrados
         public void SetRegisteredOptions()
         {
-
+            //Cogemos el objeto al que le vamos a meter todas las opciones de navegación, es decir, la imagen de usuario
             MenuItem usr = FindMenuItemByValue(innerMenu.Items, "usr_option");
+
+            //Establecemos la página de usuario como dirección a ir en caso de pulsar la imágen del usuraio
+            MenuItem log = FindMenuItemByValue(innerMenu.Items, "usr_option");
+            log.NavigateUrl = "~/user.aspx";
 
             // Crear una lista para almacenar los elementos a eliminar
             List<MenuItem> itemsToRemove = new List<MenuItem>();
@@ -140,8 +176,12 @@ namespace FrontEnd
         //Método que establece las opciones para los usuarios que a su vez son administradores
         public void SetAdminOptions()
         {
-
+            //Cogemos el objeto al que le vamos a meter todas las opciones de navegación, es decir, la imagen de usuario
             MenuItem usr = FindMenuItemByValue(innerMenu.Items, "usr_option");
+
+            //Establecemos la página de usuario como dirección a ir en caso de pulsar la imágen del usuraio
+            MenuItem log = FindMenuItemByValue(innerMenu.Items, "usr_option");
+            log.NavigateUrl = "~/user.aspx";
 
             // Crear una lista para almacenar los elementos a eliminar
             List<MenuItem> itemsToRemove = new List<MenuItem>();
