@@ -8,6 +8,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
         <h1>PRODUCTOS</h1>
+        <!-- Bloque de Filtros -->
+        <div class="filters-container">
+            <asp:DropDownList ID="ddlCategory" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterProducts">
+                <asp:ListItem Text="Todas las Categorías" Value="all" />
+                <asp:ListItem Text="Teclados" Value="Teclados" />
+                <asp:ListItem Text="Ratones" Value="Ratones" />
+                <asp:ListItem Text="Monitores" Value="Monitores" />
+                <asp:ListItem Text="Ordenadores" Value="Ordenadores" />
+                <asp:ListItem Text="Auriculares" Value="Auriculares" />
+            </asp:DropDownList>
+
+            <asp:TextBox ID="txtMinPrice" runat="server" placeholder="Precio Mínimo"></asp:TextBox>
+            <asp:TextBox ID="txtMaxPrice" runat="server" placeholder="Precio Máximo"></asp:TextBox>
+            <asp:Button ID="btnApplyFilters" runat="server" Text="Aplicar Filtros" OnClick="FilterProducts" />
+        </div>
+
         <div class="products-container">
             <asp:Repeater ID="RepeaterProductos" runat="server">
                 <ItemTemplate>
