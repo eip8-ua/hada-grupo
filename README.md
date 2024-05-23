@@ -11,6 +11,35 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 -  Daniel Alarcón Mena
 -  Abdelatif Boussaid
 
+# Trabajo realizado
+- Emiliano Dovao Marcovich
+    - Escribe aqui
+
+- Saúl Conejo Minguez
+    - Escribe aqui
+
+- Lucas Alberola Pastor
+	- Escribe aqui
+
+
+- Elías Iborra Pérez
+	- Entidades Direccion y Locker
+	- Aspx de inicio de sesión y registro
+	- Aspx de añadir artículos (administrador)
+	- Mostrar valoraciones en los productos
+	- Confección y rellenado de la base de datos
+
+- David Mas Almendros
+    - Esbribe aqui
+
+- Daniel Alarcón Mena
+    - Esbribe aqui
+
+- Abdelatif Boussaid
+    - Esbribe aqui
+
+
+
 ## Reparto de Entidades y Aspx
 
 |   Alumno    | EN |	ASPX |
