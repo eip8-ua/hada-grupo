@@ -1,7 +1,7 @@
 ﻿using System;
 using Library;
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class testimonial : System.Web.UI.Page
     {

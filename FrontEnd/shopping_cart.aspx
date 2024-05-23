@@ -1,162 +1,149 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="shopping_cart.aspx.cs" Inherits="proyecto.shopping_cart" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="shopping_cart.aspx.cs" Inherits="FrontEnd.shopping_cart" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="estilos/index.css"/>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
+        .container {
             display: flex;
-            justify-content: center;
+            flex-direction: row;   
+            background-color: white;
+            padding: 20px;
+        }
+
+        .cartMenu {
+            flex: 2;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .totalMenu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #b88e2f;
+            
+            padding: 30px;
+            padding-bottom: 100px;
+            border-radius: 8px;
             align-items: center;
         }
 
-        #cartContainer {
-            width: 80%;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+        #titulo {
+            margin-left: 80px;
         }
 
-        #cartHeader {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
-            font-size: 24px;
+        .gridview-container {
+            width: 100%;
+            margin-bottom: 20px;
+         
         }
-
-        #cartItems {
-            padding: 20px;
-            flex-grow: 1;
-        }
-
-        table {
+        .gridview-container table {
             width: 100%;
             border-collapse: collapse;
         }
-
-        th, td {
-            border: 1px solid #dddddd;
-            padding: 12px;
+        .gridview-container th, .gridview-container td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
             text-align: left;
         }
-
-        tr:nth-child(even) {
+        .gridview-container th {
+            border-radius: 8px;
+            background: #b88e2f;
+        }
+        .gridview-container tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
-        #cartSummary {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
+        .gridview-container tr:hover {
+            background-color: #e9ecef;
         }
-
-        #cartSummary h2 {
+        h2 {
             margin-bottom: 10px;
         }
-
-        #btnComprar {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #ffffff;
-            color: #007bff;
-            border: 2px solid #007bff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .message {
+            margin: 20px 0;
+            color: #dc3545;
+            font-size: 24px;
+            margin-left: 40px;
         }
 
-        #btnComprar:hover {
+        a {
+            color: #b88e2f;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input {
+            padding: 10px;
+            width: calc(100% - 22px);
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .btn {
             background-color: #007bff;
-            color: #ffffff;
-        }
-
-        .btnEliminar {
-            padding: 8px 12px;
-            font-size: 14px;
-            background-color: #dc3545;
-            color: #ffffff;
+            color: white;
+            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s;
+            margin-top: 50px
         }
-
-        .btnEliminar:hover {
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-remove {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-remove:hover {
             background-color: #c82333;
         }
-
-        .cantidadInput {
-            width: 60px;
-            padding: 5px;
-            font-size: 14px;
-            text-align: center;
-        }
     </style>
-    <script>
-        function eliminarProducto(index) {
-            if (confirm("¿Estás seguro de eliminar este producto?")) {
-                // Lógica para eliminar el producto
-                alert("Producto eliminado del carrito");
-            }
-        }
-
-        function actualizarCantidad(index, newValue) {
-            // Lógica para actualizar la cantidad del producto en el carrito
-            // newValue: nuevo valor de cantidad seleccionado por el usuario
-            if (newValue >= 1 && newValue <= 10) {
-                alert("Cantidad actualizada a " + newValue);
-                // Aquí puedes enviar una solicitud al servidor para actualizar la cantidad del producto
-            } else {
-                alert("La cantidad debe estar entre 1 y 10");
-                // Restaurar el valor anterior o tomar otra acción según sea necesario
-            }
-        }
-    </script>
-    <div id="body">
-        <div id="cartContainer">
-            <div id="cartHeader">Carrito de Compra</div>
-            
-            <div id="cartItems">
-                <table>
-                    <tr style="background-color: #007bff; color: #ffffff;">
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Subtotal</th>
-                        <th>Acciones</th>
-                    </tr>
-                    <asp:Repeater ID="rptCartItems" runat="server">
-                        <ItemTemplate>
-                            <tr>
-                                <td><%# Eval("Nombre") %></td>
-                                <td>$<%# Eval("Precio", "{0:N2}") %></td>
-                                <td>
-                                    <input type="number" class="cantidadInput" min="1" max="10" value='<%# Eval("Cantidad") %>'
-                                        onchange="actualizarCantidad(<%# Container.ItemIndex + 1 %>, this.value)" />
-                                </td>
-                                <td>$<%# Eval("Subtotal", "{0:N2}") %></td>
-                                <td>
-                                    <button class="btnEliminar" onclick="eliminarProducto(<%# Container.ItemIndex + 1 %>)">Eliminar</button>
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </table>
-            </div>
-            
-            <div id="cartSummary">
-                <h2>Total: $<asp:Label ID="lblTotal" runat="server" Text="0.00"></asp:Label></h2>
-                <asp:Button ID="btnComprar" runat="server" Text="Comprar" OnClick="btnComprar_Click" />
+    <h2 id="titulo">Carrito de la compra</h2>
+    <div class="container">
+        <div class="cartMenu">
+            <div class="gridview-container">
+                <asp:GridView ID="gvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="gvCart_RowCommand" OnRowDataBound="gvCart_RowDataBound" DataKeyNames="Id">
+                    <Columns>
+                        <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" />
+                        <asp:BoundField DataField="Name" HeaderText="Nombre" ReadOnly="True" />
+                        <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" ReadOnly="True" />
+                        <asp:TemplateField HeaderText="Cantidad">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtQuantity" runat="server" Text='<%# Eval("Quantity") %>' AutoPostBack="True" OnTextChanged="txtQuantity_TextChanged"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:Button ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("Id") %>' Text="Eliminar" CssClass="btn-remove" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <EmptyDataTemplate>
+                        <p class="message">
+                            Tu carrito está vacío. <br />
+                            Añade productos en la <a href="index.aspx">tienda</a> para poder verlos en el carrito.
+                        </p>
+                    </EmptyDataTemplate>
+                </asp:GridView>
             </div>
         </div>
+        <div id="divTotalAndBuy" class="totalMenu" runat="server">
+            <h2>Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label></h2>
+            <asp:Button ID="btnBuy" runat="server" Text="Comprar" CssClass="btn" OnClick="btnBuy_Click" />
+        </div>
     </div>
+            
+        
 </asp:Content>
-

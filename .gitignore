@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/FrontEnd/PruebaDelCarrito.aspx
+/FrontEnd/PruebaDelCarrito.aspx.cs
+/FrontEnd/PruebaDelCarrito.aspx.designer.cs

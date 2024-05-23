@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Library;
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class login : System.Web.UI.Page
     {
@@ -42,7 +42,6 @@ namespace proyecto
                 Site1.usuario = new ENUsuario();
                 status_lbl.Text = "Algún campo vacio o falta el @";
             }
-
         }
         protected void Register_Click(object sender, EventArgs e)
         {

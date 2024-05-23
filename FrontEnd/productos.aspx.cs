@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Library;
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class productos : System.Web.UI.Page
     {

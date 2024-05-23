@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace proyecto
+namespace FrontEnd
 {
 
 

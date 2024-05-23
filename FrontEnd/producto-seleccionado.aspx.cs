@@ -2,7 +2,7 @@
 using System.Web.UI;
 using Library; // Asegúrate de importar el espacio de nombres donde están definidas las clases ENProducto y CADProducto
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class ProductoSeleccionado : Page
     {
@@ -23,7 +23,7 @@ namespace proyecto
                         lblNombreProducto.Text = producto.nombre;
                         lblDescripcionProducto.Text = producto.descripcion;
                         lblPrecioProducto.Text = producto.pvp.ToString("N2") + " EUR";
-                        imgProducto.ImageUrl = producto.url_image+".jpg";
+                        imgProducto.ImageUrl = producto.url_image;
                     }
                     else
                     {

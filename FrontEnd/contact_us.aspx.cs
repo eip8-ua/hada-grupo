@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net.Mail;
 
-namespace proyecto
+namespace FrontEnd
 {
     public partial class contact_us : System.Web.UI.Page
     {

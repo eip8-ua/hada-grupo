@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.master" CodeBehind="productos.aspx.cs" Inherits="proyecto.productos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.master" CodeBehind="productos.aspx.cs" Inherits="FrontEnd.productos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Productos</title>
@@ -13,7 +13,7 @@
                 <ItemTemplate>
                     <div class="product-card">
                         <asp:HyperLink ID="HyperLinkImage" runat="server" NavigateUrl='<%# "producto-seleccionado.aspx?id=" + Eval("id") %>'>
-                            <img src='<%# Eval("url_image", "{0}.jpg") %>' alt="Producto" class="product-image" />
+                            <img src='<%# Eval("url_image") %>' alt="Producto" class="product-image" />
                         </asp:HyperLink>
                         <div class="discount-tag" style='<%# Convert.ToDecimal(Eval("promocion.Descuento")) > 0 ? "" : "display:none;" %>'>
                             <%# Eval("promocion.Descuento") %>% OFF

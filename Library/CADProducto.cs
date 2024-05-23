@@ -8,6 +8,7 @@ namespace Library
     class CADProducto
     {
         public string constring;
+        private SqlConnection connection;
         public CADProducto()
         {
             constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
@@ -15,24 +16,42 @@ namespace Library
 
         public bool Create(ENProducto prod)
         {
-            SqlConnection connection = null;
-            string consu = "Insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values ('" + prod.nombre + "'," + prod.pvp + ",'" + prod.url_image + "','" + prod.descripcion + "'," + prod.stock + "," + prod.popularidad + "," + (prod.promocion != null ? prod.promocion.MiId.ToString() : "NULL") + ",'" + prod.categoria.tipo + "')";
-
-            SqlCommand comm = new SqlCommand(consu, connection);
+            string consu = "Insert into Producto(nombre,pvp,url_image,descripcion,stock,popularidad,promocion,categoria) values (@nom,@pvp,@url_image,@descripcion,@stock,@pop,@promo,@cat); select SCOPE_IDENTITY();";
 
             try
             {
                 connection = new SqlConnection(constring);
                 connection.Open();
+                SqlCommand comm = new SqlCommand(consu, connection);
+                comm.Parameters.AddWithValue("@nom", prod.nombre);
+                comm.Parameters.AddWithValue("@pvp", prod.pvp);
+                if (prod.url_image == null)
+                    comm.Parameters.AddWithValue("@url_image", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@url_image", prod.url_image);
+                if (prod.descripcion == null)
+                    comm.Parameters.AddWithValue("@descripcion", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@descripcion", prod.descripcion);
 
-                if (comm.ExecuteNonQuery() == 0)
-                {
-                    return false;
-                }
+
+                comm.Parameters.AddWithValue("@stock", prod.stock);
+                comm.Parameters.AddWithValue("@pop", prod.popularidad);
+                if(prod.promocion == null)
+                    comm.Parameters.AddWithValue("@promo", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
+
+                if (prod.categoria == null)
+                    comm.Parameters.AddWithValue("@cat", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
+
+                prod.id = Convert.ToInt32(comm.ExecuteScalar());
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL");
+                Console.Write(e);
                 return false;
             }
             finally
@@ -80,32 +99,51 @@ namespace Library
 
         public bool Update(ENProducto prod)
         {
-            SqlConnection connection = null;
 
-            string consu = "Update Producto set nombre ='" + prod.nombre + "',pvp =" + prod.pvp + ",url_image='" + prod.url_image + "',descripcion='" + prod.descripcion + "',stock=" + prod.stock + ",popularidad=" + prod.popularidad + ",promocion=" + (prod.promocion != null ? prod.promocion.MiId.ToString() : "NULL") + ",categoria='" + prod.categoria.tipo + "' where id =" + prod.id;
-
-            SqlCommand comm = new SqlCommand(consu, connection);
+            string consu = "Update Producto set nombre=@name,pvp=@pvp,url_image=@url_image,descripcion=@descripcion,stock=@stock,popularidad=@pop,promocion=@promo,categoria=@cat where id =@id";
 
             try
             {
                 connection = new SqlConnection(constring);
                 connection.Open();
-                if (comm.ExecuteNonQuery() == 0)
-                {
-                    return false;
-                }
+                SqlCommand comm = new SqlCommand(consu, connection);
+                comm.Parameters.AddWithValue("@name", prod.nombre);
+                comm.Parameters.AddWithValue("@pvp", prod.pvp);
+                if (prod.url_image == null)
+                    comm.Parameters.AddWithValue("@url_image", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@url_image", prod.url_image);
+                if (prod.descripcion == null)
+                    comm.Parameters.AddWithValue("@descripcion", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@descripcion", prod.descripcion);
+
+
+                comm.Parameters.AddWithValue("@stock", prod.stock);
+                comm.Parameters.AddWithValue("@pop", prod.popularidad);
+                
+                if (prod.promocion == null)
+                    comm.Parameters.AddWithValue("@promo", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@promo", prod.promocion.MiId);
+
+                if (prod.categoria == null)
+                    comm.Parameters.AddWithValue("@cat", DBNull.Value);
+                else
+                    comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
+                
+                comm.Parameters.AddWithValue("@id", prod.id);
+
+                return comm.ExecuteNonQuery() > 0;
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL");
+                Console.Write(e);
                 return false;
             }
             finally
             {
-                if (connection != null)
-                {
-                    connection.Close();
-                }
+                connection.Close();
             }
             return true;
         }
@@ -167,9 +205,9 @@ namespace Library
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL: " + ex.Message);
+                Console.Write(e);
                 return false; // Error al ejecutar la consulta SQL
             }
             finally
@@ -222,9 +260,9 @@ namespace Library
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException e)
             {
-                Console.Write("Excepción SQL: " + ex.Message);
+                Console.Write(e);
             }
             finally
             {
