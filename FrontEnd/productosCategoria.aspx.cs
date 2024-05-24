@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.UI;
+using System.Web.UI.WebControls;
 using Library;
 
 namespace FrontEnd
 {
-    public partial class productosCategoria : Page
+    public partial class productosCategoria : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,16 +22,26 @@ namespace FrontEnd
             }
         }
 
-        protected void btnAddToCart_Click(object sender, EventArgs e)
+        protected void btnAddToCart_Command(object sender, CommandEventArgs e)
         {
             // Obtener el ID del producto y la cantidad seleccionada
-            int productId = Convert.ToInt32(Request.QueryString["id"]);
+            int productId = Convert.ToInt32(e.CommandArgument);
+            Console.WriteLine(productId);
             int quantity = 1;
             List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
 
-            ENLinCarr enLinCarr = new ENLinCarr(1, quantity, 1, productId);
+            ENLinCarr existingProduct = cart.Find(p => p.Producto == productId);
 
-            cart.Add(enLinCarr);
+            if (existingProduct != null)
+            {
+                existingProduct.Cantidad += quantity;
+                existingProduct.Carrito = -1;
+            }
+            else
+            {
+                cart.Add(new ENLinCarr(1, quantity, 1, productId));
+            }
+
             Session["Cart"] = cart;
         }
     }
