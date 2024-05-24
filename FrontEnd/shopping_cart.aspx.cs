@@ -61,15 +61,12 @@ namespace FrontEnd
                             ENCarrito enCarrito = new ENCarrito();
                             enCarrito.Num_carrito = enCarrito.getNextCartId(); // Generar id del carrito
                             enCarrito.Fecha = DateTime.Now;
-                            if (enCarrito.Create())
+
+                            enCarritoDe = new ENCarritoDe(Site1.usuario.Id, enCarrito.Num_carrito);
+                            if(enCarritoDe.Create())
                             {
-                                Response.Write("SUU");
+                                Response.Write("Suu");
                             }
-
-                            enCarritoDe.Carrito = enCarrito.getNextCartId(); ;
-                            enCarritoDe.Usuario = Site1.usuario.Id;
-
-                            enCarritoDe.Create();
 
                             ENLinCarr enLinCarr = new ENLinCarr();
 

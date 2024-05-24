@@ -27,7 +27,7 @@ namespace Library
         /// <returns></returns>
         public bool Create(ENLinCarr en)
         {
-            string insertQuery = "INSERT INTO Linea_carrito (id, cantidad, carrito, producto) VALUES (@LineCartId, @Quantity, @CartId, @ProductId)";
+            string insertQuery = "INSERT INTO Linea_carrito (cantidad, carrito, producto) VALUES (@Quantity, @CartId, @ProductId)";
             int lineCartId = en.Id;
             int quantity = en.Cantidad;
             int cartId = en.Carrito;
@@ -39,7 +39,6 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@LineCartId", lineCartId);
                         command.Parameters.AddWithValue("@Quantity", quantity);
                         command.Parameters.AddWithValue("@CartId", cartId);
                         command.Parameters.AddWithValue("@ProductId", productId);

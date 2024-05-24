@@ -50,8 +50,7 @@ namespace Library
                 nextId += 1;
                 if(!exists)
                 {
-                    SqlCommand ins = new SqlCommand($"insert into usuario (id, dni, email, nombre, apellidos, telefono, fecha_nac, admin, dir, contrasena) values (@id,@dni,@email,@nombre,@apellidos,@telefono,@fecha_nac,@admin,@contrasena); select SCOPE_IDENTITY();", connection);
-                    ins.Parameters.AddWithValue("@id", nextId);
+                    SqlCommand ins = new SqlCommand($"insert into usuario (dni, email, nombre, apellidos, telefono, fecha_nac, admin, dir, contrasena) values (@id,@dni,@email,@nombre,@apellidos,@telefono,@fecha_nac,@admin,@contrasena); select SCOPE_IDENTITY();", connection);
                     ins.Parameters.AddWithValue("@dni", en.Dni);
                     ins.Parameters.AddWithValue("@email", en.Email);
                     ins.Parameters.AddWithValue("@nombre", en.Nombre);
