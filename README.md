@@ -15,7 +15,7 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 
 |   Alumno    | EN |	ASPX |
 | :----------- | :-----------: | :-----------: |
-| Emiliano Dovao      |    Promociones <br></br>  Informes                    |		Master <br></br>  Index                            |
+| Emiliano Dovao      |    Promociones <br></br>  Informes                    |		Master <br></br>  Index  <br><br>   Estadisticas                      |
 | Saúl Conejo         |    Producto <br></br>  Categoría                      |		Contacta                                           |
 | Lucas Alberola      |    Usuario <br></br>  Testimonial                     |		Usuario											   |
 | Elías Iborra        |    Locker <br></br>  Dirección                        |		Login <br></br> Crear Usuario                      |
@@ -35,12 +35,12 @@ La parte pública permite a los usuarios no registrados crear una cuenta, inicia
 -  Devolver el mapa/ubicación de nuestra supuesta central
 -  Permitir poder enviar correos electrónicos a nuestro email de empresa?
 #### Promociones  -emiliano
--  Mostrar todas las promociones disponibles actualmente
--  Mostrar el periodo de disponibilidad de una promoción concreta
+-  Devolver una lista con todas las promociones
+-  Leer los datos de una promocion pasada por parámetro
 #### Informes  -emiliano
 -  Conseguir el top 10 de los productos más vendidos
--  Conseguir el top 10 de los clientes que más aportan a la empresa
--  Obtener la provincia con la mayor cantidad de pedidos
+-  Obtener la puntuación media de un producto
+-  Obtener una pareja de productos promociones
 
 ## Parte Privada  
 La parte privada permite a los usuarios con cuenta de cliente añadir productos al carrito y realizar pedidos. Y a los administradores introducir productos, actualizarlos y obtener estadísticas.  
@@ -71,6 +71,11 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 #### Locker -elias
 -  Obtener todos los lockers dada una provincia??
 -  Obtener todos los lockers
+#### Informes  -emiliano
+-  Conseguir el top 10 de los clientes que más aportan a la empresa con el dinero gastado
+-  Obtener la provincia con la mayor cantidad de pedidos
+-  Obtener la cantidad de artículos vendidos
+-  Obtener el número de pedidos realizados por un usuario
 
 ## Posibles mejoras
 -  Añadir una página principal de presentación de nuestra empresa en la que se explique nuestro nicho de mercado y nuestra filosofía de empresa.
