@@ -27,9 +27,8 @@ namespace Library
 
                     if (en.is_correct())
                     {
-                        string query = "INSERT INTO Pedido (num_pedido, fecha, usuario) VALUES (@NumPedido, @FechaPedido, @IdUsuario)";
+                        string query = "INSERT INTO Pedido (fecha, usuario) VALUES (@FechaPedido, @IdUsuario)";
                         SqlCommand cmd = new SqlCommand(query, connection);
-                        cmd.Parameters.AddWithValue("@NumPedido", en.Numpedido);
                         cmd.Parameters.AddWithValue("@FechaPedido", en.FechaPedido);
                         cmd.Parameters.AddWithValue("@IdUsuario", en.IdUsuario);
 

@@ -27,7 +27,7 @@ namespace Library
         public bool Create(ENCarrito en)
         {
             // SQL query to insert a new shopping cart
-            string insertQuery = "INSERT INTO Carrito (num_carrito, fecha) VALUES (@num_carrito, @fecha)";
+            string insertQuery = "INSERT INTO Carrito (fecha) VALUES (@fecha)";
 
             // Current date and time
             DateTime currentDate = DateTime.Now;
@@ -40,7 +40,6 @@ namespace Library
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
                         // Set parameters for the SQL query
-                        command.Parameters.AddWithValue("@num_carrito", cartNumber);
                         command.Parameters.AddWithValue("@fecha", currentDate);
 
                         // Open the connection

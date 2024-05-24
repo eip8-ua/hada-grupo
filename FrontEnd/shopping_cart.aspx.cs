@@ -20,15 +20,15 @@ namespace FrontEnd
   
                 if (Site1.usuario.Email!=null)
                 {
-                    ENCarritoDe enCarritoDe = new ENCarritoDe();
+                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id, 1);
 
                     // Ver si existe el usuario en la base de datos
-                    if (enCarritoDe.UserExists(Site1.usuario))
+                    if (enCarritoDe.Read())
                     {
                         ENLinCarr enLinCarr = new ENLinCarr();
 
                         // Conseguir Id del carrito ligada al usuario
-                        int cartDataBase = enCarritoDe.GetCartIdByUser(Site1.usuario);
+                        int cartDataBase = enCarritoDe.Carrito;
 
                         // Añadir los productos de la Variable Session a la base de datos
                         if (Session["Cart"] != null)
@@ -51,24 +51,14 @@ namespace FrontEnd
                     }
                     else
                     {
-                        Response.Write("No tenia carrito");
-
                         if(Session["Cart"] != null) 
                         {
-                            Response.Write("Carrito con algo");
-                            
                             // Si no existe crear una linea de la base de datos con el usuario y el carrito actual
                             ENCarrito enCarrito = new ENCarrito();
                             enCarrito.Num_carrito = enCarrito.getNextCartId(); // Generar id del carrito
                             enCarrito.Fecha = DateTime.Now;
-                            if (enCarrito.Create())
-                            {
-                                Response.Write("SUU");
-                            }
 
-                            enCarritoDe.Carrito = enCarrito.getNextCartId(); ;
-                            enCarritoDe.Usuario = Site1.usuario.Id;
-
+                            enCarritoDe = new ENCarritoDe(Site1.usuario.Id, enCarrito.Num_carrito);
                             enCarritoDe.Create();
 
                             ENLinCarr enLinCarr = new ENLinCarr();
