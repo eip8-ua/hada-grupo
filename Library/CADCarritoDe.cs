@@ -114,7 +114,7 @@ namespace Library
         /// <returns></returns>
         public bool Read(ENCarritoDe en)
         {
-            string selectQuery = "SELECT * FROM Carrito_de WHERE id = @UserId";
+            string selectQuery = "SELECT * FROM Carrito_de WHERE usuario = @UserId";
             int userId = en.Usuario;
 
             try
@@ -129,15 +129,19 @@ namespace Library
 
                         SqlDataReader reader = command.ExecuteReader();
 
-                        while (reader.Read())
-                        {
-                            en.Carrito = (int)reader["carrito"];
-                        }
-
+                        
                         if (!reader.HasRows)
                         {
                             Console.WriteLine("No line items found in the shopping cart.");
+                            return false;
                         }
+
+                        if (reader.Read())
+                        {
+                            en.Carrito = Convert.ToInt32(reader["carrito"]);
+                            return true;
+                        }
+
                     }
                 }
             }

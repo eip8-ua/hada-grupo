@@ -17,14 +17,13 @@ namespace FrontEnd
         {
             if (!IsPostBack)
             {
-  
                 if (Site1.usuario.Email!=null)
                 {
-                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id, 1);
+                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id,0);
 
                     // Ver si existe el usuario en la base de datos
                     if (enCarritoDe.Read())
-                    {
+                    { 
                         ENLinCarr enLinCarr = new ENLinCarr();
 
                         // Conseguir Id del carrito ligada al usuario
@@ -43,7 +42,7 @@ namespace FrontEnd
                         }
 
                         // Conseguir Productos del carrito con la Id anterior
-                        List<ENProducto> cartDBItems = enLinCarr.getItemsByCartId(cartDataBase);
+                        List<ENLinCarr> cartDBItems = enLinCarr.getItemsByCartId(cartDataBase);
 
                         // Añadir los Productos al GridView
                         Session["Cart"] = cartDBItems;
@@ -51,12 +50,11 @@ namespace FrontEnd
                     }
                     else
                     {
-                        if(Session["Cart"] != null) 
+                        if (Session["Cart"] != null) 
                         {
                             // Si no existe crear una linea de la base de datos con el usuario y el carrito actual
                             ENCarrito enCarrito = new ENCarrito();
-                            enCarrito.Num_carrito = enCarrito.getNextCartId(); // Generar id del carrito
-                            enCarrito.Fecha = DateTime.Now;
+                            enCarrito.Create();
 
                             enCarritoDe = new ENCarritoDe(Site1.usuario.Id, enCarrito.Num_carrito);
                             enCarritoDe.Create();
@@ -64,7 +62,7 @@ namespace FrontEnd
                             ENLinCarr enLinCarr = new ENLinCarr();
 
                             // Conseguir Id del carrito ligada al usuario
-                            int cartDataBase = enCarritoDe.GetCartIdByUser(Site1.usuario);
+                            int cartDataBase = enCarrito.Num_carrito;
 
                             // Añadir los productos de la Variable Session a la base de datos
                             if (Session["Cart"] != null)

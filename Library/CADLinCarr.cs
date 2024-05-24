@@ -28,7 +28,6 @@ namespace Library
         public bool Create(ENLinCarr en)
         {
             string insertQuery = "INSERT INTO Linea_carrito (cantidad, carrito, producto) VALUES (@Quantity, @CartId, @ProductId)";
-            int lineCartId = en.Id;
             int quantity = en.Cantidad;
             int cartId = en.Carrito;
             int productId = en.Producto;
@@ -115,8 +114,8 @@ namespace Library
         public bool Read(ENLinCarr en)
         {
 
-            string selectQuery = "SELECT * FROM Linea_carrito WHERE id = @LineCartId";
-            int lineCartId = en.Id;
+            string selectQuery = "SELECT * FROM Linea_carrito WHERE carrito = @CartId";
+            int cartId = en.Carrito;
 
             try
             {
@@ -124,21 +123,27 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(selectQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@CartId", lineCartId);
+                        command.Parameters.AddWithValue("@CartId", cartId);
 
                         connection.Open();
 
                         SqlDataReader reader = command.ExecuteReader();
 
-                        while (reader.Read())
-                        {
-                            Console.WriteLine($"ID: {reader["id"]}, Quantity: {reader["quantity"]}, Product ID: {reader["product"]}");
-                        }
-
                         if (!reader.HasRows)
                         {
                             Console.WriteLine("No line items found in the shopping cart.");
+                            return false;
                         }
+
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($"ID: {reader["id"]}, Quantity: {reader["cantidad"]}, Product ID: {reader["producto"]}");
+                            en.Id = (int)reader["id"];
+                            en.Cantidad = (int)reader["cantidad"];
+                            en.Producto = (int)reader["producto"];
+                        }
+
+                        return true;
                     }
                 }
             }
@@ -189,9 +194,9 @@ namespace Library
             return true;
         }
 
-        public List<ENProducto> getItemsByCartId(int cartId)
+        public List<ENLinCarr> getItemsByCartId(int cartId)
         {
-            string selectQuery = "SELECT * FROM Linea_carrito carrito id = @CartId";
+            string selectQuery = "SELECT * FROM Linea_carrito WHERE carrito = @CartId";
 
             try
             {
@@ -205,21 +210,22 @@ namespace Library
 
                         SqlDataReader reader = command.ExecuteReader();
 
-                        List<ENProducto> products = new List<ENProducto>();
-                        while (reader.Read())
-                        {
-                            ENProducto enProd = new ENProducto((int)reader["producto"], 1, 1, 1);
-                            enProd.Read();
-                            products.Add(enProd);
-                        }
-
-                        return products;
                         
-
+                        List<ENLinCarr> listLinCarr = new List<ENLinCarr>();
+                        
                         if (!reader.HasRows)
                         {
                             Console.WriteLine("No line items found in the shopping cart.");
+                            return null;
                         }
+                        
+                        while (reader.Read())
+                        {
+                            ENLinCarr enLinCarr = new ENLinCarr((int)reader["id"], (int)reader["cantidad"] , (int)reader["carrito"], (int)reader["producto"]);
+                            listLinCarr.Add(enLinCarr);
+                        }
+
+                        return listLinCarr;
                     }
                 }
             }

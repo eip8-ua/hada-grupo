@@ -75,7 +75,7 @@ namespace Library
             return cadLinCarr.Delete(this);
         }
 
-        public List<ENProducto> getItemsByCartId(int cartId)
+        public List<ENLinCarr> getItemsByCartId(int cartId)
         {
             CADLinCarr cadLinCarr = new CADLinCarr();
             return cadLinCarr.getItemsByCartId(cartId);
