@@ -222,12 +222,17 @@ namespace FrontEnd
             admin_user.Value = "admin_user";
             admin_user.NavigateUrl = "~/admin_usuarios.aspx";
 
+            MenuItem stats = new MenuItem("Estadísticas");
+            stats.Value = "stats";
+            stats.NavigateUrl = "~/estadisticas.aspx";
+
             usr.ChildItems.Add(account);
             usr.ChildItems.Add(orders);
             usr.ChildItems.Add(log_out);
             usr.ChildItems.Add(admin_product);
             usr.ChildItems.Add(admin_order);
             usr.ChildItems.Add(admin_user);
+            usr.ChildItems.Add(stats);
         }
 
         //Método con los eventos OnClick del menú de usuario y carrito

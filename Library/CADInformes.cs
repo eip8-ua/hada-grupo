@@ -103,81 +103,6 @@ namespace Library
             }
         }
 
-        //Método que modifica la lista pasada para que contenga todos los productos
-        //Devuelve verdadero si no hay ningún error al acceder a la BD SQL, si no devuelve falso
-        public bool getAllProducts(List<ENProducto> productos)
-        {
-            //Creamos las conexión
-            SqlConnection connection = new SqlConnection(miConexion);
-
-            try
-            {
-                //Abrimos la conexión
-                connection.Open();
-
-                //Creamos el comando y lo ejecutamos
-                SqlCommand command = new SqlCommand( "SELECT * FROM Producto;", connection);
-                SqlDataReader dr = command.ExecuteReader();
-
-                //Se trata de un bucle que va leyendo los productos sacados por el DataReader y metiéndolos en una lista
-                while(dr.Read())
-                {
-                    //Definimos las variables para pasar los valores correctamente a la entidad EN
-                    ENProducto producto = new ENProducto();
-                    int rid, rstock, rpopularidad, rpromocion;
-                    float rpvp;
-
-                    //Pasamos los valores leídos a la entidad producto
-                    int.TryParse(dr["id"].ToString(), out rid);
-                    producto.id = rid;
-                    producto.nombre = dr["nombre"].ToString();
-                    float.TryParse(dr["pvp"].ToString(), out rpvp);
-                    producto.pvp = rpvp;
-                    producto.url_image = dr["url_image"].ToString();
-                    producto.descripcion = dr["descripcion"].ToString();
-                    int.TryParse(dr["stock"].ToString(), out rstock);
-                    producto.stock = rstock;
-                    int.TryParse(dr["popularidad"].ToString(), out rpopularidad);
-                    producto.popularidad = rpopularidad;
-                    int.TryParse(dr["promocion"].ToString(), out rpromocion);
-
-                    // Inicializamos y asignamos el valor a la promoción
-                    producto.promocion = new ENPromociones();
-                    producto.promocion.MiId = rpromocion;
-
-                    // Realizamos la lectura
-                    ENPromociones promocionLeida = producto.promocion.read();
-
-                    // Validamos si la promoción leída es válida
-                    if (promocionLeida.MiId == rpromocion)
-                    {
-                        producto.promocion.MiId = promocionLeida.MiId;
-                        producto.promocion.Descuento = promocionLeida.Descuento;
-                        producto.promocion.Disponibilidad = promocionLeida.Disponibilidad;
-                    }
-                    else
-                    {
-                        producto.promocion = new ENPromociones();
-                    }
-
-                    //Añadimos el producto a la lista de productos
-                    productos.Add(producto);
-
-                }
-
-                return true;
-                //En caso de fallar la operación Sql
-            } catch(SqlException ex)
-            {
-                Console.WriteLine("Error con la parte SQL en CADInformes: {0}", ex.Message);
-                return false;
-            } finally
-            {
-                //Cerramos la conexión
-                connection.Close();
-            }
-        }
-
         //Método que modifica la lista pasada para que contenga los diez usuarios que más han gastado en la web
         //Devuelve verdadero si no hay ningún error al acceder a la BD SQL, si no devuelve falso
         public bool getTopClients(List<ENUsuario> ballenas)
@@ -216,7 +141,8 @@ namespace Library
                     usuario.Email = dr["email"].ToString();
                     usuario.Nombre = dr["nombre"].ToString();
                     usuario.Apellidos = dr["apellidos"].ToString();
-                    usuario.Tlfn = dr["telefono"].ToString();
+                    //Cantidad de dinero gastado
+                    usuario.Tlfn = dr["Total gastado"].ToString();
                     DateTime.TryParse(dr["fecha_nac"].ToString(), out fecha_nac);
                     usuario.FNacimiento = fecha_nac;
                     bool.TryParse(dr["admin"].ToString(), out admin);
@@ -254,14 +180,19 @@ namespace Library
                 connection.Open();
 
                 //Creamos el comando y lo ejecutamos
-                SqlCommand command = new SqlCommand("SELECT * FROM Producto ORDER BY popularidad DESC;", connection);
+                SqlCommand command = new SqlCommand("SELECT d.provincia, COUNT(*) 'Pedidos' FROM Usuario u " +
+                       "INNER JOIN Pedido p ON u.id = p.usuario " +
+                        "INNER JOIN Direccion_en de ON de.usuario = p.usuario " +
+                        "INNER JOIN Direccion d ON de.direccion = d.id " +
+                        "WHERE d.provincia IS NOT NULL " +
+                        "GROUP BY d.provincia ORDER BY COUNT(*) DESC; ", connection);
                 SqlDataReader dr = command.ExecuteReader();
 
                 //Condicional para ver si hay alguna provincia en la base de datos y para coger solo la información de la primera
                 if (dr.Read())
                 {
-
- 
+                    direccion.provincia = dr["provincia"].ToString();
+                    direccion.calle = dr["Pedidos"].ToString();
                 }
 
                 return true;
@@ -281,6 +212,7 @@ namespace Library
 
         //Método que devuelve el beneficio bruto que un producto aporta a la compañía
         //En caso de no encontrar el producto, o al haber algún error, devuelve -101
+        //Devuelve el beneficio bruto sin aplicar las ofertas, por lo que está mal
         public int getProductIncome(ENProducto en)
         {
             //Creamos las conexión
@@ -365,9 +297,11 @@ namespace Library
             {
                 //Abrimos la conexión
                 connection.Open();
+
                 //Creamos el comando necesario
                 SqlCommand command = new SqlCommand("SELECT COUNT(*) AS 'Pedidos' FROM Usuario u " +
                     "INNER JOIN Pedido p ON u.id = p.usuario WHERE u.id = " + en.Id.ToString() + ";", connection);
+
                 //Creamos el DataReader
                 SqlDataReader dr = command.ExecuteReader();
 
@@ -395,10 +329,49 @@ namespace Library
         //Devuelve una valoración con la puntuación media, o bien nulo en caso de error
         public ENValoraciones getAverageProductRating(ENProducto en)
         {
+            //Creamos la conexión y la valoración que vamos a devolver
+            SqlConnection connection = new SqlConnection(miConexion);
+            ENValoraciones valoracion = new ENValoraciones();
 
-            return null;
+            try
+            {
+                //Abrimos la conexión
+                connection.Open();
+
+                //Creamos el comando necesario
+                SqlCommand command = new SqlCommand("SELECT AVG(puntuacion) AS 'Media' FROM Valora WHERE producto =" + en.id.ToString(),
+                    connection);
+
+                //Creamos el DataReader
+                SqlDataReader dr = command.ExecuteReader();
+
+                //Leemos la media del producto
+                if(dr.Read())
+                {
+                    //Definimos la variable contenedor
+                    int rpuntuacion;
+
+                    valoracion.Producto = new ENProducto(en);
+                    int.TryParse(dr["Media"].ToString(), out rpuntuacion);
+                    valoracion.Puntuacion = rpuntuacion;
+                }
+
+                //Devolvemos la valoración con la media
+                return valoracion;
+
+                //En caso de error
+            } catch (SqlException ex)
+            {
+                Console.WriteLine("Error con la parte SQL en CADInformes: {0}", ex.Message);
+                return new ENValoraciones();
+
+            } finally
+            {
+                connection.Close();
+            }
         }
 
+        //Método que devuelve un par de productos con promoción activa
         public List<ENProducto> getPairPromoProducts()
         {
             //Creamos la conexión y la pareja a devolver, y el contador de la cantidad de objetos a devolver
@@ -449,12 +422,14 @@ namespace Library
                     // Validamos si la promoción leída es válida
                     if (promocionLeida.MiId == rpromocion)
                     {
+                        //Igualamos los valores
                         producto.promocion.MiId = promocionLeida.MiId;
                         producto.promocion.Descuento = promocionLeida.Descuento;
                         producto.promocion.Disponibilidad = promocionLeida.Disponibilidad;
                     }
                     else
                     {
+                        //Si no es igual, es decir, no se ha encontrado, devolvemos una promoción vacía
                         producto.promocion = new ENPromociones();
                     }
 
