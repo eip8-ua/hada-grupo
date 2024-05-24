@@ -1428,3 +1428,7 @@ insert into Locker_en ([direccion],[locker]) values (82,1);
 insert into Locker_en ([direccion],[locker]) values (83,2);
 insert into Locker_en ([direccion],[locker]) values (84,3);
 insert into Locker_en ([direccion],[locker]) values (85,4);
+
+insert into Pedido([fecha], [usuario]) values ('01/01/1900', 1);
+insert into Pedido([fecha], [usuario]) values ('01/01/1900', 2);
+insert into Pedido([fecha], [usuario]) values ('01/01/1900', 3);

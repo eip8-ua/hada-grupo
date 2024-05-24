@@ -145,7 +145,6 @@ namespace Library
             {
                 connection.Close();
             }
-            return true;
         }
 
         public bool Read(ENProducto prod)
