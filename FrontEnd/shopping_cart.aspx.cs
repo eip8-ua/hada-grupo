@@ -34,10 +34,18 @@ namespace FrontEnd
                         {
                             List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
 
+                            List<ENLinCarr> cartDB = enLinCarr.getItemsByCartId(cartDataBase);
+                            
+
                             foreach (ENLinCarr item in cart)
                             {
-                                item.Carrito = cartDataBase;
-                                item.Create();
+                                bool existsInCartDB = cartDB.Any(dbItem => dbItem.Producto == item.Producto);
+
+                                if (!existsInCartDB)
+                                {
+                                    item.Carrito = cartDataBase;
+                                    item.Create();
+                                }
                             }
                         }
 
@@ -125,6 +133,18 @@ namespace FrontEnd
 
                     Session["Cart"] = cart;
                     BindCart();
+                }
+
+                if(Site1.usuario.Email != null)
+                {
+                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id, 0);
+                    if (enCarritoDe.Read())
+                    {
+                        ENLinCarr enLinCarr = new ENLinCarr();
+                        enLinCarr.Producto = int.Parse(e.CommandArgument.ToString());
+                        enLinCarr.Carrito = enCarritoDe.Carrito;
+                        enLinCarr.Delete();
+                    }
                 }
             }
         }

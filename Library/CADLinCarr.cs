@@ -161,8 +161,9 @@ namespace Library
         /// <returns></returns>
         public bool Delete(ENLinCarr en)
         {
-            string deleteQuery = "DELETE FROM Linea_carrito WHERE id = @LineCartId";
-            int lineCartId = en.Id;
+            string deleteQuery = "DELETE FROM Linea_carrito WHERE carriot = @CartId and producto = @ProductId";
+            int cartId = en.Carrito;
+            int productId = en.Producto;
 
             try
             {
@@ -170,7 +171,8 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(deleteQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@LineItemId", lineCartId);
+                        command.Parameters.AddWithValue("@CartId", cartId);
+                        command.Parameters.AddWithValue("@ProductId",productId);
 
                         connection.Open();
 
@@ -179,10 +181,12 @@ namespace Library
                         if (rowsAffected > 0)
                         {
                             Console.WriteLine("Line item deleted successfully!");
+                            return true;
                         }
                         else
                         {
                             Console.WriteLine("Line item not found.");
+                            return false;
                         }
                     }
                 }
