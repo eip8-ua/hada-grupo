@@ -198,7 +198,7 @@ BEGIN
 		[usuario] INT UNIQUE,
 		CONSTRAINT pk_califica PRIMARY KEY([testimonial]),
 		CONSTRAINT fk_califica_1 FOREIGN KEY ([testimonial]) REFERENCES Testimonial,
-		CONSTRAINT fk_califica_2 FOREIGN KEY ([usuario]) REFERENCES Usuario
+		CONSTRAINT fk_califica_2 FOREIGN KEY ([usuario]) REFERENCES Usuario ON DELETE SET NULL
 	)
 END;
 
