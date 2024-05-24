@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Library;
-using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace FrontEnd
 {
@@ -24,6 +24,7 @@ namespace FrontEnd
             {
                 List<ENPedido> pedidos = ENPedido.ReadAll();
 
+                // Filtrar pedidos solo del usuario actual
                 var userPedidos = pedidos.FindAll(p => p.IdUsuario == userId);
 
                 if (userPedidos.Count > 0)
@@ -57,6 +58,39 @@ namespace FrontEnd
             {
                 return -1; // Usuario no autenticado
             }
+        }
+
+        protected void OrdersGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (OrdersGridView.SelectedDataKey == null)
+            {
+                return;
+            }
+
+            int pedidoId = Convert.ToInt32(OrdersGridView.SelectedDataKey.Value);
+
+            // Obtener las líneas de pedido para el pedido seleccionado
+            List<ENLinPed> lineasPedido = ENLinPed.GetLinesByPedidoId(pedidoId);
+            List<dynamic> productos = new List<dynamic>();
+
+            foreach (var linea in lineasPedido)
+            {
+                ENProducto producto = new ENProducto();
+                producto.id = linea.IdProducto;
+                if (producto.Read())
+                {
+                    productos.Add(new
+                    {
+                        producto.nombre,
+                        producto.pvp,
+                        cantidad = linea.Cantidad
+                    });
+                }
+            }
+
+            ProductsGridView.DataSource = productos;
+            ProductsGridView.DataBind();
+            ProductsGridView.Visible = true;
         }
     }
 }
