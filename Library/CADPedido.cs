@@ -27,10 +27,19 @@ namespace Library
 
                     if (en.is_correct())
                     {
-                        string query = "INSERT INTO Pedido (fecha, usuario) VALUES (@FechaPedido, @IdUsuario)";
+                        string query = "INSERT INTO Pedido (fecha, usuario) OUTPUT INSERTED.num_pedido VALUES(@FechaPedido, @IdUsuario); ";
                         SqlCommand cmd = new SqlCommand(query, connection);
                         cmd.Parameters.AddWithValue("@FechaPedido", en.FechaPedido);
                         cmd.Parameters.AddWithValue("@IdUsuario", en.IdUsuario);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                en.Numpedido = Convert.ToInt32(reader["num_pedido"]);
+                                Console.WriteLine($"Se ha insertado el pedido con num_pedido");
+                            }
+                        }
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         return rowsAffected > 0;
