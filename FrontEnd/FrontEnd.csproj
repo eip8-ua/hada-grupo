@@ -207,6 +207,7 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="contact_us.aspx" />
+    <Content Include="estadisticas.aspx" />
     <Content Include="estilos\admin_productos.css" />
     <Content Include="estilos\estilos.css" />
     <Content Include="estilos\login.css" />
@@ -216,6 +217,7 @@
     <Content Include="estilos\register.css" />
     <Content Include="estilos\admin.css" />
     <Content Include="estilos\productos.css" />
+    <Content Include="estilos\estadisticas.css" />
     <Content Include="estilos\testimoniales.css" />
     <Content Include="estilos\usuario.css" />
     <Content Include="Images\cascos 1.jpg" />
@@ -294,6 +296,13 @@
     </Compile>
     <Compile Include="contact_us.aspx.designer.cs">
       <DependentUpon>contact_us.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="estadisticas.aspx.cs">
+      <DependentUpon>estadisticas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="estadisticas.aspx.designer.cs">
+      <DependentUpon>estadisticas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
