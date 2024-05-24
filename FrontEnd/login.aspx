@@ -1,58 +1,62 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="proyecto.login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="FrontEnd.login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
-    <link rel="stylesheet" href="estilos/Login.css" />
+    <link rel="stylesheet" type="text/css" href="estilos/login.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
         <div class="central">
-            <div class="logo_marca">
-                <label>
-                    Aquí irá el logo de la tienda
-                </label>
+            <div class="logo">
+                <img src="images/logo.png" />
             </div>
 
-            <div class="inicio_sesion">
-                Inicio de sesión
+            <div class="txt_inicio_sesion">
+                <label class="login_title">Inicio de sesión</label>
 
-                    <div class="div-parametros">
-                        <div class="div-parametro">
-                            <div class="texto">
-                                Correo o nombre de usuario
-                            </div>
-                            <div class="separadorvertical"></div>
-
-                            <asp:TextBox ID="email" runat="server" TextMode="Email" name="email" class="input" />
+                <div class="div-parametros">
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Correo electrónico
                         </div>
+                        <!-- <div class="separadorhorizontal"></div> -->
 
-                        <div class="separadorvertical"></div>
-
-                        <div class="div-parametro">
-                            <div class="texto">
-                                Contraseña
-                            </div>
-                            <div class="separadorvertical"></div>
-
-
-                            <asp:TextBox ID="password" runat="server" TextMode="Password" name="password" class="input" />
-
-
-                        </div>
+                        <asp:TextBox ID="email" runat="server" TextMode="Email" name="email" class="input" />
                     </div>
+
+
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Contraseña
+                        </div>
+                        <!-- <div class="separadorhorizontal"></div> -->
+
+                        <asp:TextBox ID="password" runat="server" TextMode="Password" name="password" class="input" />
+
+                    </div>
+                    <div class="status-div">
+                        <asp:Label class="status-lbl" runat="server" ID="status_lbl"></asp:Label>
+                    </div>
+                </div>
+
+
+                <asp:Button ID="login_btn"
+                    Text="Iniciar sesión"
+                    class="boton-login"
+                    OnClick="Login_Click"
+                    runat="server" />
+
             </div>
 
 
-
-            <asp:Button ID="login_btn"
-                Text="Login"
-                class="boton-login"
-                CommandName="Submit"
-                OnClick="Login_Click"
+            <asp:Button ID="register_btn"
+                Text="Crear una nueva cuenta"
+                class="boton-register"
+                OnClick="Register_Click"
                 runat="server" />
-
-
+            <!--<asp:label runat="server" id="botono1" Text="HOla"></asp:label> /!-->
         </div>
+
     </div>
 </asp:Content>

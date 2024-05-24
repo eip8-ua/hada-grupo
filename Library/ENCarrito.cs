@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENCarrito
+    public class ENCarrito
     {
         private int _num_carrito;
         private DateTime _fecha;
@@ -66,6 +66,12 @@ namespace Library
         {
             CADCarrito cadCarr = new CADCarrito();
             return cadCarr.Delete(this);
+        }
+
+        public int getNextCartId()
+        {
+            CADCarrito cadCarr = new CADCarrito();
+            return cadCarr.getNextCartId();
         }
     }
 }

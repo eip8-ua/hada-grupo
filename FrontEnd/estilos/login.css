@@ -1,0 +1,112 @@
+﻿body {
+    background-color: white;
+}
+
+.central {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    display: grid;
+    /*height: 100vh;*/
+}
+
+.txt_inicio_sesion {
+    position: relative;
+    /*width: 60%;*/
+    margin: 0 auto;
+    display: grid;
+    justify-content: center; /* Center content horizontally */
+    align-items: center;
+    border: 1px solid black; /* Add a border with 2px width and black color */
+    border-radius: 10px; /* Make the corners rounded */
+    padding: 20px; /* Add padding to create space between the content and the border */
+    margin-top: 13px;
+    margin-bottom: 13px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.login_title {
+    color: black;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.status-div {
+    color: red;
+    margin-bottom: 6%;
+}
+
+.input {
+    position: relative;
+    width: 100%;
+    padding: 5px;
+    top: 70%;
+    border: 0.5px solid grey;
+    border-radius: 8px;
+    font-size: 90%;
+    color: #312A27;
+    margin-top: 1%;
+    margin-bottom: 9%;
+}
+
+
+.boton-login {
+    position: relative;
+    height: 140%;
+    width: 80%;
+    border-radius: 17px !important;
+    font-weight: 500;
+    font-family: 'Pontano Sans';
+    font-size: 120%;
+    border: 1px solid black;
+    margin: 0 auto;
+    background-color: #1F1A18;
+    color: white;
+
+    transition: 0.4s;
+}
+
+    .boton-login:hover {
+        font-weight: 600;
+        background: white;
+        color: black;
+    }
+
+.boton-register {
+    position: relative;
+    height: 125%;
+    width: 60%;
+    border-radius: 17px !important;
+    font-weight: 600;
+    font-family: 'Pontano Sans';
+    font-size: 120%;
+    border: 1px solid black;
+    margin: 0 auto;
+    background-color: transparent;
+    color: black;
+
+    transition: 0.4s;
+}
+    .boton-register:hover {
+        font-weight: 600;
+        background: black;
+        color: white;
+        transform: scale(1.05);
+    }
+
+
+.logo {
+    position: relative;
+    height: 80px;
+    width: 80px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+    .logo img {
+        width: auto;
+        height: 100%;
+        display: block;
+    }

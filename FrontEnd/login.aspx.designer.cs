@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace proyecto
+namespace FrontEnd
 {
 
 
@@ -33,6 +33,15 @@ namespace proyecto
         protected global::System.Web.UI.WebControls.TextBox password;
 
         /// <summary>
+        /// Control status_lbl.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label status_lbl;
+
+        /// <summary>
         /// Control login_btn.
         /// </summary>
         /// <remarks>
@@ -40,5 +49,23 @@ namespace proyecto
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button login_btn;
+
+        /// <summary>
+        /// Control register_btn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button register_btn;
+
+        /// <summary>
+        /// Control botono1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label botono1;
     }
 }

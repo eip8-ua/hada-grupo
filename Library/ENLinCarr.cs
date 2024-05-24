@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class ENLinCarr
+    public class ENLinCarr
     {
         private int _id;
         private int _cantidad;
+        private int _carrito;
+        private int _producto;
 
         public int Id { set { _id = value; } get { return _id; } }
         public int Cantidad { set { _cantidad = value; } get { return _cantidad; } }
+        public int Carrito { set { _carrito = value; } get { return _carrito; } }
+        public int Producto { set { _producto = value; } get { return _producto; } }
+
 
 
         /// <summary>
@@ -25,10 +30,12 @@ namespace Library
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cantidad"></param>
-        public ENLinCarr(int id, int cantidad)
+        public ENLinCarr(int id, int cantidad, int carrito, int producto)
         {
             Id = id;
             Cantidad = cantidad;
+            Carrito = carrito;
+            Producto = producto;
         }
         /// <summary>
         /// Método que crea una linea de carrito con los datos almacenados en el objeto EN
@@ -66,6 +73,12 @@ namespace Library
         {
             CADLinCarr cadLinCarr = new CADLinCarr();
             return cadLinCarr.Delete(this);
+        }
+
+        public List<ENLinCarr> getItemsByCartId(int cartId)
+        {
+            CADLinCarr cadLinCarr = new CADLinCarr();
+            return cadLinCarr.getItemsByCartId(cartId);
         }
     }
 }

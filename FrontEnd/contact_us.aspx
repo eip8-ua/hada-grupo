@@ -1,38 +1,59 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="contact_us.aspx.cs" Inherits="proyecto.contact_us" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="contact_us.aspx.cs" Inherits="FrontEnd.contact_us" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Contáctanos</title>
+    <link rel="stylesheet" type="text/css" href="estilos/login.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <center>
-        <h3>Contáctanos</h3>
-       <div class="contact_us_menu">
-        <div class="contact_us">
-            <div class="campo_contact">
-                        <div class="texto_contact">
-                            Nombre:<br />
-                            <asp:TextBox ID="password" CssClass="input-estilo" type="password" runat="server" ValidateRequestMode="Enabled"/>
-                        </div>
-             </div>
-            <div class="campo_contact">
-                        <div class="texto_contact">                            
-                            Email:<br />                                  
-                            <asp:TextBox ID="TextBox1" CssClass="input-estilo" type="password" runat="server" ValidateRequestMode="Enabled"/>
-                        </div>
+    <div>
+        <div class="central">
+            <div class="logo">
+                <img src="images/logo.png" />
             </div>
-            <div class="campo_contact">
-                        <div class="texto_contact">
-                            Teléfono:<br />
-                            <asp:TextBox ID="TextBox2" CssClass="input-estilo" type="password" runat="server" ValidateRequestMode="Enabled"/>
+
+            <div class="txt_inicio_sesion">
+                <label class="login_title">Contáctanos</label>
+
+                <div class="div-parametros">
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Nombre
                         </div>
+                        <asp:TextBox ID="nombre" runat="server" class="input" />
                     </div>
-            <div class="campo_contact">
-                        <div class="texto_contact">
-                            Mensaje:<br />
-                            <asp:TextBox ID="TextBox3" CssClass="input-estilo" type="password" runat="server" ValidateRequestMode="Enabled" Height="100px"/>
+
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Email
                         </div>
+                        <asp:TextBox ID="email" runat="server" TextMode="Email" class="input" />
+                    </div>
+
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Teléfono
+                        </div>
+                        <asp:TextBox ID="telf" runat="server" class="input" />
+                    </div>
+
+                    <div class="div-parametro">
+                        <div class="texto">
+                            Mensaje
+                        </div>
+                        <asp:TextBox ID="mensaje" runat="server" TextMode="MultiLine" class="input" />
+                    </div>
+
+                    <div class="status-div">
+                        <asp:Label class="status-lbl" runat="server" ID="status_lbl"></asp:Label>
+                    </div>
+                </div>
+
+                <asp:Button ID="login_btn"
+                    Text="Contactar"
+                    class="boton-login"
+                    OnClick="Login_Click"
+                    runat="server" />
             </div>
         </div>
-       </div>
-    </center>
-    
+    </div>
 </asp:Content>

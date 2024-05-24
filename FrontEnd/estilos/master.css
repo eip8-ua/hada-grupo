@@ -1,0 +1,91 @@
+﻿html {
+    filter: brightness(1.15);
+}
+
+body {
+    font-family: 'Poppins';
+}
+
+#navigationMenu {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    font-family: 'Poppins';
+    background-color: #ffffff;
+    margin-top: 40px;
+    margin-bottom: 75px;
+}
+
+.border_shadow {
+    -webkit-box-shadow: 20px 15px 10px 0px rgba(0,0,0,0.37);
+    -moz-box-shadow: 20px 15px 10px 0px rgba(0,0,0,0.37);
+    box-shadow: 20px 15px 10px 0px rgba(0,0,0,0.37);
+}
+
+.submenuStyle {
+    padding-left: 20px;
+    padding-right: 40px;
+    border-radius: 4px;
+    border: 1px none;
+}
+
+#leftMenu {
+}
+
+#rightMenu {
+    position: absolute;
+    margin-right: 50px;
+    right: 0;
+}
+
+.ButtonStyle1 {
+    font-family: "Poppins";
+    font-size: 15px;
+    color: white;
+    background-color: #b88e2f;
+    height: 50px;
+    width: 160px;
+    border: none;
+    font-weight: 500;
+    transition: transform 0.1s;
+}
+
+.ButtonStyle1:hover {
+    background-color: white;
+    color: #b88e2f;
+    transform: scale(1.05);
+}
+
+.ButtonStyle2 {
+    border: 2px solid #b88e2f;
+    background-color: white;
+    color: #b88e2f;
+    transition: transform 0.1s;
+    font-family: "Poppins";
+    font-size: 15px;
+    height: 45px;
+    width: 140px;
+}
+
+.ButtonStyle2:hover {
+    background-color: #b88e2f;
+    color: white;
+    transform: scale(1.05);
+    border: none;
+}
+
+.ButtonStyle3 {
+    font-family: "Poppins";
+    font-size: 15px;
+    color: white;
+    background-color: #b88e2f;
+    height: 50px;
+    width: 160px;
+    border: none;
+    font-weight: 500;
+    transition: transform 0.1s;
+}
+
+.ButtonStyle3:hover {
+        transform: scale(1.075);
+}

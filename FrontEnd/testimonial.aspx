@@ -1,64 +1,22 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="testimonial.aspx.cs" Inherits="proyecto.testimonial" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="testimonial.aspx.cs" Inherits="FrontEnd.testimonial" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="estilos/testimoniales.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <h1>TESTIMONIOS</h1>
 
-    <h3>Testimonial</h3>
-       <div id="testimonialContainer" class="testimonial_container">
+    <div id="testimonialContainer" class="testimonial_container">
         <div class="testimonial">
-            <p id="nombre_testimonial"></p>
-
-            <button id="btn1"><</button>
-            <span class="testimonial_quote">“</span>
-                <span id="testimonialText"></span>
-                <span class="testimonial_quote">”</span>
-            <button id="btn2">></button>
+            <button id="btn1" runat="server" onserverclick="btn1_Click" class="nav_button">&lt;</button>
+            <div class="testimonial_content">
+                <asp:Label ID="lblNombreTestimonial" runat="server" Text="" CssClass="testimonial_username"></asp:Label>
+                <div class="testimonial_message">
+                    <span class="testimonial_quote">“</span>
+                    <asp:Label ID="lblCita" runat="server" Text="" CssClass="testimonial_text"></asp:Label>
+                    <span class="testimonial_quote">”</span>
+                </div>
             </div>
+            <button id="btn2" runat="server" onserverclick="btn2_Click" class="nav_button">&gt;</button>
         </div>
-<script>
-
-    var nombres = [
-        'Nombre 1',
-        'Nombre 2',
-        'Nombre 3',
-        'Nombre 4'
-    ];
-
-    var citas = [
-        'Esta es la cita del testimonio 1.',
-        'Esta es la cita del testimonio 2.',
-        'Esta es la cita del testimonio 3.',
-        'Esta es la cita del testimonio 4.'
-    ];
-
-    var indiceActual = 0;
-
-    document.getElementById('nombre_testimonial').innerHTML = nombres[indiceActual];
-    document.getElementById('testimonialText').innerHTML = citas[indiceActual];
-
-    document.getElementById('btn1').addEventListener('click', function (event) {
-        event.preventDefault(); 
-
-        indiceActual = (indiceActual - 1 + citas.length) % citas.length;
-
-        document.getElementById('nombre_testimonial').innerHTML = nombres[indiceActual];
-        document.getElementById('testimonialText').innerHTML = citas[indiceActual];
-    });
-
-    document.getElementById('btn2').addEventListener('click', function (event) {
-        event.preventDefault(); // Evita el postback
-
-        indiceActual = (indiceActual + 1) % citas.length;
-
-        document.getElementById('nombre_testimonial').innerHTML = nombres[indiceActual];
-        document.getElementById('testimonialText').innerHTML = citas[indiceActual];
-    });
-</script>
-
-
-
+    </div>
 </asp:Content>
-
-
-
-

@@ -2,6 +2,12 @@
 ## Descripción  
 Esta aplicación web es una tienda online de productos tecnológicos, con un control de usuarios y privilegios para los administradores
 
+## Usuarios de prueba
+|   Tipo    | Correo electrónico |	Contraseña |
+| :----------- | :-----------: | :-----------: |
+|Administrador | admin@ua.es   | 1234		   |
+| Usuario	   | user@ua.es    | 1234          |
+
 ## Integrantes del equipo de desarrollo
 -  Emiliano Dovao Marcovich
 -  Saúl Conejo Minguez
@@ -11,7 +17,58 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 -  Daniel Alarcón Mena
 -  Abdelatif Boussaid
 
-## Reparto de Entidades y Aspx
+# Trabajo realizado
+- Emiliano Dovao Marcovich
+    - Creación de la página maestra y la gestión del usuario durante toda la web
+    - Aspx de tienda (página principal)
+    - Aspx de estadísticas
+    - Entidades promociones e informes
+
+- Saúl Conejo Minguez
+    - Entidades producto, categoría y valoraciones
+    - Aspx de contactanos
+    - Aspx de administacion de pedidos
+    - Confección de la base de datos 
+    - Rellenado de la base de datos
+
+- Lucas Alberola Pastor
+  	- Entidades de Negocio ENUsuario y ENTestimonial y su capa intermedia con la base de datos
+  	  (CADUsuario y CADTestimonial)
+  	- Página de administración de usuarios para el admin de la página, con implementación de eliminado de usuarios
+  	- Página de Datos de Usuario, con posibilidad de modificación y un pop-up de confirmación
+  	- Configuración del Web.config para el acceso a la base de datos desde los CAD
+
+- Elías Iborra Pérez
+	- Entidades Direccion y Locker
+	- Aspx de inicio de sesión y registro
+	- Aspx de añadir artículos (administrador)
+	- Mostrar valoraciones en los productos
+    - Valoraciones en los productos
+	- Confección y rellenado de la base de datos
+
+- David Mas Almendros
+    - Creación de los estilos, estructura y diseño de la página web (Estilos_web.pdf)
+    - Entidades Carrito, LinCarr (Linea de Carrito) y CarritoDe
+    - Aspx de Carrito
+    - Añadir productos al carrito desde productos, producto-seleccionado y productosCategoria
+    - Funcionalides de eliminar y cambiar cantidad de una linea del carrito
+    - Ventana de confirmación de compra
+    - Compatibilidad entre la variable Session y la Base de datos (Persistencia de datos)
+
+- Daniel Alarcón Mena
+	-Entidades Pedido y Línea Pedido
+  	-Aspx de Testimoniales
+  	-Aspx de Productos (por categoria,todos y de manera individual) 
+
+- Abdelatif Boussaid
+    - Entidades valoraciones.
+    - Apsx de pedidos.
+    - Aspx categorias, ayudando a Daniel.
+
+
+
+
+## Reparto de Entidades y Aspx (inicialmente)
 
 |   Alumno    | EN |	ASPX |
 | :----------- | :-----------: | :-----------: |
@@ -20,10 +77,8 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 | Lucas Alberola      |    Usuario <br></br>  Testimonial                     |		Usuario											   |
 | Elías Iborra        |    Locker <br></br>  Dirección                        |		Login <br></br> Crear Usuario                      |
 | David Mas Almendros |    Carrito <br></br>  Línea de Carrito                |		Carrito							                   |
-| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |		Testimoniales						               |
-| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |		Pedido											   |
-
-
+| Daniel Alarcón      |    Pedido <br></br>  Línea de pedido                  |		Testimoniales<br></br>Página con todos los productos|
+| Abdelatif Boussaid  |    Valoraciones <br></br>  Contacta con nosotros      |		Pedido<br></br>Página de producto específico       |
 ## Parte Pública  
 La parte pública permite a los usuarios no registrados crear una cuenta, iniciar sesión, consultar los productos ofrecidos y su stock.  
 ## Listado EN Pública  
@@ -77,11 +132,40 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Obtener la cantidad de artículos vendidos
 -  Obtener el número de pedidos realizados por un usuario
 
+
+#Problemas encontrados
+- Ha habido problemas con la gestión del carrito y como añadir los productos al carrito para los usuarios sin registrar en la web. Finalmente se ha podido solventar pero ha llevado mucho tiempo.
+- Modificación de la base de datos una vez ya empezado el proyecto debido a que surgieron nuevas funcionalidades en las que la base de datos anterior estaba obsoleta. Esto ha conllevado la modificacion del modelo entidad relación.
+- Trabajo en equipo y sobretodo el uso de github para poder trabajar independientemente. Uno de los mayores aprendizajes ha sido el poder trabajar cada uno sobre su parte y luego unirlo todo en develop. La metodología de trabajo aprendida ha sido el mayor aprendizaje de este proyecto.
+- Uso de nuevas tecnologías web de los que muchos no habíamos hecho uso nunca como puede ser css.
+- Abdelatif Boussaid no ha podido con toda la carga de trabajo y se ha repartido su parte a Saúl Conejo Mínguez.
+
+
+## Mejoras implementadas
+- Protección contra injecciones sql. Gracias a SqlCommand.Parameters.SetValuesWith(string,variable). hemos conseguido mejorar en la seguridad de la página web.
+- Apartado de testimonios de usuarios donde nuestros usuarios puedes expresar su opinión libremente sobre nuestra web y nuestros productos.
+- Capacidad de ver estadísticas de los artículos de la web
+- Sistema de popularidad para poder ordenar los artículos por popularidad
+- Gestión total de la web por parte del administrador con un panel de control
+- Mejoras gráficas en la web que aportan armonía visual
+- Sistema de soporte para que los administradores de la web puedan solventar los problemas de los usuarios
+
+
 ## Posibles mejoras
--  Añadir una página principal de presentación de nuestra empresa en la que se explique nuestro nicho de mercado y nuestra filosofía de empresa.
 -  Apartado de devolución de artículos para usuarios registrados.
--  Apartado de valoración de usuarios.
 -  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
+-   Capacidad de recoger un pedido en un locker (no ha dado tiempo a implementarlo).
+
+## Mejoras necesarias
+-  Si el usuario está registrado las opciones del icono de usuario pasarán a ser:
+	1. Mi cuenta (llevará a usuario.aspx)
+	2. Mis pedios. (llevará a pedidos.aspx)
+	3. Si es admin también aparecerán estas opciones:
+		1.1. Añadir artículo. (llevará a un nuevos aspx llamado admin_productos.aspx)
+		1.2. Administrar pedidos. (llevará a un aspx nuevo llamado admin_pedidos.aspx) MENOS PRIORITARIO
+		1.3. Administrar usuarios. (llevará a un aspx nuevo llamado admin_usuarios.aspx) MENOS PRIORITARIO
+	4. Cerrar sesión.
+
 
 ## Esquema Entidad Relacion de la base de datos
 - El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.

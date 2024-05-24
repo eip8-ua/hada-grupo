@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace proyecto
+namespace FrontEnd
 {
 
 
@@ -15,111 +15,75 @@ namespace proyecto
     {
 
         /// <summary>
-        /// Control Button1.
+        /// Control contact_Button.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button contact_Button;
 
         /// <summary>
-        /// Control popProduct1.
+        /// Control popular_column1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl popProduct1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl popular_column1;
 
         /// <summary>
-        /// Control AddCart1.
+        /// Control popular_column2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddCart1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl popular_column2;
 
         /// <summary>
-        /// Control AddCart2.
+        /// Control see_more_pop_products.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddCart2;
+        protected global::System.Web.UI.WebControls.Button see_more_pop_products;
 
         /// <summary>
-        /// Control popProduct2.
+        /// Control explore_more_promotions_Button.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl popProduct2;
+        protected global::System.Web.UI.WebControls.Button explore_more_promotions_Button;
 
         /// <summary>
-        /// Control AddCart3.
+        /// Control right_promotions1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddCart3;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl right_promotions1;
 
         /// <summary>
-        /// Control AddCart4.
+        /// Control right_promotions2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddCart4;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl right_promotions2;
 
         /// <summary>
-        /// Control popProduct3.
+        /// Control testimonies_Button.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl popProduct3;
-
-        /// <summary>
-        /// Control AddCart5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddCart5;
-
-        /// <summary>
-        /// Control AddCart6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddCart6;
-
-        /// <summary>
-        /// Control ButtonSeeMore.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSeeMore;
-
-        /// <summary>
-        /// Control Button2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button testimonies_Button;
     }
 }
