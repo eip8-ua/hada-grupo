@@ -27,6 +27,7 @@ namespace Library
         /// <returns></returns>
         public bool Create(ENCarritoDe en)
         {
+            this.connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string insertQuery = "INSERT INTO Carrito_de (usuario, carrito) VALUES (@UserId, @CartId)";
             int userId = en.Usuario;
             int cartId = en.Carrito;
@@ -130,7 +131,7 @@ namespace Library
 
                         while (reader.Read())
                         {
-                            Console.WriteLine($"ID: ");
+                            en.Carrito = (int)reader["carrito"];
                         }
 
                         if (!reader.HasRows)
