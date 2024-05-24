@@ -37,17 +37,18 @@
     </div>
 
     <div class="reviews">
-        <table width: 100%, display: flex>
+        <hr class="line" />
+        <asp:Label class="txt-valoraciones" Text="Valoraciones" runat="server"></asp:Label>
+        <table class="table" width: 100%>
             <asp:Repeater ID="rptListReviews" runat="server">
-                    <ItemTemplate>
-               <tr>
-                    <td class="email"><%# Eval("Usuario.email") %></td>
-                    <td class="puntuacion"> <%# Eval("puntuacion") %></td>
-                </tr>
-                <tr>
-                    <td class="descripcion" colspan="4"><%# Eval("descripcion") %></td>
-                </tr>
-                    </ItemTemplate>
+                <ItemTemplate>
+                    <tr class="zona">
+                        <td class="email">
+                            <%# Eval("Usuario.email") %>
+                            <%# Eval("puntuacion") %>
+                            <%# String.IsNullOrEmpty(Eval("descripcion") as string) ? "Hello my name is Jeff" : Eval("descripcion") %>
+                        </td>
+                </ItemTemplate>
             </asp:Repeater>
         </table>
     </div>
