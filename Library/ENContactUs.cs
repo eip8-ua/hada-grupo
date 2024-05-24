@@ -15,6 +15,11 @@ namespace Library
         private string _telefono;
         private string _mensaje;
 
+        public int id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         public string telefono
         {
@@ -42,8 +47,10 @@ namespace Library
 
         }
 
-        public ENContactUs(string nombre = "", string email = "", string telefono = "", string mensaje ="" )
+        public ENContactUs(int id = -1, string nombre = "", string email = "", string telefono = "", string mensaje ="" )
         {
+            this.id = id;
+
             if (nombre != "")
                 this.nombre = nombre;
             if (email != "")
@@ -73,6 +80,12 @@ namespace Library
         {
             CADContactUs cad = new CADContactUs();
             return cad.Read(this);
+        }
+
+        public bool SolicitudExiste()
+        {
+            CADContactUs cad = new CADContactUs();
+            return cad.SolicitudExiste(this);
         }
     }
 }

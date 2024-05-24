@@ -39,18 +39,33 @@ namespace FrontEnd
 
                 
 
-                ENContactUs en = new ENContactUs(email.Text, nombre.Text, telf.Text, mensaje.Text);
-                if (en.Create())
+                ENContactUs en = new ENContactUs(-1, nombre.Text, email.Text, telf.Text, mensaje.Text);
+                if (!en.SolicitudExiste())
                 {
-                    status_lbl.ForeColor = System.Drawing.Color.Green;
-                    status_lbl.Text = "Mensaje enviado con éxito";
+                    if (en.Create())
+                    {
+                        status_lbl.ForeColor = System.Drawing.Color.Green;
+                        status_lbl.Text = "Mensaje enviado con éxito";
+                        return;
+                    }
+
+                    else
+                    {
+                        status_lbl.ForeColor = System.Drawing.Color.Red;
+                        status_lbl.Text = "Error al crear mensaje";
+                        return;
+                    }
+                    
                 }
 
                 else
                 {
-                    status_lbl.ForeColor = System.Drawing.Color.Red;
-                    status_lbl.Text = "Error al crear mensaje";
+                    status_lbl.ForeColor = System.Drawing.Color.Blue;
+                    status_lbl.Text = "Ya tiene una solicitud pendiente de respuesta";
+                    return;
                 }
+
+                
 
 
 

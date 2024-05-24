@@ -48,6 +48,8 @@ namespace Library
                     comm.Parameters.AddWithValue("@cat", prod.categoria.tipo);
 
                 prod.id = Convert.ToInt32(comm.ExecuteScalar());
+
+                return comm.ExecuteNonQuery() > 0;
             }
             catch (SqlException e)
             {
@@ -62,7 +64,7 @@ namespace Library
                 }
             }
 
-            return true;
+            
         }
 
         public bool Delete(ENProducto prod)
