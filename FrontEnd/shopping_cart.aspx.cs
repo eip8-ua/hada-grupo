@@ -51,11 +51,11 @@ namespace FrontEnd
                     }
                     else
                     {
-                        Response.Write("No tenia carrito");
+                        
 
                         if(Session["Cart"] != null) 
                         {
-                            Response.Write("Carrito con algo");
+                            
                             
                             // Si no existe crear una linea de la base de datos con el usuario y el carrito actual
                             ENCarrito enCarrito = new ENCarrito();
@@ -63,10 +63,7 @@ namespace FrontEnd
                             enCarrito.Fecha = DateTime.Now;
 
                             enCarritoDe = new ENCarritoDe(Site1.usuario.Id, enCarrito.Num_carrito);
-                            if(enCarritoDe.Create())
-                            {
-                                Response.Write("Suu");
-                            }
+                            enCarritoDe.Create();
 
                             ENLinCarr enLinCarr = new ENLinCarr();
 
