@@ -2,6 +2,12 @@
 ## Descripción  
 Esta aplicación web es una tienda online de productos tecnológicos, con un control de usuarios y privilegios para los administradores
 
+## Usuarios de prueba
+|   Tipo    | Correo electrónico |	Contraseña |
+| :----------- | :-----------: | :-----------: |
+|Administrador | admin@ua.es   | 1234		   |
+| Usuario	   | user@ua.es    | 1234          |
+
 ## Integrantes del equipo de desarrollo
 -  Emiliano Dovao Marcovich
 -  Saúl Conejo Minguez
@@ -13,10 +19,17 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 
 # Trabajo realizado
 - Emiliano Dovao Marcovich
-    - Escribe aqui
+    - Creación de la página maestra y la gestión del usuario durante toda la web
+    - Aspx de tienda (página principal)
+    - Aspx de estadísticas
+    - Entidades promociones e informes
 
 - Saúl Conejo Minguez
-    - Escribe aqui
+    - Entidades producto, categoría y valoraciones
+    - Aspx de contactanos
+    - Aspx de administacion de pedidos
+    - Confección de la base de datos 
+    - Rellenado de la base de datos
 
 - Lucas Alberola Pastor
   	- Entidades de Negocio ENUsuario y ENTestimonial y su capa intermedia con la base de datos
@@ -30,6 +43,7 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 	- Aspx de inicio de sesión y registro
 	- Aspx de añadir artículos (administrador)
 	- Mostrar valoraciones en los productos
+    - Valoraciones en los productos
 	- Confección y rellenado de la base de datos
 
 - David Mas Almendros
@@ -47,16 +61,14 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
   	-Aspx de Productos (por categoria,todos y de manera individual) 
 
 - Abdelatif Boussaid
-    - Entidades valoraciones y contactanos.
+    - Entidades valoraciones.
     - Apsx de pedidos.
     - Aspx categorias, ayudando a Daniel.
 
-- Lucas Alberola
-  
 
 
 
-## Reparto de Entidades y Aspx
+## Reparto de Entidades y Aspx (inicialmente)
 
 |   Alumno    | EN |	ASPX |
 | :----------- | :-----------: | :-----------: |
@@ -115,16 +127,29 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 -  Obtener todos los lockers dada una provincia??
 -  Obtener todos los lockers
 
-## Posibles mejoras
--  Añadir una página principal de presentación de nuestra empresa en la que se explique nuestro nicho de mercado y nuestra filosofía de empresa.
--  Apartado de devolución de artículos para usuarios registrados.
--  Apartado de valoración de usuarios.
--  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
+
+#Problemas encontrados
+- Ha habido problemas con la gestión del carrito y como añadir los productos al carrito para los usuarios sin registrar en la web. Finalmente se ha podido solventar pero ha llevado mucho tiempo.
+- Modificación de la base de datos una vez ya empezado el proyecto debido a que surgieron nuevas funcionalidades en las que la base de datos anterior estaba obsoleta. Esto ha conllevado la modificacion del modelo entidad relación.
+- Trabajo en equipo y sobretodo el uso de github para poder trabajar independientemente. Uno de los mayores aprendizajes ha sido el poder trabajar cada uno sobre su parte y luego unirlo todo en develop. La metodología de trabajo aprendida ha sido el mayor aprendizaje de este proyecto.
+- Uso de nuevas tecnologías web de los que muchos no habíamos hecho uso nunca como puede ser css.
+- Abdelatif Boussaid no ha podido con toda la carga de trabajo y se ha repartido su parte a Saúl Conejo Mínguez.
+
 
 ## Mejoras implementadas
 - Protección contra injecciones sql. Gracias a SqlCommand.Parameters.SetValuesWith(string,variable). hemos conseguido mejorar en la seguridad de la página web.
 - Apartado de testimonios de usuarios donde nuestros usuarios puedes expresar su opinión libremente sobre nuestra web y nuestros productos.
+- Capacidad de ver estadísticas de los artículos de la web
+- Sistema de popularidad para poder ordenar los artículos por popularidad
+- Gestión total de la web por parte del administrador con un panel de control
+- Mejoras gráficas en la web que aportan armonía visual
+- Sistema de soporte para que los administradores de la web puedan solventar los problemas de los usuarios
 
+
+## Posibles mejoras
+-  Apartado de devolución de artículos para usuarios registrados.
+-  Programam de fidelización de usuarios en el que se de recompensas a los usuarios que compren asiduamente.
+-   Capacidad de recoger un pedido en un locker (no ha dado tiempo a implementarlo).
 
 ## Mejoras necesarias
 -  Si el usuario está registrado las opciones del icono de usuario pasarán a ser:
@@ -136,11 +161,6 @@ La parte privada permite a los usuarios con cuenta de cliente añadir productos 
 		1.3. Administrar usuarios. (llevará a un aspx nuevo llamado admin_usuarios.aspx) MENOS PRIORITARIO
 	4. Cerrar sesión.
 
-## Usuarios de prueba
-|   Tipo    | Correo electrónico |	Contraseña |
-| :----------- | :-----------: | :-----------: |
-|Administrador | admin@ua.es   | 1234		   |
-| Usuario	   | user@ua.es    | 1234          |
 
 ## Esquema Entidad Relacion de la base de datos
 - El esquema se encuentra en la raiz del proyecto con el nombre 'Esquema_ER.pdf'. En este archivo se encuentra el equema ER con todas las relaciones de las entidades de nuestra página web.
