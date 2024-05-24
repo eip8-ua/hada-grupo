@@ -3,32 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link rel="stylesheet" type="text/css" href="estilos/admin.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script>
-        function eliminarUsuario(email) {
-            console.log("Función eliminarUsuario llamada"); // Verificar si la función 
-            if (confirm("¿Estás seguro de eliminar este usuario?")) {
-                // Llamar al método del servidor usando AJAX
-                $.ajax({
-                    type: "POST",
-                    url: "YourPage.aspx/EliminarUsuario",
-                    data: JSON.stringify({ email: email }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert(response.d); // Mostrar el mensaje del servidor
-                        location.reload();
-                    },
-                    error: function (xhr, status, error) {
-                        alert("Error al eliminar el usuario: " + error);
-                    }
-                });
-                return false; // Evitar el postback
-            }
-            return false; // Evitar el postback si el usuario cancela
-        }
-    </script>
 <div id="body">            
     <div id="items">
         <asp:Label runat="server" ID="problem"></asp:Label>
@@ -56,8 +31,6 @@
                         <td class="element"><%# Eval("Telefono") %></td>
                         <td class="element">
                             <asp:LinkButton runat="server" class="Button" Text="Eliminar" OnCommand="EliminarUsuario" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Email") %>'/>
-
-                            <%--<asp:Button runat="server" class="Button" Text="Eliminar" OnClientClick='<%# "return eliminarUsuario(\"" + Eval("Email") + "\");" %>' />--%>
                         </td>
                     </tr>
                 </ItemTemplate>

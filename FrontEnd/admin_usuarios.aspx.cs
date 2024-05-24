@@ -22,82 +22,43 @@ namespace FrontEnd
 
             if (!IsPostBack)
             {
-                ENUsuario usu = new ENUsuario();
-                usu.ReadFirst();
-                if (!usu.ReadNext())
-                {
-                    problem.Text = "No hay usuarios que administrar";
-                }
-                else
-                {
-                    List<UsuarioLista> listaUsuarios = new List<UsuarioLista>();
-
-                    while (usu.ReadNext())
-                    {
-                        UsuarioLista usuLista = new UsuarioLista(usu.Email, usu.Nombre, usu.Apellidos, usu.Admin, usu.FNacimiento, usu.Dni, usu.Tlfn);
-                        listaUsuarios.Add(usuLista);
-                    }
-
-                    rptListUsers.DataSource = listaUsuarios;
-                    rptListUsers.DataBind();
-                }
-
-
+                LoadPage();
             }
         }
 
-        //protected void rptListUsers_ItemCommand(object source, RepeaterCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "Eliminar")
-        //    {
-        //        System.Diagnostics.Debug.WriteLine("Se ejecuta");
-        //        string email = e.CommandArgument.ToString();
-        //        ENUsuario usu = new ENUsuario();
-        //        usu.Email = email;
-        //        usu.Read();
-        //        usu.Delete();
-        //    }
-        //}
-
-
-        //[WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //public static string EliminarUsuario(string email)
-        //{
-        //    System.Diagnostics.Debug.WriteLine("Se ejecuta");
-        //    // Implementa la lógica para eliminar el usuario usando el email
-        //    // Por ejemplo:
-        //    // bool isDeleted = UserService.DeleteUserByEmail(email);
-        //    ENUsuario usu = new ENUsuario();
-        //    usu.Email = email;
-        //    usu.Read();
-        //    if(usu.Delete())
-        //    {
-        //        return "Usuario eliminado: " + email;
-        //    }
-        //    else
-        //        return "Error";
-        //    // Retorna un mensaje o resultado
-
-        //}
-
         public void EliminarUsuario(object sender, CommandEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Se ejecuta");
             string email = e.CommandArgument.ToString();
-            System.Diagnostics.Debug.WriteLine("Email buscado = " + email);
             ENUsuario usu = new ENUsuario();
             usu.Email = email;
             usu.Read();
-            System.Diagnostics.Debug.WriteLine("ID buscado = " + usu.Id);
             usu.Delete();
-            Page_Load(sender, e);
+            LoadPage();
+        } 
+
+        public void LoadPage()
+        {
+            ENUsuario usu = new ENUsuario();
+            usu.ReadFirst();
+            if (!usu.ReadNext())
+            {
+                problem.Text = "No hay usuarios que administrar";
+            }
+            else
+            {
+                List<UsuarioLista> listaUsuarios = new List<UsuarioLista>();
+
+                while (usu.ReadNext())
+                {
+                    UsuarioLista usuLista = new UsuarioLista(usu.Email, usu.Nombre, usu.Apellidos, usu.Admin, usu.FNacimiento, usu.Dni, usu.Tlfn);
+                    listaUsuarios.Add(usuLista);
+                }
+
+                rptListUsers.DataSource = listaUsuarios;
+                rptListUsers.DataBind();
+            }
         }
-
-
-        
     }
-
 
 
         public class UsuarioLista
@@ -109,8 +70,6 @@ namespace FrontEnd
             public string Fecha { get; set; }
             public string Dni { get; set; }
             public string Telefono { get; set; }
-
-
 
             public UsuarioLista(string email, string nombre, string apellidos, bool admin, DateTime fecha, string dni, string telefono = null)
             {
