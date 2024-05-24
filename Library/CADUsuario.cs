@@ -67,7 +67,7 @@ namespace Library
                 }
                 else
                 {
-                    Console.WriteLine("An error ocurred while inserting on the Database: The given email for the User is alredy used");
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while inserting on the Database: The given email for the User is alredy used");
                 }
 
                 connection.Close();
@@ -76,7 +76,7 @@ namespace Library
             {
                 //Falta indicar que ha habido un problema
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -98,66 +98,65 @@ namespace Library
             int id = 0;
             try
             {
-                try
+
+                connection.Open();
+                SqlCommand com = new SqlCommand("SELECT * FROM usuario;", connection);
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr["email"].ToString() == en.Email && dr.GetInt32(dr.GetOrdinal("id")) != en.Id)
+                    {
+                        exists = true;
+                        break;
+                    }
+
+                }
+                dr.Close();
+
+                if (!exists)
                 {
 
-                    connection.Open();
-                    SqlCommand com = new SqlCommand("SELECT * FROM usuario;", connection);
-                    SqlDataReader dr = com.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        if (dr["email"].ToString() == en.Email && dr.GetInt32(dr.GetOrdinal("id")) != en.Id)
-                        {
-                            exists = true;
-                            break;
-                        }
+                    SqlCommand updt = new SqlCommand($"UPDATE usuario set dni = @dni,email = @email,nombre = @nombre,apellidos = @apellidos,telefono = @telefono,fecha_nac = @fecha_nac,admin = @admin,contrasena = @contrasena WHERE id = @id;", connection);
+                    updt.Parameters.Add("@id", SqlDbType.Int).Value = en.Id;
+                    updt.Parameters.Add("@dni", SqlDbType.NVarChar).Value = en.Dni;
+                    updt.Parameters.Add("@email", SqlDbType.NVarChar).Value = en.Email;
+                    updt.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = en.Nombre;
+                    updt.Parameters.Add("@apellidos", SqlDbType.NVarChar).Value = en.Apellidos;
+                    updt.Parameters.Add("@fecha_nac", SqlDbType.Date).Value = en.FNacimiento;
+                    updt.Parameters.Add("@admin", SqlDbType.Bit).Value = en.Admin;
+                    updt.Parameters.Add("@contrasena", SqlDbType.NVarChar).Value = en.Passwd;
 
-                    }
-                    dr.Close();
-
-                    if (!exists)
-                    {
-
-                        SqlCommand updt = new SqlCommand($"UPDATE usuario set dni = @dni,email = @email,nombre = @nombre,apellidos = @apellidos,telefono = @telefono,fecha_nac = @fecha_nac,admin = @admin,contrasena = @contrasena WHERE id = @id;", connection);
-                        updt.Parameters.Add("@id", SqlDbType.Int).Value = en.Id;
-                        updt.Parameters.Add("@dni", SqlDbType.NVarChar).Value = en.Dni;
-                        updt.Parameters.Add("@email", SqlDbType.NVarChar).Value = en.Email;
-                        updt.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = en.Nombre;
-                        updt.Parameters.Add("@apellidos", SqlDbType.NVarChar).Value = en.Apellidos;
-                        updt.Parameters.Add("@fecha_nac", SqlDbType.Date).Value = en.FNacimiento;
-                        updt.Parameters.Add("@admin", SqlDbType.Bit).Value = en.Admin;
-                        updt.Parameters.Add("@contrasena", SqlDbType.NVarChar).Value = en.Passwd;
-
-                        if (en.Tlfn == "")
-                            updt.Parameters.AddWithValue("@telefono", DBNull.Value);
-                        else
-                            updt.Parameters.Add("@telefono", SqlDbType.NVarChar).Value = en.Tlfn;
-                        updt.ExecuteNonQuery();
-                        updated = true;
-                    }
+                    if (en.Tlfn == "")
+                        updt.Parameters.AddWithValue("@telefono", DBNull.Value);
                     else
-                    {
-                        throw new Exception("Puto puto");
-                        Console.WriteLine("An error ocurred while updating the Database: The given Email is alredy used by another user");
-                    }
+                        updt.Parameters.Add("@telefono", SqlDbType.NVarChar).Value = en.Tlfn;
+                    updt.ExecuteNonQuery();
+                    updated = true;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while updating the Database: The given Email is alredy used by another user");
+                }
 
-                    connection.Close();
-                }
-                catch (Exception e)
-                {
-                    //Falta indicar que ha habido un problema
-                    Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
-                    connection.Close();
-                    return false;
-                }
-                finally
-                {
-                    connection.Close();
-                }
+                connection.Close();
             }
-            catch (System.Threading.ThreadAbortException)
+            catch (SqlException e)
             {
-                //Do nothing.  The exception will get rethrown by the framework when this block terminates.
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            finally
+            {
+                connection.Close();
             }
             return updated;
         }
@@ -180,6 +179,7 @@ namespace Library
                 {
                     if (dr["email"].ToString() == en.Email)
                     {
+                        en.Id = dr.GetInt32(dr.GetOrdinal("id"));
                         en.Dni = dr["dni"].ToString();
                         en.Email = dr["email"].ToString();
                         en.Nombre = dr["nombre"].ToString();
@@ -189,15 +189,24 @@ namespace Library
                         en.FNacimiento = dr.GetDateTime(dr.GetOrdinal("fecha_nac"));//fecha_aux;
                         en.Admin = dr.GetBoolean(dr.GetOrdinal("admin"));
                         found = true;
+                        System.Diagnostics.Debug.WriteLine("Se ejecuta leer");
                         break;
+                       
                     }
                 }
                 dr.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema 
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -216,10 +225,11 @@ namespace Library
         public bool Delete(ENUsuario en)
         {
             bool exists = false, deleted = false;
+            int id = 0;
             try
             {
+                System.Diagnostics.Debug.WriteLine("Se inica borrar");
                 connection.Open();
-
                 SqlCommand com = new SqlCommand("SELECT * FROM usuario", connection);
                 SqlDataReader dr = com.ExecuteReader();
                 while (dr.Read())
@@ -227,6 +237,8 @@ namespace Library
                     if (dr.GetInt32(dr.GetOrdinal("id")) == en.Id)
                     {
                         exists = true;
+                        id = dr.GetInt32(dr.GetOrdinal("id"));
+                        System.Diagnostics.Debug.WriteLine("Existe");
                         break;
                     }
                 }
@@ -234,22 +246,29 @@ namespace Library
 
                 if (exists)
                 {
-                    SqlCommand dlt = new SqlCommand("DELETE FROM usuario WHERE id = '" + dr.GetInt32(dr.GetOrdinal("id")) + "';", connection);
+                    SqlCommand dlt = new SqlCommand("DELETE FROM usuario WHERE id = '" + id + "';", connection);
 
                     dlt.ExecuteNonQuery();
                     deleted = true;
                 }
                 else
                 {
-                    Console.WriteLine("An error ocurred while deleting on the Database: The given User doesn't exist");
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while deleting on the Database: The given User (" + en.Id + ") doesn't exist");
                 }
 
                 connection.Close();
             }
+            catch (SqlException e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
             catch (Exception e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -301,13 +320,20 @@ namespace Library
                     read = true;
                 }
                 else
-                    Console.WriteLine("An error ocurred while reading the first element on the Database: There are no items on the Database");
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while reading the first element on the Database: There are no items on the Database");
                 dr.Close();
+            }
+            catch (SqlException e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
             }
             catch (Exception e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -354,10 +380,17 @@ namespace Library
                 }
                 dr.Close();
             }
+            catch (SqlException e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
             catch (Exception e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -371,7 +404,7 @@ namespace Library
         /// <summary>
         /// Método que lee el anterior Usuario de la BD
         /// </summary>
-        /// <param name="en">EN del testimonio actual</param>
+        /// <param name="en">EN del usuario actual</param>
         /// <returns>True si lo ha realizado con éxito; False si no</returns>
         public bool ReadPrev(ENUsuario en)
         {
@@ -392,7 +425,7 @@ namespace Library
                         if (id_aux == -1)
                         {
                             dr.Close();
-                            Console.WriteLine("An error ocurred while reading the previous element: The element doesn't exist");
+                            System.Diagnostics.Debug.WriteLine("An error ocurred while reading the previous element: The element doesn't exist");
                             return false;
                         }
                         else found = true;
@@ -411,10 +444,17 @@ namespace Library
                 }
                 dr.Close();
             }
+            catch (SqlException e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
             catch (Exception e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -465,10 +505,17 @@ namespace Library
                 }
 
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema 
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -479,7 +526,11 @@ namespace Library
             return false;
         }
 
-
+        /// <summary>
+        /// Método Read a partir de un ID de usuario
+        /// </summary>
+        /// <param name="en">EN del usuario actual</param>
+        /// <returns>True si lo ha hecho correctamente; False si no</returns>
         public bool Read_Id(ENUsuario en)
         {
             try
@@ -505,7 +556,14 @@ namespace Library
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e);
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (Exception e)
+            {
+                //Falta indicar que ha habido un problema
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                connection.Close();
+                return false;
             }
             finally
             {

@@ -32,24 +32,44 @@ namespace FrontEnd
         {
             ENUsuario usu = new ENUsuario();
             usu.Id = Site1.usuario.Id;
-            usu.Dni = dni.Text;
-            usu.Email = correo.Text;
-            usu.Nombre = nombre.Text;
-            usu.Passwd = contrasena.Text;
-            usu.Apellidos = apellidos.Text;
-            usu.Tlfn = tlfno.Text;
+            if (string.IsNullOrEmpty(dni.Text)) 
+                usu.Dni = Site1.usuario.Dni;
+            else
+                usu.Dni = dni.Text;
+            if (string.IsNullOrEmpty(correo.Text))
+                usu.Email = Site1.usuario.Email;
+            else
+                usu.Email = correo.Text;
+            if (string.IsNullOrEmpty(nombre.Text))
+                usu.Nombre = Site1.usuario.Nombre;
+            else
+                usu.Nombre = nombre.Text;
+            if (string.IsNullOrEmpty(contrasena.Text))
+                usu.Passwd = Site1.usuario.Passwd;
+            else
+                usu.Passwd = contrasena.Text;
+            if (string.IsNullOrEmpty(apellidos.Text))
+                usu.Apellidos = Site1.usuario.Apellidos;
+            else
+                usu.Apellidos = apellidos.Text;
+            if (string.IsNullOrEmpty(tlfno.Text))
+                usu.Tlfn = Site1.usuario.Tlfn;
+            else
+                usu.Tlfn = tlfno.Text;
             usu.Admin = Site1.usuario.Admin;
             //Para gestionar la fecha
-            string[] date_splitted = fechaNac.Text.Split('-');
-            DateTime date = new DateTime(Convert.ToInt32(date_splitted[0]), Convert.ToInt32(date_splitted[1]), Convert.ToInt32(date_splitted[2]));
-            usu.FNacimiento = date;
-
+            if (string.IsNullOrEmpty(fechaNac.Text))
+                usu.FNacimiento = Site1.usuario.FNacimiento;
+            else
+            {
+                string[] date_splitted = fechaNac.Text.Split('-');
+                DateTime date = new DateTime(Convert.ToInt32(date_splitted[0]), Convert.ToInt32(date_splitted[1]), Convert.ToInt32(date_splitted[2]));
+                usu.FNacimiento = date;
+            }
 
             bool result = usu.Update();
             if (!result)
-                error.Text = "Ha ocurrido algún error";       
-            
-
+                error.Text = "Ha ocurrido algún error";
         }
     }
 }

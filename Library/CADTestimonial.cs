@@ -62,15 +62,15 @@ namespace Library
                 }
                 else
                 {
-                    Console.WriteLine("An error ocurred while inserting on the Database: The given message for the Testimonial alredy exists");
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while inserting on the Database: The given message for the Testimonial alredy exists");
                 }
 
                 connection.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -110,15 +110,15 @@ namespace Library
                 }
                 else
                 {
-                    Console.WriteLine("An error ocurred while updating the Database: The given Testimonial doesn't exist");
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while updating the Database: The given Testimonial doesn't exist");
                 }
 
                 connection.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -153,10 +153,10 @@ namespace Library
                 }
                 dr.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema 
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -196,15 +196,15 @@ namespace Library
                 }
                 else
                 {
-                    Console.WriteLine("An error ocurred while deleting on the Database: The given Testimonial doesn't exist");
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while deleting on the Database: The given Testimonial doesn't exist");
                 }
 
                 connection.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -239,13 +239,13 @@ namespace Library
                     read = true;
                 }
                 else
-                    Console.WriteLine("An error ocurred while reading the first element on the Database: There are no items on the Database");
+                    System.Diagnostics.Debug.WriteLine("An error ocurred while reading the first element on the Database: There are no items on the Database");
                 dr.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 //Falta indicar que ha habido un problema
-                Console.WriteLine("An error ocurred while accessing the Database: ", e.Message);
+                System.Diagnostics.Debug.WriteLine("An error ocurred while accessing the Database: ", e.Message);
                 connection.Close();
                 return false;
             }
@@ -293,6 +293,7 @@ namespace Library
             }
             return false; // No se encontró el testimonio o ya es el primero
         }
+
         /// <summary>
         /// Método que obtiene todos los testimonios de la base de datos
         /// </summary>
@@ -317,9 +318,9 @@ namespace Library
                 }
                 dr.Close();
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
-                Console.WriteLine("An error occurred while accessing the Database: " + e.Message);
+                System.Diagnostics.Debug.WriteLine("An error occurred while accessing the Database: " + e.Message);
             }
             finally
             {

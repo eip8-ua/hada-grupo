@@ -6,6 +6,15 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <script>
+            function actualizarUsuario() {
+                if (confirm("¿Estás seguro de que deseas cambiar los datos de este usuario? \n Puedes dejar los textos en blanco para los datos que no desees modificar")) {
+                    alert("Usuario modificado");
+                    return true;
+                }
+                else return false;
+            }
+     </script>
    <div class ="spacing">
     <h3>Datos del usuario</h3>
 
@@ -45,7 +54,7 @@
             <asp:TextBox runat="server" ID="dni" Width="220"></asp:TextBox>
         </div>
         <div class="user-buttons">
-            <asp:Button runat="server" class=ButtonStyle2 ID="actualizar" Width="100" Text="Actualizar" OnClick="cuandoActualizar"></asp:Button>
+            <asp:Button runat="server" class=ButtonStyle2 ID="actualizar" Width="100" Text="Actualizar" OnClientClick="return actualizarUsuario()" OnClick="cuandoActualizar"></asp:Button>
             <asp:Label runat="server" ID="error"></asp:Label>
         </div>
         
