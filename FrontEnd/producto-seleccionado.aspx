@@ -37,18 +37,8 @@
     </div>
 
     <div class="reviews">
-        <table width: 100%, display: flex>
-            <asp:Repeater ID="rptListReviews" runat="server">
-                    <ItemTemplate>
-               <tr>
-                    <td class="email"><%# Eval("Usuario.email") %></td>
-                    <td class="puntuacion"> <%# Eval("puntuacion") %></td>
-                </tr>
-                <tr>
-                    <td class="descripcion" colspan="4"><%# Eval("descripcion") %></td>
-                </tr>
-                    </ItemTemplate>
-            </asp:Repeater>
-        </table>
+        <hr class="line" />
+        <div class="val-text-div"><asp:Label class="txt-valoraciones" Text="Valoraciones" runat="server"></asp:Label></div>
+        <div class="valoraciones-container" id="valoraciones_container" runat="server"></div>
     </div>
 </asp:Content>
