@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net.Mail;
+using Library;
 
 namespace FrontEnd
 {
@@ -36,8 +37,22 @@ namespace FrontEnd
 
                 }
 
-                status_lbl.ForeColor = System.Drawing.Color.Green;
-                status_lbl.Text = "Mensaje enviado con éxito";
+                
+
+                ENContactUs en = new ENContactUs(email.Text, nombre.Text, telf.Text, mensaje.Text);
+                if (en.Create())
+                {
+                    status_lbl.ForeColor = System.Drawing.Color.Green;
+                    status_lbl.Text = "Mensaje enviado con éxito";
+                }
+
+                else
+                {
+                    status_lbl.ForeColor = System.Drawing.Color.Red;
+                    status_lbl.Text = "Error al crear mensaje";
+                }
+
+
 
             }
         }

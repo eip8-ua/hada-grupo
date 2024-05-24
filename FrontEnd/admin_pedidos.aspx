@@ -20,7 +20,8 @@
                         <td class="element"><%# Eval("fechaPedido") %></td>
                         <td class="element"><%# Eval("idUsuario") %></td>
                         <td class="element">
-                            <button class="Button" onclick="EliminarPedido_Click(<%# Container.ItemIndex + 1 %>)">Eliminar</button>
+                            <asp:Label runat="server" ID="lblConfirmacion" Text="¿Estás seguro de que deseas eliminar este pedido?" Visible="false"></asp:Label>
+                            <button class="Button" onclick="EliminarPedido_Click(<%# Eval("numpedido") %>)" OnClientClick="MostrarConfirmacion()">Eliminar</button>
                         </td>
                     </tr>
                 </ItemTemplate>
