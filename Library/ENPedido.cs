@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,8 +71,38 @@ namespace Library
 
         public static List<ENPedido> ReadAll()
         {
-            CADPedido cadPedido = new CADPedido();
-            return cadPedido.ReadAll();
+            List<ENPedido> pedidos = new List<ENPedido>();
+            string constring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(constring))
+                {
+                    connection.Open();
+
+                    string query = "SELECT num_pedido, fecha, usuario FROM Pedido";
+                    SqlCommand cmd = new SqlCommand(query, connection);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ENPedido pedido = new ENPedido
+                        {
+                            Numpedido = reader.GetInt32(0),
+                            FechaPedido = reader.GetDateTime(1),
+                            IdUsuario = reader.GetInt32(2)
+                        };
+                        pedidos.Add(pedido);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error al obtener los pedidos: " + e.Message);
+            }
+
+            return pedidos;
         }
+
     }
 }

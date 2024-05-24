@@ -29,11 +29,23 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Mis pedidos</h2>
     <asp:Label ID="NoOrdersLabel" runat="server" CssClass="no-orders-message" Visible="false" />
-    <asp:GridView ID="OrdersGridView" runat="server" AutoGenerateColumns="False" CssClass="order-table">
+    <asp:GridView ID="OrdersGridView" runat="server" AutoGenerateColumns="False" CssClass="order-table" OnSelectedIndexChanged="OrdersGridView_SelectedIndexChanged" DataKeyNames="Numpedido">
         <Columns>
             <asp:BoundField DataField="Numpedido" HeaderText="Número de Pedido" />
             <asp:BoundField DataField="FechaPedido" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
             <asp:BoundField DataField="IdUsuario" HeaderText="Usuario" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button ID="btnViewDetails" runat="server" Text="Ver Detalles" CommandName="Select" />
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
+    <asp:GridView ID="ProductsGridView" runat="server" AutoGenerateColumns="False" CssClass="order-table" Visible="false">
+        <Columns>
+            <asp:BoundField DataField="nombre" HeaderText="Nombre del Producto" />
+            <asp:BoundField DataField="pvp" HeaderText="Precio" DataFormatString="{0:C}" />
+            <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
         </Columns>
     </asp:GridView>
 </asp:Content>

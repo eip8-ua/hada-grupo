@@ -26,12 +26,11 @@ namespace Library
         /// <returns></returns>
         public bool Create(ENCarrito en)
         {
-            // SQL query to insert a new shopping cart
-            string insertQuery = "INSERT INTO Carrito (num_carrito, fecha) VALUES (@num_carrito, @fecha)";
+            // SQL query to insert a new shopping cart and get the inserted ID
+            string insertQuery = "INSERT INTO Carrito (fecha) OUTPUT INSERTED.num_carrito VALUES (@fecha)";
 
             // Current date and time
             DateTime currentDate = DateTime.Now;
-            int cartNumber = en.Num_carrito;
 
             try
             {
@@ -40,23 +39,24 @@ namespace Library
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
                         // Set parameters for the SQL query
-                        command.Parameters.AddWithValue("@num_carrito", cartNumber);
                         command.Parameters.AddWithValue("@fecha", currentDate);
 
                         // Open the connection
                         connection.Open();
 
-                        // Execute the SQL command
-                        int rowsAffected = command.ExecuteNonQuery();
+                        // Execute the SQL command and get the inserted ID
+                        var insertedId = (int)command.ExecuteScalar();
 
-                        if (rowsAffected > 0)
+                        if (insertedId > 0)
                         {
-                            Console.WriteLine($"Shopping cart {cartNumber} created successfully!");
+                            Console.WriteLine($"Shopping cart created successfully with ID: {insertedId}");
+                            en.Num_carrito = insertedId;
+                            en.Fecha = currentDate;
                             return true;
                         }
                         else
                         {
-                            Console.WriteLine($"Failed to create shopping cart {cartNumber}.");
+                            Console.WriteLine("Failed to create shopping cart.");
                             return false;
                         }
                     }
@@ -65,9 +65,10 @@ namespace Library
             catch (Exception ex)
             {
                 Console.WriteLine($"Error creating shopping cart: {ex.Message}");
+                return false;
             }
-            return true;
         }
+
 
         /// <summary>
         /// Método que actualiza un Carrito en la BD

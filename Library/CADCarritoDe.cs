@@ -27,7 +27,8 @@ namespace Library
         /// <returns></returns>
         public bool Create(ENCarritoDe en)
         {
-            string insertQuery = "INSERT INTO Carrito_de (usuario, carrito, producto) VALUES (@UserId, @CartId)";
+            this.connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string insertQuery = "INSERT INTO Carrito_de (usuario, carrito) VALUES (@UserId, @CartId)";
             int userId = en.Usuario;
             int cartId = en.Carrito;
 
@@ -38,7 +39,6 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
-                      
                         command.Parameters.AddWithValue("@UserId", userId);
                         command.Parameters.AddWithValue("@CartId", cartId);
                         
@@ -49,10 +49,11 @@ namespace Library
                         if (rowsAffected > 0)
                         {
                             Console.WriteLine("Line item added to shopping cart successfully!");
+                            return true;
                         }
                         else
                         {
-                            Console.WriteLine("Failed to add line item to shopping cart.");
+                            return false;
                         }
                     }
                 }
@@ -113,7 +114,7 @@ namespace Library
         /// <returns></returns>
         public bool Read(ENCarritoDe en)
         {
-            string selectQuery = "SELECT * FROM Carrito_de WHERE id = @UserId";
+            string selectQuery = "SELECT * FROM Carrito_de WHERE usuario = @UserId";
             int userId = en.Usuario;
 
             try
@@ -128,15 +129,19 @@ namespace Library
 
                         SqlDataReader reader = command.ExecuteReader();
 
-                        while (reader.Read())
-                        {
-                            Console.WriteLine($"ID: ");
-                        }
-
+                        
                         if (!reader.HasRows)
                         {
                             Console.WriteLine("No line items found in the shopping cart.");
+                            return false;
                         }
+
+                        if (reader.Read())
+                        {
+                            en.Carrito = Convert.ToInt32(reader["carrito"]);
+                            return true;
+                        }
+
                     }
                 }
             }

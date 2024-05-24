@@ -26,9 +26,8 @@ namespace Library
 
                     if (en.is_correct())
                     {
-                        string query = "INSERT INTO Linea_pedido (id, cantidad, pedido, producto) VALUES (@id, @cantidad,@pedido, @producto)";
+                        string query = "INSERT INTO Linea_pedido  (cantidad, pedido, producto) VALUES (@cantidad,@pedido, @producto)";
                         SqlCommand cmd = new SqlCommand(query, connection);
-                        cmd.Parameters.AddWithValue("@id", en.IdLinPedido);
                         cmd.Parameters.AddWithValue("@cantidad", en.Cantidad);
                         cmd.Parameters.AddWithValue("@pedido", en.IdPedido);
                         cmd.Parameters.AddWithValue("@producto", en.IdProducto);

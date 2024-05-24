@@ -15,35 +15,47 @@ namespace FrontEnd
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnBuy.Attributes["OnClick"] = "return showModal();";
             if (!IsPostBack)
             {
-  
                 if (Site1.usuario.Email!=null)
                 {
-                    ENCarritoDe enCarritoDe = new ENCarritoDe();
+                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id,0);
 
                     // Ver si existe el usuario en la base de datos
-                    if (enCarritoDe.UserExists(Site1.usuario))
-                    {
+                    if (enCarritoDe.Read())
+                    { 
                         ENLinCarr enLinCarr = new ENLinCarr();
 
                         // Conseguir Id del carrito ligada al usuario
-                        int cartDataBase = enCarritoDe.GetCartIdByUser(Site1.usuario);
+                        int cartDataBase = enCarritoDe.Carrito;
 
                         // Añadir los productos de la Variable Session a la base de datos
                         if (Session["Cart"] != null)
                         {
                             List<ENLinCarr> cart = Session["Cart"] as List<ENLinCarr> ?? new List<ENLinCarr>();
 
+                            List<ENLinCarr> cartDB = enLinCarr.getItemsByCartId(cartDataBase);
+                            
+
                             foreach (ENLinCarr item in cart)
                             {
-                                item.Carrito = cartDataBase;
-                                item.Create();
+                                bool existsInCartDB = cartDB != null ? cartDB.Any(dbItem => dbItem.Producto == item.Producto) : false;
+
+                                if (!existsInCartDB)
+                                {
+                                    item.Carrito = cartDataBase;
+                                    item.Create();
+                                } else if (item.Carrito == -1)
+                                {
+                                    item.Carrito = cartDataBase;
+                                    item.Update();
+                                }
                             }
                         }
 
                         // Conseguir Productos del carrito con la Id anterior
-                        List<ENProducto> cartDBItems = enLinCarr.getItemsByCartId(cartDataBase);
+                        List<ENLinCarr> cartDBItems = enLinCarr.getItemsByCartId(cartDataBase);
 
                         // Añadir los Productos al GridView
                         Session["Cart"] = cartDBItems;
@@ -51,30 +63,19 @@ namespace FrontEnd
                     }
                     else
                     {
-                        Response.Write("No tenia carrito");
-
-                        if(Session["Cart"] != null) 
+                        if (Session["Cart"] != null) 
                         {
-                            Response.Write("Carrito con algo");
-                            
                             // Si no existe crear una linea de la base de datos con el usuario y el carrito actual
                             ENCarrito enCarrito = new ENCarrito();
-                            enCarrito.Num_carrito = enCarrito.getNextCartId(); // Generar id del carrito
-                            enCarrito.Fecha = DateTime.Now;
-                            if (enCarrito.Create())
-                            {
-                                Response.Write("SUU");
-                            }
+                            enCarrito.Create();
 
-                            enCarritoDe.Carrito = enCarrito.getNextCartId(); ;
-                            enCarritoDe.Usuario = Site1.usuario.Id;
-
+                            enCarritoDe = new ENCarritoDe(Site1.usuario.Id, enCarrito.Num_carrito);
                             enCarritoDe.Create();
 
                             ENLinCarr enLinCarr = new ENLinCarr();
 
                             // Conseguir Id del carrito ligada al usuario
-                            int cartDataBase = enCarritoDe.GetCartIdByUser(Site1.usuario);
+                            int cartDataBase = enCarrito.Num_carrito;
 
                             // Añadir los productos de la Variable Session a la base de datos
                             if (Session["Cart"] != null)
@@ -138,6 +139,18 @@ namespace FrontEnd
                     Session["Cart"] = cart;
                     BindCart();
                 }
+
+                if(Site1.usuario.Email != null)
+                {
+                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id, 0);
+                    if (enCarritoDe.Read())
+                    {
+                        ENLinCarr enLinCarr = new ENLinCarr();
+                        enLinCarr.Producto = int.Parse(e.CommandArgument.ToString());
+                        enLinCarr.Carrito = enCarritoDe.Carrito;
+                        enLinCarr.Delete();
+                    }
+                }
             }
         }
 
@@ -167,8 +180,6 @@ namespace FrontEnd
                             Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad, enProd.promocion != null ? enProd.promocion.Descuento : 0);
                             cartFormat.Add(prod);
                         }
-
-                        UpdateTotal(cartFormat);
                     }
                 };
             }
@@ -209,6 +220,19 @@ namespace FrontEnd
                     cartFormat.Add(prod);
                 }
 
+
+                if (Site1.usuario.Email != null)
+                {
+                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id, 0);
+                    if (enCarritoDe.Read())
+                    {
+                        ENLinCarr enLinCarr = new ENLinCarr();
+                        enLinCarr.Id = productToUpdate.Id;
+                        enLinCarr.Cantidad = newQuantity;
+                        enLinCarr.Update();
+                    }
+                }
+
                 UpdateTotal(cartFormat);
             }
         }
@@ -237,6 +261,7 @@ namespace FrontEnd
 
         protected void btnBuy_Click(object sender, EventArgs e)
         {
+            
             ENPedido enPedido = new ENPedido(1, DateTime.Now, Site1.usuario.Id);
             enPedido.Create();
 
@@ -246,6 +271,9 @@ namespace FrontEnd
             {
                 ENLinPed enLinPed = new ENLinPed(item.Id, item.Carrito, item.Producto, item.Cantidad);
                 enLinPed.Create();
+
+                ENLinCarr enLinCarr = new ENLinCarr(item.Id, item.Cantidad, item.Carrito, item.Producto);
+                enLinCarr.Delete();
             }
 
             Response.Redirect("Pedidos.aspx");
