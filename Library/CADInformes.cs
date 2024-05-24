@@ -210,46 +210,6 @@ namespace Library
             }
         }
 
-        //Método que devuelve el beneficio bruto que un producto aporta a la compañía
-        //En caso de no encontrar el producto, o al haber algún error, devuelve -101
-        //Devuelve el beneficio bruto sin aplicar las ofertas, por lo que está mal
-        public int getProductIncome(ENProducto en)
-        {
-            //Creamos las conexión
-            SqlConnection connection = new SqlConnection(miConexion);
-
-            try
-            {
-                //Abrimos la conexión y definimos la variable De contador para los 10 productos más populares
-                connection.Open();
-                int income = 0;
-
-                //Creamos el comando y lo ejecutamos
-                SqlCommand command = new SqlCommand("SELECT SUM(p.pvp*lp.cantidad) AS 'Income' FROM Producto p " +
-                "INNER JOIN Linea_pedido lp on p.id = lp.producto WHERE p.id = " + en.id.ToString() + ";", connection);
-                SqlDataReader dr = command.ExecuteReader();
-
-                //Leemos la fila encontradas y cogemos el beneficio bruto
-                if (dr.Read())
-                {
-                    int.TryParse(dr["Income"].ToString(), out income);
-                }
-
-                return income;
-                //En caso de que haya error a la hora de recoger el beneficio bruto
-            } catch(SqlException ex)
-            {
-                Console.WriteLine("Error con la parte SQL en CADInformes: {0}", ex.Message);
-                return -101;
-            }
-            finally
-            {
-                //Cerramos la conexión
-                connection.Close();
-            }
-
-        }
-
         //Método que devuelve el número de unidades vendidas del producto pasado por parámetro
         //En caso de no encontrar el producto, o al haber algún error, devuelve -101
         public int getNumberOfSoldUnits(ENProducto en)
@@ -264,7 +224,8 @@ namespace Library
                 connection.Open();
                 //Creamos el comando necesario
                 SqlCommand command = new SqlCommand("SELECT SUM(lp.cantidad) AS 'Unidades' FROM Producto p " +
-                    "INNER JOIN Linea_pedido lp ON p.id = lp.producto WHERE p.id = " + en.id.ToString() +";", connection);
+                    "INNER JOIN Linea_pedido lp ON p.id = lp.producto WHERE p.id = @prodid;", connection);
+                command.Parameters.AddWithValue("@prodid", en.id);
                 //Creamos el DataReader
                 SqlDataReader dr = command.ExecuteReader();
 
@@ -300,7 +261,8 @@ namespace Library
 
                 //Creamos el comando necesario
                 SqlCommand command = new SqlCommand("SELECT COUNT(*) AS 'Pedidos' FROM Usuario u " +
-                    "INNER JOIN Pedido p ON u.id = p.usuario WHERE u.id = " + en.Id.ToString() + ";", connection);
+                    "INNER JOIN Pedido p ON u.id = p.usuario WHERE u.id = @prodid;", connection);
+                command.Parameters.AddWithValue("@prodid", en.Id);
 
                 //Creamos el DataReader
                 SqlDataReader dr = command.ExecuteReader();
@@ -339,8 +301,9 @@ namespace Library
                 connection.Open();
 
                 //Creamos el comando necesario
-                SqlCommand command = new SqlCommand("SELECT AVG(puntuacion) AS 'Media' FROM Valora WHERE producto =" + en.id.ToString(),
+                SqlCommand command = new SqlCommand("SELECT AVG(puntuacion) AS 'Media' FROM Valora WHERE producto = @prodid",
                     connection);
+                command.Parameters.AddWithValue("@prodid", en.id);
 
                 //Creamos el DataReader
                 SqlDataReader dr = command.ExecuteReader();

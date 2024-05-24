@@ -35,13 +35,6 @@ namespace Library
             return direccion;
         }
 
-        //Obsoleto
-        static public int getProductIncome(ENProducto en) {
-
-            CADInformes cad = new CADInformes();
-            return cad.getProductIncome(en);
-        }
-
         //Devuelve el número de unidades compradas de producto
         static public int getNumberOfSoldUnits(ENProducto en) {
 
