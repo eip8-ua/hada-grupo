@@ -74,6 +74,7 @@ namespace FrontEnd
 
             if (existingProduct != null)
             {
+                existingProduct.Carrito = -1;
                 existingProduct.Cantidad += quantity;
             }
             else

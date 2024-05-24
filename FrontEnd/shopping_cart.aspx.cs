@@ -45,6 +45,10 @@ namespace FrontEnd
                                 {
                                     item.Carrito = cartDataBase;
                                     item.Create();
+                                } else if (item.Carrito == -1)
+                                {
+                                    item.Carrito = cartDataBase;
+                                    item.Update();
                                 }
                             }
                         }
