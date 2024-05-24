@@ -30,7 +30,13 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 	- Confección y rellenado de la base de datos
 
 - David Mas Almendros
-    - Esbribe aqui
+    - Creación de los estilos, estructura y diseño de la página web (Estilos_web.pdf)
+    - Entidades Carrito, LinCarr (Linea de Carrito) y CarritoDe
+    - Aspx de Carrito
+    - Añadir productos al carrito desde productos y producto-seleccionado
+    - Funcionalides de eliminar y cambiar cantidad de una linea del carrito
+    - Ventana de confirmación de compra
+    - Compatibilidad entre la variable Session y la Base de datos (Persistencia de datos)
 
 - Daniel Alarcón Mena
 	-Entidades Pedido y Línea Pedido
