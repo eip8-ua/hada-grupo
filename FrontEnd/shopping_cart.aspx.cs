@@ -269,7 +269,7 @@ namespace FrontEnd
 
             foreach (ENLinCarr item in cart)
             {
-                ENLinPed enLinPed = new ENLinPed(item.Id, item.Carrito, item.Producto, item.Cantidad);
+                ENLinPed enLinPed = new ENLinPed(item.Id, enPedido.Numpedido, item.Producto, item.Cantidad);
                 enLinPed.Create();
 
                 ENLinCarr enLinCarr = new ENLinCarr(item.Id, item.Cantidad, item.Carrito, item.Producto);
