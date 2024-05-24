@@ -8,6 +8,9 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 |Administrador | admin@ua.es   | 1234		   |
 | Usuario	   | user@ua.es    | 1234          |
 
+## Zip del proyecto
+https://drive.google.com/file/d/1Hayu1q9b8rDYcmBrbu0aio9vWZCkVJL4/view?usp=sharing
+
 ## Integrantes del equipo de desarrollo
 -  Emiliano Dovao Marcovich
 -  Saúl Conejo Minguez
