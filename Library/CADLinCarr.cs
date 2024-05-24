@@ -71,9 +71,11 @@ namespace Library
         /// <returns></returns>
         public bool Update(ENLinCarr en)
         {
-            string updateQuery = "UPDATE Linea_carrito SET cantidad = @NewQuantity WHERE id = @LineCartId";
-            int lineCartId = en.Id;
+            string updateQuery = "UPDATE Linea_carrito SET cantidad = @NewQuantity WHERE id = @LinCartId";
+            int cartId = en.Carrito;
+            int productId = en.Producto;
             int newQuantity = en.Cantidad;
+            int linCartId = en.Id;
 
             try
             {
@@ -81,8 +83,8 @@ namespace Library
                 {
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
+                        command.Parameters.AddWithValue("@LinCartId", linCartId);
                         command.Parameters.AddWithValue("@NewQuantity", newQuantity);
-                        command.Parameters.AddWithValue("@LineItemId", lineCartId);
 
                         connection.Open();
 
@@ -91,10 +93,12 @@ namespace Library
                         if (rowsAffected > 0)
                         {
                             Console.WriteLine("Line item updated successfully!");
+                            return true;
                         }
                         else
                         {
                             Console.WriteLine("Line item not found.");
+                            return false;
                         }
                     }
                 }
@@ -161,7 +165,7 @@ namespace Library
         /// <returns></returns>
         public bool Delete(ENLinCarr en)
         {
-            string deleteQuery = "DELETE FROM Linea_carrito WHERE carriot = @CartId and producto = @ProductId";
+            string deleteQuery = "DELETE FROM Linea_carrito WHERE carrito = @CartId and producto = @ProductId";
             int cartId = en.Carrito;
             int productId = en.Producto;
 

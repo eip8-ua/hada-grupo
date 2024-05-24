@@ -39,7 +39,7 @@ namespace FrontEnd
 
                             foreach (ENLinCarr item in cart)
                             {
-                                bool existsInCartDB = cartDB.Any(dbItem => dbItem.Producto == item.Producto);
+                                bool existsInCartDB = cartDB != null ? cartDB.Any(dbItem => dbItem.Producto == item.Producto) : false;
 
                                 if (!existsInCartDB)
                                 {
@@ -175,8 +175,6 @@ namespace FrontEnd
                             Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad, enProd.promocion != null ? enProd.promocion.Descuento : 0);
                             cartFormat.Add(prod);
                         }
-
-                        UpdateTotal(cartFormat);
                     }
                 };
             }
@@ -215,6 +213,19 @@ namespace FrontEnd
                     enProd.Read();
                     Product prod = new Product(linCarr.Producto, enProd.nombre, enProd.pvp, linCarr.Cantidad, enProd.promocion != null ? enProd.promocion.Descuento : 0);
                     cartFormat.Add(prod);
+                }
+
+
+                if (Site1.usuario.Email != null)
+                {
+                    ENCarritoDe enCarritoDe = new ENCarritoDe(Site1.usuario.Id, 0);
+                    if (enCarritoDe.Read())
+                    {
+                        ENLinCarr enLinCarr = new ENLinCarr();
+                        enLinCarr.Id = productToUpdate.Id;
+                        enLinCarr.Cantidad = newQuantity;
+                        enLinCarr.Update();
+                    }
                 }
 
                 UpdateTotal(cartFormat);
