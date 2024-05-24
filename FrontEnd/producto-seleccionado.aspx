@@ -38,18 +38,7 @@
 
     <div class="reviews">
         <hr class="line" />
-        <asp:Label class="txt-valoraciones" Text="Valoraciones" runat="server"></asp:Label>
-        <table class="table" width: 100%>
-            <asp:Repeater ID="rptListReviews" runat="server">
-                <ItemTemplate>
-                    <tr class="zona">
-                        <td class="email">
-                            <%# Eval("Usuario.email") %>
-                            <%# Eval("puntuacion") %>
-                            <%# String.IsNullOrEmpty(Eval("descripcion") as string) ? "Hello my name is Jeff" : Eval("descripcion") %>
-                        </td>
-                </ItemTemplate>
-            </asp:Repeater>
-        </table>
+        <div class="val-text-div"><asp:Label class="txt-valoraciones" Text="Valoraciones" runat="server"></asp:Label></div>
+        <div class="valoraciones-container" id="valoraciones_container" runat="server"></div>
     </div>
 </asp:Content>

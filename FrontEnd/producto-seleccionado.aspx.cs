@@ -55,12 +55,7 @@ namespace FrontEnd
 
 
 
-                //Añadir valoraciones
-                ENValoraciones val = new ENValoraciones();
-                val.Producto.id = Convert.ToInt32(Request.QueryString["id"]);
-                val.Producto.Read();
-                rptListReviews.DataSource = val.Get_All_Product_Reviews();
-                rptListReviews.DataBind();
+                Add_Valoraciones();
             }
         }
         protected void btnAddToCart_Click(object sender, EventArgs e)
@@ -83,6 +78,35 @@ namespace FrontEnd
             }
 
             Session["Cart"] = cart;
+        }
+
+        protected void Add_Valoraciones()
+        {
+            ENValoraciones val = new ENValoraciones();
+            val.Producto.id = Convert.ToInt32(Request.QueryString["id"]);
+            val.Producto.Read();
+            List<ENValoraciones> vals = val.Get_All_Product_Reviews();
+
+            foreach(ENValoraciones i in vals)
+            {
+                string stars = "";
+                for (int j = 0; j < i.Puntuacion; j++)
+                {
+                    stars += "★";
+                }
+                string desc = String.IsNullOrEmpty(i.Descripcion) ? "(Sin comentario)" : i.Descripcion;
+                var rowDiv = new LiteralControl
+                {
+
+                    Text = $@"<div class='row'>
+                                <div class='email-puntuacion'>{i.Usuario.Email}    {stars}</div>
+                                <div class='descripcion'>{desc}</div>
+                               </div>"
+
+                };
+                valoraciones_container.Controls.Add(rowDiv);
+                
+            }
         }
     }
 }
