@@ -19,8 +19,11 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
     - Escribe aqui
 
 - Lucas Alberola Pastor
-	- Escribe aqui
-
+  	- Entidades de Negocio ENUsuario y ENTestimonial y su capa intermedia con la base de datos
+  	  (CADUsuario y CADTestimonial)
+  	- Página de administración de usuarios para el admin de la página, con implementación de eliminado de usuarios
+  	- Página de Datos de Usuario, con posibilidad de modificación y un pop-up de confirmación
+  	- Configuración del Web.config para el acceso a la base de datos desde los CAD
 
 - Elías Iborra Pérez
 	- Entidades Direccion y Locker
@@ -46,7 +49,10 @@ Esta aplicación web es una tienda online de productos tecnológicos, con un con
 - Abdelatif Boussaid
     - Entidades valoraciones y contactanos.
     - Apsx de pedidos.
-    - Aspx categorias, ayudando a Daniel. 
+    - Aspx categorias, ayudando a Daniel.
+
+- Lucas Alberola
+  
 
 
 
