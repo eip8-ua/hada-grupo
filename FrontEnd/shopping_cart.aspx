@@ -109,18 +109,128 @@
         .btn-remove:hover {
             background-color: #c82333;
         }
+
+                /* Estilos para la ventana modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            background-color: #b88e2f;
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            font-size: 42px;
+            font-weight: bold;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close, .confirm, .cancel {
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            margin: 10px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button.cancel {
+            background-color: #f44336;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button.cancel:hover {
+            background-color: #e53935;
+        }
+
+
     </style>
 
+    <script type="text/javascript">
+            function showModal() {
+                document.getElementById('myModal').style.display = 'block';
+                return false; // Prevent postback
+            }
+
+            function closeModal() {
+                document.getElementById('myModal').style.display = 'none';
+            }
+
+            function confirmAction() {
+                document.getElementById('btnBuy').click();
+            }
+
+            // Close the modal when clicking outside of the modal content
+            window.onclick = function(event) {
+                var modal = document.getElementById('myModal');
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+    </script>
 
     <h2 id="titulo">Carrito de la compra</h2>
     <div class="container">
+        <!-- Ventana Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p>¿Estás seguro de que quieres continuar?</p>
+                <div class="button-container">
+                    <asp:Button ID="Button2" class="button confirm" runat="server" Text="Finalizar Compra" OnClick="btnBuy_Click" />
+                    <button class="button cancel" onclick="closeModal()">Cancelar Compra</button>
+                </div>
+            </div>
+        </div>
         <div class="cartMenu">
             <div class="gridview-container">
                 <asp:GridView ID="gvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="gvCart_RowCommand" OnRowDataBound="gvCart_RowDataBound" DataKeyNames="Id">
                     <Columns>
                         <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" />
                         <asp:BoundField DataField="Name" HeaderText="Nombre" ReadOnly="True" />
-                        <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" ReadOnly="True"/>
+                        <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" ReadOnly="True" />
                         <asp:TemplateField HeaderText="Precio con Descuento">
                             <ItemTemplate>
                                 <%# GetDiscountedPrice((float)Eval("Price"), (float)Eval("Discount")) %>
