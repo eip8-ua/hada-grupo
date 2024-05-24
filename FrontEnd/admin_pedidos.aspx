@@ -21,7 +21,8 @@
                         <td class="element"><%# Eval("idUsuario") %></td>
                         <td class="element">
                             <asp:Label runat="server" ID="lblConfirmacion" Text="¿Estás seguro de que deseas eliminar este pedido?" Visible="false"></asp:Label>
-                            <button class="Button" onclick="EliminarPedido_Click(<%# Eval("numpedido") %>)" OnClientClick="MostrarConfirmacion()">Eliminar</button>
+                            <asp:Button class="Button" runat="server" Text ="Eliminar" OnClick="EliminarPedido_Click" 
+                                CommandArgument='<%# Eval("numpedido") %>' OnClientClick="MostrarConfirmacion" CssClass="ButtonStyle2"></asp:Button>
                         </td>
                     </tr>
                 </ItemTemplate>

@@ -127,7 +127,7 @@ namespace Library
                 {
                     connection.Open();
 
-                    string query = "DELETE FROM Pedido WHERE num_pedido = @NumPedido";
+                    string query = "DELETE FROM Linea_pedido WHERE pedido = @NumPedido; DELETE FROM Pedido WHERE num_pedido = @NumPedido;";
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@NumPedido", en.Numpedido);
 

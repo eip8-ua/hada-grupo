@@ -30,16 +30,14 @@ namespace FrontEnd
         protected void EliminarPedido_Click(object sender, EventArgs e)
         {
             Button btnEliminar = (Button)sender;
-            RepeaterItem item = (RepeaterItem)btnEliminar.NamingContainer;
-            Label lblNumPedido = (Label)item.FindControl("lblNumPedido");
+            string cadena = btnEliminar.CommandArgument;
 
-            if (lblNumPedido != null)
-            {
-                int numPedido = Convert.ToInt32(lblNumPedido.Text);
-                ENPedido ped = new ENPedido();
-                ped.Numpedido = numPedido;
-                ped.Delete();
-            }
+            int numPedido;
+            int.TryParse(cadena, out numPedido);
+            ENPedido ped = new ENPedido();
+            ped.Numpedido = numPedido;
+            ped.Delete();
+            Response.Redirect("~/admin_pedidos.aspx");
         }
 
     }
