@@ -15,7 +15,6 @@ namespace FrontEnd
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            btnBuy.Attributes["OnClick"] = "return showModal();";
             if (!IsPostBack)
             {
                 if (Site1.usuario.Email!=null)
@@ -275,6 +274,9 @@ namespace FrontEnd
                 ENLinCarr enLinCarr = new ENLinCarr(item.Id, item.Cantidad, item.Carrito, item.Producto);
                 enLinCarr.Delete();
             }
+
+            cart.RemoveAll(item => true);
+            Session["Cart"] = cart;
 
             Response.Redirect("Pedidos.aspx");
         }

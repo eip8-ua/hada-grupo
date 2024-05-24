@@ -219,7 +219,7 @@
                 <span class="close" onclick="closeModal()">&times;</span>
                 <p>¿Estás seguro de que quieres continuar?</p>
                 <div class="button-container">
-                    <asp:Button ID="Button2" class="button confirm" runat="server" Text="Finalizar Compra" OnClick="btnBuy_Click" />
+                    <asp:Button ID="btnBuy" class="button confirm" runat="server" Text="Finalizar Compra" OnClick="btnBuy_Click" />
                     <button class="button cancel" onclick="closeModal()">Cancelar Compra</button>
                 </div>
             </div>
@@ -260,7 +260,7 @@
             <h3>Total sin descuentos: <asp:Label ID="lblTotalPvp" runat="server" Text="0"></asp:Label></h3>
             <h3>Total ahorrado con descuentos: <asp:Label ID="lblTotalDesc" runat="server" Text="0"></asp:Label></h3>
             <h2>Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label></h2>
-            <asp:Button ID="btnBuy" runat="server" Text="Comprar" CssClass="btn" OnClick="btnBuy_Click" />
+            <asp:Button ID="Button2" runat="server" Text="Comprar" CssClass="btn" OnClientClick="return showModal(); return false;" />
         </div>
     </div>
             

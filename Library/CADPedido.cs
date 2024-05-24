@@ -38,11 +38,15 @@ namespace Library
                             {
                                 en.Numpedido = Convert.ToInt32(reader["num_pedido"]);
                                 Console.WriteLine($"Se ha insertado el pedido con num_pedido");
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
                             }
                         }
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        return rowsAffected > 0;
+                       
                     }
                     else
                     {

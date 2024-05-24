@@ -15,13 +15,13 @@ namespace FrontEnd
     {
 
         /// <summary>
-        /// Control Button2.
+        /// Control btnBuy.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnBuy;
 
         /// <summary>
         /// Control gvCart.
@@ -69,12 +69,12 @@ namespace FrontEnd
         protected global::System.Web.UI.WebControls.Label lblTotal;
 
         /// <summary>
-        /// Control btnBuy.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBuy;
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }
